@@ -29,7 +29,7 @@
     "increase_quantity": "Tăng số lượng",
     "inventory_status": "Trạng thái hàng trong kho",
     "localization_region_and_language": "Bộ chọn vùng và ngôn ngữ",
-    "menu": "Menu",
+    "menu": "Trình đơn",
     "header_navigation_label": "Chính",
     "nested_product": "{{ product_title }} cho {{ parent_title }}",
     "new_window": "Mở trong cửa sổ mới.",
