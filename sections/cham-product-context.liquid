@@ -9,7 +9,7 @@
     <div class="cham-product-context__grid">
       <div class="cham-product-context__item"><span class="cham-product-context__label">Nguồn gốc</span><span class="cham-product-context__value">{{ origin | default: section.settings.origin_fallback }}</span></div>
       <div class="cham-product-context__item"><span class="cham-product-context__label">Chất liệu</span><span class="cham-product-context__value">{{ material | default: section.settings.material_fallback }}</span></div>
-      <div class="cham-product-context__item"><span class="cham-product-context__label">Kỹ thuật đan</span><span class="cham-product-context__value">{{ craft | default: section.settings.craft_fallback }}</span></div>
+      <div class="cham-product-context__item"><span class="cham-product-context__label">Kỹ thuật</span><span class="cham-product-context__value">{{ craft | default: section.settings.craft_fallback }}</span></div>
     </div>
     {% if section.settings.show_custom %}
       <div class="cham-product-context__custom">
@@ -25,8 +25,8 @@
   "tag":"section",
   "settings":[
     {"type":"text","id":"origin_fallback","label":"Nguồn gốc mặc định","default":"Việt Nam · cập nhật theo sản phẩm"},
-    {"type":"text","id":"material_fallback","label":"Chất liệu mặc định","default":"Mây, tre, cói hoặc sợi tự nhiên · xem mô tả"},
-    {"type":"text","id":"craft_fallback","label":"Kỹ thuật mặc định","default":"Đan thủ công · cập nhật theo sản phẩm"},
+    {"type":"text","id":"material_fallback","label":"Chất liệu mặc định","default":"Xem mô tả sản phẩm"},
+    {"type":"text","id":"craft_fallback","label":"Kỹ thuật mặc định","default":"Thủ công · cập nhật theo sản phẩm"},
     {"type":"checkbox","id":"show_custom","label":"Hiện tùy chỉnh","default":true},
     {"type":"text","id":"custom_heading","label":"Tiêu đề tùy chỉnh","default":"Bạn cần một phiên bản riêng?"},
     {"type":"textarea","id":"custom_text","label":"Mô tả tùy chỉnh","default":"Hỏi CHẠM về màu, kích thước, nhãn riêng, đóng gói quà hoặc đơn số lượng lớn. Khả năng tùy chỉnh phụ thuộc từng sản phẩm."},

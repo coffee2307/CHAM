@@ -19,7 +19,7 @@
         {% endif %}
       {% endfor %}
       {% if shown == 0 %}
-        {% assign labels = 'Giỏ & lưu trữ|Túi & phụ kiện|Khay & đồ bàn|Đèn & trang trí|Đồ dùng gia đình|Quà tặng đan' | split: '|' %}
+        {% assign labels = 'Trang trí nhà cửa|Phụ kiện|Đồ dùng hằng ngày|Quà tặng|Trải nghiệm thủ công|Sản phẩm tùy chỉnh' | split: '|' %}
         {% for label in labels %}
           <a class="cham-category-card" href="{{ routes.all_products_collection_url }}"><span class="cham-category-card__index">0{{ forloop.index }}</span><span class="cham-category-card__text">{{ label }}</span></a>
         {% endfor %}
@@ -32,9 +32,9 @@
   "name":"CHẠM · Danh mục",
   "tag":"section",
   "settings":[
-    {"type":"text","id":"eyebrow","label":"Dòng nhỏ","default":"KHÁM PHÁ THEO CÁCH DÙNG"},
-    {"type":"text","id":"heading","label":"Tiêu đề","default":"Một kỹ thuật đan. Nhiều cách sống cùng nó."},
-    {"type":"textarea","id":"body","label":"Mô tả","default":"CHẠM đi sâu vào đồ đan và tổ chức danh mục theo nhu cầu sử dụng để khách hàng tìm món phù hợp nhanh hơn."},
+    {"type":"text","id":"eyebrow","label":"Dòng nhỏ","default":"KHÁM PHÁ THEO NHU CẦU"},
+    {"type":"text","id":"heading","label":"Tiêu đề","default":"Thủ công không chỉ để ngắm."},
+    {"type":"textarea","id":"body","label":"Mô tả","default":"CHẠM sắp xếp sản phẩm theo cách chúng hiện diện trong đời sống — từ đồ dùng, phụ kiện, trang trí đến quà tặng và nhu cầu tùy chỉnh."},
     {"type":"range","id":"category_limit","label":"Số danh mục","min":3,"max":12,"step":1,"default":6}
   ],
   "presets":[{"name":"CHẠM · Danh mục","category":"CHẠM"}]

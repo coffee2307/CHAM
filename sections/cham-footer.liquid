@@ -1,6 +1,6 @@
 <section class="cham-footer">
   <div class="cham-shell">
-    <div class="cham-footer__marquee" aria-hidden="true"><span>ĐAN · CHẠM · DÙNG · GIỮ ·</span><span>ĐAN · CHẠM · DÙNG · GIỮ ·</span></div>
+    <div class="cham-footer__marquee" aria-hidden="true"><span>LÀM · CHẠM · DÙNG · GIỮ ·</span><span>LÀM · CHẠM · DÙNG · GIỮ ·</span></div>
     <div class="cham-footer__grid">
       <div class="cham-footer__brand-wrap">
         <div class="cham-footer__brand">{{ section.settings.wordmark | default: 'CHẠM' }}</div>
@@ -9,6 +9,7 @@
       <div>
         <p class="cham-footer__heading">Khám phá</p>
         <ul class="cham-footer__menu" role="list">
+          <li><a href="{{ routes.root_url }}">Trang chủ</a></li>
           <li><a href="{{ routes.all_products_collection_url }}">Tất cả sản phẩm</a></li>
           <li><a href="/pages/about#story">Câu chuyện CHẠM</a></li>
           <li><a href="/pages/about">Về CHẠM</a></li>
@@ -46,10 +47,10 @@
   "class":"cham-footer-section",
   "settings":[
     {"type":"text","id":"wordmark","label":"Tên thương hiệu","default":"CHẠM"},
-    {"type":"textarea","id":"tagline","label":"Giới thiệu ngắn","default":"Đồ đan thủ công Việt Nam cho đời sống đương đại — rõ vật liệu, rõ kỹ thuật và có thể tùy chỉnh."},
+    {"type":"textarea","id":"tagline","label":"Giới thiệu ngắn","default":"Đồ thủ công Việt Nam cho đời sống đương đại — rõ câu chuyện, rõ giá trị và có thể tùy chỉnh."},
     {"type":"text","id":"newsletter_heading","label":"Tiêu đề nhận tin","default":"Nhận tin từ CHẠM"},
-    {"type":"textarea","id":"newsletter_text","label":"Mô tả nhận tin","default":"Sản phẩm đan mới, câu chuyện vật liệu và các đợt mở tùy chỉnh."},
-    {"type":"text","id":"bottom_note","label":"Ghi chú cuối trang","default":"Đồ đan Việt Nam · Vật liệu tự nhiên · Tùy chỉnh theo nhu cầu"}
+    {"type":"textarea","id":"newsletter_text","label":"Mô tả nhận tin","default":"Sản phẩm mới, câu chuyện người làm và các đợt mở tùy chỉnh."},
+    {"type":"text","id":"bottom_note","label":"Ghi chú cuối trang","default":"Thủ công Việt Nam · Chọn lọc có trách nhiệm · Tùy chỉnh theo nhu cầu"}
   ],
   "presets":[{"name":"CHẠM · Cuối trang","category":"Cuối trang"}],
   "enabled_on":{"groups":["footer"]}

@@ -1368,3 +1368,202 @@ body.cham-site::before{
 @media(prefers-reduced-motion:reduce){
   .cham-footer__marquee span{animation:none!important}
 }
+
+/* ==========================================================
+   CHẠM V4.1 — broader handicraft direction
+   ========================================================== */
+
+/* Primary CTA must stay legible regardless of inherited theme link colors */
+.cham-site .cham-button--primary,
+.cham-site .cham-button--primary:link,
+.cham-site .cham-button--primary:visited,
+.cham-site .cham-button--primary:hover,
+.cham-site .cham-button--primary:focus{
+  color:#fff9ef!important;
+  background:#2d211a!important;
+  border-color:#2d211a!important;
+}
+.cham-site .cham-button--primary *,
+.cham-site .cham-button--primary span{
+  color:inherit!important;
+}
+.cham-site .cham-button--primary:hover{
+  background:#a34530!important;
+  border-color:#a34530!important;
+}
+
+/* Header actions are icons, not text buttons */
+.cham-header__actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:8px;
+}
+.cham-icon-link{
+  width:40px!important;
+  height:40px!important;
+  min-width:40px;
+  padding:0!important;
+  display:grid!important;
+  place-items:center;
+  border:1px solid rgba(73,47,31,.14);
+  border-radius:50%!important;
+  background:rgba(255,250,241,.62);
+  color:#2d211a!important;
+  text-decoration:none!important;
+  position:relative;
+  transition:background .2s ease,color .2s ease,transform .22s var(--cham-ease),border-color .2s ease;
+}
+.cham-icon-link:hover{
+  background:#2d211a;
+  color:#fff8ec!important;
+  border-color:#2d211a;
+  transform:translateY(-2px);
+}
+.cham-icon-link::after{display:none!important}
+.cham-icon-link svg,
+.cham-mobile-nav summary svg{
+  width:19px;height:19px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.cham-cart-count{
+  position:absolute;
+  top:-5px;right:-5px;
+  min-width:18px;height:18px;padding:0 4px;
+  display:grid;place-items:center;
+  border-radius:999px;
+  background:#a34530;color:#fff!important;
+  font-size:.6rem;font-weight:800;
+  border:2px solid #fffaf1;
+}
+.cham-mobile-nav summary{
+  width:40px;height:40px;
+  display:grid;place-items:center;
+  border:1px solid rgba(73,47,31,.14);
+  border-radius:50%;
+  color:#2d211a;
+}
+
+/* Give 5-item navigation enough room without squeezing the wordmark/actions */
+.cham-header__inner{
+  grid-template-columns:auto minmax(0,1fr) auto!important;
+  gap:24px;
+}
+.cham-nav{
+  gap:clamp(14px,1.7vw,28px)!important;
+}
+.cham-nav a{
+  white-space:nowrap;
+}
+
+/* Broader craft art direction: no woven-disc hero */
+.cham-craft-visual{
+  background:
+    radial-gradient(circle at 75% 18%,rgba(255,255,255,.62),transparent 23%),
+    linear-gradient(140deg,#e6cda1 0%,#d39a62 34%,#9e573b 69%,#453127 100%)!important;
+}
+.cham-craft-sculpture{
+  position:absolute;
+  inset:7%;
+  z-index:3;
+  perspective:1000px;
+}
+.cham-craft-sculpture__shape{
+  position:absolute;
+  border:1px solid rgba(255,255,255,.24);
+  box-shadow:0 34px 70px rgba(49,29,18,.22);
+  backdrop-filter:blur(3px);
+}
+.cham-craft-sculpture__shape--one{
+  width:56%;height:60%;
+  left:9%;top:13%;
+  border-radius:48% 52% 38% 62% / 55% 38% 62% 45%;
+  background:
+    radial-gradient(circle at 35% 28%,rgba(255,255,255,.28),transparent 22%),
+    linear-gradient(145deg,#d9b46f,#a86b3f);
+  transform:rotate(-13deg) translate3d(var(--parallax-a,0),var(--parallax-b,0),0);
+}
+.cham-craft-sculpture__shape--two{
+  width:42%;height:42%;
+  right:4%;top:11%;
+  border-radius:14px;
+  background:
+    repeating-linear-gradient(135deg,rgba(68,42,27,.07) 0 1px,transparent 1px 11px),
+    linear-gradient(145deg,#f0dcc0,#c4935c);
+  transform:rotate(11deg);
+}
+.cham-craft-sculpture__shape--three{
+  width:48%;height:27%;
+  right:8%;bottom:9%;
+  border-radius:999px 24px 999px 24px;
+  background:linear-gradient(135deg,#6e4430,#ae6544);
+  transform:rotate(-7deg);
+}
+.cham-craft-sculpture__label{
+  position:absolute;
+  z-index:6;
+  min-width:145px;
+  padding:14px 16px;
+  background:rgba(255,249,238,.86);
+  border:1px solid rgba(72,45,29,.13);
+  border-radius:10px;
+  box-shadow:0 16px 42px rgba(43,26,16,.14);
+  backdrop-filter:blur(10px);
+}
+.cham-craft-sculpture__label b{
+  display:block;
+  font-family:var(--cham-font-display);
+  font-size:1.15rem;
+  letter-spacing:-.02em;
+}
+.cham-craft-sculpture__label span{
+  display:block;
+  margin-top:3px;
+  color:#75513b;
+  font-size:.65rem;
+  line-height:1.35;
+}
+.cham-craft-sculpture__label--a{left:0;top:4%;transform:rotate(-4deg)}
+.cham-craft-sculpture__label--b{right:0;top:43%;transform:rotate(4deg)}
+.cham-craft-sculpture__label--c{left:15%;bottom:0;transform:rotate(2deg)}
+
+/* Remove woven-only visual cues from generic areas */
+.cham-custom__weave{
+  background:
+    radial-gradient(circle at 50% 50%,transparent 0 28%,rgba(255,255,255,.25) 28.5% 29.5%,transparent 30% 44%,rgba(255,255,255,.18) 44.5% 45.5%,transparent 46%),
+    linear-gradient(135deg,rgba(255,255,255,.12),transparent)!important;
+  mask-image:radial-gradient(circle,#000 0 66%,transparent 67%)!important;
+}
+.cham-showcase__pattern--basket::before{
+  background:
+    radial-gradient(circle at 38% 28%,rgba(255,255,255,.28),transparent 13%),
+    linear-gradient(135deg,rgba(98,61,38,.08),transparent)!important;
+}
+.cham-showcase__pattern--bag::before,
+.cham-showcase__pattern--bag::after,
+.cham-showcase__pattern--table::before,
+.cham-showcase__pattern--decor::before{
+  opacity:.45;
+}
+
+/* On tablets, Home + full nav still fit; on mobile use menu */
+@media(max-width:1120px){
+  .cham-nav{gap:12px!important}
+  .cham-nav a{font-size:.72rem!important}
+}
+@media(max-width:860px){
+  .cham-nav{display:none!important}
+  .cham-mobile-nav{display:block!important}
+  .cham-header__inner{grid-template-columns:auto 1fr auto!important}
+}
+@media(max-width:560px){
+  .cham-icon-link{width:38px!important;height:38px!important;min-width:38px}
+  .cham-account-link{display:none!important}
+  .cham-craft-sculpture__label{min-width:105px;padding:10px 11px}
+  .cham-craft-sculpture__label b{font-size:.92rem}
+  .cham-craft-sculpture__label span{font-size:.58rem}
+}
