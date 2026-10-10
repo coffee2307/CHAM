@@ -293,3 +293,481 @@ body.cham-site img{border-radius:inherit}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
+
+/* ==========================================================
+   CHẠM ART DIRECTION V2
+   Vietnamese-ready typography + warm material motion system
+   ========================================================== */
+:root{
+  --cham-font-body:"Be Vietnam Pro","Segoe UI",Arial,sans-serif;
+  --cham-font-display:"Noto Serif","Times New Roman",serif;
+  --cham-red:#b94932;
+  --cham-red-deep:#8f3426;
+  --cham-orange:#dd7a4b;
+  --cham-yellow:#e5b04c;
+  --cham-cream:#fff8ed;
+  --cham-cream-2:#f7ead7;
+  --cham-brown:#3d271f;
+  --cham-brown-soft:#72594d;
+  --cham-glass:rgba(255,251,244,.78);
+  --cham-shadow-soft:0 12px 35px rgba(72,42,28,.08);
+  --cham-shadow-lift:0 24px 70px rgba(72,42,28,.16);
+  --cham-ease:cubic-bezier(.22,1,.36,1);
+}
+html{scroll-behavior:smooth}
+body.cham-site{
+  font-family:var(--cham-font-body)!important;
+  font-feature-settings:"kern" 1,"liga" 1;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:clip;
+  background:
+    radial-gradient(900px 600px at -8% 8%,rgba(221,122,75,.12),transparent 65%),
+    radial-gradient(760px 520px at 104% 24%,rgba(229,176,76,.12),transparent 64%),
+    linear-gradient(180deg,#fffaf2 0%,#fff7eb 52%,#fbefe0 100%);
+}
+body.cham-site::before{
+  content:"";
+  position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.18;
+  background-image:
+    radial-gradient(circle at 20% 30%,rgba(88,50,33,.12) 0 .45px,transparent .6px),
+    radial-gradient(circle at 72% 66%,rgba(88,50,33,.10) 0 .4px,transparent .55px);
+  background-size:8px 8px,11px 11px;
+  mix-blend-mode:multiply;
+}
+body.cham-site h1,
+body.cham-site h2,
+body.cham-site h3,
+body.cham-site h4,
+body.cham-site .cham-display,
+.cham-wordmark{
+  font-family:var(--cham-font-display)!important;
+  font-kerning:normal;
+}
+body.cham-site p,
+body.cham-site a,
+body.cham-site button,
+body.cham-site input,
+body.cham-site textarea,
+body.cham-site select{font-family:var(--cham-font-body)!important}
+::selection{background:#c65339;color:#fffaf3}
+
+.cham-cursor-light{
+  position:fixed;width:460px;height:460px;border-radius:50%;
+  left:var(--cham-pointer-x,-999px);top:var(--cham-pointer-y,-999px);
+  transform:translate(-50%,-50%);pointer-events:none;z-index:0;
+  background:radial-gradient(circle,rgba(225,143,87,.11) 0%,rgba(225,143,87,.04) 36%,transparent 70%);
+  transition:opacity .25s ease;opacity:0;
+}
+@media (hover:hover) and (pointer:fine){.cham-cursor-light{opacity:1}}
+
+.cham-header{
+  transition:background .35s var(--cham-ease),box-shadow .35s var(--cham-ease),border-color .35s ease;
+  background:rgba(255,249,239,.72);
+  border-bottom:1px solid rgba(141,83,56,.10);
+}
+.cham-header[data-scrolled]{
+  background:rgba(255,249,239,.94);
+  box-shadow:0 10px 40px rgba(84,47,29,.08);
+  border-color:rgba(141,83,56,.18);
+}
+.cham-wordmark{
+  font-size:1.82rem;
+  letter-spacing:-.055em;
+  position:relative;
+}
+.cham-wordmark::after{
+  content:"";
+  position:absolute;left:0;bottom:-7px;width:0;height:2px;
+  background:linear-gradient(90deg,var(--cham-red),var(--cham-yellow));
+  transition:width .35s var(--cham-ease);
+}
+.cham-wordmark:hover::after{width:100%}
+.cham-nav a,.cham-icon-link{position:relative}
+.cham-nav a::after{
+  content:"";position:absolute;left:0;right:100%;bottom:-7px;height:1px;
+  background:var(--cham-red);transition:right .3s var(--cham-ease);
+}
+.cham-nav a:hover::after{right:0}
+
+.cham-hero{position:relative;padding-top:clamp(54px,7vw,108px);overflow:hidden}
+.cham-hero::before{
+  content:"";position:absolute;width:min(42vw,620px);aspect-ratio:1;border-radius:50%;
+  left:-18vw;top:4vw;border:1px solid rgba(185,73,50,.12);
+  box-shadow:0 0 0 70px rgba(185,73,50,.025),0 0 0 140px rgba(185,73,50,.018);
+  pointer-events:none;
+}
+.cham-hero__grid{
+  position:relative;z-index:2;
+  grid-template-columns:minmax(0,1.02fr) minmax(360px,.98fr);
+  gap:clamp(36px,6vw,86px);
+}
+.cham-hero__copy{padding-block:18px}
+.cham-hero__eyebrow-row{display:flex;justify-content:space-between;gap:20px;align-items:center;max-width:760px}
+.cham-hero__edition{
+  font-size:.67rem;font-weight:700;letter-spacing:.16em;color:var(--cham-muted);
+  border:1px solid rgba(125,89,71,.2);border-radius:999px;padding:.36rem .62rem;
+}
+.cham-hero__title{
+  max-width:920px;
+  margin-top:20px;
+  font-size:clamp(3.35rem,7.2vw,7.35rem);
+  line-height:.92;
+  letter-spacing:-.058em!important;
+  text-wrap:balance;
+}
+.cham-hero__title::first-letter{color:var(--cham-red)}
+.cham-hero__body{
+  max-width:620px;
+  font-size:clamp(1rem,1.45vw,1.16rem);
+  line-height:1.78;
+  color:#765e53;
+}
+.cham-hero__actions{margin-top:32px}
+.cham-button{
+  position:relative;overflow:hidden;
+  min-height:50px;padding:.82rem 1.28rem;
+  border-radius:999px;
+  transition:transform .28s var(--cham-ease),box-shadow .28s var(--cham-ease),background .28s ease,color .28s ease,border-color .28s ease;
+}
+.cham-button::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(110deg,transparent 20%,rgba(255,255,255,.28) 47%,transparent 70%);
+  transform:translateX(-130%);
+  transition:transform .65s var(--cham-ease);
+}
+.cham-button:hover::before{transform:translateX(130%)}
+.cham-button:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(113,54,34,.14)}
+.cham-button--primary{
+  background:linear-gradient(135deg,#a83f2d,#cf6844);
+  border-color:transparent;
+}
+.cham-button--soft{background:rgba(255,253,248,.7);backdrop-filter:blur(10px)}
+
+.cham-search{
+  max-width:620px;
+  margin-top:32px;
+  padding:7px 7px 7px 16px;
+  background:rgba(255,253,248,.72);
+  backdrop-filter:blur(12px);
+  border-color:rgba(154,102,77,.22);
+  box-shadow:0 16px 50px rgba(78,43,28,.08);
+  transition:border-color .25s ease,box-shadow .25s ease,transform .25s var(--cham-ease);
+}
+.cham-search:focus-within{
+  transform:translateY(-2px);
+  border-color:rgba(185,73,50,.58);
+  box-shadow:0 18px 52px rgba(120,58,37,.13);
+}
+.cham-search__mark{font-size:1.22rem;color:var(--cham-red)}
+.cham-search input{font-size:.93rem}
+.cham-search button{
+  min-width:64px;
+  background:var(--cham-brown);
+  transition:background .2s ease,transform .2s ease;
+}
+.cham-search button:hover{background:var(--cham-red);transform:scale(1.03)}
+.cham-hero__chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.cham-hero__chips a{
+  padding:.36rem .66rem;border-radius:999px;text-decoration:none;
+  color:var(--cham-muted);font-size:.73rem;font-weight:650;
+  border:1px solid rgba(160,110,84,.16);
+  background:rgba(255,253,248,.42);
+  transition:background .2s ease,color .2s ease,transform .2s var(--cham-ease);
+}
+.cham-hero__chips a:hover{background:#fff;color:var(--cham-red);transform:translateY(-2px)}
+
+.cham-hero__visual{
+  min-height:clamp(480px,48vw,680px);
+  border-radius:44px 18px 44px 18px;
+  background:
+    radial-gradient(circle at var(--hero-x,68%) var(--hero-y,26%),rgba(255,255,255,.72),transparent 20%),
+    linear-gradient(145deg,#e9a37d 0%,#f2cb87 42%,#e6c09b 72%,#bf5d43 100%);
+  border:1px solid rgba(125,72,46,.14);
+  box-shadow:0 38px 100px rgba(85,45,28,.16);
+  transform:perspective(1100px) rotateX(var(--tilt-y,0deg)) rotateY(var(--tilt-x,0deg));
+  transition:transform .55s var(--cham-ease),box-shadow .4s ease;
+  isolation:isolate;
+}
+.cham-hero__visual:hover{box-shadow:0 45px 120px rgba(85,45,28,.21)}
+.cham-hero__visual::before{
+  background:
+    repeating-linear-gradient(32deg,rgba(102,54,34,.045) 0 1px,transparent 1px 18px),
+    repeating-linear-gradient(122deg,rgba(255,255,255,.065) 0 1px,transparent 1px 26px);
+  mix-blend-mode:multiply;
+}
+.cham-hero__visual::after{
+  content:"";position:absolute;inset:18px;border:1px solid rgba(255,255,255,.34);
+  border-radius:34px 12px 34px 12px;pointer-events:none;z-index:5;
+}
+.cham-hero__image{position:absolute;inset:0;z-index:1}
+.cham-hero__image img{width:100%;height:100%;object-fit:cover;border-radius:inherit;filter:saturate(.85) contrast(.98)}
+.cham-hero__halo{
+  position:absolute;left:50%;top:48%;width:62%;aspect-ratio:1;border-radius:50%;
+  border:1px solid rgba(255,255,255,.5);transform:translate(-50%,-50%);
+  box-shadow:0 0 0 38px rgba(255,255,255,.065),0 0 0 78px rgba(255,255,255,.04);
+  animation:cham-halo 8s ease-in-out infinite;z-index:0;
+}
+@keyframes cham-halo{0%,100%{transform:translate(-50%,-50%) scale(.96)}50%{transform:translate(-50%,-50%) scale(1.05)}}
+.cham-craft-orbit{inset:9%;z-index:2}
+.cham-craft-tile{
+  padding:18px;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;gap:3px;
+  border-radius:22px 8px 22px 8px;
+  backdrop-filter:blur(6px);
+  font-family:var(--cham-font-body)!important;
+  transition:transform .5s var(--cham-ease),box-shadow .35s ease;
+}
+.cham-craft-tile span{position:absolute;top:14px;right:14px;font-size:.64rem;font-weight:800;letter-spacing:.12em;opacity:.65}
+.cham-craft-tile strong{font-family:var(--cham-font-display);font-size:clamp(1.25rem,2vw,2.1rem);letter-spacing:-.03em}
+.cham-craft-tile em{font-size:.66rem;font-style:normal;letter-spacing:.12em;text-transform:uppercase;opacity:.7}
+.cham-craft-tile:nth-child(1){background:rgba(222,125,84,.88);transform:rotate(-7deg) translate3d(var(--parallax-a,0),var(--parallax-b,0),0)}
+.cham-craft-tile:nth-child(2){background:rgba(240,198,91,.88);transform:rotate(6deg) translate3d(calc(var(--parallax-a,0)*-.6),calc(var(--parallax-b,0)*-.6),0)}
+.cham-craft-tile:nth-child(3){background:rgba(231,205,178,.91);transform:rotate(5deg) translate3d(calc(var(--parallax-a,0)*.45),calc(var(--parallax-b,0)*.45),0)}
+.cham-craft-tile:nth-child(4){background:rgba(171,70,49,.92);transform:rotate(-5deg) translate3d(calc(var(--parallax-a,0)*-.35),calc(var(--parallax-b,0)*-.35),0)}
+.cham-craft-tile:hover{box-shadow:0 24px 60px rgba(72,38,24,.22)}
+.cham-hero__seal{
+  position:absolute;z-index:6;left:22px;bottom:24px;width:92px;aspect-ratio:1;border-radius:50%;
+  display:grid;place-content:center;text-align:center;
+  background:rgba(255,249,240,.84);backdrop-filter:blur(10px);
+  border:1px solid rgba(90,48,31,.18);box-shadow:0 14px 40px rgba(75,39,25,.14);
+  transform:rotate(-8deg);
+}
+.cham-hero__seal span{font-family:var(--cham-font-display);font-weight:700;font-size:1.05rem}
+.cham-hero__seal small{font-size:.44rem;letter-spacing:.08em;margin-top:2px}
+.cham-hero__note{
+  position:absolute;z-index:6;font-size:.56rem;font-weight:800;letter-spacing:.16em;color:rgba(61,39,31,.65)
+}
+.cham-hero__note--top{top:30px;left:34px}
+.cham-hero__note--bottom{right:34px;bottom:32px;writing-mode:vertical-rl;transform:rotate(180deg)}
+
+.cham-material-strip{
+  position:relative;z-index:3;margin-top:clamp(44px,6vw,78px);
+  border-block:1px solid rgba(139,91,67,.13);
+  background:rgba(248,234,215,.52);
+  overflow:hidden;
+}
+.cham-material-strip__track{
+  width:max-content;display:flex;align-items:center;gap:28px;
+  padding:13px 0;font-size:.69rem;font-weight:800;letter-spacing:.18em;color:#7b5d50;
+  animation:cham-marquee 24s linear infinite;
+}
+.cham-material-strip__track i{font-style:normal;color:var(--cham-red)}
+@keyframes cham-marquee{to{transform:translateX(-50%)}}
+
+.cham-section{position:relative}
+.cham-section--paper{
+  background:
+    linear-gradient(180deg,rgba(249,237,220,.68),rgba(246,229,208,.52)),
+    radial-gradient(circle at 82% 22%,rgba(213,115,69,.07),transparent 28rem);
+}
+.cham-section-head{margin-bottom:36px}
+.cham-section-title{
+  max-width:850px;font-size:clamp(2.3rem,4.5vw,4.6rem);
+  letter-spacing:-.04em!important;line-height:.98;
+}
+.cham-section-copy{font-size:.93rem;line-height:1.78}
+.cham-kicker{font-size:.68rem;letter-spacing:.17em}
+
+.cham-category-grid{gap:16px}
+.cham-category-card{
+  min-height:220px;
+  border-radius:26px 10px 26px 10px;
+  border-color:rgba(140,90,65,.16);
+  box-shadow:0 10px 32px rgba(77,44,29,.055);
+  transform:translateZ(0);
+  transition:transform .42s var(--cham-ease),box-shadow .42s var(--cham-ease),border-color .3s ease;
+}
+.cham-category-card::before{
+  content:"↗";position:absolute;right:14px;top:14px;z-index:4;
+  width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(255,250,242,.8);backdrop-filter:blur(8px);
+  color:#5f4438;font-size:.86rem;opacity:0;transform:translateY(7px);
+  transition:opacity .3s ease,transform .3s var(--cham-ease);
+}
+.cham-category-card:hover{
+  transform:translateY(-7px) rotate(.3deg);
+  box-shadow:0 26px 65px rgba(77,44,29,.13);
+  border-color:rgba(185,73,50,.32)
+}
+.cham-category-card:hover::before{opacity:1;transform:none}
+.cham-category-card__media img{transition:transform .8s var(--cham-ease),filter .4s ease}
+.cham-category-card:hover .cham-category-card__media img{transform:scale(1.07);filter:saturate(.9)}
+.cham-category-card::after{inset:30% 0 0;background:linear-gradient(transparent,rgba(47,29,22,.62))}
+.cham-category-card__text{
+  font-family:var(--cham-font-display);font-size:1.24rem;letter-spacing:-.025em;
+  text-shadow:0 1px 16px rgba(0,0,0,.12)
+}
+
+.cham-product-grid{gap:22px}
+.cham-product-card{
+  border-radius:28px 12px 28px 12px;
+  border-color:rgba(147,94,67,.14);
+  background:rgba(255,252,246,.72);
+  backdrop-filter:blur(10px);
+  box-shadow:0 8px 28px rgba(70,41,28,.045);
+  transition:transform .42s var(--cham-ease),box-shadow .42s var(--cham-ease),border-color .3s ease;
+}
+.cham-product-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 28px 70px rgba(76,42,26,.14);
+  border-color:rgba(185,73,50,.28)
+}
+.cham-product-card__media{position:relative}
+.cham-product-card__media::after{
+  content:"XEM";position:absolute;left:50%;top:50%;transform:translate(-50%,-44%);
+  padding:.52rem .72rem;border-radius:999px;
+  background:rgba(255,250,242,.9);backdrop-filter:blur(7px);
+  color:var(--cham-brown);font-size:.62rem;font-weight:800;letter-spacing:.12em;
+  opacity:0;transition:opacity .25s ease,transform .32s var(--cham-ease)
+}
+.cham-product-card:hover .cham-product-card__media::after{opacity:1;transform:translate(-50%,-50%)}
+.cham-product-card__media img{transition:transform .75s var(--cham-ease),filter .35s ease}
+.cham-product-card:hover .cham-product-card__media img{transform:scale(1.055);filter:saturate(.94)}
+.cham-product-card__body{padding:18px 18px 20px}
+.cham-product-card__meta{font-size:.68rem;letter-spacing:.04em;text-transform:uppercase}
+.cham-product-card__title{font-size:1.08rem}
+.cham-product-card__price{margin-top:7px;color:var(--cham-red);font-size:.9rem}
+.cham-badge{border:1px solid rgba(185,73,50,.14);background:#f7ddcb}
+
+/* Native Shopify product grids */
+.cham-site product-card .product-card__content,
+.cham-site .product-grid__item .product-card__content{
+  border-radius:22px!important;
+  overflow:hidden;
+  transition:transform .38s var(--cham-ease),box-shadow .38s var(--cham-ease);
+}
+.cham-site product-card:hover .product-card__content{
+  transform:translateY(-6px);
+  box-shadow:0 22px 58px rgba(76,42,26,.12);
+}
+
+.cham-values{gap:18px}
+.cham-value{
+  position:relative;overflow:hidden;padding:30px;
+  border-radius:28px 12px 28px 12px;
+  background:linear-gradient(145deg,rgba(255,253,248,.84),rgba(250,237,220,.68));
+  box-shadow:0 8px 30px rgba(76,42,26,.045);
+  transition:transform .4s var(--cham-ease),border-color .3s ease,box-shadow .4s ease;
+}
+.cham-value::after{
+  content:"";position:absolute;width:130px;height:130px;border:1px solid rgba(185,73,50,.09);
+  border-radius:50%;right:-56px;bottom:-60px;transition:transform .55s var(--cham-ease)
+}
+.cham-value:hover{transform:translateY(-6px);border-color:rgba(185,73,50,.28);box-shadow:0 22px 56px rgba(76,42,26,.10)}
+.cham-value:hover::after{transform:scale(1.22)}
+.cham-value h3{font-size:1.72rem;line-height:1.12}
+.cham-value p{line-height:1.75}
+
+.cham-custom{
+  border-radius:42px 16px 42px 16px;
+  background:
+    radial-gradient(circle at 84% 18%,rgba(255,214,127,.42),transparent 24rem),
+    linear-gradient(122deg,#8e3428 0%,#bd5236 46%,#dd814d 78%,#e3aa55 100%);
+  box-shadow:0 32px 90px rgba(112,49,31,.20);
+  transform:translateZ(0);
+}
+.cham-custom::before{
+  content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(35deg,rgba(255,255,255,.04) 0 1px,transparent 1px 22px);
+  pointer-events:none
+}
+.cham-custom::after{
+  width:480px;height:480px;right:-120px;top:-190px;
+  box-shadow:0 0 0 54px rgba(255,255,255,.035),0 0 0 108px rgba(255,255,255,.025);
+  animation:cham-orbit 11s ease-in-out infinite
+}
+@keyframes cham-orbit{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(-20px,24px) rotate(8deg)}}
+.cham-custom h2{max-width:900px;letter-spacing:-.045em!important}
+.cham-custom .cham-button{box-shadow:0 12px 36px rgba(72,31,21,.14)}
+
+.cham-footer{position:relative;overflow:hidden}
+.cham-footer::before{
+  content:"";position:absolute;width:420px;height:420px;border-radius:50%;
+  right:-180px;bottom:-240px;border:1px solid rgba(165,92,60,.13);
+  box-shadow:0 0 0 55px rgba(165,92,60,.025),0 0 0 110px rgba(165,92,60,.018)
+}
+.cham-footer__brand{font-family:var(--cham-font-display)!important;letter-spacing:-.04em}
+
+.cham-product-context__item{
+  border-radius:22px 10px 22px 10px;
+  transition:transform .3s var(--cham-ease),box-shadow .3s ease,border-color .3s ease;
+}
+.cham-product-context__item:hover{transform:translateY(-4px);box-shadow:var(--cham-shadow-soft);border-color:rgba(185,73,50,.26)}
+.cham-product-context__custom{border-radius:24px 10px 24px 10px}
+
+/* Reveal system: only hidden when JS is active */
+.cham-js [data-cham-reveal],
+.cham-js .cham-section-head,
+.cham-js .cham-category-card,
+.cham-js .cham-product-card,
+.cham-js .cham-value,
+.cham-js .cham-custom,
+.cham-js .cham-product-context__item{
+  opacity:0;
+  transform:translateY(24px);
+  transition:
+    opacity .72s var(--cham-ease),
+    transform .72s var(--cham-ease),
+    box-shadow .35s ease,
+    border-color .3s ease;
+}
+.cham-js .cham-inview{opacity:1!important;transform:translateY(0)!important}
+.cham-js .cham-category-card:nth-child(2),
+.cham-js .cham-product-card:nth-child(2),
+.cham-js .cham-value:nth-child(2){transition-delay:.06s}
+.cham-js .cham-category-card:nth-child(3),
+.cham-js .cham-product-card:nth-child(3),
+.cham-js .cham-value:nth-child(3){transition-delay:.12s}
+.cham-js .cham-category-card:nth-child(4),
+.cham-js .cham-product-card:nth-child(4){transition-delay:.18s}
+.cham-js .cham-category-card:nth-child(5),
+.cham-js .cham-product-card:nth-child(5){transition-delay:.24s}
+.cham-js .cham-category-card:nth-child(6),
+.cham-js .cham-product-card:nth-child(6){transition-delay:.30s}
+
+@media(max-width:1100px){
+  .cham-hero__grid{grid-template-columns:minmax(0,1fr) minmax(330px,.9fr);gap:36px}
+  .cham-hero__title{font-size:clamp(3rem,7vw,5.6rem)}
+}
+@media(max-width:820px){
+  .cham-hero{padding-top:42px}
+  .cham-hero__grid{grid-template-columns:1fr}
+  .cham-hero__copy{padding-block:0}
+  .cham-hero__title{font-size:clamp(3.1rem,14vw,5.8rem)}
+  .cham-hero__visual{min-height:480px;border-radius:34px 14px 34px 14px}
+  .cham-hero__note--bottom{display:none}
+  .cham-material-strip{margin-top:50px}
+  .cham-category-card{min-height:190px}
+}
+@media(max-width:560px){
+  .cham-hero__eyebrow-row{align-items:flex-start}
+  .cham-hero__edition{display:none}
+  .cham-hero__title{font-size:clamp(2.85rem,15.5vw,4.6rem)}
+  .cham-hero__body{margin-top:20px}
+  .cham-hero__actions{gap:8px}
+  .cham-button{min-height:47px;padding:.75rem 1rem;font-size:.84rem}
+  .cham-search{margin-top:24px}
+  .cham-hero__visual{min-height:400px}
+  .cham-craft-tile{padding:13px}
+  .cham-craft-tile strong{font-size:1.15rem}
+  .cham-hero__seal{width:74px;left:16px;bottom:16px}
+  .cham-hero__note--top{left:20px;top:23px}
+  .cham-category-card{min-height:160px}
+  .cham-section-title{font-size:clamp(2.1rem,10vw,3.3rem)}
+}
+@media(prefers-reduced-motion:reduce){
+  .cham-material-strip__track,.cham-hero__halo,.cham-custom::after{animation:none!important}
+  .cham-js [data-cham-reveal],
+  .cham-js .cham-section-head,
+  .cham-js .cham-category-card,
+  .cham-js .cham-product-card,
+  .cham-js .cham-value,
+  .cham-js .cham-custom,
+  .cham-js .cham-product-context__item{opacity:1!important;transform:none!important}
+}
+
+/* Preserve interactive lift after reveal completes */
+.cham-js .cham-category-card.cham-inview:hover{transform:translateY(-7px) rotate(.3deg)!important}
+.cham-js .cham-product-card.cham-inview:hover{transform:translateY(-8px)!important}
+.cham-js .cham-value.cham-inview:hover{transform:translateY(-6px)!important}
+.cham-js .cham-product-context__item.cham-inview:hover{transform:translateY(-4px)!important}

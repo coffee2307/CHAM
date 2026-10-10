@@ -2,36 +2,69 @@
   assign primary_link = section.settings.primary_link | default: routes.all_products_collection_url
   assign secondary_link = section.settings.secondary_link | default: '/pages/about'
 -%}
-<section class="cham-hero">
+<section class="cham-hero" data-cham-hero>
   <div class="cham-shell cham-hero__grid">
-    <div>
-      <p class="cham-kicker">{{ section.settings.eyebrow }}</p>
+    <div class="cham-hero__copy" data-cham-reveal>
+      <div class="cham-hero__eyebrow-row">
+        <p class="cham-kicker">{{ section.settings.eyebrow }}</p>
+        <span class="cham-hero__edition">VIETNAM / 2026</span>
+      </div>
       <h1 class="cham-hero__title">{{ section.settings.heading }}</h1>
       <div class="cham-hero__body">{{ section.settings.body }}</div>
       <div class="cham-hero__actions">
-        <a class="cham-button cham-button--primary" href="{{ primary_link }}">{{ section.settings.primary_label }}</a>
-        <a class="cham-button cham-button--soft" href="{{ secondary_link }}">{{ section.settings.secondary_label }}</a>
+        <a class="cham-button cham-button--primary" href="{{ primary_link }}">
+          <span>{{ section.settings.primary_label }}</span><span aria-hidden="true">↗</span>
+        </a>
+        <a class="cham-button cham-button--soft" href="{{ secondary_link }}">
+          <span>{{ section.settings.secondary_label }}</span>
+        </a>
       </div>
+
       {% if section.settings.show_search %}
         <form class="cham-search" action="{{ routes.search_url }}" method="get" role="search">
+          <span class="cham-search__mark" aria-hidden="true">⌕</span>
           <label class="visually-hidden" for="ChamHeroSearch-{{ section.id }}">Tìm sản phẩm</label>
           <input id="ChamHeroSearch-{{ section.id }}" type="search" name="q" placeholder="{{ section.settings.search_placeholder }}" autocomplete="off">
           <input type="hidden" name="options[prefix]" value="last">
           <button type="submit">Tìm</button>
         </form>
       {% endif %}
+
+      <div class="cham-hero__chips" aria-label="Gợi ý danh mục">
+        <a href="{{ routes.all_products_collection_url }}">Gốm</a>
+        <a href="{{ routes.all_products_collection_url }}">Mây tre</a>
+        <a href="{{ routes.all_products_collection_url }}">Dệt</a>
+        <a href="{{ routes.all_products_collection_url }}">Sơn mài</a>
+      </div>
     </div>
-    <div class="cham-hero__visual" aria-label="Chất liệu và kỹ nghệ thủ công Việt Nam">
+
+    <div class="cham-hero__visual" data-cham-tilt aria-label="Chất liệu và kỹ nghệ thủ công Việt Nam">
+      <div class="cham-hero__halo" aria-hidden="true"></div>
       {% if section.settings.image != blank %}
-        {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'eager', widths: '480, 720, 960, 1200', sizes: '(max-width: 820px) 100vw, 48vw', alt: section.settings.image.alt }}
+        <div class="cham-hero__image">
+          {{ section.settings.image | image_url: width: 1400 | image_tag: loading: 'eager', widths: '480, 720, 960, 1200, 1400', sizes: '(max-width: 820px) 100vw, 48vw', alt: section.settings.image.alt }}
+        </div>
       {% else %}
         <div class="cham-craft-orbit" aria-hidden="true">
-          <div class="cham-craft-tile">Gốm</div>
-          <div class="cham-craft-tile">Mây tre</div>
-          <div class="cham-craft-tile">Dệt</div>
-          <div class="cham-craft-tile">Sơn mài</div>
+          <div class="cham-craft-tile"><span>01</span><strong>Gốm</strong><em>đất / lửa</em></div>
+          <div class="cham-craft-tile"><span>02</span><strong>Mây tre</strong><em>đan / uốn</em></div>
+          <div class="cham-craft-tile"><span>03</span><strong>Dệt</strong><em>sợi / nhịp</em></div>
+          <div class="cham-craft-tile"><span>04</span><strong>Sơn mài</strong><em>lớp / bóng</em></div>
         </div>
       {% endif %}
+      <div class="cham-hero__seal" aria-hidden="true">
+        <span>CHẠM</span>
+        <small>CRAFTED IN VIETNAM</small>
+      </div>
+      <div class="cham-hero__note cham-hero__note--top">MATERIAL / HAND / STORY</div>
+      <div class="cham-hero__note cham-hero__note--bottom">CURATED CRAFT GOODS</div>
+    </div>
+  </div>
+
+  <div class="cham-material-strip" aria-hidden="true">
+    <div class="cham-material-strip__track">
+      <span>GỐM</span><i>•</i><span>MÂY TRE</span><i>•</i><span>DỆT</span><i>•</i><span>SƠN MÀI</span><i>•</i><span>GỖ</span><i>•</i><span>GIẤY</span><i>•</i>
+      <span>GỐM</span><i>•</i><span>MÂY TRE</span><i>•</i><span>DỆT</span><i>•</i><span>SƠN MÀI</span><i>•</i><span>GỖ</span><i>•</i><span>GIẤY</span><i>•</i>
     </div>
   </div>
 </section>

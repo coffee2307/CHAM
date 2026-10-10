@@ -12,6 +12,13 @@
     {%- render 'scripts' -%}
     {%- render 'theme-styles-variables' -%}
     {%- render 'color-schemes' -%}
+
+    {% # theme-check-disable RemoteAsset %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Noto+Serif:wght@500;600;700&display=swap" rel="stylesheet">
+    {% # theme-check-enable RemoteAsset %}
+
     {{ 'cham-theme.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'cham-theme.js' | asset_url }}" defer></script>
     {% if request.design_mode %}
@@ -20,6 +27,7 @@
     {{ content_for_header }}
   </head>
   <body class="cham-site page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
+    <div class="cham-cursor-light" aria-hidden="true"></div>
     {% render 'skip-to-content-link', href: '#MainContent', text: 'Skip to main content', literal: true %}
     <div id="header-group">{% sections 'header-group' %}</div>
     <main id="MainContent" class="content-for-layout" role="main"
