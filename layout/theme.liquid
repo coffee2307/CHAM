@@ -13,7 +13,9 @@
     {%- render 'theme-styles-variables' -%}
     {%- render 'color-schemes' -%}
     {{ 'cham-theme.css' | asset_url | stylesheet_tag }}
+    {{ 'cham-refinement.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'cham-theme.js' | asset_url }}" defer></script>
+    <script src="{{ 'cham-mobile-menu.js' | asset_url }}" defer></script>
     {% if request.design_mode %}{%- render 'theme-editor' -%}{% endif %}
     {{ content_for_header }}
   </head>

@@ -1,0 +1,384 @@
+/* CHẠM — V5: restrained editorial layout and accessible mobile interactions.
+   Loaded after cham-theme.css to consolidate the old overlapping overrides. */
+
+/* Remove decorative text/visual noise without touching the real logo. */
+.cham-site .cham-hero__backtype,
+.cham-site .cham-cursor-light { display: none !important; }
+
+/* Touch feedback must use brand styles, never the browser's blue tap overlay. */
+.cham-site a,
+.cham-site button,
+.cham-site summary,
+.cham-site input[type="submit"],
+.cham-site [role="button"] {
+  -webkit-tap-highlight-color: transparent !important;
+  touch-action: manipulation;
+}
+.cham-site a,
+.cham-site button,
+.cham-site summary {
+  -webkit-touch-callout: none;
+}
+.cham-site a:focus:not(:focus-visible),
+.cham-site button:focus:not(:focus-visible),
+.cham-site summary:focus:not(:focus-visible) {
+  outline: none !important;
+}
+.cham-site a:focus-visible,
+.cham-site button:focus-visible,
+.cham-site summary:focus-visible {
+  outline: 2px solid #a65a40 !important;
+  outline-offset: 3px;
+}
+.cham-site a::selection,
+.cham-site button::selection,
+.cham-site summary::selection { background: transparent; }
+
+/* Mobile navigation: real, reversible 230ms exit; click-outside handled by JS. */
+.cham-site .cham-mobile-nav { position: static; }
+.cham-site .cham-mobile-nav summary {
+  position: relative;
+  transition: color 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+.cham-site .cham-mobile-nav summary:hover,
+.cham-site .cham-mobile-nav details.is-open summary {
+  background: #e9dbca;
+  border-color: rgba(72,47,31,.28);
+}
+.cham-site .cham-mobile-nav__panel {
+  left: 12px;
+  right: auto;
+  top: calc(100% + 9px);
+  width: min(330px, calc(100vw - 40px));
+  padding: 10px 18px;
+  border: 1px solid rgba(80,51,34,.17);
+  border-radius: 11px;
+  background: #fffaf1;
+  box-shadow: 0 18px 45px rgba(43,30,22,.15);
+  z-index: 100;
+}
+.cham-site .cham-mobile-nav__panel a {
+  padding: 13px 7px;
+  min-height: 44px;
+  font-size: 14px;
+  line-height: 1.25;
+  color: #38271f;
+  border-bottom: 1px solid rgba(90,62,44,.10);
+  transition: background 160ms ease, padding-left 160ms ease;
+}
+.cham-site .cham-mobile-nav__panel a:last-child { border-bottom: 0; }
+.cham-site .cham-mobile-nav__panel a:hover,
+.cham-site .cham-mobile-nav__panel a:focus-visible {
+  background: #f4eadf;
+  padding-left: 11px;
+}
+/* CSS is only gated by JS: native <details> still works without scripts. */
+html.cham-js .cham-mobile-nav details[open] .cham-mobile-nav__panel {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-9px) scale(.985);
+  transform-origin: top left;
+  transition:
+    opacity 230ms ease,
+    transform 230ms cubic-bezier(.2,.8,.2,1),
+    visibility 230ms;
+}
+html.cham-js .cham-mobile-nav details.is-open[open] .cham-mobile-nav__panel {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+/* Layout rhythm: real hierarchy instead of oversized type and decorative gaps. */
+.cham-site .cham-shell { width: min(1260px, calc(100% - 64px)); }
+.cham-site .cham-section { padding-block: clamp(52px, 6vw, 86px); }
+.cham-site .cham-section-head {
+  margin-bottom: 28px;
+  gap: 20px 34px;
+  align-items: end;
+}
+.cham-site .cham-section-title {
+  max-width: 790px;
+  font-size: clamp(28px, 3.2vw, 48px);
+  line-height: 1.18 !important;
+  letter-spacing: -.035em !important;
+  text-wrap: pretty;
+}
+.cham-site .cham-section-copy {
+  max-width: 390px;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.cham-site .cham-kicker {
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: .10em;
+}
+.cham-site .cham-button {
+  min-height: 46px;
+  padding: 10px 17px;
+  border-radius: 8px !important;
+}
+.cham-site .cham-button:hover,
+.cham-site .cham-product-card:hover,
+.cham-site .cham-category-card:hover { box-shadow: none; }
+
+/* Hero: smaller, less theatrical, consistent with Vietnamese sans typography. */
+.cham-site .cham-hero--signature {
+  min-height: auto;
+  padding: clamp(68px, 7vw, 96px) 0 0;
+}
+.cham-site .cham-hero--signature::before { content: none; }
+.cham-site .cham-hero__grid {
+  grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr);
+  gap: clamp(28px, 4vw, 64px);
+  align-items: center;
+}
+.cham-site .cham-hero__copy { padding-block: 0; }
+.cham-site .cham-hero__title {
+  margin-top: 18px;
+  max-width: 680px;
+  font-size: clamp(40px, 5vw, 72px);
+  line-height: 1.12 !important;
+  letter-spacing: -.04em !important;
+  text-wrap: pretty;
+}
+.cham-site .cham-hero__body {
+  max-width: 530px;
+  margin-top: 17px;
+  font-size: clamp(15px, 1.12vw, 17px);
+  line-height: 1.7;
+}
+.cham-site .cham-hero__body p { margin: 0; }
+.cham-site .cham-hero__actions { margin-top: 23px; gap: 9px; }
+.cham-site .cham-search {
+  max-width: 520px;
+  margin-top: 23px;
+  box-shadow: none;
+}
+.cham-site .cham-hero__chips { margin-top: 16px; }
+.cham-site .cham-hero__visual--signature {
+  min-height: 480px;
+  border-radius: 10px !important;
+  box-shadow: 0 16px 42px rgba(62,43,29,.12);
+  background: linear-gradient(140deg, #e0c7a5, #c79b72 58%, #8e6149) !important;
+}
+.cham-site .cham-hero__visual--signature::before,
+.cham-site .cham-hero__visual--signature::after {
+  opacity: .4;
+}
+.cham-site .cham-craft-sculpture__shape { box-shadow: 10px 20px 38px rgba(49,29,18,.15); }
+.cham-site .cham-craft-sculpture__label,
+.cham-site .cham-hero__seal,
+.cham-site .cham-hero__note { display: none !important; }
+.cham-site .cham-material-strip { margin-top: 38px; }
+.cham-site .cham-material-strip__track { font-size: 11px; }
+
+/* Predictable grid dimensions instead of oversized masonry cards. */
+.cham-site .cham-category-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: auto;
+  gap: 13px;
+}
+.cham-site .cham-category-card,
+.cham-site .cham-category-card:nth-child(n) {
+  grid-column: auto;
+  grid-row: auto;
+  min-height: 205px !important;
+  aspect-ratio: 1.36;
+  padding: 18px;
+  border-radius: 10px !important;
+  background: #e7d6bc !important;
+  border: 1px solid rgba(82,54,35,.11);
+}
+.cham-site .cham-category-card:nth-child(even) { background: #e5cfae !important; }
+.cham-site .cham-category-card__text {
+  font-size: clamp(18px, 1.8vw, 26px);
+  line-height: 1.25;
+  letter-spacing: -.025em;
+}
+.cham-site .cham-category-card:not(:has(img))::after { opacity: 0; }
+.cham-site .cham-category-card:has(img)::after { opacity: 1; }
+.cham-site .cham-product-grid { gap: 15px; }
+.cham-site .cham-product-card { border-radius: 10px !important; }
+.cham-site .cham-product-card__body { padding: 15px; }
+.cham-site .cham-product-card__title { line-height: 1.35 !important; }
+
+/* Tonal breaks: one dark chapter rather than many competing loud panels. */
+.cham-site .cham-process-section { background: #342a23; }
+.cham-site .cham-process__steps article { padding: 23px 0; }
+.cham-site .cham-process__steps h3 { font-size: clamp(19px, 2vw, 25px); }
+.cham-site .cham-showcase-section {
+  background: #e7dac8;
+  color: #322219;
+}
+.cham-site .cham-showcase-section .cham-section-title { color: #322219; }
+.cham-site .cham-showcase-section .cham-kicker { color: #975239; }
+.cham-site .cham-showcase__head {
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-bottom: 26px;
+}
+.cham-site .cham-showcase {
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  grid-template-rows: auto;
+  gap: 14px;
+}
+.cham-site .cham-showcase article,
+.cham-site .cham-showcase .cham-showcase__feature {
+  grid-column: auto;
+  grid-row: auto;
+  min-height: 270px !important;
+  border: 1px solid rgba(82,54,35,.10);
+  border-radius: 10px !important;
+}
+.cham-site .cham-showcase__pattern { opacity: .50; }
+.cham-site .cham-showcase article>div:last-child { padding: 19px 22px; }
+.cham-site .cham-showcase article h3 { font-size: 21px; line-height: 1.25 !important; }
+.cham-site .cham-showcase article p { font-size: 14px; }
+
+/* Values: remove the odd 110px empty gap. */
+.cham-site .cham-values { gap: 14px; }
+.cham-site .cham-value {
+  min-height: 268px;
+  padding: 25px;
+  border-radius: 10px !important;
+}
+.cham-site .cham-value h3 {
+  margin-top: 58px;
+  font-size: clamp(20px, 1.65vw, 26px);
+  line-height: 1.3 !important;
+}
+.cham-site .cham-value p { font-size: 14px; line-height: 1.65; }
+
+/* Callout, contact, editorial pages and footer: sober, readable proportions. */
+.cham-site .cham-custom { min-height: 315px; padding: clamp(32px, 5vw, 58px); }
+.cham-site .cham-custom h2 {
+  max-width: 740px;
+  font-size: clamp(29px, 3.4vw, 47px);
+  line-height: 1.18 !important;
+}
+.cham-site .cham-custom p { max-width: 610px; margin: 15px 0 22px; }
+.cham-site .cham-custom__weave { opacity: .16 !important; }
+.cham-site .cham-editorial-hero h1 {
+  max-width: 1000px;
+  font-size: clamp(36px, 5vw, 68px);
+  line-height: 1.14 !important;
+}
+.cham-site .cham-about-story h2,
+.cham-site .cham-story-manifesto strong {
+  font-size: clamp(30px, 3.2vw, 46px);
+  line-height: 1.2 !important;
+}
+.cham-site .cham-editorial-grid article { min-height: 260px; }
+.cham-site .cham-contact h1 { font-size: clamp(36px, 4.6vw, 64px); line-height: 1.13 !important; }
+.cham-site .cham-footer { padding-top: 35px !important; }
+.cham-site .cham-footer__marquee { display: none !important; }
+.cham-site .cham-footer__grid { padding-top: 0; gap: 26px; }
+.cham-site .cham-footer__brand { font-size: clamp(38px, 5vw, 68px) !important; }
+.cham-site .cham-footer__bottom { margin-top: 30px; }
+
+/* Tablet and mobile layout: visual balance, no giant cards or overlapping typography. */
+@media (max-width: 980px) {
+  .cham-site .cham-shell { width: min(100% - 44px, 760px); }
+  .cham-site .cham-hero__grid { grid-template-columns: 1fr; gap: 28px; }
+  .cham-site .cham-hero__visual--signature { min-height: 380px; }
+  .cham-site .cham-hero__title { font-size: clamp(38px, 7.3vw, 60px); }
+  .cham-site .cham-category-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .cham-site .cham-category-card:nth-child(n) { grid-row: auto; }
+  .cham-site .cham-values { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .cham-site .cham-footer__grid { gap: 24px; }
+}
+
+@media (max-width: 620px) {
+  .cham-site .cham-shell { width: calc(100% - 36px); }
+  .cham-site .cham-section { padding-block: 49px; }
+  .cham-site .cham-section-head { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 20px; }
+  .cham-site .cham-section-title { font-size: clamp(26px, 7vw, 34px); }
+  .cham-site .cham-section-copy { font-size: 14px; }
+  .cham-site .cham-kicker { letter-spacing: .08em; }
+  .cham-site .cham-hero--signature { padding: 42px 0 0; }
+  .cham-site .cham-hero__title { font-size: clamp(33px, 9vw, 44px); margin-top: 14px; }
+  .cham-site .cham-hero__body { font-size: 14px; margin-top: 14px; }
+  .cham-site .cham-hero__actions { margin-top: 20px; gap: 9px; }
+  .cham-site .cham-button { min-height: 44px; padding-inline: 14px; font-size: 13px; }
+  .cham-site .cham-search { margin-top: 20px; }
+  .cham-site .cham-hero__visual--signature { min-height: 300px; }
+  .cham-site .cham-material-strip { margin-top: 26px; }
+  .cham-site .cham-category-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+  .cham-site .cham-category-card,
+  .cham-site .cham-category-card:nth-child(n) {
+    min-height: 150px !important;
+    aspect-ratio: 1/1.05;
+    padding: 12px;
+  }
+  .cham-site .cham-category-card__text { font-size: clamp(15px,4vw,19px); }
+  .cham-site .cham-category-card__index { font-size: 10px; }
+  .cham-site .cham-product-grid { gap: 10px; }
+  .cham-site .cham-showcase { grid-template-columns: 1fr; }
+  .cham-site .cham-showcase article,
+  .cham-site .cham-showcase .cham-showcase__feature { min-height: 245px !important; }
+  .cham-site .cham-values { grid-template-columns: 1fr; }
+  .cham-site .cham-value { min-height: auto; padding: 22px; }
+  .cham-site .cham-value h3 { margin-top: 34px; font-size: 22px; }
+  .cham-site .cham-custom { min-height: 280px; padding: 28px 23px; }
+  .cham-site .cham-custom h2 { font-size: clamp(26px,7vw,33px); }
+  .cham-site .cham-editorial-hero h1 { font-size: clamp(34px, 8.4vw, 46px); }
+  .cham-site .cham-editorial-grid article { min-height: auto; }
+  .cham-site .cham-contact h1 { font-size: clamp(33px, 8vw, 44px); }
+  .cham-site .cham-header__inner { min-height: 60px; gap: 10px; }
+  .cham-site .cham-wordmark { font-size: 27px; }
+  .cham-site .cham-footer__grid { gap: 26px; }
+}
+@media (max-width: 360px) {
+  .cham-site .cham-hero__actions .cham-button { width: 100%; }
+  .cham-site .cham-category-grid { grid-template-columns: 1fr; }
+  .cham-site .cham-category-card:nth-child(n) { min-height: 145px !important; aspect-ratio: 2.0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.cham-js .cham-mobile-nav details[open] .cham-mobile-nav__panel { transition: none !important; }
+}
+
+/* Final polish: fewer decorative effects, tighter image-less category navigation. */
+body.cham-site {
+  background: #fffaf1 !important;
+}
+body.cham-site::before { display: none !important; }
+.cham-site .cham-material-strip { display: none !important; }
+.cham-site .cham-hero--signature { padding-bottom: clamp(48px, 6vw, 78px); }
+
+.cham-site .cham-category-card:not(:has(img)),
+.cham-site .cham-category-card:nth-child(n):not(:has(img)) {
+  min-height: 160px !important;
+  aspect-ratio: auto !important;
+  background: #f1e6d5 !important;
+  border: 1px solid rgba(85,57,40,.17);
+}
+.cham-site .cham-category-card:nth-child(even):not(:has(img)) {
+  background: #eadbc5 !important;
+}
+.cham-site .cham-category-card:not(:has(img))::after { display: none !important; }
+.cham-site .cham-category-card:not(:has(img)):hover {
+  border-color: rgba(100,65,45,.42);
+  background: #e6d3ba !important;
+}
+
+@media (max-width: 620px) {
+  .cham-site .cham-hero--signature { padding-bottom: 42px; }
+  .cham-site .cham-hero__actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 9px;
+  }
+  .cham-site .cham-hero__actions .cham-button {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .cham-site .cham-category-card:not(:has(img)),
+  .cham-site .cham-category-card:nth-child(n):not(:has(img)) {
+    min-height: 119px !important;
+    padding: 13px;
+  }
+}

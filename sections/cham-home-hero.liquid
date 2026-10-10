@@ -3,7 +3,6 @@
   assign secondary_link = section.settings.secondary_link | default: '/pages/about#story'
 -%}
 <section class="cham-hero cham-hero--signature" data-cham-hero>
-  <div class="cham-hero__backtype" aria-hidden="true">CHẠM</div>
   <div class="cham-shell cham-hero__grid">
     <div class="cham-hero__copy" data-cham-reveal>
       <div class="cham-hero__eyebrow-row">
@@ -40,6 +39,10 @@
       {% if section.settings.image != blank %}
         <div class="cham-hero__image">
           {{ section.settings.image | image_url: width: 1400 | image_tag: loading: 'eager', widths: '480, 720, 960, 1200, 1400', sizes: '(max-width: 820px) 100vw, 48vw', alt: section.settings.image.alt }}
+        </div>
+      {% elsif collections.all.products.first.featured_image != blank %}
+        <div class="cham-hero__image">
+          {{ collections.all.products.first.featured_image | image_url: width: 1400 | image_tag: loading: 'eager', widths: '480, 720, 960, 1200, 1400', sizes: '(max-width: 820px) 100vw, 48vw', alt: collections.all.products.first.title }}
         </div>
       {% else %}
         <div class="cham-craft-sculpture" aria-hidden="true">
