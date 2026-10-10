@@ -2,13 +2,18 @@
 <section class="cham-section cham-custom-section">
   <div class="cham-shell">
     <div class="cham-custom">
+      <div class="cham-custom__label" aria-hidden="true"><span>CHẠM / CUSTOM</span><span>01—01</span></div>
       <div class="cham-custom__inner">
-        <p class="cham-kicker" style="color:#fff2df">{{ section.settings.eyebrow }}</p>
+        <p class="cham-kicker">{{ section.settings.eyebrow }}</p>
         <h2>{{ section.settings.heading }}</h2>
         <p>{{ section.settings.body }}</p>
-        <a class="cham-button" href="{{ custom_link }}">{{ section.settings.button_label }}</a>
+        <a class="cham-button" href="{{ custom_link }}">{{ section.settings.button_label }} <span aria-hidden="true">↗</span></a>
       </div>
-      <div class="cham-custom__weave" aria-hidden="true"></div>
+      <div class="cham-custom__aside">
+        <span>GỢI Ý YÊU CẦU</span>
+        <ul><li>Quà tặng doanh nghiệp</li><li>Kích thước và màu sắc</li><li>Đóng gói và nhãn riêng</li></ul>
+        <small>Mỗi yêu cầu được xem xét theo năng lực sản xuất thực tế.</small>
+      </div>
     </div>
   </div>
 </section>
@@ -17,10 +22,10 @@
   "name":"CHẠM · Tùy chỉnh",
   "tag":"section",
   "settings":[
-    {"type":"text","id":"eyebrow","label":"Dòng nhỏ","default":"ĐAN THEO NHU CẦU"},
-    {"type":"text","id":"heading","label":"Tiêu đề","default":"Muốn đổi kích thước, phối màu, thêm nhãn hoặc làm theo bộ?"},
-    {"type":"textarea","id":"body","label":"Mô tả","default":"Gửi nhu cầu cho CHẠM. Khả năng tùy chỉnh được xác nhận theo từng kiểu đan, vật liệu, số lượng và năng lực của cơ sở sản xuất."},
-    {"type":"text","id":"button_label","label":"Nhãn nút","default":"Gửi yêu cầu tùy chỉnh"},
+    {"type":"text","id":"eyebrow","label":"Dòng nhỏ","default":"CÁ NHÂN HÓA / ĐẶT THEO YÊU CẦU"},
+    {"type":"text","id":"heading","label":"Tiêu đề","default":"Mỗi nhu cầu có thể bắt đầu từ một món đồ thủ công."},
+    {"type":"textarea","id":"body","label":"Mô tả","default":"CHẠM tiếp nhận yêu cầu về kích thước, màu sắc, đóng gói quà và đơn đặt hàng doanh nghiệp. Khả năng thực hiện được xác nhận theo từng sản phẩm, vật liệu và cơ sở sản xuất."},
+    {"type":"text","id":"button_label","label":"Nhãn nút","default":"Gửi yêu cầu"},
     {"type":"url","id":"link","label":"Liên kết"}
   ],
   "presets":[{"name":"CHẠM · Tùy chỉnh","category":"CHẠM"}]

@@ -26,12 +26,15 @@
           </div>
         </article>
       {% else %}
-        {% for i in (1..4) %}
-          <article class="cham-product-card">
-            <div class="cham-product-card__media">{{ 'product-' | append: i | placeholder_svg_tag }}</div>
-            <div class="cham-product-card__body"><div class="cham-product-card__meta"><span>Đồ thủ công</span></div><h3 class="cham-product-card__title">Sản phẩm mẫu {{ i }}</h3><div class="cham-product-card__price">—</div></div>
-          </article>
-        {% endfor %}
+        <div class="cham-empty-collection">
+          <div class="cham-empty-collection__monogram" aria-hidden="true">C.</div>
+          <div>
+            <span class="cham-kicker">CHẠM / SẢN PHẨM</span>
+            <h3>Đang hoàn thiện danh mục chọn lọc.</h3>
+            <p>Những sản phẩm đầu tiên sẽ xuất hiện tại đây khi thông tin về chất liệu, kích thước và khả năng cung ứng được xác nhận.</p>
+            <a href="/pages/about">Tìm hiểu về CHẠM <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
       {% endfor %}
     </div>
   </div>

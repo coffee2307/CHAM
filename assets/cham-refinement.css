@@ -594,3 +594,393 @@ body.cham-site::before { display: none !important; }
   .cham-site .cham-hero--text-only .cham-hero__title { font-size: clamp(35px,9vw,47px); }
   .cham-site .cham-hero__visual--photo { min-height: 280px; }
 }
+
+/* CHẠM / EDITORIAL REFINEMENT — purposeful composition, no ornamental circles. */
+.cham-site .cham-value::before,
+.cham-site .cham-value::after,
+.cham-site .cham-custom::before,
+.cham-site .cham-custom::after,
+.cham-site .cham-custom__weave,
+.cham-site .cham-footer::before,
+.cham-site .cham-footer::after,
+.cham-site .cham-hero__halo { display:none !important; content:none !important; }
+
+/* Remove universal generated-surface effects, retain lightweight states. */
+.cham-site .cham-product-card:hover,
+.cham-site .cham-value:hover,
+.cham-site .cham-category-card:hover { transform:none !important; }
+.cham-site .cham-value,
+.cham-site .cham-product-card,
+.cham-site .cham-category-card {
+  transition: background-color .2s ease, border-color .2s ease;
+}
+.cham-site .cham-button::before { display:none !important; }
+.cham-site .cham-category-card::before { display:none !important; }
+
+/* Hero has its own composition: a statement rather than empty decoration. */
+.cham-site .cham-hero--text-only {
+  padding-block: clamp(66px, 8vw, 128px);
+  background: #f7f0e5;
+}
+.cham-site .cham-hero--text-only .cham-hero__grid {
+  position:relative;
+  max-width:1260px;
+}
+.cham-site .cham-hero--text-only .cham-hero__grid::after {
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+  height:80px;
+  width:1px;
+  background:#b88264;
+}
+.cham-site .cham-hero--text-only .cham-hero__copy {
+  max-width:880px;
+}
+.cham-site .cham-hero--text-only .cham-hero__title {
+  max-width:950px;
+  font-size:clamp(48px,6.8vw,99px);
+  line-height:1.08!important;
+  letter-spacing:-.055em!important;
+}
+.cham-site .cham-hero__edition {
+  border-radius:4px;
+  background:transparent;
+  border:0;
+  border-bottom:1px solid #b79c85;
+  padding:0 0 5px;
+}
+.cham-site .cham-hero--text-only .cham-hero__body { max-width:620px; }
+.cham-site .cham-hero--text-only .cham-hero__body p { font-size:clamp(16px,1.3vw,19px); }
+.cham-site .cham-hero__chips a { border-radius:4px; }
+
+/* Wider, more breathable and intentional section composition. */
+.cham-site .cham-section-head { margin-bottom:clamp(26px,3vw,44px); }
+.cham-site .cham-section-title {
+  font-size:clamp(34px,3.8vw,58px);
+  font-weight:760;
+}
+.cham-site .cham-categories-section {
+  background:#f7f0e5 !important;
+  border:0;
+}
+.cham-site .cham-category-grid { gap:13px; }
+.cham-site .cham-category-card:not(:has(img)),
+.cham-site .cham-category-card:nth-child(n):not(:has(img)) {
+  min-height:210px!important;
+  padding:24px!important;
+  aspect-ratio:auto!important;
+  background:#fdf8f0!important;
+  border-color:#d8c6b2;
+}
+.cham-site .cham-category-card:nth-child(even):not(:has(img)) { background:#efe1cf!important; }
+.cham-site .cham-category-card:not(:has(img)):hover { background:#e6d0ba!important; }
+.cham-site .cham-category-card__index { font-size:11px;letter-spacing:.14em; }
+.cham-site .cham-category-card__text {
+  font-size:clamp(21px,2vw,31px);
+  line-height:1.2;
+  max-width:290px;
+}
+.cham-site .cham-category-card:hover .cham-category-card__text { text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px; }
+
+/* Editorial interlude: high-impact type plus structured material index. */
+.cham-site .cham-feature-story-section {
+  background:#352820 !important;
+  color:#f6eee2;
+  padding-block:clamp(84px,9vw,142px)!important;
+}
+.cham-site .cham-feature-story {
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+  gap:clamp(50px,7vw,125px);
+  align-items:end;
+}
+.cham-site .cham-feature-story__intro { position:relative; }
+.cham-site .cham-feature-story__intro .cham-kicker {color:#d4a881; }
+.cham-site .cham-feature-story__mark {
+  display:block;
+  margin:25px 0;
+  font-size:11px;
+  letter-spacing:.18em;
+  color:#cebca7;
+}
+.cham-site .cham-feature-story__intro h2 {
+  margin:0 0 28px;
+  max-width:760px;
+  font-size:clamp(54px,6.2vw,99px);
+  font-weight:760;
+  line-height:1.04!important;
+  letter-spacing:-.055em!important;
+  color:#fff9ef;
+}
+.cham-site .cham-feature-story__intro h2 span { color:#cca37e; }
+.cham-site .cham-feature-story__intro>p:not(.cham-kicker) {
+  max-width:580px;
+  font-size:16px;
+  line-height:1.82;
+  color:#d5c4b3;
+}
+.cham-site .cham-feature-story__link {
+  display:inline-flex;align-items:center;gap:14px;
+  margin-top:22px;
+  padding:0 0 13px;
+  font-size:14px;font-weight:700;
+  border-bottom:1px solid #d3af90;
+  text-decoration:none;color:#fff9ef;
+}
+.cham-site .cham-feature-story__link:hover { color:#e8bb95; }
+.cham-site .cham-feature-story__index { border-top:1px solid #7f6655; }
+.cham-site .cham-feature-story__line {
+  display:grid;
+  grid-template-columns:44px minmax(0,1fr);
+  gap:22px;
+  align-items:start;
+  padding:28px 0;
+  border-bottom:1px solid #7f6655;
+}
+.cham-site .cham-feature-story__line>span {
+  padding-top:9px;
+  color:#c6a082;
+  font-size:12px;
+}
+.cham-site .cham-feature-story__line strong {
+  display:block;
+  font-size:clamp(28px,3vw,47px);
+  line-height:1.15;
+  letter-spacing:-.04em;
+  color:#fff9ef;
+}
+.cham-site .cham-feature-story__line small {
+  display:block;
+  font-size:13px;
+  color:#c8b6a4;
+  margin-top:7px;
+}
+
+/* Process: quieter information rhythm, intentional hierarchy. */
+.cham-site .cham-process-section { background:#ece1d1!important;color:#2e241c; }
+.cham-site .cham-process-section .cham-kicker {color:#975b3d; }
+.cham-site .cham-process-section .cham-section-title { color:#2e241c; }
+.cham-site .cham-process__intro p:last-child {color:#6f5b4d;font-size:15px; }
+.cham-site .cham-process__steps {border-color:#bfae9b;}
+.cham-site .cham-process__steps article {border-color:#bfae9b;padding:29px 0;}
+.cham-site .cham-process__steps h3 {color:#2e241c!important;}
+.cham-site .cham-process__steps article:hover h3 {color:#92563a!important;}
+.cham-site .cham-process__steps p {color:#6f5b4d;}
+.cham-site .cham-process__steps span {color:#985f45;}
+
+/* Product section: real imagery when available, explicit editorial holding state otherwise. */
+.cham-site .cham-featured-section {background:#fffaf1;}
+.cham-site .cham-product-grid:has(.cham-empty-collection) {display:block;}
+.cham-site .cham-empty-collection {
+  display:grid;
+  grid-template-columns:minmax(230px,.5fr) minmax(0,1fr);
+  gap:clamp(26px,5vw,80px);
+  background:#eee0cd;
+  border:1px solid #d6bd9f;
+  border-radius:9px;
+  min-height:360px;
+  padding:clamp(30px,5vw,72px);
+  align-items:center;
+}
+.cham-site .cham-empty-collection__monogram {
+  font-size:clamp(125px,16vw,255px);
+  line-height:1;
+  letter-spacing:-.13em;
+  font-weight:800;
+  color:#b48c6b;
+  user-select:none;
+}
+.cham-site .cham-empty-collection h3 {
+  margin:14px 0 15px;
+  font-size:clamp(29px,3.2vw,47px);
+  line-height:1.2!important;
+  letter-spacing:-.035em;
+}
+.cham-site .cham-empty-collection p {max-width:620px;color:#64503f;font-size:16px;line-height:1.75;}
+.cham-site .cham-empty-collection a {
+  display:inline-flex;gap:11px;
+  font-size:14px;font-weight:700;
+  margin-top:15px;padding-bottom:10px;
+  text-decoration:none;border-bottom:1px solid #5b4030;
+}
+.cham-site .cham-product-card {background:#fffaf1;border:0;}
+.cham-site .cham-product-card__media {border-radius:8px;background:#e8dac7;}
+.cham-site .cham-product-card__body {padding:15px 2px;}
+.cham-site .cham-product-card__title {font-size:18px;}
+
+/* Applications: distinct asymmetric editorial modules with navigable CTAs. */
+.cham-site .cham-showcase-section {background:#f8f0e5!important;}
+.cham-site .cham-showcase__head {
+  margin-bottom:36px;
+  max-width:1000px;
+}
+.cham-site .cham-showcase__head .cham-section-title {max-width:940px;}
+.cham-site .cham-showcase__description {
+  max-width:630px;
+  margin:5px 0 0;
+  font-size:16px;
+  line-height:1.7;
+  color:#745d4c;
+}
+.cham-site .cham-applications {
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  grid-template-rows:auto auto;
+  gap:15px;
+}
+.cham-site .cham-application {
+  display:flex;
+  min-height:277px;
+  flex-direction:column;
+  justify-content:space-between;
+  border:1px solid #d8c4af;
+  border-radius:9px;
+  padding:clamp(23px,3vw,42px);
+  background:#f3e7d6;
+  color:#30251e;
+  text-decoration:none;
+  transition:background .2s ease,border-color .2s ease;
+}
+.cham-site .cham-application--lead {
+  min-height:570px;
+  grid-row:span 2;
+  background:#d5b18f;
+  border-color:#cda47e;
+}
+.cham-site .cham-application:nth-child(2) {background:#eee2d3;}
+.cham-site .cham-application:nth-child(3) {background:#e4d2bb;}
+.cham-site .cham-application:hover {background:#dfc6a9;border-color:#ae8663;}
+.cham-site .cham-application__number {font-size:11px;letter-spacing:.13em;font-weight:800;color:#7e553c;}
+.cham-site .cham-application h3 {
+  max-width:620px;
+  margin:10px 0 14px;
+  font-size:clamp(26px,2.9vw,43px);
+  font-weight:760;
+  line-height:1.17!important;
+  letter-spacing:-.04em;
+}
+.cham-site .cham-application--lead h3 {font-size:clamp(40px,4.7vw,71px);}
+.cham-site .cham-application p {max-width:540px;color:#6c5342;font-size:15px;line-height:1.7;}
+.cham-site .cham-application__link {
+  display:inline-flex;gap:11px;align-items:center;
+  margin-top:14px;
+  color:#513626;font-size:14px;font-weight:700;
+}
+
+/* Values: flat typographic columns, remove all circular outlines. */
+.cham-site .cham-values-section {background:#f1e7d8!important;}
+.cham-site .cham-values {gap:0;border-top:1px solid #d0bda6;border-bottom:1px solid #d0bda6;}
+.cham-site .cham-value,
+.cham-site .cham-value:nth-child(n) {
+  border:0!important;
+  border-right:1px solid #d0bda6!important;
+  border-radius:0!important;
+  background:transparent!important;
+  padding:32px 33px 35px;
+  min-height:275px;
+}
+.cham-site .cham-value:last-child {border-right:0!important;}
+.cham-site .cham-value h3 {font-size:clamp(24px,2vw,31px);margin-top:55px;}
+.cham-site .cham-value p {font-size:14px;}
+
+/* Custom CTA: split dark editorial panel, no radial backgrounds or circles. */
+.cham-site .cham-custom-section {background:#fffaf1;}
+.cham-site .cham-custom {
+  display:grid;
+  grid-template-columns:minmax(0,1.25fr) minmax(250px,.75fr);
+  min-height:495px;
+  padding:0!important;
+  color:#fff8ed;
+  background:#32271f!important;
+  border:1px solid #34271f;
+  border-radius:10px!important;
+}
+.cham-site .cham-custom__label {
+  grid-column:1/-1;
+  display:flex;
+  justify-content:space-between;
+  border-bottom:1px solid #695449;
+  padding:19px 33px;
+  font-size:11px;
+  letter-spacing:.13em;
+  color:#d2b89e;
+}
+.cham-site .cham-custom__inner {
+  max-width:100%;
+  padding:clamp(28px,4.7vw,75px);
+}
+.cham-site .cham-custom .cham-kicker {color:#d3a986!important;}
+.cham-site .cham-custom h2 {
+  max-width:780px;
+  margin:10px 0 18px;
+  font-size:clamp(37px,4.3vw,67px);
+  line-height:1.13!important;
+  letter-spacing:-.045em!important;
+}
+.cham-site .cham-custom p {max-width:570px;color:#dcc9b6;}
+.cham-site .cham-custom .cham-button {
+  display:inline-flex;
+  color:#31251d!important;
+  background:#f7eee1!important;
+  border:1px solid #f7eee1;
+}
+.cham-site .cham-custom__aside {
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:15px;
+  padding:36px clamp(22px,3.2vw,49px);
+  border-left:1px solid #695449;
+  background:#3c2c22;
+}
+.cham-site .cham-custom__aside>span {font-size:11px;letter-spacing:.14em;color:#d3a986;}
+.cham-site .cham-custom__aside ul {list-style:none;padding:0;margin:3px 0;}
+.cham-site .cham-custom__aside li {
+  padding:14px 0;
+  border-bottom:1px solid #795e4e;
+  color:#fff2e5;
+  font-size:18px;
+  font-weight:600;
+}
+.cham-site .cham-custom__aside small {color:#baa594;font-size:12px;line-height:1.6;}
+
+/* Small screens: varied density without giant placeholders. */
+@media(max-width:960px){
+ .cham-site .cham-feature-story {grid-template-columns:1fr;gap:42px;}
+ .cham-site .cham-feature-story__intro h2 {font-size:clamp(50px,7vw,80px);}
+ .cham-site .cham-custom {grid-template-columns:1fr;}
+ .cham-site .cham-custom__aside {border-left:0;border-top:1px solid #695449;}
+ .cham-site .cham-value:nth-child(n) {border-right:0!important;border-bottom:1px solid #d0bda6!important;}
+ .cham-site .cham-values {grid-template-columns:1fr;}
+ .cham-site .cham-value:last-child {border-bottom:0!important;}
+}
+@media(max-width:620px){
+ .cham-site .cham-hero--text-only .cham-hero__grid::after {display:none;}
+ .cham-site .cham-hero--text-only .cham-hero__title {font-size:clamp(41px,10.4vw,59px);}
+ .cham-site .cham-section-title {font-size:clamp(32px,7.8vw,42px);}
+ .cham-site .cham-category-card:not(:has(img)),
+ .cham-site .cham-category-card:nth-child(n):not(:has(img)) {
+   min-height:150px!important;
+   padding:16px!important;
+ }
+ .cham-site .cham-category-card__text {font-size:clamp(18px,4.5vw,23px);}
+ .cham-site .cham-feature-story-section {padding-block:70px!important;}
+ .cham-site .cham-feature-story__intro h2 {font-size:clamp(50px,12vw,70px);}
+ .cham-site .cham-feature-story__line {padding:21px 0;}
+ .cham-site .cham-applications {grid-template-columns:1fr;grid-template-rows:auto;}
+ .cham-site .cham-application,
+ .cham-site .cham-application--lead {grid-row:auto;min-height:295px;padding:25px;}
+ .cham-site .cham-application--lead {min-height:380px;}
+ .cham-site .cham-application--lead h3 {font-size:clamp(34px,8vw,46px);}
+ .cham-site .cham-empty-collection {grid-template-columns:1fr;min-height:0;padding:28px;gap:0;}
+ .cham-site .cham-empty-collection__monogram {font-size:98px;line-height:1;}
+ .cham-site .cham-empty-collection h3 {font-size:clamp(29px,7vw,36px);}
+ .cham-site .cham-value:nth-child(n) {padding:27px 0;min-height:0;}
+ .cham-site .cham-value h3 {margin-top:25px;}
+ .cham-site .cham-custom__label {padding:16px 23px;}
+ .cham-site .cham-custom__inner {padding:30px 23px 39px;}
+ .cham-site .cham-custom h2 {font-size:clamp(35px,9vw,44px);}
+ .cham-site .cham-custom__aside {padding:25px 23px;}
+}

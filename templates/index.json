@@ -1,12 +1,46 @@
 {
   "sections": {
-    "hero": {"type":"cham-home-hero","settings":{}},
-    "categories": {"type":"cham-category-grid","settings":{}},
-    "process": {"type":"cham-weave-process","settings":{}},
-    "products": {"type":"cham-featured-products","settings":{}},
-    "showcase": {"type":"cham-weave-showcase","settings":{}},
-    "values": {"type":"cham-values","settings":{}},
-    "custom": {"type":"cham-custom-callout","settings":{}}
+    "hero": {
+      "type": "cham-home-hero",
+      "settings": {}
+    },
+    "categories": {
+      "type": "cham-category-grid",
+      "settings": {}
+    },
+    "process": {
+      "type": "cham-weave-process",
+      "settings": {}
+    },
+    "products": {
+      "type": "cham-featured-products",
+      "settings": {}
+    },
+    "showcase": {
+      "type": "cham-weave-showcase",
+      "settings": {}
+    },
+    "values": {
+      "type": "cham-values",
+      "settings": {}
+    },
+    "custom": {
+      "type": "cham-custom-callout",
+      "settings": {}
+    },
+    "manifesto": {
+      "type": "cham-editorial-manifesto",
+      "settings": {}
+    }
   },
-  "order":["hero","categories","process","products","showcase","values","custom"]
+  "order": [
+    "hero",
+    "categories",
+    "manifesto",
+    "process",
+    "products",
+    "showcase",
+    "values",
+    "custom"
+  ]
 }
