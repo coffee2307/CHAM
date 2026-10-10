@@ -31,19 +31,19 @@
           </p>
 
           <nav class="cham-portal__nav" aria-label="Account navigation">
-            <a href="{{ routes.account_addresses_url }}" class="cham-portal__nav-link">{{ section.settings.addresses_label | default: 'Addresses' }}</a>
+            <a href="{{ routes.account_addresses_url }}" class="cham-portal__nav-link">{{ section.settings.addresses_label | default: 'Địa chỉ' }}</a>
             <a href="{{ routes.account_logout_url }}" class="cham-portal__nav-link cham-portal__nav-link--muted">{{ section.settings.logout_label | default: 'Log out' }}</a>
           </nav>
 
           <div class="cham-portal__orders">
-            <h2 class="cham-portal__subhead">{{ section.settings.orders_heading | default: 'Order history' }}</h2>
+            <h2 class="cham-portal__subhead">{{ section.settings.orders_heading | default: 'Lịch sử đơn hàng' }}</h2>
 
             {%- if customer.orders.size > 0 -%}
               <ul class="cham-portal__order-list" role="list">
                 {%- for order_item in customer.orders -%}
                   <li class="cham-portal__order-item">
                     <a href="{{ order_item.customer_url }}" class="cham-portal__order-link">
-                      <span class="cham-portal__order-id">{{ section.settings.order_prefix | default: 'Order' }} {{ order_item.name }}</span>
+                      <span class="cham-portal__order-id">{{ section.settings.order_prefix | default: 'Đơn hàng' }} {{ order_item.name }}</span>
                       <span class="cham-portal__order-meta">
                         <time datetime="{{ order_item.created_at | date: '%Y-%m-%d' }}">{{ order_item.created_at | date: format: 'date' }}</time>
                         · {{ order_item.financial_status_label }}
@@ -62,11 +62,11 @@
       {%- when 'order' -%}
         <div class="cham-portal__panel">
           <p class="cham-portal__back">
-            <a href="{{ routes.account_url }}" class="cham-auth__link">&larr; {{ section.settings.back_to_account | default: 'Back to account' }}</a>
+            <a href="{{ routes.account_url }}" class="cham-auth__link">&larr; {{ section.settings.back_to_account | default: 'Quay lại tài khoản' }}</a>
           </p>
 
           <header class="cham-portal__order-head">
-            <h2 class="cham-portal__subhead">{{ section.settings.order_prefix | default: 'Order' }} {{ order.name }}</h2>
+            <h2 class="cham-portal__subhead">{{ section.settings.order_prefix | default: 'Đơn hàng' }} {{ order.name }}</h2>
             <p class="cham-portal__order-meta">
               <time datetime="{{ order.created_at | date: '%Y-%m-%d' }}">{{ order.created_at | date: format: 'date' }}</time>
               · {{ order.financial_status_label }}
@@ -79,9 +79,9 @@
           <table class="cham-portal__table">
             <thead>
               <tr>
-                <th scope="col">Item</th>
-                <th scope="col">Qty</th>
-                <th scope="col">Total</th>
+                <th scope="col">Sản phẩm</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Tổng cộng</th>
               </tr>
             </thead>
             <tbody>
@@ -89,7 +89,7 @@
                 <tr>
                   <td>
                     <span class="cham-portal__line-title">{{ line_item.title }}</span>
-                    {%- unless line_item.variant.title == 'Default Title' -%}
+                    {%- unless line_item.variant.title == 'Mặc định Title' -%}
                       <span class="cham-portal__line-variant">{{ line_item.variant.title }}</span>
                     {%- endunless -%}
                   </td>
@@ -100,23 +100,23 @@
             </tbody>
             <tfoot>
               <tr>
-                <th scope="row" colspan="2">Subtotal</th>
+                <th scope="row" colspan="2">Tạm tính</th>
                 <td>{{ order.line_items_subtotal_price | money }}</td>
               </tr>
               {%- if order.shipping_price > 0 -%}
                 <tr>
-                  <th scope="row" colspan="2">Shipping</th>
+                  <th scope="row" colspan="2">Vận chuyển</th>
                   <td>{{ order.shipping_price | money }}</td>
                 </tr>
               {%- endif -%}
               {%- if order.tax_price > 0 -%}
                 <tr>
-                  <th scope="row" colspan="2">Tax</th>
+                  <th scope="row" colspan="2">Thuế</th>
                   <td>{{ order.tax_price | money }}</td>
                 </tr>
               {%- endif -%}
               <tr class="cham-portal__total-row">
-                <th scope="row" colspan="2">Total</th>
+                <th scope="row" colspan="2">Tổng cộng</th>
                 <td>{{ order.total_price | money }}</td>
               </tr>
             </tfoot>
@@ -124,7 +124,7 @@
 
           {%- if order.shipping_address -%}
             <div class="cham-portal__address-block">
-              <h3 class="cham-portal__address-title">{{ section.settings.shipping_heading | default: 'Shipping address' }}</h3>
+              <h3 class="cham-portal__address-title">{{ section.settings.shipping_heading | default: 'Địa chỉ giao hàng' }}</h3>
               {{ order.shipping_address | format_address }}
             </div>
           {%- endif -%}
@@ -133,28 +133,28 @@
       {%- when 'addresses' -%}
         <div class="cham-portal__panel">
           <p class="cham-portal__back">
-            <a href="{{ routes.account_url }}" class="cham-auth__link">&larr; {{ section.settings.back_to_account | default: 'Back to account' }}</a>
+            <a href="{{ routes.account_url }}" class="cham-auth__link">&larr; {{ section.settings.back_to_account | default: 'Quay lại tài khoản' }}</a>
           </p>
 
           {%- paginate customer.addresses by 8 -%}
             <ul class="cham-portal__address-list" role="list">
               {%- for address in customer.addresses -%}
-                <li class="cham-portal__address-card" id="ChamAddress-{{ address.id }}">
+                <li class="cham-portal__address-card" id="ChamĐịa chỉ-{{ address.id }}">
                   {%- if address == customer.default_address -%}
-                    <p class="cham-portal__default-badge">{{ section.settings.default_badge | default: 'Default' }}</p>
+                    <p class="cham-portal__default-badge">{{ section.settings.default_badge | default: 'Mặc định' }}</p>
                   {%- endif -%}
                   {{ address | format_address }}
                   <div class="cham-portal__address-actions">
                     <button type="button"
                             class="cham-auth__text-btn"
                             data-cham-address-edit="{{ address.id }}">
-                      {{ section.settings.edit_address | default: 'Edit' }}
+                      {{ section.settings.edit_address | default: 'Sửa' }}
                     </button>
                     <button type="button"
                             class="cham-auth__text-btn cham-portal__nav-link--muted"
                             data-cham-address-delete
                             data-delete-url="{{ address.url }}">
-                      {{ section.settings.delete_address | default: 'Delete' }}
+                      {{ section.settings.delete_address | default: 'Xóa' }}
                     </button>
                   </div>
 
@@ -162,51 +162,51 @@
                     {%- form 'customer_address', address, class: 'cham-contact__form' -%}
                       <div class="cham-contact__fields">
                         <div class="cham-contact__field cham-contact__field--half">
-                          <label class="cham-contact__label" for="ChamAddrFirst-{{ address.id }}">First name</label>
+                          <label class="cham-contact__label" for="ChamAddrFirst-{{ address.id }}">Tên</label>
                           <input id="ChamAddrFirst-{{ address.id }}" class="cham-contact__input" type="text" name="address[first_name]" value="{{ form.first_name }}" autocomplete="given-name" required>
                         </div>
                         <div class="cham-contact__field cham-contact__field--half">
-                          <label class="cham-contact__label" for="ChamAddrLast-{{ address.id }}">Last name</label>
+                          <label class="cham-contact__label" for="ChamAddrLast-{{ address.id }}">Họ</label>
                           <input id="ChamAddrLast-{{ address.id }}" class="cham-contact__input" type="text" name="address[last_name]" value="{{ form.last_name }}" autocomplete="family-name" required>
                         </div>
                         <div class="cham-contact__field cham-contact__field--full">
-                          <label class="cham-contact__label" for="ChamAddrCompany-{{ address.id }}">Company</label>
-                          <input id="ChamAddrCompany-{{ address.id }}" class="cham-contact__input" type="text" name="address[company]" value="{{ form.company }}" autocomplete="organization">
+                          <label class="cham-contact__label" for="ChamAddrCông ty-{{ address.id }}">Công ty</label>
+                          <input id="ChamAddrCông ty-{{ address.id }}" class="cham-contact__input" type="text" name="address[company]" value="{{ form.company }}" autocomplete="organization">
                         </div>
                         <div class="cham-contact__field cham-contact__field--full">
-                          <label class="cham-contact__label" for="ChamAddr1-{{ address.id }}">Address</label>
+                          <label class="cham-contact__label" for="ChamAddr1-{{ address.id }}">Địa chỉ</label>
                           <input id="ChamAddr1-{{ address.id }}" class="cham-contact__input" type="text" name="address[address1]" value="{{ form.address1 }}" autocomplete="address-line1" required>
                         </div>
                         <div class="cham-contact__field cham-contact__field--full">
-                          <label class="cham-contact__label" for="ChamAddr2-{{ address.id }}">Apartment, suite, etc.</label>
+                          <label class="cham-contact__label" for="ChamAddr2-{{ address.id }}">Căn hộ, tầng, thông tin bổ sung</label>
                           <input id="ChamAddr2-{{ address.id }}" class="cham-contact__input" type="text" name="address[address2]" value="{{ form.address2 }}" autocomplete="address-line2">
                         </div>
                         <div class="cham-contact__field cham-contact__field--half">
-                          <label class="cham-contact__label" for="ChamAddrCity-{{ address.id }}">City</label>
-                          <input id="ChamAddrCity-{{ address.id }}" class="cham-contact__input" type="text" name="address[city]" value="{{ form.city }}" autocomplete="address-level2" required>
+                          <label class="cham-contact__label" for="ChamAddrTỉnh / thành phố-{{ address.id }}">Tỉnh / thành phố</label>
+                          <input id="ChamAddrTỉnh / thành phố-{{ address.id }}" class="cham-contact__input" type="text" name="address[city]" value="{{ form.city }}" autocomplete="address-level2" required>
                         </div>
                         <div class="cham-contact__field cham-contact__field--half">
-                          <label class="cham-contact__label" for="ChamAddrZip-{{ address.id }}">Postal code</label>
+                          <label class="cham-contact__label" for="ChamAddrZip-{{ address.id }}">Mã bưu chính</label>
                           <input id="ChamAddrZip-{{ address.id }}" class="cham-contact__input" type="text" name="address[zip]" value="{{ form.zip }}" autocomplete="postal-code" required>
                         </div>
                         <div class="cham-contact__field cham-contact__field--full">
-                          <label class="cham-contact__label" for="ChamAddrCountry-{{ address.id }}">Country</label>
-                          <select id="ChamAddrCountry-{{ address.id }}" class="cham-contact__input" name="address[country]" data-default="{{ form.country }}" autocomplete="country">{{ all_country_option_tags }}</select>
+                          <label class="cham-contact__label" for="ChamAddrQuốc gia-{{ address.id }}">Quốc gia</label>
+                          <select id="ChamAddrQuốc gia-{{ address.id }}" class="cham-contact__input" name="address[country]" data-default="{{ form.country }}" autocomplete="country">{{ all_country_option_tags }}</select>
                         </div>
                         <div class="cham-contact__field cham-contact__field--full">
-                          <label class="cham-contact__label" for="ChamAddrPhone-{{ address.id }}">Phone</label>
-                          <input id="ChamAddrPhone-{{ address.id }}" class="cham-contact__input" type="tel" name="address[phone]" value="{{ form.phone }}" autocomplete="tel">
+                          <label class="cham-contact__label" for="ChamAddrSố điện thoại-{{ address.id }}">Số điện thoại</label>
+                          <input id="ChamAddrSố điện thoại-{{ address.id }}" class="cham-contact__input" type="tel" name="address[phone]" value="{{ form.phone }}" autocomplete="tel">
                         </div>
                         <div class="cham-contact__field cham-contact__field--full">
                           <label class="cham-contact__checkbox">
                             <input type="checkbox" name="address[default]" value="1" {% if address == customer.default_address %}checked{% endif %}>
-                            {{ section.settings.set_default | default: 'Set as default address' }}
+                            {{ section.settings.set_default | default: 'Đặt làm địa chỉ mặc định' }}
                           </label>
                         </div>
                       </div>
                       <div class="cham-auth__actions">
-                        <button type="submit" class="cham-btn cham-contact__submit">{{ section.settings.save_address | default: 'SAVE ADDRESS' }}</button>
-                        <button type="button" class="cham-auth__text-btn" data-cham-address-cancel="{{ address.id }}">{{ section.settings.cancel | default: 'Cancel' }}</button>
+                        <button type="submit" class="cham-btn cham-contact__submit">{{ section.settings.save_address | default: 'LƯU ĐỊA CHỈ' }}</button>
+                        <button type="button" class="cham-auth__text-btn" data-cham-address-cancel="{{ address.id }}">{{ section.settings.cancel | default: 'Hủy' }}</button>
                       </div>
                     {%- endform -%}
                   </div>
@@ -215,50 +215,50 @@
             </ul>
 
             {%- if paginate.pages > 1 -%}
-              <nav class="cham-portal__pagination" aria-label="Addresses pagination">{{ paginate | default_pagination }}</nav>
+              <nav class="cham-portal__pagination" aria-label="Địa chỉ pagination">{{ paginate | default_pagination }}</nav>
             {%- endif -%}
           {%- endpaginate -%}
 
           <div class="cham-portal__new-address">
-            <h2 class="cham-portal__subhead">{{ section.settings.add_address_heading | default: 'Add address' }}</h2>
+            <h2 class="cham-portal__subhead">{{ section.settings.add_address_heading | default: 'Thêm địa chỉ' }}</h2>
             {%- form 'customer_address', customer.new_address, class: 'cham-contact__form' -%}
               <div class="cham-contact__fields">
                 <div class="cham-contact__field cham-contact__field--half">
-                  <label class="cham-contact__label" for="ChamNewFirst-{{ section.id }}">First name</label>
+                  <label class="cham-contact__label" for="ChamNewFirst-{{ section.id }}">Tên</label>
                   <input id="ChamNewFirst-{{ section.id }}" class="cham-contact__input" type="text" name="address[first_name]" value="{{ form.first_name }}" autocomplete="given-name" required>
                 </div>
                 <div class="cham-contact__field cham-contact__field--half">
-                  <label class="cham-contact__label" for="ChamNewLast-{{ section.id }}">Last name</label>
+                  <label class="cham-contact__label" for="ChamNewLast-{{ section.id }}">Họ</label>
                   <input id="ChamNewLast-{{ section.id }}" class="cham-contact__input" type="text" name="address[last_name]" value="{{ form.last_name }}" autocomplete="family-name" required>
                 </div>
                 <div class="cham-contact__field cham-contact__field--full">
-                  <label class="cham-contact__label" for="ChamNewAddr1-{{ section.id }}">Address</label>
+                  <label class="cham-contact__label" for="ChamNewAddr1-{{ section.id }}">Địa chỉ</label>
                   <input id="ChamNewAddr1-{{ section.id }}" class="cham-contact__input" type="text" name="address[address1]" value="{{ form.address1 }}" autocomplete="address-line1" required>
                 </div>
                 <div class="cham-contact__field cham-contact__field--half">
-                  <label class="cham-contact__label" for="ChamNewCity-{{ section.id }}">City</label>
-                  <input id="ChamNewCity-{{ section.id }}" class="cham-contact__input" type="text" name="address[city]" value="{{ form.city }}" autocomplete="address-level2" required>
+                  <label class="cham-contact__label" for="ChamNewTỉnh / thành phố-{{ section.id }}">Tỉnh / thành phố</label>
+                  <input id="ChamNewTỉnh / thành phố-{{ section.id }}" class="cham-contact__input" type="text" name="address[city]" value="{{ form.city }}" autocomplete="address-level2" required>
                 </div>
                 <div class="cham-contact__field cham-contact__field--half">
-                  <label class="cham-contact__label" for="ChamNewZip-{{ section.id }}">Postal code</label>
+                  <label class="cham-contact__label" for="ChamNewZip-{{ section.id }}">Mã bưu chính</label>
                   <input id="ChamNewZip-{{ section.id }}" class="cham-contact__input" type="text" name="address[zip]" value="{{ form.zip }}" autocomplete="postal-code" required>
                 </div>
                 <div class="cham-contact__field cham-contact__field--full">
-                  <label class="cham-contact__label" for="ChamNewCountry-{{ section.id }}">Country</label>
-                  <select id="ChamNewCountry-{{ section.id }}" class="cham-contact__input" name="address[country]" data-default="{{ form.country }}" autocomplete="country">{{ all_country_option_tags }}</select>
+                  <label class="cham-contact__label" for="ChamNewQuốc gia-{{ section.id }}">Quốc gia</label>
+                  <select id="ChamNewQuốc gia-{{ section.id }}" class="cham-contact__input" name="address[country]" data-default="{{ form.country }}" autocomplete="country">{{ all_country_option_tags }}</select>
                 </div>
                 <div class="cham-contact__field cham-contact__field--full">
-                  <label class="cham-contact__label" for="ChamNewPhone-{{ section.id }}">Phone</label>
-                  <input id="ChamNewPhone-{{ section.id }}" class="cham-contact__input" type="tel" name="address[phone]" value="{{ form.phone }}" autocomplete="tel">
+                  <label class="cham-contact__label" for="ChamNewSố điện thoại-{{ section.id }}">Số điện thoại</label>
+                  <input id="ChamNewSố điện thoại-{{ section.id }}" class="cham-contact__input" type="tel" name="address[phone]" value="{{ form.phone }}" autocomplete="tel">
                 </div>
                 <div class="cham-contact__field cham-contact__field--full">
                   <label class="cham-contact__checkbox">
                     <input type="checkbox" name="address[default]" value="1">
-                    {{ section.settings.set_default | default: 'Set as default address' }}
+                    {{ section.settings.set_default | default: 'Đặt làm địa chỉ mặc định' }}
                   </label>
                 </div>
               </div>
-              <button type="submit" class="cham-btn cham-contact__submit">{{ section.settings.add_address | default: 'ADD ADDRESS' }}</button>
+              <button type="submit" class="cham-btn cham-contact__submit">{{ section.settings.add_address | default: 'THÊM ĐỊA CHỈ' }}</button>
             {%- endform -%}
           </div>
         </div>
@@ -330,7 +330,7 @@
   root.querySelectorAll('[data-cham-address-delete]').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var url = btn.getAttribute('data-delete-url');
-      if (!url || !window.confirm('Delete this address?')) return;
+      if (!url || !window.confirm('Xóa this address?')) return;
       var form = document.createElement('form');
       form.method = 'post';
       form.action = url;
@@ -358,9 +358,9 @@
       "label": "Portal mode",
       "default": "account",
       "options": [
-        { "value": "account", "label": "Account overview" },
-        { "value": "order", "label": "Order detail" },
-        { "value": "addresses", "label": "Addresses" }
+        { "value": "account", "label": "Tổng quan tài khoản" },
+        { "value": "order", "label": "Chi tiết đơn hàng" },
+        { "value": "addresses", "label": "Địa chỉ" }
       ]
     },
     {
@@ -373,25 +373,25 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Your account"
+      "default": "Tài khoản của bạn"
     },
     {
       "type": "textarea",
       "id": "intro",
       "label": "Intro",
-      "default": "Orders, addresses, and thông tin mua sắm."
+      "default": "Đơn hàng, địa chỉ và thông tin mua sắm."
     },
     {
       "type": "text",
       "id": "orders_heading",
-      "label": "Orders heading",
-      "default": "Order history"
+      "label": "Đơn hàngs heading",
+      "default": "Lịch sử đơn hàng"
     },
     {
       "type": "text",
       "id": "order_prefix",
-      "label": "Order label prefix",
-      "default": "Order"
+      "label": "Đơn hàng label prefix",
+      "default": "Đơn hàng"
     },
     {
       "type": "checkbox",

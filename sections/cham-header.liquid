@@ -1,61 +1,47 @@
-﻿{%- liquid
-  assign menu = section.settings.menu
-  assign wordmark = section.settings.wordmark | default: 'CHáº M'
--%}
+{%- assign wordmark = section.settings.wordmark | default: 'CHẠM' -%}
 <header class="cham-header" role="banner">
   <div class="cham-shell cham-header__inner">
     <div class="cham-mobile-nav">
       <details>
-        <summary aria-label="Má»Ÿ menu">â˜°</summary>
-        <nav class="cham-mobile-nav__panel" aria-label="Äiá»u hÆ°á»›ng di Ä‘á»™ng">
-          {% if menu != blank %}
-            {% for link in menu.links %}<a href="{{ link.url }}">{{ link.title }}</a>{% endfor %}
-          {% else %}
-            <a href="{{ routes.all_products_collection_url }}">Sáº£n pháº©m</a>
-            <a href="/pages/about#story">CĂ¢u chuyá»‡n</a>
-            <a href="/pages/about">Vá» CHáº M</a>
-            <a href="/pages/contact">LiĂªn há»‡</a>
-          {% endif %}
-          <a href="{{ routes.search_url }}">TĂ¬m kiáº¿m</a>
-          {% if shop.customer_accounts_enabled %}<a href="{{ routes.account_url }}">TĂ i khoáº£n</a>{% endif %}
+        <summary aria-label="Mở menu">☰</summary>
+        <nav class="cham-mobile-nav__panel" aria-label="Điều hướng di động">
+          <a href="{{ routes.all_products_collection_url }}">Sản phẩm</a>
+          <a href="/pages/about#story">Câu chuyện</a>
+          <a href="/pages/about">Về CHẠM</a>
+          <a href="/pages/contact">Liên hệ</a>
+          <a href="{{ routes.search_url }}">Tìm kiếm</a>
+          {% if shop.customer_accounts_enabled %}<a href="{{ routes.account_url }}">Tài khoản</a>{% endif %}
         </nav>
       </details>
     </div>
 
-    <a class="cham-wordmark" href="{{ routes.root_url }}" aria-label="{{ wordmark | escape }} â€” Trang chá»§">{{ wordmark }}</a>
+    <a class="cham-wordmark" href="{{ routes.root_url }}" aria-label="{{ wordmark | escape }} — Trang chủ">{{ wordmark }}</a>
 
-    <nav class="cham-nav" aria-label="Äiá»u hÆ°á»›ng chĂ­nh">
-      {% if menu != blank %}
-        {% for link in menu.links %}<a href="{{ link.url }}">{{ link.title }}</a>{% endfor %}
-      {% else %}
-        <a href="{{ routes.all_products_collection_url }}">Sáº£n pháº©m</a>
-        <a href="/pages/about#story">CĂ¢u chuyá»‡n</a>
-        <a href="/pages/about">Vá» CHáº M</a>
-        <a href="/pages/contact">LiĂªn há»‡</a>
-      {% endif %}
+    <nav class="cham-nav" aria-label="Điều hướng chính">
+      <a href="{{ routes.all_products_collection_url }}">Sản phẩm</a>
+      <a href="/pages/about#story">Câu chuyện</a>
+      <a href="/pages/about">Về CHẠM</a>
+      <a href="/pages/contact">Liên hệ</a>
     </nav>
 
     <div class="cham-header__actions">
-      {% if section.settings.show_search %}<a class="cham-icon-link" href="{{ routes.search_url }}" aria-label="TĂ¬m kiáº¿m">TĂ¬m</a>{% endif %}
-      {% if section.settings.show_account and shop.customer_accounts_enabled %}<a class="cham-icon-link cham-account-link" href="{{ routes.account_url }}">TĂ i khoáº£n</a>{% endif %}
-      <a class="cham-icon-link" href="{{ routes.cart_url }}" aria-label="Giá» hĂ ng">Giá»{% if cart.item_count > 0 %}<span class="cham-cart-count">{{ cart.item_count }}</span>{% endif %}</a>
+      {% if section.settings.show_search %}<a class="cham-icon-link" href="{{ routes.search_url }}" aria-label="Tìm kiếm">Tìm</a>{% endif %}
+      {% if section.settings.show_account and shop.customer_accounts_enabled %}<a class="cham-icon-link cham-account-link" href="{{ routes.account_url }}">Tài khoản</a>{% endif %}
+      <a class="cham-icon-link" href="{{ routes.cart_url }}" aria-label="Giỏ hàng">Giỏ{% if cart.item_count > 0 %}<span class="cham-cart-count">{{ cart.item_count }}</span>{% endif %}</a>
     </div>
   </div>
 </header>
-
 {% schema %}
 {
-  "name":"CHáº M Header",
+  "name":"CHẠM · Đầu trang",
   "tag":"section",
   "class":"cham-header-section",
   "settings":[
-    {"type":"text","id":"wordmark","label":"Wordmark","default":"CHáº M"},
-    {"type":"link_list","id":"menu","label":"Menu","default":"main-menu"},
-    {"type":"checkbox","id":"show_search","label":"Hiá»‡n tĂ¬m kiáº¿m","default":true},
-    {"type":"checkbox","id":"show_account","label":"Hiá»‡n tĂ i khoáº£n","default":true}
+    {"type":"text","id":"wordmark","label":"Tên thương hiệu","default":"CHẠM"},
+    {"type":"checkbox","id":"show_search","label":"Hiện tìm kiếm","default":true},
+    {"type":"checkbox","id":"show_account","label":"Hiện tài khoản","default":true}
   ],
-  "presets":[{"name":"CHáº M Header","category":"Header"}],
+  "presets":[{"name":"CHẠM · Đầu trang","category":"Đầu trang"}],
   "enabled_on":{"groups":["header"]}
 }
 {% endschema %}
-

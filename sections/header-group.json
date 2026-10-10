@@ -1,18 +1,15 @@
 {
-  "type": "header",
-  "name": "Header",
-  "sections": {
-    "cham-header": {
-      "type": "cham-header",
-      "settings": {
-        "wordmark": "CHẠM",
-        "menu": "main-menu",
-        "show_search": true,
-        "show_account": true
+  "type":"header",
+  "name":"Đầu trang",
+  "sections":{
+    "cham-header":{
+      "type":"cham-header",
+      "settings":{
+        "wordmark":"CHẠM",
+        "show_search":true,
+        "show_account":true
       }
     }
   },
-  "order": [
-    "cham-header"
-  ]
+  "order":["cham-header"]
 }

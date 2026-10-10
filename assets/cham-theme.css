@@ -1007,3 +1007,364 @@ body.cham-site select{font-family:var(--cham-font-body)!important}
 .cham-about-story{scroll-margin-top:120px;margin:clamp(70px,9vw,120px) 0;padding:clamp(34px,6vw,72px);border-radius:var(--cham-radius);background:linear-gradient(135deg,#efe0c5,#f8edda);border:1px solid rgba(111,73,44,.15)}
 .cham-about-story h2{max-width:900px;margin:8px 0 18px;font-size:clamp(2rem,4.5vw,4.6rem);line-height:1.02;letter-spacing:-.04em}
 .cham-about-story>p:not(.cham-kicker){max-width:760px;color:var(--cham-muted);line-height:1.8;margin-bottom:24px}
+
+/* ==========================================================
+   CHẠM V4 — SIGNATURE WOVEN EDITORIAL
+   Self-contained typography; Vietnamese-safe; no remote fonts.
+   ========================================================== */
+:root{
+  --cham-font-body:"Segoe UI Variable","Segoe UI",Arial,sans-serif;
+  --cham-font-display:"Times New Roman",Georgia,serif;
+  --cham-ink:#2b1d16;
+  --cham-ink-2:#4d3529;
+  --cham-paper:#fffaf1;
+  --cham-paper-2:#f4e5cf;
+  --cham-straw:#d8b675;
+  --cham-rattan:#a77443;
+  --cham-clay:#a34530;
+  --cham-sun:#e2a94f;
+  --cham-dark:#2d211a;
+  --cham-line:rgba(83,55,36,.18);
+  --cham-radius:18px;
+}
+html{font-family:var(--cham-font-body)}
+body.cham-site{
+  font-family:var(--cham-font-body)!important;
+  color:var(--cham-ink);
+  background:
+    linear-gradient(rgba(87,55,33,.028) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(87,55,33,.028) 1px,transparent 1px),
+    var(--cham-paper);
+  background-size:32px 32px,32px 32px,auto;
+}
+body.cham-site h1,body.cham-site h2,body.cham-site h3,body.cham-site h4,
+.cham-wordmark,.cham-display{
+  font-family:var(--cham-font-display)!important;
+  font-weight:700;
+}
+body.cham-site p,body.cham-site a,body.cham-site button,body.cham-site input,
+body.cham-site textarea,body.cham-site select,body.cham-site label{
+  font-family:var(--cham-font-body)!important;
+}
+body.cham-site::before{
+  opacity:.11;
+  background-image:
+    radial-gradient(circle at 20% 30%,rgba(70,42,27,.18) 0 .45px,transparent .65px),
+    radial-gradient(circle at 72% 66%,rgba(70,42,27,.15) 0 .45px,transparent .65px);
+}
+
+/* floating header */
+.cham-header{
+  top:14px;
+  width:min(1400px,calc(100% - 28px));
+  margin-inline:auto;
+  border:1px solid rgba(82,53,35,.13);
+  border-radius:16px;
+  background:rgba(255,250,241,.76);
+  box-shadow:0 10px 40px rgba(67,40,24,.06);
+  backdrop-filter:blur(18px) saturate(1.15);
+}
+.cham-header[data-scrolled]{background:rgba(255,250,241,.94);box-shadow:0 14px 46px rgba(67,40,24,.1)}
+.cham-header__inner{min-height:68px}
+.cham-wordmark{font-size:2rem;letter-spacing:-.06em}
+.cham-nav a,.cham-icon-link{font-size:.78rem;font-weight:700;letter-spacing:.035em}
+
+/* signature hero */
+.cham-hero--signature{
+  min-height:calc(100vh - 20px);
+  padding-top:clamp(72px,8vw,128px);
+  position:relative;
+  isolation:isolate;
+}
+.cham-hero--signature::before{
+  width:48vw;height:48vw;left:-28vw;top:9vw;
+  border-color:rgba(105,69,42,.12);
+  box-shadow:0 0 0 72px rgba(126,86,52,.025),0 0 0 144px rgba(126,86,52,.018);
+}
+.cham-hero__backtype{
+  position:absolute;z-index:-1;left:-.02em;top:22%;
+  font-family:var(--cham-font-display);
+  font-size:min(27vw,420px);
+  font-weight:700;line-height:.7;letter-spacing:-.09em;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(75,49,32,.065);
+  user-select:none;pointer-events:none;
+  white-space:nowrap;
+}
+.cham-hero__grid{
+  grid-template-columns:minmax(0,.91fr) minmax(420px,1.09fr);
+  gap:clamp(44px,7vw,110px);
+}
+.cham-hero__title{
+  max-width:840px;
+  font-size:clamp(4rem,7.8vw,8.4rem);
+  line-height:.84;
+  letter-spacing:-.072em!important;
+  margin-top:28px;
+}
+.cham-hero__title::first-letter{color:inherit}
+.cham-hero__body{max-width:570px;margin-top:30px;font-size:1.04rem;line-height:1.85}
+.cham-hero__edition{
+  color:#6f4d37;background:rgba(255,250,241,.62);
+  border-color:rgba(92,62,40,.17)
+}
+.cham-hero__visual--signature{
+  min-height:680px;
+  border-radius:18px!important;
+  background:
+    radial-gradient(circle at 72% 18%,rgba(255,255,255,.66),transparent 22%),
+    linear-gradient(145deg,#e6c995 0%,#c9995c 36%,#99643b 68%,#5f3e28 100%);
+  box-shadow:0 40px 120px rgba(58,35,21,.2);
+  overflow:hidden;
+}
+.cham-hero__visual--signature::after{inset:14px;border-radius:10px}
+.cham-hero__halo{width:68%;opacity:.55}
+.cham-weave-sculpture{position:absolute;inset:7%;z-index:3}
+.cham-weave-sculpture__disc{
+  position:absolute;left:50%;top:48%;width:70%;aspect-ratio:1;
+  transform:translate(-50%,-50%) rotate(7deg);
+  border-radius:50%;
+  background:
+    repeating-linear-gradient(0deg,rgba(49,31,18,.16) 0 2px,transparent 2px 15px),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.13) 0 2px,transparent 2px 15px),
+    radial-gradient(circle,#d8b675 0 42%,#b27f49 43% 64%,#6f482c 65%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.2),
+    0 40px 70px rgba(42,26,16,.28);
+}
+.cham-weave-sculpture__disc::after{
+  content:"";position:absolute;inset:18%;border-radius:50%;
+  border:1px solid rgba(255,255,255,.35);
+  box-shadow:0 0 0 32px rgba(255,255,255,.035),0 0 0 64px rgba(255,255,255,.022)
+}
+.cham-weave-sculpture__thread{
+  position:absolute;left:50%;top:49%;width:86%;height:22px;
+  transform-origin:center;background:rgba(240,219,176,.72);
+  border-radius:999px;box-shadow:0 9px 18px rgba(44,27,16,.16)
+}
+.cham-weave-sculpture__thread--1{transform:translate(-50%,-50%) rotate(25deg)}
+.cham-weave-sculpture__thread--2{transform:translate(-50%,-50%) rotate(-27deg);width:74%;background:rgba(121,78,45,.72)}
+.cham-weave-sculpture__thread--3{transform:translate(-50%,-50%) rotate(92deg);width:66%;height:14px;background:rgba(238,198,116,.7)}
+.cham-weave-sculpture__label{
+  position:absolute;z-index:5;min-width:120px;padding:14px 16px;
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:12px;background:rgba(255,250,241,.82);backdrop-filter:blur(12px);
+  box-shadow:0 16px 40px rgba(45,27,17,.15)
+}
+.cham-weave-sculpture__label b{display:block;font-family:var(--cham-font-display);font-size:1.3rem}
+.cham-weave-sculpture__label span{display:block;margin-top:2px;font-size:.64rem;letter-spacing:.08em;color:#75543e}
+.cham-weave-sculpture__label--a{left:0;top:14%;transform:rotate(-5deg)}
+.cham-weave-sculpture__label--b{right:0;top:38%;transform:rotate(4deg)}
+.cham-weave-sculpture__label--c{left:16%;bottom:3%;transform:rotate(3deg)}
+.cham-hero__seal{width:104px;background:#fff7e7;border-radius:50%!important}
+.cham-hero__seal small{font-size:.42rem;letter-spacing:.04em}
+.cham-hero__note{color:rgba(255,250,241,.78);text-shadow:0 1px 10px rgba(42,24,14,.18)}
+.cham-material-strip{background:#2f231c;border-color:#2f231c}
+.cham-material-strip__track{color:#f4e3c8}
+.cham-material-strip__track i{color:#d99555}
+
+/* buttons/search */
+.cham-button{
+  border-radius:10px!important;
+  min-height:52px;
+  padding:.9rem 1.25rem;
+  font-size:.84rem;letter-spacing:.02em
+}
+.cham-button--primary{background:var(--cham-dark);border-color:var(--cham-dark);color:#fff8eb}
+.cham-button--primary:hover{background:var(--cham-clay);border-color:var(--cham-clay)}
+.cham-button--soft{border-color:var(--cham-line);background:rgba(255,250,241,.72)}
+.cham-search{border-radius:12px!important;padding:7px;background:rgba(255,250,241,.78)}
+.cham-search button{border-radius:8px}
+
+/* category composition */
+.cham-categories-section{background:#f0dfc5!important;border-block:1px solid var(--cham-line)}
+.cham-category-grid{
+  grid-template-columns:repeat(12,minmax(0,1fr));
+  grid-auto-rows:105px;gap:14px
+}
+.cham-category-card{
+  grid-column:span 4;grid-row:span 2;
+  min-height:0!important;border-radius:12px!important;
+  padding:18px;background:#e1c58f!important;
+}
+.cham-category-card:nth-child(1){grid-column:span 5;grid-row:span 3}
+.cham-category-card:nth-child(2){grid-column:span 3;grid-row:span 3;background:#cfaa69!important}
+.cham-category-card:nth-child(3){grid-column:span 4;grid-row:span 3;background:#e8d7b4!important}
+.cham-category-card:nth-child(4){grid-column:span 3;grid-row:span 2}
+.cham-category-card:nth-child(5){grid-column:span 5;grid-row:span 2;background:#d3b17a!important}
+.cham-category-card:nth-child(6){grid-column:span 4;grid-row:span 2;background:#eadbbb!important}
+.cham-category-card__index{font-size:.68rem}
+.cham-category-card__text{font-size:clamp(1.2rem,2vw,2rem);line-height:1.02}
+.cham-category-card::after{inset:20% 0 0}
+
+/* dark process */
+.cham-process-section{
+  background:
+    radial-gradient(circle at 85% 5%,rgba(211,162,95,.13),transparent 30rem),
+    var(--cham-dark);
+  color:#fff5e7;
+}
+.cham-process-section .cham-kicker{color:#dca261}
+.cham-process-section .cham-section-title{color:#fff8ec}
+.cham-process__intro p:last-child{color:#cbb9a4}
+.cham-process__steps{border-color:rgba(255,255,255,.14)}
+.cham-process__steps article{border-color:rgba(255,255,255,.14);padding:34px 0}
+.cham-process__steps p{color:#cdbdaa}
+.cham-process__steps h3{color:#fff6e8}
+.cham-process__steps span{color:#dfa75f}
+.cham-process__steps article:hover h3{color:#e6b978}
+
+/* featured products */
+.cham-featured-section{background:#fffaf1}
+.cham-product-grid{gap:14px}
+.cham-product-card{
+  border-radius:12px!important;
+  background:#fffaf1;
+  border-color:rgba(76,48,31,.15);
+  box-shadow:none
+}
+.cham-product-card__media{aspect-ratio:4/5;background:#ead9bb}
+.cham-product-card__body{padding:16px 16px 18px}
+.cham-product-card__title{font-size:1.12rem;margin-top:10px}
+.cham-product-card:hover{transform:translateY(-6px);box-shadow:0 20px 55px rgba(67,41,25,.1)}
+
+/* showcase dramatic contrast */
+.cham-showcase-section{
+  background:#b9774e;color:#fff7ea;
+  overflow:hidden
+}
+.cham-showcase-section .cham-kicker{color:#ffe0b2}
+.cham-showcase-section .cham-section-title{color:#fff9ef}
+.cham-showcase article{border-color:rgba(255,255,255,.18);border-radius:12px;background:#f2dfbe}
+.cham-showcase article>div:last-child{background:linear-gradient(transparent,rgba(247,233,208,.96) 34%);color:var(--cham-ink)}
+.cham-showcase article span{color:#8e4e31}
+
+/* values */
+.cham-values-section{background:#f4e8d5!important}
+.cham-values{grid-template-columns:repeat(3,1fr)}
+.cham-value{
+  min-height:360px;border-radius:12px!important;padding:32px;
+  background:#fffaf1;border-color:rgba(80,51,32,.14)
+}
+.cham-value__index{font-size:.68rem}
+.cham-value h3{margin-top:110px;font-size:clamp(1.55rem,2.5vw,2.25rem)}
+.cham-value::before{
+  content:"";position:absolute;left:30px;top:70px;width:44px;height:44px;
+  border:1px solid rgba(111,72,45,.22);border-radius:50%;
+  box-shadow:0 0 0 11px rgba(176,120,73,.05)
+}
+
+/* custom section */
+.cham-custom{
+  border-radius:12px!important;
+  min-height:460px;
+  display:flex;align-items:center;
+  background:
+    linear-gradient(90deg,rgba(64,35,22,.16) 1px,transparent 1px),
+    linear-gradient(rgba(64,35,22,.16) 1px,transparent 1px),
+    linear-gradient(135deg,#7d3e2e,#ad5639 48%,#d18a4d 100%);
+  background-size:24px 24px,24px 24px,auto;
+}
+.cham-custom__weave{opacity:.55;right:2%;width:min(38vw,460px)}
+
+/* About / Story editorial */
+.cham-editorial-page{background:#fffaf1}
+.cham-editorial-hero{position:relative;padding-left:min(8vw,110px)}
+.cham-editorial-hero::before{
+  content:"";position:absolute;left:0;top:8px;width:2px;height:calc(100% - 16px);
+  background:linear-gradient(var(--cham-clay),transparent)
+}
+.cham-editorial-hero h1{font-size:clamp(4rem,8vw,8.8rem)}
+.cham-editorial-grid{border-left:0;border-top:0;gap:14px}
+.cham-editorial-grid article{
+  border:1px solid var(--cham-line);border-radius:12px;min-height:330px;background:#f4e5cf
+}
+.cham-editorial-grid article:nth-child(2),
+.cham-editorial-grid article:nth-child(3){background:#2f231c;color:#fff5e8}
+.cham-editorial-grid article:nth-child(2) p,
+.cham-editorial-grid article:nth-child(3) p{color:#cab8a6}
+.cham-about-story{
+  border-radius:12px!important;
+  background:#d7b376!important;
+  color:#2d211a
+}
+.cham-about-story__facts{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:36px
+}
+.cham-about-story__facts>div{
+  min-height:140px;padding:20px;border:1px solid rgba(63,42,27,.17);
+  background:rgba(255,250,241,.4);display:flex;flex-direction:column;justify-content:space-between
+}
+.cham-about-story__facts b{font-family:var(--cham-font-display);font-size:2rem}
+.cham-about-story__facts span{font-size:.84rem;line-height:1.5}
+.cham-editorial-quote{max-width:1150px}
+.cham-story-manifesto{border-radius:12px!important}
+
+/* contact */
+.cham-contact{padding-block:clamp(90px,10vw,150px)}
+.cham-contact__grid{
+  grid-template-columns:.9fr 1.1fr;
+  padding:clamp(28px,5vw,64px);
+  border:1px solid var(--cham-line);
+  background:#f4e5cf;border-radius:12px
+}
+.cham-contact h1{font-size:clamp(3.2rem,6vw,6.6rem);line-height:.9}
+.cham-form input,.cham-form textarea{border-radius:8px!important;background:#fffaf1}
+.cham-form__field label{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase}
+
+/* footer signature */
+.cham-footer{
+  background:#2d211a!important;color:#fff6e8;
+  border-top:0!important;padding-top:0!important
+}
+.cham-footer__marquee{
+  width:100%;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.13);
+  display:flex;gap:40px;padding:18px 0;
+  font-family:var(--cham-font-display);font-size:clamp(2rem,5vw,5.5rem);line-height:.8;
+  white-space:nowrap;color:#d6ad72
+}
+.cham-footer__marquee span{animation:cham-footer-flow 18s linear infinite}
+@keyframes cham-footer-flow{to{transform:translateX(-100%)}}
+.cham-footer__grid{padding-top:56px}
+.cham-footer__brand{font-size:clamp(3.4rem,8vw,8rem)!important;color:#fff7e8}
+.cham-footer__tagline,.cham-footer__menu a,.cham-footer__bottom{color:#cbb8a4!important}
+.cham-footer__heading{color:#fff1dc!important}
+.cham-footer__form input{background:transparent!important;color:#fff;border-color:rgba(255,255,255,.2)!important}
+.cham-footer__form button{background:#d3a067!important;color:#2d211a!important}
+
+/* native Shopify consistency */
+.cham-site .button,.cham-site button.button{border-radius:8px!important}
+.cham-site .field__input,.cham-site input,.cham-site textarea,.cham-site select{border-radius:8px!important}
+.cham-site .product-card__content,.cham-site product-card .product-card__content{border-radius:10px!important}
+.cham-site .section-background{background-color:transparent}
+
+/* responsive */
+@media(max-width:980px){
+  .cham-header{top:8px;width:calc(100% - 16px)}
+  .cham-hero__grid{grid-template-columns:1fr}
+  .cham-hero__visual--signature{min-height:580px}
+  .cham-hero__backtype{top:8%;font-size:42vw}
+  .cham-category-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:190px}
+  .cham-category-card,.cham-category-card:nth-child(n){grid-column:span 1;grid-row:span 1}
+  .cham-category-card:nth-child(1),.cham-category-card:nth-child(2){grid-row:span 2}
+  .cham-about-story__facts{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  .cham-hero--signature{padding-top:72px}
+  .cham-hero__title{font-size:clamp(3.6rem,16vw,5.3rem)}
+  .cham-hero__visual--signature{min-height:430px}
+  .cham-weave-sculpture__label{min-width:92px;padding:10px 12px}
+  .cham-weave-sculpture__label b{font-size:1rem}
+  .cham-hero__seal{width:76px}
+  .cham-category-grid{grid-template-columns:1fr;grid-auto-rows:180px}
+  .cham-category-card,.cham-category-card:nth-child(n){grid-column:auto;grid-row:auto}
+  .cham-values{grid-template-columns:1fr}
+  .cham-value{min-height:300px}
+  .cham-value h3{margin-top:72px}
+  .cham-contact__grid{grid-template-columns:1fr;padding:24px}
+  .cham-editorial-hero{padding-left:22px}
+  .cham-editorial-hero h1{font-size:clamp(3.3rem,15vw,5rem)}
+}
+@media(prefers-reduced-motion:reduce){
+  .cham-footer__marquee span{animation:none!important}
+}
