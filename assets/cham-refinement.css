@@ -984,3 +984,40 @@ body.cham-site::before { display: none !important; }
  .cham-site .cham-custom h2 {font-size:clamp(35px,9vw,44px);}
  .cham-site .cham-custom__aside {padding:25px 23px;}
 }
+
+/* Editable logo placeholder for the empty-product editorial section. */
+.cham-site .cham-empty-collection__logo {
+  width: min(100%, 300px);
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed rgba(106, 79, 59, .33);
+  border-radius: 8px;
+  background: rgba(255, 251, 245, .32);
+}
+.cham-site .cham-empty-collection__logo-label {
+  font-family: Arial, "Segoe UI", sans-serif;
+  font-weight: 700;
+  font-size: clamp(20px, 2.4vw, 30px);
+  line-height: 1.1;
+  letter-spacing: .15em;
+  color: #93755f;
+}
+.cham-site .cham-empty-collection__logo-image {
+  display: block;
+  width: min(78%, 245px);
+  max-height: 170px;
+  height: auto;
+  object-fit: contain;
+}
+@media (max-width: 620px) {
+  .cham-site .cham-empty-collection__logo {
+    min-height: 126px;
+    width: min(100%, 240px);
+    margin-bottom: 18px;
+  }
+  .cham-site .cham-empty-collection__logo-label {
+    font-size: 21px;
+  }
+}
