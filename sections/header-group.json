@@ -2,28 +2,17 @@
   "type": "header",
   "name": "Header",
   "sections": {
-    "pham-header": {
-      "type": "pham-header",
+    "cham-header": {
+      "type": "cham-header",
       "settings": {
-        "single_product_mode": true,
-        "show_home": true,
-        "home_label": "HOME",
-        "show_product": true,
-        "product_label": "PRODUCT",
-        "show_about": true,
-        "about_label": "ABOUT",
-        "about_url": "/pages/about",
-        "show_contact": true,
-        "contact_label": "CONTACT",
-        "contact_url": "/pages/contact",
+        "wordmark": "CHẠM",
         "menu": "main-menu",
         "show_search": true,
-        "show_account": true,
-        "transparent_on_top": false
+        "show_account": true
       }
     }
   },
   "order": [
-    "pham-header"
+    "cham-header"
   ]
 }

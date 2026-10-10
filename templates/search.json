@@ -1,13 +1,16 @@
 {
   "sections": {
+    "header": {
+      "type": "search-header",
+      "settings": {}
+    },
     "main": {
-      "type": "pham-search-results",
-      "settings": {
-        "products_per_page": 12
-      }
+      "type": "search-results",
+      "settings": {}
     }
   },
   "order": [
+    "header",
     "main"
   ]
 }

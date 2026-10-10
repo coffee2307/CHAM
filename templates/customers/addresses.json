@@ -1,12 +1,12 @@
 {
   "sections": {
     "main": {
-      "type": "pham-customer-portal",
+      "type": "cham-customer-portal",
       "settings": {
         "portal_mode": "addresses",
-        "eyebrow": "ATELIER · ADDRESSES",
+        "eyebrow": "CHẠM · ADDRESSES",
         "heading": "Your addresses",
-        "intro": "Manage shipping addresses for your editions.",
+        "intro": "Manage shipping addresses for your dòng sản phẩms.",
         "show_back_link": true
       }
     }

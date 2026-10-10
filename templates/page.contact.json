@@ -1,15 +1,8 @@
 {
   "sections": {
     "main": {
-      "type": "pham-contact",
-      "settings": {
-        "eyebrow": "PHAM · CONTACT HUB",
-        "heading": "Contact Hub",
-        "intro": "Direct line to the atelier. All inquiries are reviewed manually.",
-        "submit_label": "Send Message",
-        "success_message": "Message received. The atelier will respond when ready.",
-        "show_back_link": true
-      }
+      "type": "cham-contact",
+      "settings": {}
     }
   },
   "order": [

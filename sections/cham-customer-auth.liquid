@@ -1,0 +1,440 @@
+<!-- # DO NOT EDIT — managed by CHẠM theme architecture -->
+{%- liquid
+  assign auth_mode = section.settings.auth_mode | default: 'login'
+  assign show_back = section.settings.show_back_link
+-%}
+
+<section class="cham-auth cham-contact"
+         data-cham-customer-auth
+         data-auth-mode="{{ auth_mode | escape }}"
+         role="region"
+         aria-label="{{ section.settings.heading | escape }}">
+  <div class="cham-container cham-contact__inner reveal-up">
+
+    <header class="cham-contact__head">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="cham-eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h1 class="cham-contact__title">{{ section.settings.heading }}</h1>
+      {%- if section.settings.intro != blank -%}
+        <p class="cham-contact__intro">{{ section.settings.intro }}</p>
+      {%- endif -%}
+    </header>
+
+    {%- case auth_mode -%}
+
+      {%- when 'login' -%}
+        <div class="cham-auth__panel" data-cham-auth-panel="login">
+          {%- form 'customer_login', id: 'ChamCustomerLogin', class: 'cham-contact__form' -%}
+            {%- if form.errors -%}
+              <div class="cham-contact__msg cham-contact__msg--error" role="alert">
+                <p class="cham-contact__msg-heading">Please correct the following:</p>
+                {{ form.errors | default_errors }}
+              </div>
+            {%- endif -%}
+
+            <div class="cham-contact__fields">
+              <div class="cham-contact__field cham-contact__field--full">
+                <label for="ChamLoginEmail-{{ section.id }}" class="cham-contact__label">Email</label>
+                <input id="ChamLoginEmail-{{ section.id }}"
+                       type="email"
+                       name="customer[email]"
+                       class="cham-contact__input"
+                       placeholder="EMAIL ADDRESS"
+                       autocomplete="email"
+                       spellcheck="false"
+                       autocapitalize="off"
+                       required
+                       value="{% if form.email %}{{ form.email }}{% endif %}">
+              </div>
+
+              <div class="cham-contact__field cham-contact__field--full">
+                <label for="ChamLoginPassword-{{ section.id }}" class="cham-contact__label">Password</label>
+                <input id="ChamLoginPassword-{{ section.id }}"
+                       type="password"
+                       name="customer[password]"
+                       class="cham-contact__input"
+                       placeholder="PASSWORD"
+                       autocomplete="current-password"
+                       required>
+              </div>
+            </div>
+
+            <div class="cham-auth__actions">
+              <button type="submit" class="cham-btn cham-contact__submit">
+                {{ section.settings.submit_label | default: 'SIGN IN' }}
+              </button>
+              <button type="button"
+                      class="cham-auth__text-btn"
+                      data-cham-auth-show="recover">
+                {{ section.settings.forgot_label | default: 'Forgot password?' }}
+              </button>
+            </div>
+          {%- endform -%}
+
+          <p class="cham-auth__switch">
+            {{ section.settings.register_prompt | default: 'New to CHẠM?' }}
+            <a href="{{ routes.account_register_url }}" class="cham-auth__link">
+              {{ section.settings.register_link_label | default: 'Create account' }}
+            </a>
+          </p>
+        </div>
+
+        <div class="cham-auth__panel" data-cham-auth-panel="recover" hidden>
+          {%- form 'recover_customer_password', id: 'ChamCustomerRecover', class: 'cham-contact__form' -%}
+            {%- if form.posted_successfully? -%}
+              <p class="cham-contact__msg cham-contact__msg--success" role="status">
+                {{ section.settings.recover_success | default: 'We sent you an email with a link to reset your password.' }}
+              </p>
+            {%- endif -%}
+
+            {%- if form.errors -%}
+              <div class="cham-contact__msg cham-contact__msg--error" role="alert">
+                <p class="cham-contact__msg-heading">Please correct the following:</p>
+                {{ form.errors | default_errors }}
+              </div>
+            {%- endif -%}
+
+            <div class="cham-contact__fields">
+              <div class="cham-contact__field cham-contact__field--full">
+                <label for="ChamRecoverEmail-{{ section.id }}" class="cham-contact__label">Email</label>
+                <input id="ChamRecoverEmail-{{ section.id }}"
+                       type="email"
+                       name="email"
+                       class="cham-contact__input"
+                       placeholder="EMAIL ADDRESS"
+                       autocomplete="email"
+                       spellcheck="false"
+                       autocapitalize="off"
+                       required
+                       value="{% if form.email %}{{ form.email }}{% endif %}">
+              </div>
+            </div>
+
+            <div class="cham-auth__actions">
+              <button type="submit" class="cham-btn cham-contact__submit">
+                {{ section.settings.recover_submit_label | default: 'SEND RESET LINK' }}
+              </button>
+              <button type="button"
+                      class="cham-auth__text-btn"
+                      data-cham-auth-show="login">
+                {{ section.settings.back_to_login_label | default: 'Back to sign in' }}
+              </button>
+            </div>
+          {%- endform -%}
+        </div>
+
+      {%- when 'register' -%}
+        {%- form 'create_customer', id: 'ChamCustomerRegister', class: 'cham-contact__form' -%}
+          {%- if form.errors -%}
+            <div class="cham-contact__msg cham-contact__msg--error" role="alert">
+              <p class="cham-contact__msg-heading">Please correct the following:</p>
+              {{ form.errors | default_errors }}
+            </div>
+          {%- endif -%}
+
+          <div class="cham-contact__fields">
+            <div class="cham-contact__field">
+              <label for="ChamRegisterFirstName-{{ section.id }}" class="cham-contact__label">First name</label>
+              <input id="ChamRegisterFirstName-{{ section.id }}"
+                     type="text"
+                     name="customer[first_name]"
+                     class="cham-contact__input"
+                     placeholder="FIRST NAME"
+                     autocomplete="given-name"
+                     required
+                     value="{% if form.first_name %}{{ form.first_name }}{% endif %}">
+            </div>
+
+            <div class="cham-contact__field">
+              <label for="ChamRegisterLastName-{{ section.id }}" class="cham-contact__label">Last name</label>
+              <input id="ChamRegisterLastName-{{ section.id }}"
+                     type="text"
+                     name="customer[last_name]"
+                     class="cham-contact__input"
+                     placeholder="LAST NAME"
+                     autocomplete="family-name"
+                     required
+                     value="{% if form.last_name %}{{ form.last_name }}{% endif %}">
+            </div>
+
+            <div class="cham-contact__field cham-contact__field--full">
+              <label for="ChamRegisterEmail-{{ section.id }}" class="cham-contact__label">Email</label>
+              <input id="ChamRegisterEmail-{{ section.id }}"
+                     type="email"
+                     name="customer[email]"
+                     class="cham-contact__input"
+                     placeholder="EMAIL ADDRESS"
+                     autocomplete="email"
+                     spellcheck="false"
+                     autocapitalize="off"
+                     required
+                     value="{% if form.email %}{{ form.email }}{% endif %}">
+            </div>
+
+            <div class="cham-contact__field cham-contact__field--full">
+              <label for="ChamRegisterPassword-{{ section.id }}" class="cham-contact__label">Password</label>
+              <input id="ChamRegisterPassword-{{ section.id }}"
+                     type="password"
+                     name="customer[password]"
+                     class="cham-contact__input"
+                     placeholder="PASSWORD"
+                     autocomplete="new-password"
+                     required>
+            </div>
+          </div>
+
+          <button type="submit" class="cham-btn cham-contact__submit">
+            {{ section.settings.submit_label | default: 'CREATE ACCOUNT' }}
+          </button>
+        {%- endform -%}
+
+        <p class="cham-auth__switch">
+          {{ section.settings.login_prompt | default: 'Already have an account?' }}
+          <a href="{{ routes.account_login_url }}" class="cham-auth__link">
+            {{ section.settings.login_link_label | default: 'Sign in' }}
+          </a>
+        </p>
+
+      {%- when 'reset_password' -%}
+        {%- form 'reset_customer_password', id: 'ChamCustomerReset', class: 'cham-contact__form' -%}
+          {%- if form.errors -%}
+            <div class="cham-contact__msg cham-contact__msg--error" role="alert">
+              <p class="cham-contact__msg-heading">Please correct the following:</p>
+              {{ form.errors | default_errors }}
+            </div>
+          {%- endif -%}
+
+          <div class="cham-contact__fields">
+            <div class="cham-contact__field cham-contact__field--full">
+              <label for="ChamResetPassword-{{ section.id }}" class="cham-contact__label">New password</label>
+              <input id="ChamResetPassword-{{ section.id }}"
+                     type="password"
+                     name="customer[password]"
+                     class="cham-contact__input"
+                     placeholder="NEW PASSWORD"
+                     autocomplete="new-password"
+                     required>
+            </div>
+
+            <div class="cham-contact__field cham-contact__field--full">
+              <label for="ChamResetPasswordConfirm-{{ section.id }}" class="cham-contact__label">Confirm password</label>
+              <input id="ChamResetPasswordConfirm-{{ section.id }}"
+                     type="password"
+                     name="customer[password_confirmation]"
+                     class="cham-contact__input"
+                     placeholder="CONFIRM PASSWORD"
+                     autocomplete="new-password"
+                     required>
+            </div>
+          </div>
+
+          <button type="submit" class="cham-btn cham-contact__submit">
+            {{ section.settings.submit_label | default: 'RESET PASSWORD' }}
+          </button>
+        {%- endform -%}
+
+      {%- when 'activate_account' -%}
+        {%- form 'activate_customer_password', id: 'ChamCustomerActivate', class: 'cham-contact__form' -%}
+          {%- if form.errors -%}
+            <div class="cham-contact__msg cham-contact__msg--error" role="alert">
+              <p class="cham-contact__msg-heading">Please correct the following:</p>
+              {{ form.errors | default_errors }}
+            </div>
+          {%- endif -%}
+
+          <div class="cham-contact__fields">
+            <div class="cham-contact__field cham-contact__field--full">
+              <label for="ChamActivatePassword-{{ section.id }}" class="cham-contact__label">Password</label>
+              <input id="ChamActivatePassword-{{ section.id }}"
+                     type="password"
+                     name="customer[password]"
+                     class="cham-contact__input"
+                     placeholder="PASSWORD"
+                     autocomplete="new-password"
+                     required>
+            </div>
+
+            <div class="cham-contact__field cham-contact__field--full">
+              <label for="ChamActivatePasswordConfirm-{{ section.id }}" class="cham-contact__label">Confirm password</label>
+              <input id="ChamActivatePasswordConfirm-{{ section.id }}"
+                     type="password"
+                     name="customer[password_confirmation]"
+                     class="cham-contact__input"
+                     placeholder="CONFIRM PASSWORD"
+                     autocomplete="new-password"
+                     required>
+            </div>
+          </div>
+
+          <button type="submit" class="cham-btn cham-contact__submit">
+            {{ section.settings.submit_label | default: 'ACTIVATE ACCOUNT' }}
+          </button>
+        {%- endform -%}
+
+    {%- endcase -%}
+
+    {%- if show_back -%}
+      <p class="cham-contact__back">
+        <a href="{{ routes.root_url }}" class="cham-back-link cham-contact__back-link">
+          <span class="cham-back-link__arrow" aria-hidden="true">&larr;</span>
+          <span class="cham-back-link__label">VỀ TRANG CHỦ</span>
+        </a>
+      </p>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+(function () {
+  'use strict';
+  var root = document.querySelector('[data-cham-customer-auth][data-auth-mode="login"]');
+  if (!root) return;
+
+  var panels = root.querySelectorAll('[data-cham-auth-panel]');
+  var toggles = root.querySelectorAll('[data-cham-auth-show]');
+
+  function showPanel(name) {
+    panels.forEach(function (panel) {
+      var active = panel.getAttribute('data-cham-auth-panel') === name;
+      panel.hidden = !active;
+    });
+  }
+
+  toggles.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      showPanel(btn.getAttribute('data-cham-auth-show'));
+    });
+  });
+
+  if (window.location.hash === '#recover') {
+    showPanel('recover');
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "CHẠM Customer Auth",
+  "tag": "section",
+  "class": "cham-customer-auth-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "auth_mode",
+      "label": "Auth mode",
+      "default": "login",
+      "options": [
+        { "value": "login", "label": "Sign in" },
+        { "value": "register", "label": "Create account" },
+        { "value": "reset_password", "label": "Reset password" },
+        { "value": "activate_account", "label": "Activate account" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "CHẠM · TÀI KHOẢN"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Sign in"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Intro",
+      "default": "Access your CHẠM account — orders, addresses, and thông tin mua sắm."
+    },
+    {
+      "type": "text",
+      "id": "submit_label",
+      "label": "Submit button",
+      "default": "SIGN IN"
+    },
+    {
+      "type": "header",
+      "content": "Sign in extras"
+    },
+    {
+      "type": "text",
+      "id": "forgot_label",
+      "label": "Forgot password label",
+      "default": "Forgot password?"
+    },
+    {
+      "type": "text",
+      "id": "recover_submit_label",
+      "label": "Recover submit label",
+      "default": "SEND RESET LINK"
+    },
+    {
+      "type": "textarea",
+      "id": "recover_success",
+      "label": "Recover success message",
+      "default": "We sent you an email with a link to reset your password."
+    },
+    {
+      "type": "text",
+      "id": "back_to_login_label",
+      "label": "Back to sign in label",
+      "default": "Back to sign in"
+    },
+    {
+      "type": "text",
+      "id": "register_prompt",
+      "label": "Register prompt (login page)",
+      "default": "New to CHẠM?"
+    },
+    {
+      "type": "text",
+      "id": "register_link_label",
+      "label": "Register link label",
+      "default": "Create account"
+    },
+    {
+      "type": "header",
+      "content": "Register extras"
+    },
+    {
+      "type": "text",
+      "id": "login_prompt",
+      "label": "Sign in prompt (register page)",
+      "default": "Already have an account?"
+    },
+    {
+      "type": "text",
+      "id": "login_link_label",
+      "label": "Sign in link label",
+      "default": "Sign in"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_back_link",
+      "label": "Show return-to-home link",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "CHẠM Customer Auth",
+      "category": "CHẠM"
+    }
+  ],
+  "enabled_on": {
+    "templates": [
+      "customers/login",
+      "customers/register",
+      "customers/reset_password",
+      "customers/activate_account"
+    ]
+  }
+}
+{% endschema %}

@@ -1,0 +1,404 @@
+<!-- # DO NOT EDIT — managed by CHẠM theme architecture -->
+{%- liquid
+  assign portal_mode = section.settings.portal_mode | default: 'account'
+  assign show_back = section.settings.show_back_link
+-%}
+
+<section class="cham-auth cham-contact cham-portal"
+         data-cham-customer-portal
+         data-portal-mode="{{ portal_mode | escape }}"
+         role="region"
+         aria-label="{{ section.settings.heading | escape }}">
+  <div class="cham-container cham-contact__inner reveal-up">
+
+    <header class="cham-contact__head">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="cham-eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h1 class="cham-contact__title">{{ section.settings.heading }}</h1>
+      {%- if section.settings.intro != blank -%}
+        <p class="cham-contact__intro">{{ section.settings.intro }}</p>
+      {%- endif -%}
+    </header>
+
+    {%- case portal_mode -%}
+
+      {%- when 'account' -%}
+        <div class="cham-portal__panel">
+          <p class="cham-portal__welcome">
+            {{ section.settings.welcome_label | default: 'Welcome' }},
+            <strong>{{ customer.first_name | default: customer.email }}</strong>
+          </p>
+
+          <nav class="cham-portal__nav" aria-label="Account navigation">
+            <a href="{{ routes.account_addresses_url }}" class="cham-portal__nav-link">{{ section.settings.addresses_label | default: 'Addresses' }}</a>
+            <a href="{{ routes.account_logout_url }}" class="cham-portal__nav-link cham-portal__nav-link--muted">{{ section.settings.logout_label | default: 'Log out' }}</a>
+          </nav>
+
+          <div class="cham-portal__orders">
+            <h2 class="cham-portal__subhead">{{ section.settings.orders_heading | default: 'Order history' }}</h2>
+
+            {%- if customer.orders.size > 0 -%}
+              <ul class="cham-portal__order-list" role="list">
+                {%- for order_item in customer.orders -%}
+                  <li class="cham-portal__order-item">
+                    <a href="{{ order_item.customer_url }}" class="cham-portal__order-link">
+                      <span class="cham-portal__order-id">{{ section.settings.order_prefix | default: 'Order' }} {{ order_item.name }}</span>
+                      <span class="cham-portal__order-meta">
+                        <time datetime="{{ order_item.created_at | date: '%Y-%m-%d' }}">{{ order_item.created_at | date: format: 'date' }}</time>
+                        · {{ order_item.financial_status_label }}
+                        · {{ order_item.total_price | money }}
+                      </span>
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- else -%}
+              <p class="cham-portal__empty">{{ section.settings.no_orders | default: 'You have not placed any orders yet.' }}</p>
+            {%- endif -%}
+          </div>
+        </div>
+
+      {%- when 'order' -%}
+        <div class="cham-portal__panel">
+          <p class="cham-portal__back">
+            <a href="{{ routes.account_url }}" class="cham-auth__link">&larr; {{ section.settings.back_to_account | default: 'Back to account' }}</a>
+          </p>
+
+          <header class="cham-portal__order-head">
+            <h2 class="cham-portal__subhead">{{ section.settings.order_prefix | default: 'Order' }} {{ order.name }}</h2>
+            <p class="cham-portal__order-meta">
+              <time datetime="{{ order.created_at | date: '%Y-%m-%d' }}">{{ order.created_at | date: format: 'date' }}</time>
+              · {{ order.financial_status_label }}
+              {%- if order.fulfillment_status_label != blank -%}
+                · {{ order.fulfillment_status_label }}
+              {%- endif -%}
+            </p>
+          </header>
+
+          <table class="cham-portal__table">
+            <thead>
+              <tr>
+                <th scope="col">Item</th>
+                <th scope="col">Qty</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%- for line_item in order.line_items -%}
+                <tr>
+                  <td>
+                    <span class="cham-portal__line-title">{{ line_item.title }}</span>
+                    {%- unless line_item.variant.title == 'Default Title' -%}
+                      <span class="cham-portal__line-variant">{{ line_item.variant.title }}</span>
+                    {%- endunless -%}
+                  </td>
+                  <td>{{ line_item.quantity }}</td>
+                  <td>{{ line_item.final_line_price | money }}</td>
+                </tr>
+              {%- endfor -%}
+            </tbody>
+            <tfoot>
+              <tr>
+                <th scope="row" colspan="2">Subtotal</th>
+                <td>{{ order.line_items_subtotal_price | money }}</td>
+              </tr>
+              {%- if order.shipping_price > 0 -%}
+                <tr>
+                  <th scope="row" colspan="2">Shipping</th>
+                  <td>{{ order.shipping_price | money }}</td>
+                </tr>
+              {%- endif -%}
+              {%- if order.tax_price > 0 -%}
+                <tr>
+                  <th scope="row" colspan="2">Tax</th>
+                  <td>{{ order.tax_price | money }}</td>
+                </tr>
+              {%- endif -%}
+              <tr class="cham-portal__total-row">
+                <th scope="row" colspan="2">Total</th>
+                <td>{{ order.total_price | money }}</td>
+              </tr>
+            </tfoot>
+          </table>
+
+          {%- if order.shipping_address -%}
+            <div class="cham-portal__address-block">
+              <h3 class="cham-portal__address-title">{{ section.settings.shipping_heading | default: 'Shipping address' }}</h3>
+              {{ order.shipping_address | format_address }}
+            </div>
+          {%- endif -%}
+        </div>
+
+      {%- when 'addresses' -%}
+        <div class="cham-portal__panel">
+          <p class="cham-portal__back">
+            <a href="{{ routes.account_url }}" class="cham-auth__link">&larr; {{ section.settings.back_to_account | default: 'Back to account' }}</a>
+          </p>
+
+          {%- paginate customer.addresses by 8 -%}
+            <ul class="cham-portal__address-list" role="list">
+              {%- for address in customer.addresses -%}
+                <li class="cham-portal__address-card" id="ChamAddress-{{ address.id }}">
+                  {%- if address == customer.default_address -%}
+                    <p class="cham-portal__default-badge">{{ section.settings.default_badge | default: 'Default' }}</p>
+                  {%- endif -%}
+                  {{ address | format_address }}
+                  <div class="cham-portal__address-actions">
+                    <button type="button"
+                            class="cham-auth__text-btn"
+                            data-cham-address-edit="{{ address.id }}">
+                      {{ section.settings.edit_address | default: 'Edit' }}
+                    </button>
+                    <button type="button"
+                            class="cham-auth__text-btn cham-portal__nav-link--muted"
+                            data-cham-address-delete
+                            data-delete-url="{{ address.url }}">
+                      {{ section.settings.delete_address | default: 'Delete' }}
+                    </button>
+                  </div>
+
+                  <div class="cham-portal__address-form" data-cham-address-form="{{ address.id }}" hidden>
+                    {%- form 'customer_address', address, class: 'cham-contact__form' -%}
+                      <div class="cham-contact__fields">
+                        <div class="cham-contact__field cham-contact__field--half">
+                          <label class="cham-contact__label" for="ChamAddrFirst-{{ address.id }}">First name</label>
+                          <input id="ChamAddrFirst-{{ address.id }}" class="cham-contact__input" type="text" name="address[first_name]" value="{{ form.first_name }}" autocomplete="given-name" required>
+                        </div>
+                        <div class="cham-contact__field cham-contact__field--half">
+                          <label class="cham-contact__label" for="ChamAddrLast-{{ address.id }}">Last name</label>
+                          <input id="ChamAddrLast-{{ address.id }}" class="cham-contact__input" type="text" name="address[last_name]" value="{{ form.last_name }}" autocomplete="family-name" required>
+                        </div>
+                        <div class="cham-contact__field cham-contact__field--full">
+                          <label class="cham-contact__label" for="ChamAddrCompany-{{ address.id }}">Company</label>
+                          <input id="ChamAddrCompany-{{ address.id }}" class="cham-contact__input" type="text" name="address[company]" value="{{ form.company }}" autocomplete="organization">
+                        </div>
+                        <div class="cham-contact__field cham-contact__field--full">
+                          <label class="cham-contact__label" for="ChamAddr1-{{ address.id }}">Address</label>
+                          <input id="ChamAddr1-{{ address.id }}" class="cham-contact__input" type="text" name="address[address1]" value="{{ form.address1 }}" autocomplete="address-line1" required>
+                        </div>
+                        <div class="cham-contact__field cham-contact__field--full">
+                          <label class="cham-contact__label" for="ChamAddr2-{{ address.id }}">Apartment, suite, etc.</label>
+                          <input id="ChamAddr2-{{ address.id }}" class="cham-contact__input" type="text" name="address[address2]" value="{{ form.address2 }}" autocomplete="address-line2">
+                        </div>
+                        <div class="cham-contact__field cham-contact__field--half">
+                          <label class="cham-contact__label" for="ChamAddrCity-{{ address.id }}">City</label>
+                          <input id="ChamAddrCity-{{ address.id }}" class="cham-contact__input" type="text" name="address[city]" value="{{ form.city }}" autocomplete="address-level2" required>
+                        </div>
+                        <div class="cham-contact__field cham-contact__field--half">
+                          <label class="cham-contact__label" for="ChamAddrZip-{{ address.id }}">Postal code</label>
+                          <input id="ChamAddrZip-{{ address.id }}" class="cham-contact__input" type="text" name="address[zip]" value="{{ form.zip }}" autocomplete="postal-code" required>
+                        </div>
+                        <div class="cham-contact__field cham-contact__field--full">
+                          <label class="cham-contact__label" for="ChamAddrCountry-{{ address.id }}">Country</label>
+                          <select id="ChamAddrCountry-{{ address.id }}" class="cham-contact__input" name="address[country]" data-default="{{ form.country }}" autocomplete="country">{{ all_country_option_tags }}</select>
+                        </div>
+                        <div class="cham-contact__field cham-contact__field--full">
+                          <label class="cham-contact__label" for="ChamAddrPhone-{{ address.id }}">Phone</label>
+                          <input id="ChamAddrPhone-{{ address.id }}" class="cham-contact__input" type="tel" name="address[phone]" value="{{ form.phone }}" autocomplete="tel">
+                        </div>
+                        <div class="cham-contact__field cham-contact__field--full">
+                          <label class="cham-contact__checkbox">
+                            <input type="checkbox" name="address[default]" value="1" {% if address == customer.default_address %}checked{% endif %}>
+                            {{ section.settings.set_default | default: 'Set as default address' }}
+                          </label>
+                        </div>
+                      </div>
+                      <div class="cham-auth__actions">
+                        <button type="submit" class="cham-btn cham-contact__submit">{{ section.settings.save_address | default: 'SAVE ADDRESS' }}</button>
+                        <button type="button" class="cham-auth__text-btn" data-cham-address-cancel="{{ address.id }}">{{ section.settings.cancel | default: 'Cancel' }}</button>
+                      </div>
+                    {%- endform -%}
+                  </div>
+                </li>
+              {%- endfor -%}
+            </ul>
+
+            {%- if paginate.pages > 1 -%}
+              <nav class="cham-portal__pagination" aria-label="Addresses pagination">{{ paginate | default_pagination }}</nav>
+            {%- endif -%}
+          {%- endpaginate -%}
+
+          <div class="cham-portal__new-address">
+            <h2 class="cham-portal__subhead">{{ section.settings.add_address_heading | default: 'Add address' }}</h2>
+            {%- form 'customer_address', customer.new_address, class: 'cham-contact__form' -%}
+              <div class="cham-contact__fields">
+                <div class="cham-contact__field cham-contact__field--half">
+                  <label class="cham-contact__label" for="ChamNewFirst-{{ section.id }}">First name</label>
+                  <input id="ChamNewFirst-{{ section.id }}" class="cham-contact__input" type="text" name="address[first_name]" value="{{ form.first_name }}" autocomplete="given-name" required>
+                </div>
+                <div class="cham-contact__field cham-contact__field--half">
+                  <label class="cham-contact__label" for="ChamNewLast-{{ section.id }}">Last name</label>
+                  <input id="ChamNewLast-{{ section.id }}" class="cham-contact__input" type="text" name="address[last_name]" value="{{ form.last_name }}" autocomplete="family-name" required>
+                </div>
+                <div class="cham-contact__field cham-contact__field--full">
+                  <label class="cham-contact__label" for="ChamNewAddr1-{{ section.id }}">Address</label>
+                  <input id="ChamNewAddr1-{{ section.id }}" class="cham-contact__input" type="text" name="address[address1]" value="{{ form.address1 }}" autocomplete="address-line1" required>
+                </div>
+                <div class="cham-contact__field cham-contact__field--half">
+                  <label class="cham-contact__label" for="ChamNewCity-{{ section.id }}">City</label>
+                  <input id="ChamNewCity-{{ section.id }}" class="cham-contact__input" type="text" name="address[city]" value="{{ form.city }}" autocomplete="address-level2" required>
+                </div>
+                <div class="cham-contact__field cham-contact__field--half">
+                  <label class="cham-contact__label" for="ChamNewZip-{{ section.id }}">Postal code</label>
+                  <input id="ChamNewZip-{{ section.id }}" class="cham-contact__input" type="text" name="address[zip]" value="{{ form.zip }}" autocomplete="postal-code" required>
+                </div>
+                <div class="cham-contact__field cham-contact__field--full">
+                  <label class="cham-contact__label" for="ChamNewCountry-{{ section.id }}">Country</label>
+                  <select id="ChamNewCountry-{{ section.id }}" class="cham-contact__input" name="address[country]" data-default="{{ form.country }}" autocomplete="country">{{ all_country_option_tags }}</select>
+                </div>
+                <div class="cham-contact__field cham-contact__field--full">
+                  <label class="cham-contact__label" for="ChamNewPhone-{{ section.id }}">Phone</label>
+                  <input id="ChamNewPhone-{{ section.id }}" class="cham-contact__input" type="tel" name="address[phone]" value="{{ form.phone }}" autocomplete="tel">
+                </div>
+                <div class="cham-contact__field cham-contact__field--full">
+                  <label class="cham-contact__checkbox">
+                    <input type="checkbox" name="address[default]" value="1">
+                    {{ section.settings.set_default | default: 'Set as default address' }}
+                  </label>
+                </div>
+              </div>
+              <button type="submit" class="cham-btn cham-contact__submit">{{ section.settings.add_address | default: 'ADD ADDRESS' }}</button>
+            {%- endform -%}
+          </div>
+        </div>
+
+    {%- endcase -%}
+
+    {%- if show_back -%}
+      <p class="cham-auth__back">
+        <a href="{{ routes.root_url }}" class="cham-back-link">
+          <span class="cham-back-link__arrow" aria-hidden="true">&larr;</span>
+          <span class="cham-back-link__label">VỀ TRANG CHỦ</span>
+        </a>
+      </p>
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  .cham-portal { padding-block: var(--space-2xl) var(--space-3xl); }
+  .cham-portal__panel { margin-top: var(--space-xl); }
+  .cham-portal__welcome { color: var(--color-smoke); margin: 0 0 var(--space-md); }
+  .cham-portal__nav { display: flex; flex-wrap: wrap; gap: var(--space-md); margin-bottom: var(--space-xl); }
+  .cham-portal__nav-link { color: var(--color-white); text-decoration: none; font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: var(--tracking-luxury); text-transform: uppercase; }
+  .cham-portal__nav-link--muted { color: var(--color-smoke); }
+  .cham-portal__subhead { margin: 0 0 var(--space-md); font-size: var(--text-lg); letter-spacing: var(--tracking-wide); text-transform: uppercase; }
+  .cham-portal__order-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-sm); }
+  .cham-portal__order-link { display: flex; flex-direction: column; gap: 0.25rem; padding: var(--space-md); border: 1px solid var(--color-ash); text-decoration: none; color: inherit; transition: border-color 0.2s; }
+  .cham-portal__order-link:hover { border-color: var(--color-smoke); }
+  .cham-portal__order-id { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: var(--tracking-luxury); text-transform: uppercase; }
+  .cham-portal__order-meta, .cham-portal__empty { color: var(--color-smoke); font-size: var(--text-sm); margin: 0; }
+  .cham-portal__table { width: 100%; border-collapse: collapse; margin-top: var(--space-md); font-size: var(--text-sm); }
+  .cham-portal__table th, .cham-portal__table td { padding: var(--space-sm) var(--space-md); border-bottom: 1px solid var(--color-ash); text-align: left; }
+  .cham-portal__table thead th { color: var(--color-smoke); font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: var(--tracking-luxury); text-transform: uppercase; }
+  .cham-portal__line-variant { display: block; color: var(--color-smoke); font-size: var(--text-xs); }
+  .cham-portal__total-row th, .cham-portal__total-row td { font-weight: 600; border-bottom: none; }
+  .cham-portal__address-block { margin-top: var(--space-xl); color: var(--color-smoke); line-height: 1.65; }
+  .cham-portal__address-title { margin: 0 0 var(--space-sm); font-size: var(--text-sm); text-transform: uppercase; letter-spacing: var(--tracking-wide); }
+  .cham-portal__address-list { list-style: none; margin: 0 0 var(--space-xl); padding: 0; display: flex; flex-direction: column; gap: var(--space-md); }
+  .cham-portal__address-card { padding: var(--space-md); border: 1px solid var(--color-ash); color: var(--color-smoke); line-height: 1.65; }
+  .cham-portal__default-badge { margin: 0 0 var(--space-xs); font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: var(--tracking-luxury); text-transform: uppercase; color: var(--color-white); }
+  .cham-portal__address-actions { display: flex; gap: var(--space-md); margin-top: var(--space-sm); }
+  .cham-portal__address-form { margin-top: var(--space-md); padding-top: var(--space-md); border-top: 1px solid var(--color-ash); }
+  .cham-portal__back { margin: 0 0 var(--space-md); }
+  .cham-product-main__cart-form, .cham-product-spotlight__cart-form { margin: 0; }
+</style>
+
+<script>
+(function () {
+  'use strict';
+  var root = document.querySelector('[data-cham-customer-portal][data-portal-mode="addresses"]');
+  if (!root) return;
+
+  root.querySelectorAll('[data-cham-address-edit]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var id = btn.getAttribute('data-cham-address-edit');
+      var form = root.querySelector('[data-cham-address-form="' + id + '"]');
+      if (form) form.hidden = !form.hidden;
+    });
+  });
+
+  root.querySelectorAll('[data-cham-address-cancel]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var id = btn.getAttribute('data-cham-address-cancel');
+      var form = root.querySelector('[data-cham-address-form="' + id + '"]');
+      if (form) form.hidden = true;
+    });
+  });
+
+  root.querySelectorAll('[data-cham-address-delete]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var url = btn.getAttribute('data-delete-url');
+      if (!url || !window.confirm('Delete this address?')) return;
+      var form = document.createElement('form');
+      form.method = 'post';
+      form.action = url;
+      var method = document.createElement('input');
+      method.type = 'hidden';
+      method.name = '_method';
+      method.value = 'delete';
+      form.appendChild(method);
+      document.body.appendChild(form);
+      form.submit();
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "CHẠM Customer Portal",
+  "tag": "section",
+  "class": "cham-customer-portal-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "portal_mode",
+      "label": "Portal mode",
+      "default": "account",
+      "options": [
+        { "value": "account", "label": "Account overview" },
+        { "value": "order", "label": "Order detail" },
+        { "value": "addresses", "label": "Addresses" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "CHẠM · TÀI KHOẢN"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your account"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Intro",
+      "default": "Orders, addresses, and thông tin mua sắm."
+    },
+    {
+      "type": "text",
+      "id": "orders_heading",
+      "label": "Orders heading",
+      "default": "Order history"
+    },
+    {
+      "type": "text",
+      "id": "order_prefix",
+      "label": "Order label prefix",
+      "default": "Order"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_back_link",
+      "label": "Show return to CHẠM link",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

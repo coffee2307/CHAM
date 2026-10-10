@@ -2,20 +2,21 @@
   "type": "footer",
   "name": "Footer",
   "sections": {
-    "pham-footer": {
-      "type": "pham-footer",
+    "cham-footer": {
+      "type": "cham-footer",
       "settings": {
-        "tagline": "Simply Being, Fully Living.",
-        "menu_heading": "Atelier",
-        "menu": "footer",
-        "newsletter_heading": "The Atelier List",
-        "newsletter_text": "Private releases. No noise. No frequency. Only when an edition is ready.",
-        "copyright_suffix": "All rights reserved.",
-        "show_payment_icons": true
+        "wordmark": "CHẠM",
+        "tagline": "Đồ thủ công Việt Nam cho đời sống đương đại — dễ tiếp cận, có nguồn gốc và có thể tùy chỉnh.",
+        "menu_primary_heading": "Khám phá",
+        "menu_primary": "footer",
+        "menu_secondary_heading": "Hỗ trợ",
+        "newsletter_heading": "Nhận tin từ CHẠM",
+        "newsletter_text": "Sản phẩm mới, câu chuyện làng nghề và các đợt mở custom.",
+        "bottom_note": "Thủ công Việt Nam · Mua sắm có chọn lọc · Custom theo nhu cầu"
       }
     }
   },
   "order": [
-    "pham-footer"
+    "cham-footer"
   ]
 }

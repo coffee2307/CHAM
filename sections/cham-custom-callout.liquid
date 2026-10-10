@@ -1,0 +1,27 @@
+{%- assign custom_link = section.settings.link | default: '/pages/contact' -%}
+<section class="cham-section">
+  <div class="cham-shell">
+    <div class="cham-custom">
+      <div class="cham-custom__inner">
+        <p class="cham-kicker" style="color:#fff2df">{{ section.settings.eyebrow }}</p>
+        <h2>{{ section.settings.heading }}</h2>
+        <p>{{ section.settings.body }}</p>
+        <a class="cham-button" href="{{ custom_link }}">{{ section.settings.button_label }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name":"CHẠM Custom callout",
+  "tag":"section",
+  "settings":[
+    {"type":"text","id":"eyebrow","label":"Dòng nhỏ","default":"LÀM RIÊNG CHO BẠN"},
+    {"type":"text","id":"heading","label":"Tiêu đề","default":"Muốn đổi kích thước, màu, khắc tên hay làm quà theo bộ?"},
+    {"type":"textarea","id":"body","label":"Mô tả","default":"Gửi nhu cầu cho CHẠM. Đơn custom được tư vấn theo khả năng của từng chất liệu và cơ sở sản xuất, thay vì hứa mọi tùy biến cho mọi sản phẩm."},
+    {"type":"text","id":"button_label","label":"Nhãn nút","default":"Gửi yêu cầu custom"},
+    {"type":"url","id":"link","label":"Link"}
+  ],
+  "presets":[{"name":"CHẠM Custom callout","category":"CHẠM"}]
+}
+{% endschema %}

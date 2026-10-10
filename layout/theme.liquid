@@ -1,138 +1,33 @@
 <!doctype html>
-<html
-  {% if request.design_mode %}
-    class="shopify-design-mode"
-  {% endif %}
-  lang="{{ request.locale.iso_code }}"
->
+<html lang="{{ request.locale.iso_code }}" {% if request.design_mode %}class="shopify-design-mode"{% endif %}>
   <head>
-    {%- render 'pham-favicon' -%}
-
-    {% # theme-check-disable RemoteAsset %}
-    {% comment %} This a way to wait for main content to load when navigating to a new page so that the view transitions can work consistently {% endcomment %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     {% if settings.transition_to_main_product or settings.page_transition_enabled %}
-      <link
-        rel="expect"
-        href="#MainContent"
-        blocking="render"
-        id="view-transition-render-blocker"
-      >
+      <link rel="expect" href="#MainContent" blocking="render" id="view-transition-render-blocker">
     {% endif %}
-
     {%- render 'meta-tags' -%}
-    {%- render 'pham-robots' -%}
-    {%- render 'pham-structured-data' -%}
-    {%- render 'pham-analytics' -%}
-    {%- if request.design_mode -%}
-      {%- render 'stylesheets' -%}
-      {%- render 'fonts' -%}
-      {%- render 'scripts' -%}
-      {%- render 'theme-styles-variables' -%}
-      {%- render 'color-schemes' -%}
-    {%- else -%}
-      {%- render 'pham-stylesheets' -%}
-      {%- render 'pham-scripts' -%}
-    {%- endif -%}
-
+    {%- render 'stylesheets' -%}
+    {%- render 'fonts' -%}
+    {%- render 'scripts' -%}
+    {%- render 'theme-styles-variables' -%}
+    {%- render 'color-schemes' -%}
+    {{ 'cham-theme.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'cham-theme.js' | asset_url }}" defer></script>
     {% if request.design_mode %}
       {%- render 'theme-editor' -%}
     {% endif %}
-
-    {%- render 'pham-metricool' -%}
-
     {{ content_for_header }}
-    {% # theme-check-enable RemoteAsset %}
-
-    {% comment %}CUSTOM_PHAM_THEME_START{% endcomment %}
-    {% # theme-check-disable RemoteAsset, AssetPreload %}
-    {%- comment -%} Pre-paint critical styles — eliminates white flash before pham-theme loads {%- endcomment -%}
-    <style>
-      html { background-color: #0A0A0C !important; }
-      html, body, #MainContent, .content-for-layout, main { background-color: #0A0A0C !important; color: #E8E8EA; }
-      html.pham-js body,
-      html.pham-js body.pham-page-ready,
-      html.pham-js body.pham-page-exiting,
-      body.pham-page-ready,
-      body.pham-page-exiting {
-        opacity: 1 !important;
-        visibility: visible !important;
-        transition: none !important;
-        animation: none !important;
-      }
-      body { opacity: 1 !important; transition: none !important; animation: none !important; }
-      @view-transition { navigation: none; }
-    </style>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    {%- if request.page_type == 'product' -%}
-      <link rel="preconnect" href="https://ajax.googleapis.com" crossorigin>
-      <link rel="dns-prefetch" href="//ajax.googleapis.com">
-    {%- endif -%}
-    {%- assign pham_text_fonts_url = 'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Space+Mono:wght@400&display=swap' -%}
-    {%- assign pham_display_fonts_url = 'https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=optional' -%}
-    <link rel="preload" as="style" href="{{ pham_text_fonts_url }}">
-    <link href="{{ pham_text_fonts_url }}" rel="stylesheet" media="print" onload="this.media='all'">
-    <link rel="preload" as="style" href="{{ pham_display_fonts_url }}">
-    <link href="{{ pham_display_fonts_url }}" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript>
-      <link href="{{ pham_text_fonts_url }}" rel="stylesheet">
-      <link href="{{ pham_display_fonts_url }}" rel="stylesheet">
-    </noscript>
-    <link rel="preload" as="style" href="{{ 'pham-theme.css' | asset_url }}">
-    {{ 'pham-theme.css' | asset_url | stylesheet_tag }}
-    {%- if request.page_type == 'index' -%}
-      <link rel="preload" as="style" href="{{ 'pham-vault.css' | asset_url }}">
-      {{ 'pham-vault.css' | asset_url | stylesheet_tag }}
-    {%- endif -%}
-    <script src="{{ 'pham-security.js' | asset_url }}" defer></script>
-    {%- if request.path contains '/challenge' -%}
-      <script src="{{ 'pham-challenge.js' | asset_url }}" defer></script>
-    {%- endif -%}
-    {% # theme-check-enable RemoteAsset, AssetPreload %}
-    {% comment %}CUSTOM_PHAM_THEME_END{% endcomment %}
   </head>
-
-  <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}{% if request.path contains '/challenge' %} pham-challenge-page{% endif %}{% if request.page_type == 'policy' or request.path contains '/policies/' %} pham-policy-page{% endif %}">
+  <body class="cham-site page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
     {% render 'skip-to-content-link', href: '#MainContent', text: 'Skip to main content', literal: true %}
-    <div id="header-group">
-      {% sections 'header-group' %}
-    </div>
-
-    <main
-      id="MainContent"
-      class="content-for-layout"
-      role="main"
+    <div id="header-group">{% sections 'header-group' %}</div>
+    <main id="MainContent" class="content-for-layout" role="main"
       data-page-transition-enabled="{{ settings.page_transition_enabled }}"
       data-product-transition="{{ settings.transition_to_main_product }}"
-      data-template="{{ template }}"
-    >
+      data-template="{{ template }}">
       {{ content_for_layout }}
     </main>
-
-    <footer>
-      {% sections 'footer-group' %}
-    </footer>
-
-    {% comment %}CUSTOM_PHAM_SCRIPTS_START{% endcomment %}
-    {%- if settings.pham_campaign_enabled -%}
-      {%- render 'pham-campaign-context' -%}
-      <script src="{{ 'pham-campaign.js' | asset_url }}" defer></script>
-    {%- endif -%}
-    {%- render 'pham-post-login-redirect' -%}
-    {% if request.page_type == 'policy' or request.path contains '/policies/' %}
-      {% # theme-check-disable ParserBlockingScript %}
-      <script src="{{ 'pham-policy.js' | asset_url }}" defer></script>
-      {% # theme-check-enable ParserBlockingScript %}
-    {% endif %}
-    <script src="{{ 'pham-animations.js' | asset_url }}" defer></script>
-    {%- if request.page_type == 'index' -%}
-      <script src="{{ 'pham-immersive.js' | asset_url }}" defer></script>
-    {%- endif -%}
-    <script src="{{ 'pham-header.js' | asset_url }}" defer></script>
-    <script src="{{ 'pham-cart.js' | asset_url }}" defer></script>
-    {%- if request.page_type == 'product' or template contains 'pre-order' -%}
-      <script src="{{ 'pham-limited-qty.js' | asset_url }}" defer></script>
-    {%- endif -%}
-    {% comment %}CUSTOM_PHAM_SCRIPTS_END{% endcomment %}
+    <footer>{% sections 'footer-group' %}</footer>
   </body>
 </html>

@@ -1,12 +1,12 @@
 {
   "sections": {
     "main": {
-      "type": "pham-customer-auth",
+      "type": "cham-customer-auth",
       "settings": {
         "auth_mode": "activate_account",
-        "eyebrow": "ATELIER · ACCOUNT",
+        "eyebrow": "CHẠM · TÀI KHOẢN",
         "heading": "Activate account",
-        "intro": "Set your password to activate your PHAM account.",
+        "intro": "Set your password to activate your CHẠM account.",
         "submit_label": "ACTIVATE ACCOUNT",
         "show_back_link": true
       }

@@ -1,12 +1,8 @@
 {
   "sections": {
     "main": {
-      "type": "pham-product-focus",
-      "settings": {
-        "eyebrow": "PHAM · EDITION 01",
-        "heading": "Simply Being, Fully Living.",
-        "intro": "The first piece. Made slowly. — a small-batch opening release while the atelier scales."
-      }
+      "type": "main-collection-list",
+      "settings": {}
     }
   },
   "order": [

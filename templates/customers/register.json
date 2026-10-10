@@ -1,12 +1,12 @@
 {
   "sections": {
     "main": {
-      "type": "pham-customer-auth",
+      "type": "cham-customer-auth",
       "settings": {
         "auth_mode": "register",
-        "eyebrow": "ATELIER · ACCOUNT",
+        "eyebrow": "CHẠM · TÀI KHOẢN",
         "heading": "Create account",
-        "intro": "Join the atelier registry. One account for orders, waitlist updates, and future editions.",
+        "intro": "Join the CHẠM registry. One account for orders, thông tin sản phẩm, and sản phẩm mới.",
         "submit_label": "CREATE ACCOUNT",
         "show_back_link": true
       }

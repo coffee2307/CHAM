@@ -1,0 +1,46 @@
+{%- assign category_limit = section.settings.category_limit | default: 6 -%}
+<section class="cham-section cham-section--paper">
+  <div class="cham-shell">
+    <div class="cham-section-head">
+      <div>
+        <p class="cham-kicker">{{ section.settings.eyebrow }}</p>
+        <h2 class="cham-section-title">{{ section.settings.heading }}</h2>
+      </div>
+      <p class="cham-section-copy">{{ section.settings.body }}</p>
+    </div>
+    <div class="cham-category-grid">
+      {% assign shown = 0 %}
+      {% for collection in collections %}
+        {% if collection.handle != 'frontpage' and shown < category_limit %}
+          {% assign category_image = collection.image | default: collection.products.first.featured_image %}
+          <a class="cham-category-card" href="{{ collection.url }}">
+            {% if category_image != blank %}
+              <span class="cham-category-card__media">{{ category_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '240, 420, 700', sizes: '(max-width: 560px) 50vw, 16vw', alt: collection.title }}</span>
+            {% endif %}
+            <span class="cham-category-card__text">{{ collection.title }}</span>
+          </a>
+          {% assign shown = shown | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+      {% if shown == 0 %}
+        {% assign labels = 'Gốm|Mây tre|Dệt thủ công|Sơn mài|Trang trí|Quà tặng' | split: '|' %}
+        {% for label in labels %}
+          <a class="cham-category-card" href="{{ routes.all_products_collection_url }}"><span class="cham-category-card__text">{{ label }}</span></a>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name":"CHẠM Categories",
+  "tag":"section",
+  "settings":[
+    {"type":"text","id":"eyebrow","label":"Dòng nhỏ","default":"KHÁM PHÁ THEO CHẤT LIỆU"},
+    {"type":"text","id":"heading","label":"Tiêu đề","default":"Tìm theo cách bạn muốn chạm."},
+    {"type":"textarea","id":"body","label":"Mô tả","default":"Danh mục được tổ chức để dễ mua như một marketplace, nhưng mỗi sản phẩm vẫn giữ rõ nguồn gốc và câu chuyện làm ra nó."},
+    {"type":"range","id":"category_limit","label":"Số danh mục","min":3,"max":12,"step":1,"default":6}
+  ],
+  "presets":[{"name":"CHẠM Categories","category":"CHẠM"}]
+}
+{% endschema %}

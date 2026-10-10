@@ -1,0 +1,37 @@
+{%- liquid
+  assign origin = product.metafields.cham.origin.value | default: product.metafields.cham.origin
+  assign material = product.metafields.cham.material.value | default: product.metafields.cham.material
+  assign craft = product.metafields.cham.craft.value | default: product.metafields.cham.craft
+  assign custom_url = section.settings.custom_link | default: '/pages/contact'
+-%}
+<section class="cham-product-context">
+  <div class="cham-shell">
+    <div class="cham-product-context__grid">
+      <div class="cham-product-context__item"><span class="cham-product-context__label">Nguồn gốc</span><span class="cham-product-context__value">{{ origin | default: section.settings.origin_fallback }}</span></div>
+      <div class="cham-product-context__item"><span class="cham-product-context__label">Chất liệu</span><span class="cham-product-context__value">{{ material | default: section.settings.material_fallback }}</span></div>
+      <div class="cham-product-context__item"><span class="cham-product-context__label">Kỹ thuật</span><span class="cham-product-context__value">{{ craft | default: section.settings.craft_fallback }}</span></div>
+    </div>
+    {% if section.settings.show_custom %}
+      <div class="cham-product-context__custom">
+        <div><strong>{{ section.settings.custom_heading }}</strong><div>{{ section.settings.custom_text }}</div></div>
+        <a class="cham-button cham-button--primary" href="{{ custom_url }}">Yêu cầu custom</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% schema %}
+{
+  "name":"CHẠM Product context",
+  "tag":"section",
+  "settings":[
+    {"type":"text","id":"origin_fallback","label":"Nguồn gốc mặc định","default":"Việt Nam · cập nhật theo sản phẩm"},
+    {"type":"text","id":"material_fallback","label":"Chất liệu mặc định","default":"Xem mô tả sản phẩm"},
+    {"type":"text","id":"craft_fallback","label":"Kỹ thuật mặc định","default":"Thủ công / bán thủ công"},
+    {"type":"checkbox","id":"show_custom","label":"Hiện tùy chỉnh","default":true},
+    {"type":"text","id":"custom_heading","label":"Tiêu đề custom","default":"Bạn cần phiên bản riêng?"},
+    {"type":"textarea","id":"custom_text","label":"Mô tả custom","default":"Hỏi CHẠM về màu, kích thước, khắc tên, đóng gói quà hoặc đơn số lượng lớn. Khả năng tùy chỉnh phụ thuộc từng sản phẩm."},
+    {"type":"url","id":"custom_link","label":"Link custom"}
+  ],
+  "presets":[],"enabled_on":{"templates":["product"]}
+}
+{% endschema %}

@@ -1,0 +1,12 @@
+<section class="cham-collection-head">
+  <div class="cham-shell cham-collection-head__row">
+    <div>
+      <p class="cham-kicker">BỘ SƯU TẬP</p>
+      <h1>{{ collection.title }}</h1>
+    </div>
+    {% if collection.description != blank %}<div class="cham-collection-head__desc">{{ collection.description }}</div>{% endif %}
+  </div>
+</section>
+{% schema %}
+{"name":"CHẠM Collection header","tag":"section","settings":[],"presets":[],"enabled_on":{"templates":["collection"]}}
+{% endschema %}

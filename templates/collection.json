@@ -1,18 +1,30 @@
 {
   "sections": {
+    "header": {
+      "type": "cham-collection-header",
+      "settings": {}
+    },
     "main": {
-      "type": "pham-product-focus",
+      "type": "main-collection",
       "settings": {
-        "eyebrow": "PHAM · EDITION 01",
-        "heading": "Simply Being, Fully Living.",
-        "intro": "The first piece. Made slowly. — a small-batch opening release while the atelier scales.",
-        "spec_origin": "Atelier · Vietnam",
-        "spec_construction": "Hand-finished · Slow-made",
-        "spec_edition": "Edition · 01 / Origin"
+        "layout_type": "grid",
+        "product_card_size": "medium",
+        "mobile_product_card_size": "small",
+        "enable_infinite_scroll": true,
+        "product_grid_width": "centered",
+        "full_width_on_mobile": true,
+        "columns_gap_horizontal": 18,
+        "columns_gap_vertical": 24,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 12,
+        "padding-block-end": 56
       }
     }
   },
   "order": [
+    "header",
     "main"
   ]
 }

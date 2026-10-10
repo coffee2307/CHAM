@@ -1,11 +1,8 @@
 {
   "sections": {
     "main": {
-      "type": "pham-cart-page",
-      "settings": {
-        "title": "Your Edition",
-        "show_note": true
-      }
+      "type": "main-cart",
+      "settings": {}
     }
   },
   "order": [

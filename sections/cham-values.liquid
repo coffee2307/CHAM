@@ -1,0 +1,28 @@
+<section class="cham-section cham-section--paper">
+  <div class="cham-shell">
+    <div class="cham-section-head">
+      <div>
+        <p class="cham-kicker">{{ section.settings.eyebrow }}</p>
+        <h2 class="cham-section-title">{{ section.settings.heading }}</h2>
+      </div>
+      <p class="cham-section-copy">{{ section.settings.body }}</p>
+    </div>
+    <div class="cham-values">
+      <article class="cham-value"><span class="cham-value__index">01 · NGUỒN GỐC</span><h3>Biết món đồ đến từ đâu.</h3><p>Ưu tiên hiển thị chất liệu, nơi làm, kỹ thuật và người hoặc xưởng đứng sau sản phẩm khi dữ liệu có sẵn.</p></article>
+      <article class="cham-value"><span class="cham-value__index">02 · DỄ MUA</span><h3>Không biến thủ công thành thứ xa cách.</h3><p>Trải nghiệm mua sắm được tổ chức như một cửa hàng hiện đại: dễ tìm, dễ so sánh, dễ đặt hàng và mở rộng danh mục.</p></article>
+      <article class="cham-value"><span class="cham-value__index">03 · TÙY CHỈNH</span><h3>Có sẵn khi cần, riêng khi muốn.</h3><p>Sản phẩm đại trà có kiểm soát cho nhu cầu hằng ngày, cùng một lối riêng cho cá nhân hóa và đơn hàng doanh nghiệp.</p></article>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name":"CHẠM Values",
+  "tag":"section",
+  "settings":[
+    {"type":"text","id":"eyebrow","label":"Dòng nhỏ","default":"CÁCH CHẠM VẬN HÀNH"},
+    {"type":"text","id":"heading","label":"Tiêu đề","default":"Mua dễ hơn. Hiểu rõ hơn."},
+    {"type":"textarea","id":"body","label":"Mô tả","default":"CHẠM không đóng khung thủ công vào “độc bản”. Mục tiêu là đưa sản phẩm tốt tới nhiều người hơn mà vẫn giữ được thông tin, chất lượng và khả năng tùy chỉnh."}
+  ],
+  "presets":[{"name":"CHẠM Values","category":"CHẠM"}]
+}
+{% endschema %}
