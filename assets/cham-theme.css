@@ -1567,3 +1567,15 @@ body.cham-site::before{
   .cham-craft-sculpture__label b{font-size:.92rem}
   .cham-craft-sculpture__label span{font-size:.58rem}
 }
+
+/* CHẠM typography: legible Vietnamese-first sans serif */
+:root{--cham-font-body:Arial,"Segoe UI",sans-serif;--cham-font-display:Arial,"Segoe UI",sans-serif}
+body.cham-site,body.cham-site h1,body.cham-site h2,body.cham-site h3,body.cham-site h4,
+body.cham-site h5,body.cham-site h6,.cham-wordmark,.cham-display,
+.cham-hero__title,.cham-section-title,.cham-footer__brand,.cham-editorial-quote,
+.cham-story-manifesto strong,.cham-craft-sculpture__label b{
+ font-family:Arial,"Segoe UI",sans-serif!important;
+}
+body.cham-site h1,body.cham-site h2,body.cham-site h3,body.cham-site h4{letter-spacing:-.025em;line-height:1.18}
+body.cham-site p,body.cham-site li{line-height:1.65}
+.cham-wordmark{font-weight:800!important;letter-spacing:-.055em}
