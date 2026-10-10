@@ -1,4 +1,4 @@
-{%- liquid
+﻿{%- liquid
   assign menu_primary = section.settings.menu_primary
   assign menu_secondary = section.settings.menu_secondary
 -%}
@@ -6,7 +6,7 @@
   <div class="cham-shell">
     <div class="cham-footer__grid">
       <div class="cham-footer__brand-wrap">
-        <div class="cham-footer__brand">{{ section.settings.wordmark | default: 'CHẠM' }}</div>
+        <div class="cham-footer__brand">{{ section.settings.wordmark | default: 'CHáº M' }}</div>
         <p class="cham-footer__tagline">{{ section.settings.tagline }}</p>
       </div>
       <div>
@@ -15,9 +15,9 @@
           {% if menu_primary != blank %}
             {% for link in menu_primary.links %}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{% endfor %}
           {% else %}
-            <li><a href="{{ routes.all_products_collection_url }}">Tất cả sản phẩm</a></li>
-            <li><a href="/pages/story">Câu chuyện CHẠM</a></li>
-            <li><a href="/pages/about">Về CHẠM</a></li>
+            <li><a href="{{ routes.all_products_collection_url }}">Táº¥t cáº£ sáº£n pháº©m</a></li>
+            <li><a href="/pages/about#story">CĂ¢u chuyá»‡n CHáº M</a></li>
+            <li><a href="/pages/about">Vá» CHáº M</a></li>
           {% endif %}
         </ul>
       </div>
@@ -27,9 +27,9 @@
           {% if menu_secondary != blank %}
             {% for link in menu_secondary.links %}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{% endfor %}
           {% else %}
-            <li><a href="/pages/contact">Liên hệ</a></li>
-            <li><a href="/policies/shipping-policy">Vận chuyển</a></li>
-            <li><a href="/policies/refund-policy">Đổi trả</a></li>
+            <li><a href="/pages/contact">LiĂªn há»‡</a></li>
+            <li><a href="/policies/shipping-policy">Váº­n chuyá»ƒn</a></li>
+            <li><a href="/policies/refund-policy">Äá»•i tráº£</a></li>
           {% endif %}
         </ul>
       </div>
@@ -39,34 +39,35 @@
         {% form 'customer', class: 'cham-footer__form' %}
           <input type="hidden" name="contact[tags]" value="newsletter">
           <label class="visually-hidden" for="ChamNewsletter-{{ section.id }}">Email</label>
-          <input id="ChamNewsletter-{{ section.id }}" type="email" name="contact[email]" placeholder="Email của bạn" autocomplete="email" required>
-          <button type="submit">Đăng ký</button>
+          <input id="ChamNewsletter-{{ section.id }}" type="email" name="contact[email]" placeholder="Email cá»§a báº¡n" autocomplete="email" required>
+          <button type="submit">ÄÄƒng kĂ½</button>
         {% endform %}
       </div>
     </div>
     <div class="cham-footer__bottom">
-      <span>© {{ 'now' | date: '%Y' }} {{ section.settings.wordmark | default: 'CHẠM' }}.</span>
+      <span>Â© {{ 'now' | date: '%Y' }} {{ section.settings.wordmark | default: 'CHáº M' }}.</span>
       <span>{{ section.settings.bottom_note }}</span>
     </div>
   </div>
 </section>
 {% schema %}
 {
-  "name":"CHẠM Footer",
+  "name":"CHáº M Footer",
   "tag":"section",
   "class":"cham-footer-section",
   "settings":[
-    {"type":"text","id":"wordmark","label":"Wordmark","default":"CHẠM"},
-    {"type":"textarea","id":"tagline","label":"Tagline","default":"Đồ đan thủ công Việt Nam cho đời sống đương đại — rõ vật liệu, rõ kỹ thuật và có thể tùy chỉnh."},
-    {"type":"text","id":"menu_primary_heading","label":"Tiêu đề menu 1","default":"Khám phá"},
+    {"type":"text","id":"wordmark","label":"Wordmark","default":"CHáº M"},
+    {"type":"textarea","id":"tagline","label":"Tagline","default":"Äá»“ Ä‘an thá»§ cĂ´ng Viá»‡t Nam cho Ä‘á»i sá»‘ng Ä‘Æ°Æ¡ng Ä‘áº¡i â€” rĂµ váº­t liá»‡u, rĂµ ká»¹ thuáº­t vĂ  cĂ³ thá»ƒ tĂ¹y chá»‰nh."},
+    {"type":"text","id":"menu_primary_heading","label":"TiĂªu Ä‘á» menu 1","default":"KhĂ¡m phĂ¡"},
     {"type":"link_list","id":"menu_primary","label":"Menu 1","default":"footer"},
-    {"type":"text","id":"menu_secondary_heading","label":"Tiêu đề menu 2","default":"Hỗ trợ"},
+    {"type":"text","id":"menu_secondary_heading","label":"TiĂªu Ä‘á» menu 2","default":"Há»— trá»£"},
     {"type":"link_list","id":"menu_secondary","label":"Menu 2"},
-    {"type":"text","id":"newsletter_heading","label":"Tiêu đề newsletter","default":"Nhận tin từ CHẠM"},
-    {"type":"textarea","id":"newsletter_text","label":"Mô tả newsletter","default":"Sản phẩm đan mới, câu chuyện vật liệu và các đợt mở custom."},
-    {"type":"text","id":"bottom_note","label":"Ghi chú cuối trang","default":"Đồ đan Việt Nam · Vật liệu tự nhiên · Custom theo nhu cầu"}
+    {"type":"text","id":"newsletter_heading","label":"TiĂªu Ä‘á» newsletter","default":"Nháº­n tin tá»« CHáº M"},
+    {"type":"textarea","id":"newsletter_text","label":"MĂ´ táº£ newsletter","default":"Sáº£n pháº©m Ä‘an má»›i, cĂ¢u chuyá»‡n váº­t liá»‡u vĂ  cĂ¡c Ä‘á»£t má»Ÿ custom."},
+    {"type":"text","id":"bottom_note","label":"Ghi chĂº cuá»‘i trang","default":"Äá»“ Ä‘an Viá»‡t Nam Â· Váº­t liá»‡u tá»± nhiĂªn Â· Custom theo nhu cáº§u"}
   ],
-  "presets":[{"name":"CHẠM Footer","category":"Footer"}],
+  "presets":[{"name":"CHáº M Footer","category":"Footer"}],
   "enabled_on":{"groups":["footer"]}
 }
 {% endschema %}
+

@@ -1,6 +1,6 @@
-{%- liquid
+﻿{%- liquid
   assign primary_link = section.settings.primary_link | default: routes.all_products_collection_url
-  assign secondary_link = section.settings.secondary_link | default: '/pages/story'
+  assign secondary_link = section.settings.secondary_link | default: '/pages/about#story'
 -%}
 <section class="cham-hero cham-hero--weave" data-cham-hero>
   <div class="cham-shell cham-hero__grid">
@@ -12,29 +12,29 @@
       <h1 class="cham-hero__title">{{ section.settings.heading }}</h1>
       <div class="cham-hero__body">{{ section.settings.body }}</div>
       <div class="cham-hero__actions">
-        <a class="cham-button cham-button--primary" href="{{ primary_link }}"><span>{{ section.settings.primary_label }}</span><span aria-hidden="true">↗</span></a>
+        <a class="cham-button cham-button--primary" href="{{ primary_link }}"><span>{{ section.settings.primary_label }}</span><span aria-hidden="true">â†—</span></a>
         <a class="cham-button cham-button--soft" href="{{ secondary_link }}"><span>{{ section.settings.secondary_label }}</span></a>
       </div>
 
       {% if section.settings.show_search %}
         <form class="cham-search" action="{{ routes.search_url }}" method="get" role="search">
-          <span class="cham-search__mark" aria-hidden="true">⌕</span>
-          <label class="visually-hidden" for="ChamHeroSearch-{{ section.id }}">Tìm sản phẩm đan</label>
+          <span class="cham-search__mark" aria-hidden="true">âŒ•</span>
+          <label class="visually-hidden" for="ChamHeroSearch-{{ section.id }}">TĂ¬m sáº£n pháº©m Ä‘an</label>
           <input id="ChamHeroSearch-{{ section.id }}" type="search" name="q" placeholder="{{ section.settings.search_placeholder }}" autocomplete="off">
           <input type="hidden" name="options[prefix]" value="last">
-          <button type="submit">Tìm</button>
+          <button type="submit">TĂ¬m</button>
         </form>
       {% endif %}
 
-      <div class="cham-hero__chips" aria-label="Chất liệu đan">
-        <a href="{{ routes.all_products_collection_url }}">Mây</a>
+      <div class="cham-hero__chips" aria-label="Cháº¥t liá»‡u Ä‘an">
+        <a href="{{ routes.all_products_collection_url }}">MĂ¢y</a>
         <a href="{{ routes.all_products_collection_url }}">Tre</a>
-        <a href="{{ routes.all_products_collection_url }}">Cói</a>
-        <a href="{{ routes.all_products_collection_url }}">Lục bình</a>
+        <a href="{{ routes.all_products_collection_url }}">CĂ³i</a>
+        <a href="{{ routes.all_products_collection_url }}">Lá»¥c bĂ¬nh</a>
       </div>
     </div>
 
-    <div class="cham-hero__visual cham-weave-visual" data-cham-tilt aria-label="Kỹ nghệ đan thủ công Việt Nam">
+    <div class="cham-hero__visual cham-weave-visual" data-cham-tilt aria-label="Ká»¹ nghá»‡ Ä‘an thá»§ cĂ´ng Viá»‡t Nam">
       <div class="cham-hero__halo" aria-hidden="true"></div>
       {% if section.settings.image != blank %}
         <div class="cham-hero__image">
@@ -43,13 +43,13 @@
       {% else %}
         <div class="cham-weave-demo" aria-hidden="true">
           <div class="cham-weave-demo__ring"></div>
-          <div class="cham-weave-demo__card cham-weave-demo__card--a"><span>01</span><strong>Mây</strong><em>dẻo / nhẹ</em></div>
-          <div class="cham-weave-demo__card cham-weave-demo__card--b"><span>02</span><strong>Tre</strong><em>chắc / bền</em></div>
-          <div class="cham-weave-demo__card cham-weave-demo__card--c"><span>03</span><strong>Cói</strong><em>mềm / mộc</em></div>
-          <div class="cham-weave-demo__card cham-weave-demo__card--d"><span>04</span><strong>Lục bình</strong><em>ấm / tự nhiên</em></div>
+          <div class="cham-weave-demo__card cham-weave-demo__card--a"><span>01</span><strong>MĂ¢y</strong><em>dáº»o / nháº¹</em></div>
+          <div class="cham-weave-demo__card cham-weave-demo__card--b"><span>02</span><strong>Tre</strong><em>cháº¯c / bá»n</em></div>
+          <div class="cham-weave-demo__card cham-weave-demo__card--c"><span>03</span><strong>CĂ³i</strong><em>má»m / má»™c</em></div>
+          <div class="cham-weave-demo__card cham-weave-demo__card--d"><span>04</span><strong>Lá»¥c bĂ¬nh</strong><em>áº¥m / tá»± nhiĂªn</em></div>
         </div>
       {% endif %}
-      <div class="cham-hero__seal" aria-hidden="true"><span>CHẠM</span><small>WOVEN IN VIETNAM</small></div>
+      <div class="cham-hero__seal" aria-hidden="true"><span>CHáº M</span><small>WOVEN IN VIETNAM</small></div>
       <div class="cham-hero__note cham-hero__note--top">FIBRE / HAND / FORM</div>
       <div class="cham-hero__note cham-hero__note--bottom">WOVEN OBJECTS FOR DAILY LIFE</div>
     </div>
@@ -57,27 +57,28 @@
 
   <div class="cham-material-strip" aria-hidden="true">
     <div class="cham-material-strip__track">
-      <span>MÂY</span><i>•</i><span>TRE</span><i>•</i><span>CÓI</span><i>•</i><span>LỤC BÌNH</span><i>•</i><span>ĐAN NAN</span><i>•</i><span>ĐAN MẮT CÁO</span><i>•</i>
-      <span>MÂY</span><i>•</i><span>TRE</span><i>•</i><span>CÓI</span><i>•</i><span>LỤC BÌNH</span><i>•</i><span>ĐAN NAN</span><i>•</i><span>ĐAN MẮT CÁO</span><i>•</i>
+      <span>MĂ‚Y</span><i>â€¢</i><span>TRE</span><i>â€¢</i><span>CĂ“I</span><i>â€¢</i><span>Lá»¤C BĂŒNH</span><i>â€¢</i><span>ÄAN NAN</span><i>â€¢</i><span>ÄAN Máº®T CĂO</span><i>â€¢</i>
+      <span>MĂ‚Y</span><i>â€¢</i><span>TRE</span><i>â€¢</i><span>CĂ“I</span><i>â€¢</i><span>Lá»¤C BĂŒNH</span><i>â€¢</i><span>ÄAN NAN</span><i>â€¢</i><span>ÄAN Máº®T CĂO</span><i>â€¢</i>
     </div>
   </div>
 </section>
 {% schema %}
 {
-  "name":"CHẠM Hero",
+  "name":"CHáº M Hero",
   "tag":"section",
   "settings":[
-    {"type":"text","id":"eyebrow","label":"Dòng nhỏ","default":"ĐỒ ĐAN THỦ CÔNG VIỆT NAM · CHỌN LỌC"},
-    {"type":"textarea","id":"heading","label":"Tiêu đề","default":"Đan những điều gần gũi vào đời sống hôm nay."},
-    {"type":"richtext","id":"body","label":"Mô tả","default":"<p>CHẠM tập trung vào các sản phẩm đan từ mây, tre, cói, lục bình và sợi tự nhiên — được chọn để dễ dùng, dễ mua và vẫn giữ được dấu vết của bàn tay làm ra chúng.</p>"},
-    {"type":"text","id":"primary_label","label":"Nút chính","default":"Khám phá đồ đan"},
-    {"type":"url","id":"primary_link","label":"Link nút chính"},
-    {"type":"text","id":"secondary_label","label":"Nút phụ","default":"Câu chuyện CHẠM"},
-    {"type":"url","id":"secondary_link","label":"Link nút phụ"},
-    {"type":"checkbox","id":"show_search","label":"Hiện ô tìm kiếm","default":true},
-    {"type":"text","id":"search_placeholder","label":"Placeholder tìm kiếm","default":"Tìm giỏ mây, túi cói, khay tre, đồ lưu trữ..."},
-    {"type":"image_picker","id":"image","label":"Ảnh hero (không bắt buộc)"}
+    {"type":"text","id":"eyebrow","label":"DĂ²ng nhá»","default":"Äá»’ ÄAN THá»¦ CĂ”NG VIá»†T NAM Â· CHá»ŒN Lá»ŒC"},
+    {"type":"textarea","id":"heading","label":"TiĂªu Ä‘á»","default":"Äan nhá»¯ng Ä‘iá»u gáº§n gÅ©i vĂ o Ä‘á»i sá»‘ng hĂ´m nay."},
+    {"type":"richtext","id":"body","label":"MĂ´ táº£","default":"<p>CHáº M táº­p trung vĂ o cĂ¡c sáº£n pháº©m Ä‘an tá»« mĂ¢y, tre, cĂ³i, lá»¥c bĂ¬nh vĂ  sá»£i tá»± nhiĂªn â€” Ä‘Æ°á»£c chá»n Ä‘á»ƒ dá»… dĂ¹ng, dá»… mua vĂ  váº«n giá»¯ Ä‘Æ°á»£c dáº¥u váº¿t cá»§a bĂ n tay lĂ m ra chĂºng.</p>"},
+    {"type":"text","id":"primary_label","label":"NĂºt chĂ­nh","default":"KhĂ¡m phĂ¡ Ä‘á»“ Ä‘an"},
+    {"type":"url","id":"primary_link","label":"Link nĂºt chĂ­nh"},
+    {"type":"text","id":"secondary_label","label":"NĂºt phá»¥","default":"CĂ¢u chuyá»‡n CHáº M"},
+    {"type":"url","id":"secondary_link","label":"Link nĂºt phá»¥"},
+    {"type":"checkbox","id":"show_search","label":"Hiá»‡n Ă´ tĂ¬m kiáº¿m","default":true},
+    {"type":"text","id":"search_placeholder","label":"Placeholder tĂ¬m kiáº¿m","default":"TĂ¬m giá» mĂ¢y, tĂºi cĂ³i, khay tre, Ä‘á»“ lÆ°u trá»¯..."},
+    {"type":"image_picker","id":"image","label":"áº¢nh hero (khĂ´ng báº¯t buá»™c)"}
   ],
-  "presets":[{"name":"CHẠM Hero","category":"CHẠM"}]
+  "presets":[{"name":"CHáº M Hero","category":"CHáº M"}]
 }
 {% endschema %}
+
