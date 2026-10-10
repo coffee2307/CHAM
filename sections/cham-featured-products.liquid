@@ -1,4 +1,4 @@
-{%- liquid
+﻿{%- liquid
   assign source_collection = section.settings.collection
   if source_collection == blank
     assign source_collection = collections.all
@@ -25,15 +25,15 @@
           </a>
           <div class="cham-product-card__body">
             <div class="cham-product-card__meta">
-              <span>{{ product.type | default: 'Thủ công' }}</span>
+              <span>{{ product.type | default: 'Thá»§ cĂ´ng' }}</span>
               {% if product.vendor != blank %}<span>{{ product.vendor }}</span>{% endif %}
             </div>
             <h3 class="cham-product-card__title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
             <div class="cham-product-card__price">
-              {% if product.price_varies %}Từ {% endif %}{{ product.price | money }}
+              {% if product.price_varies %}Tá»« {% endif %}{{ product.price | money }}
             </div>
             {% if product.tags contains 'custom' or product.tags contains 'Custom' or product.tags contains 'tuy-chinh' %}
-              <span class="cham-badge">Có thể tùy chỉnh</span>
+              <span class="cham-badge">CĂ³ thá»ƒ tĂ¹y chá»‰nh</span>
             {% endif %}
           </div>
         </article>
@@ -41,7 +41,7 @@
         {% for i in (1..4) %}
           <article class="cham-product-card">
             <div class="cham-product-card__media">{{ 'product-' | append: i | placeholder_svg_tag }}</div>
-            <div class="cham-product-card__body"><h3 class="cham-product-card__title">Sản phẩm mẫu {{ i }}</h3><div class="cham-product-card__price">—</div></div>
+            <div class="cham-product-card__body"><h3 class="cham-product-card__title">Sáº£n pháº©m máº«u {{ i }}</h3><div class="cham-product-card__price">â€”</div></div>
           </article>
         {% endfor %}
       {% endfor %}
@@ -50,15 +50,15 @@
 </section>
 {% schema %}
 {
-  "name":"CHẠM Featured products",
+  "name":"CHáº M Featured products",
   "tag":"section",
   "settings":[
-    {"type":"text","id":"eyebrow","label":"Dòng nhỏ","default":"ĐANG ĐƯỢC QUAN TÂM"},
-    {"type":"text","id":"heading","label":"Tiêu đề","default":"Sản phẩm nổi bật"},
-    {"type":"collection","id":"collection","label":"Bộ sưu tập"},
-    {"type":"range","id":"product_limit","label":"Số sản phẩm","min":4,"max":12,"step":1,"default":8},
-    {"type":"text","id":"view_all_label","label":"Nhãn xem tất cả","default":"Xem tất cả"}
+    {"type":"text","id":"eyebrow","label":"DĂ²ng nhá»","default":"ÄANG ÄÆ¯á»¢C QUAN TĂ‚M"},
+    {"type":"text","id":"heading","label":"TiĂªu Ä‘á»","default":"Sáº£n pháº©m ná»•i báº­t"},
+    {"type":"collection","id":"collection","label":"Bá»™ sÆ°u táº­p"},
+    {"type":"range","id":"product_limit","label":"Sá»‘ sáº£n pháº©m","min":4,"max":12,"step":1,"default":8},
+    {"type":"text","id":"view_all_label","label":"NhĂ£n xem táº¥t cáº£","default":"Xem táº¥t cáº£"}
   ],
-  "presets":[{"name":"CHẠM Featured products","category":"CHẠM"}]
+  "presets":[{"name":"CHáº M Featured products","category":"CHáº M"}]
 }
 {% endschema %}

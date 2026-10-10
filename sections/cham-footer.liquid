@@ -9,7 +9,6 @@
         <div class="cham-footer__brand">{{ section.settings.wordmark | default: 'CHẠM' }}</div>
         <p class="cham-footer__tagline">{{ section.settings.tagline }}</p>
       </div>
-
       <div>
         <p class="cham-footer__heading">{{ section.settings.menu_primary_heading }}</p>
         <ul class="cham-footer__menu" role="list">
@@ -17,11 +16,11 @@
             {% for link in menu_primary.links %}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{% endfor %}
           {% else %}
             <li><a href="{{ routes.all_products_collection_url }}">Tất cả sản phẩm</a></li>
+            <li><a href="/pages/story">Câu chuyện CHẠM</a></li>
             <li><a href="/pages/about">Về CHẠM</a></li>
           {% endif %}
         </ul>
       </div>
-
       <div>
         <p class="cham-footer__heading">{{ section.settings.menu_secondary_heading }}</p>
         <ul class="cham-footer__menu" role="list">
@@ -34,7 +33,6 @@
           {% endif %}
         </ul>
       </div>
-
       <div class="cham-footer__newsletter">
         <p class="cham-footer__heading">{{ section.settings.newsletter_heading }}</p>
         <p class="cham-footer__tagline">{{ section.settings.newsletter_text }}</p>
@@ -46,14 +44,12 @@
         {% endform %}
       </div>
     </div>
-
     <div class="cham-footer__bottom">
       <span>© {{ 'now' | date: '%Y' }} {{ section.settings.wordmark | default: 'CHẠM' }}.</span>
       <span>{{ section.settings.bottom_note }}</span>
     </div>
   </div>
 </section>
-
 {% schema %}
 {
   "name":"CHẠM Footer",
@@ -61,14 +57,14 @@
   "class":"cham-footer-section",
   "settings":[
     {"type":"text","id":"wordmark","label":"Wordmark","default":"CHẠM"},
-    {"type":"textarea","id":"tagline","label":"Tagline","default":"Đồ thủ công Việt Nam cho đời sống đương đại — dễ tiếp cận, có nguồn gốc và có thể tùy chỉnh."},
+    {"type":"textarea","id":"tagline","label":"Tagline","default":"Đồ đan thủ công Việt Nam cho đời sống đương đại — rõ vật liệu, rõ kỹ thuật và có thể tùy chỉnh."},
     {"type":"text","id":"menu_primary_heading","label":"Tiêu đề menu 1","default":"Khám phá"},
     {"type":"link_list","id":"menu_primary","label":"Menu 1","default":"footer"},
     {"type":"text","id":"menu_secondary_heading","label":"Tiêu đề menu 2","default":"Hỗ trợ"},
     {"type":"link_list","id":"menu_secondary","label":"Menu 2"},
     {"type":"text","id":"newsletter_heading","label":"Tiêu đề newsletter","default":"Nhận tin từ CHẠM"},
-    {"type":"textarea","id":"newsletter_text","label":"Mô tả newsletter","default":"Sản phẩm mới, câu chuyện làng nghề và các đợt mở custom."},
-    {"type":"text","id":"bottom_note","label":"Ghi chú cuối trang","default":"Thủ công Việt Nam · Mua sắm có chọn lọc · Custom theo nhu cầu"}
+    {"type":"textarea","id":"newsletter_text","label":"Mô tả newsletter","default":"Sản phẩm đan mới, câu chuyện vật liệu và các đợt mở custom."},
+    {"type":"text","id":"bottom_note","label":"Ghi chú cuối trang","default":"Đồ đan Việt Nam · Vật liệu tự nhiên · Custom theo nhu cầu"}
   ],
   "presets":[{"name":"CHẠM Footer","category":"Footer"}],
   "enabled_on":{"groups":["footer"]}

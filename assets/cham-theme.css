@@ -771,3 +771,236 @@ body.cham-site select{font-family:var(--cham-font-body)!important}
 .cham-js .cham-product-card.cham-inview:hover{transform:translateY(-8px)!important}
 .cham-js .cham-value.cham-inview:hover{transform:translateY(-6px)!important}
 .cham-js .cham-product-context__item.cham-inview:hover{transform:translateY(-4px)!important}
+
+/* ==========================================================
+   CHẠM V3 — WOVEN CRAFT SYSTEM
+   Scope: woven objects only. One visual language across pages.
+   ========================================================== */
+:root{
+  --cham-radius:24px;
+  --cham-radius-small:14px;
+  --cham-surface:#fffaf2;
+  --cham-surface-2:#f5e9d8;
+  --cham-straw:#d8b873;
+  --cham-rattan:#b98549;
+  --cham-bamboo:#8b6b3d;
+  --cham-fibre:#e7d2aa;
+}
+.cham-site .cham-category-card,
+.cham-site .cham-product-card,
+.cham-site .cham-value,
+.cham-site .cham-product-context__item,
+.cham-site .cham-custom,
+.cham-site .cham-hero__visual{
+  border-radius:var(--cham-radius)!important;
+}
+.cham-site .cham-section{padding-block:clamp(64px,8vw,112px)}
+.cham-site .cham-section-head{align-items:flex-start}
+.cham-site .cham-section-copy{max-width:560px}
+.cham-site .cham-kicker{color:#9d5637}
+.cham-site .cham-pill{background:#fffaf2;border-color:rgba(115,78,48,.18)}
+.cham-site .cham-pill:hover{background:#f3e2cb}
+
+/* woven hero */
+.cham-hero--weave .cham-hero__visual{
+  background:
+    radial-gradient(circle at var(--hero-x,68%) var(--hero-y,26%),rgba(255,255,255,.68),transparent 20%),
+    linear-gradient(145deg,#d9bb7d 0%,#efdcb2 42%,#c99858 73%,#8c633a 100%);
+}
+.cham-weave-visual::before{
+  content:"";
+  position:absolute;inset:0;z-index:1;
+  background:
+    repeating-linear-gradient(0deg,rgba(74,50,28,.06) 0 2px,transparent 2px 16px),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.08) 0 2px,transparent 2px 16px);
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.72),transparent 88%);
+}
+.cham-weave-demo{position:absolute;inset:9%;z-index:2}
+.cham-weave-demo__ring{
+  position:absolute;left:50%;top:50%;width:58%;aspect-ratio:1;border-radius:50%;
+  transform:translate(-50%,-50%);
+  border:1px solid rgba(69,46,27,.18);
+  box-shadow:0 0 0 22px rgba(255,255,255,.06),0 0 0 44px rgba(255,255,255,.035);
+}
+.cham-weave-demo__ring::before,
+.cham-weave-demo__ring::after{
+  content:"";position:absolute;inset:14%;border-radius:50%;border:1px dashed rgba(73,46,27,.2)
+}
+.cham-weave-demo__ring::after{inset:30%}
+.cham-weave-demo__card{
+  position:absolute;width:42%;height:32%;padding:16px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  background:rgba(255,248,232,.82);
+  border:1px solid rgba(95,64,36,.15);
+  box-shadow:0 18px 45px rgba(60,39,22,.12);
+  backdrop-filter:blur(8px);
+  transition:transform .5s var(--cham-ease),box-shadow .35s ease;
+}
+.cham-weave-demo__card span{position:absolute;top:13px;right:13px;font-size:.62rem;letter-spacing:.12em;font-weight:800;opacity:.55}
+.cham-weave-demo__card strong{font-family:var(--cham-font-display);font-size:clamp(1.25rem,2vw,2rem)}
+.cham-weave-demo__card em{font-size:.62rem;font-style:normal;letter-spacing:.12em;text-transform:uppercase;opacity:.64}
+.cham-weave-demo__card--a{left:0;top:8%;transform:rotate(-6deg) translate3d(var(--parallax-a,0),var(--parallax-b,0),0);background:rgba(217,187,125,.88)}
+.cham-weave-demo__card--b{right:1%;top:15%;transform:rotate(5deg);background:rgba(239,220,178,.9)}
+.cham-weave-demo__card--c{left:10%;bottom:5%;transform:rotate(4deg);background:rgba(198,153,93,.88);color:#3f2b1d}
+.cham-weave-demo__card--d{right:3%;bottom:2%;transform:rotate(-5deg);background:rgba(123,88,51,.9);color:#fff8ec}
+.cham-weave-demo__card:hover{box-shadow:0 30px 70px rgba(62,39,21,.2)}
+.cham-hero--weave .cham-material-strip{background:#efe1c8}
+.cham-hero--weave .cham-material-strip__track{color:#725634}
+
+/* category consistency */
+.cham-category-card{background:linear-gradient(145deg,#f4e6cd,#e9d3aa)!important}
+.cham-category-card:nth-child(3n+2){background:linear-gradient(145deg,#e8d0a3,#d7b772)!important}
+.cham-category-card:nth-child(3n+3){background:linear-gradient(145deg,#f2e6ce,#cda469)!important}
+.cham-category-card__index{
+  position:absolute;left:16px;top:14px;z-index:3;
+  font-size:.62rem;font-weight:800;letter-spacing:.12em;color:rgba(65,44,28,.5)
+}
+.cham-category-card:has(img) .cham-category-card__index{color:rgba(255,255,255,.7)}
+
+/* process block */
+.cham-process{
+  display:grid;grid-template-columns:minmax(280px,.72fr) minmax(0,1.28fr);
+  gap:clamp(34px,7vw,100px);align-items:start;
+}
+.cham-process__intro{position:sticky;top:120px}
+.cham-process__intro p:last-child{max-width:520px;color:var(--cham-muted);line-height:1.8;margin-top:24px}
+.cham-process__steps{border-top:1px solid rgba(113,76,47,.18)}
+.cham-process__steps article{
+  display:grid;grid-template-columns:64px minmax(130px,.6fr) minmax(0,1fr);
+  gap:24px;padding:28px 0;border-bottom:1px solid rgba(113,76,47,.18);align-items:start
+}
+.cham-process__steps span{font-size:.66rem;font-weight:800;letter-spacing:.16em;color:#a45e3c}
+.cham-process__steps h3{margin:0;font-size:clamp(1.25rem,2vw,1.8rem);line-height:1.1}
+.cham-process__steps p{margin:0;color:var(--cham-muted);line-height:1.75}
+.cham-process__steps article:hover h3{color:#9c5235}
+
+/* showcase — deliberately different composition but same system */
+.cham-showcase__head{display:grid;grid-template-columns:.45fr 1fr;gap:40px;align-items:end;margin-bottom:38px}
+.cham-showcase__head .cham-kicker{margin-bottom:8px}
+.cham-showcase{display:grid;grid-template-columns:1.4fr .8fr .8fr;grid-template-rows:1fr 1fr;gap:16px}
+.cham-showcase article{
+  position:relative;overflow:hidden;min-height:250px;
+  border:1px solid rgba(108,72,45,.16);border-radius:var(--cham-radius);
+  background:#f7ecda;display:flex;flex-direction:column;justify-content:space-between;
+  box-shadow:0 10px 35px rgba(67,43,25,.05);
+  transition:transform .4s var(--cham-ease),box-shadow .4s ease
+}
+.cham-showcase article:hover{transform:translateY(-5px);box-shadow:0 24px 55px rgba(67,43,25,.11)}
+.cham-showcase__feature{grid-row:1/3;min-height:520px!important}
+.cham-showcase article>div:last-child{position:relative;z-index:2;padding:24px;background:linear-gradient(transparent,rgba(255,250,242,.95) 34%)}
+.cham-showcase article span{font-size:.62rem;letter-spacing:.14em;font-weight:800;color:#9b5a3c}
+.cham-showcase article h3{margin:8px 0 6px;font-size:1.5rem}
+.cham-showcase article p{margin:0;color:var(--cham-muted);line-height:1.65;font-size:.86rem}
+.cham-showcase__pattern{position:absolute;inset:0}
+.cham-showcase__pattern::before,.cham-showcase__pattern::after{content:"";position:absolute;inset:0}
+.cham-showcase__pattern--basket{
+  background:
+    radial-gradient(circle at 48% 37%,transparent 0 24%,rgba(119,83,49,.16) 24.4% 25%,transparent 25.4% 38%,rgba(119,83,49,.12) 38.4% 39%,transparent 39.4%),
+    linear-gradient(145deg,#e5c98e,#f4e7ca)
+}
+.cham-showcase__pattern--basket::before{background:repeating-linear-gradient(24deg,transparent 0 13px,rgba(91,62,37,.1) 13px 15px)}
+.cham-showcase__pattern--bag{background:linear-gradient(145deg,#d7b572,#efe0bf)}
+.cham-showcase__pattern--bag::before{background:repeating-linear-gradient(90deg,rgba(91,63,37,.12) 0 2px,transparent 2px 14px)}
+.cham-showcase__pattern--bag::after{background:repeating-linear-gradient(0deg,rgba(255,255,255,.15) 0 2px,transparent 2px 14px)}
+.cham-showcase__pattern--table{background:linear-gradient(145deg,#ecd9b0,#c99d61)}
+.cham-showcase__pattern--table::before{background:repeating-radial-gradient(circle at 60% 30%,rgba(102,70,42,.12) 0 2px,transparent 2px 13px)}
+.cham-showcase__pattern--decor{background:linear-gradient(145deg,#b98954,#e2c18d)}
+.cham-showcase__pattern--decor::before{background:repeating-linear-gradient(45deg,transparent 0 12px,rgba(73,48,29,.13) 12px 14px),repeating-linear-gradient(-45deg,transparent 0 12px,rgba(255,255,255,.1) 12px 14px)}
+
+/* custom: weave motif */
+.cham-custom__weave{
+  position:absolute;right:5%;top:50%;width:min(33vw,360px);aspect-ratio:1;transform:translateY(-50%) rotate(8deg);
+  border-radius:50%;opacity:.38;
+  background:
+    repeating-linear-gradient(45deg,transparent 0 13px,rgba(255,255,255,.32) 13px 15px),
+    repeating-linear-gradient(-45deg,transparent 0 13px,rgba(255,255,255,.16) 13px 15px);
+  mask-image:radial-gradient(circle,#000 0 64%,transparent 65%)
+}
+.cham-custom__inner{max-width:min(760px,64%)}
+
+/* About + Story */
+.cham-editorial-page{padding:clamp(74px,9vw,132px) 0}
+.cham-editorial-hero{max-width:1120px;margin-bottom:clamp(64px,9vw,120px)}
+.cham-editorial-hero h1{
+  margin:18px 0 26px;max-width:1080px;
+  font-size:clamp(3rem,7vw,7.2rem);line-height:.94;letter-spacing:-.055em
+}
+.cham-editorial-lead{
+  max-width:820px;margin:0;color:var(--cham-muted);
+  font-size:clamp(1.05rem,1.7vw,1.35rem);line-height:1.8
+}
+.cham-editorial-grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  border-top:1px solid rgba(111,73,44,.18);border-left:1px solid rgba(111,73,44,.18)
+}
+.cham-editorial-grid article{
+  min-height:300px;padding:34px;border-right:1px solid rgba(111,73,44,.18);border-bottom:1px solid rgba(111,73,44,.18);
+  background:rgba(255,250,242,.45)
+}
+.cham-editorial-grid article>span{font-size:.63rem;font-weight:800;letter-spacing:.16em;color:#a45c39}
+.cham-editorial-grid h2{margin:55px 0 14px;font-size:clamp(1.55rem,2.6vw,2.35rem);line-height:1.08}
+.cham-editorial-grid p{margin:0;color:var(--cham-muted);line-height:1.78}
+.cham-editorial-quote{
+  margin:clamp(70px,9vw,120px) auto;padding:0;max-width:1000px;border:0;
+  font-family:var(--cham-font-display);font-size:clamp(2.2rem,5vw,5.4rem);line-height:1.04;letter-spacing:-.045em;text-align:center;color:#5f412c
+}
+.cham-editorial-cta{
+  display:flex;justify-content:space-between;align-items:end;gap:28px;
+  padding:34px;border-radius:var(--cham-radius);background:#efe0c5;border:1px solid rgba(111,73,44,.14)
+}
+.cham-editorial-cta h2{margin:4px 0 0;font-size:clamp(1.7rem,3vw,3rem)}
+.cham-story-timeline{max-width:1080px;margin-left:auto}
+.cham-story-timeline article{
+  display:grid;grid-template-columns:92px 1fr;gap:28px;padding:48px 0;border-top:1px solid rgba(111,73,44,.18)
+}
+.cham-story-timeline article:last-child{border-bottom:1px solid rgba(111,73,44,.18)}
+.cham-story-timeline>article>span{font-size:.68rem;font-weight:800;letter-spacing:.16em;color:#a25c3a;padding-top:5px}
+.cham-story-timeline h2{margin:8px 0 15px;font-size:clamp(1.8rem,3.7vw,3.5rem);line-height:1.04;letter-spacing:-.035em}
+.cham-story-timeline p:last-child{max-width:720px;color:var(--cham-muted);line-height:1.8}
+.cham-story-manifesto{
+  margin:clamp(76px,10vw,140px) 0;padding:clamp(40px,7vw,88px);
+  background:#3f2c21;color:#fff8eb;border-radius:var(--cham-radius)
+}
+.cham-story-manifesto p{margin:0 0 14px;color:#dbc7a8;font-size:clamp(1.05rem,1.6vw,1.25rem)}
+.cham-story-manifesto strong{display:block;max-width:1000px;font-family:var(--cham-font-display);font-size:clamp(2.5rem,5.8vw,6rem);line-height:.98;letter-spacing:-.045em}
+
+/* ensure all new reveal components share the same motion */
+.cham-js .cham-process__steps article,
+.cham-js .cham-showcase article,
+.cham-js .cham-editorial-grid article,
+.cham-js .cham-story-timeline article,
+.cham-js .cham-story-manifesto,
+.cham-js .cham-editorial-cta{
+  opacity:0;transform:translateY(24px);
+  transition:opacity .72s var(--cham-ease),transform .72s var(--cham-ease),box-shadow .35s ease
+}
+.cham-js .cham-process__steps article.cham-inview,
+.cham-js .cham-showcase article.cham-inview,
+.cham-js .cham-editorial-grid article.cham-inview,
+.cham-js .cham-story-timeline article.cham-inview,
+.cham-js .cham-story-manifesto.cham-inview,
+.cham-js .cham-editorial-cta.cham-inview{opacity:1;transform:none}
+
+@media(max-width:900px){
+  .cham-process{grid-template-columns:1fr}
+  .cham-process__intro{position:static}
+  .cham-showcase__head{grid-template-columns:1fr}
+  .cham-showcase{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .cham-showcase__feature{grid-column:1/3;grid-row:auto;min-height:440px!important}
+  .cham-editorial-grid{grid-template-columns:1fr}
+  .cham-custom__inner{max-width:75%}
+}
+@media(max-width:620px){
+  .cham-process__steps article{grid-template-columns:44px 1fr;gap:14px}
+  .cham-process__steps article p{grid-column:2}
+  .cham-showcase{grid-template-columns:1fr}
+  .cham-showcase__feature{grid-column:auto;min-height:360px!important}
+  .cham-showcase article{min-height:300px}
+  .cham-editorial-hero h1{font-size:clamp(2.75rem,14vw,4.3rem)}
+  .cham-editorial-grid article{padding:26px;min-height:260px}
+  .cham-editorial-grid h2{margin-top:38px}
+  .cham-story-timeline article{grid-template-columns:48px 1fr;gap:14px;padding:34px 0}
+  .cham-editorial-cta{align-items:flex-start;flex-direction:column}
+  .cham-custom__inner{max-width:100%;position:relative;z-index:2}
+  .cham-custom__weave{width:260px;right:-100px;opacity:.18}
+}

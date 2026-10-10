@@ -1,5 +1,5 @@
 {%- assign category_limit = section.settings.category_limit | default: 6 -%}
-<section class="cham-section cham-section--paper">
+<section class="cham-section cham-section--paper cham-categories-section">
   <div class="cham-shell">
     <div class="cham-section-head">
       <div>
@@ -17,15 +17,19 @@
             {% if category_image != blank %}
               <span class="cham-category-card__media">{{ category_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '240, 420, 700', sizes: '(max-width: 560px) 50vw, 16vw', alt: collection.title }}</span>
             {% endif %}
+            <span class="cham-category-card__index">0{{ shown | plus: 1 }}</span>
             <span class="cham-category-card__text">{{ collection.title }}</span>
           </a>
           {% assign shown = shown | plus: 1 %}
         {% endif %}
       {% endfor %}
       {% if shown == 0 %}
-        {% assign labels = 'Gốm|Mây tre|Dệt thủ công|Sơn mài|Trang trí|Quà tặng' | split: '|' %}
+        {% assign labels = 'Giỏ & lưu trữ|Túi & phụ kiện|Khay & đồ bàn|Đèn & trang trí|Đồ dùng gia đình|Quà tặng đan' | split: '|' %}
         {% for label in labels %}
-          <a class="cham-category-card" href="{{ routes.all_products_collection_url }}"><span class="cham-category-card__text">{{ label }}</span></a>
+          <a class="cham-category-card" href="{{ routes.all_products_collection_url }}">
+            <span class="cham-category-card__index">0{{ forloop.index }}</span>
+            <span class="cham-category-card__text">{{ label }}</span>
+          </a>
         {% endfor %}
       {% endif %}
     </div>
@@ -36,9 +40,9 @@
   "name":"CHẠM Categories",
   "tag":"section",
   "settings":[
-    {"type":"text","id":"eyebrow","label":"Dòng nhỏ","default":"KHÁM PHÁ THEO CHẤT LIỆU"},
-    {"type":"text","id":"heading","label":"Tiêu đề","default":"Tìm theo cách bạn muốn chạm."},
-    {"type":"textarea","id":"body","label":"Mô tả","default":"Danh mục được tổ chức để dễ mua như một marketplace, nhưng mỗi sản phẩm vẫn giữ rõ nguồn gốc và câu chuyện làm ra nó."},
+    {"type":"text","id":"eyebrow","label":"Dòng nhỏ","default":"KHÁM PHÁ THEO CÁCH DÙNG"},
+    {"type":"text","id":"heading","label":"Tiêu đề","default":"Một kỹ thuật đan. Nhiều cách sống cùng nó."},
+    {"type":"textarea","id":"body","label":"Mô tả","default":"Thay vì trải rộng sang mọi loại thủ công, CHẠM đi sâu vào đồ đan và tổ chức danh mục theo nhu cầu sử dụng để khách hàng tìm món phù hợp nhanh hơn."},
     {"type":"range","id":"category_limit","label":"Số danh mục","min":3,"max":12,"step":1,"default":6}
   ],
   "presets":[{"name":"CHẠM Categories","category":"CHẠM"}]
