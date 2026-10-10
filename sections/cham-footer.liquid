@@ -1,3 +1,10 @@
+{%- liquid
+  assign cham_story_page = pages['story'] | default: pages['cau-chuyen']
+  assign cham_story_url = '/pages/about#story'
+  if cham_story_page != blank
+    assign cham_story_url = cham_story_page.url
+  endif
+-%}
 <section class="cham-footer">
   <div class="cham-shell">
     <div class="cham-footer__marquee" aria-hidden="true"><span>LÀM · CHẠM · DÙNG · GIỮ ·</span><span>LÀM · CHẠM · DÙNG · GIỮ ·</span></div>
@@ -11,7 +18,7 @@
         <ul class="cham-footer__menu" role="list">
           <li><a href="{{ routes.root_url }}">Trang chủ</a></li>
           <li><a href="{{ routes.all_products_collection_url }}">Tất cả sản phẩm</a></li>
-          <li><a href="/pages/about#story">Câu chuyện CHẠM</a></li>
+          <li><a href="{{ cham_story_url }}">Câu chuyện CHẠM</a></li>
           <li><a href="/pages/about">Về CHẠM</a></li>
         </ul>
       </div>

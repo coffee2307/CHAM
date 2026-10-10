@@ -1,3 +1,10 @@
+{%- liquid
+  assign cham_story_page = pages['story'] | default: pages['cau-chuyen']
+  assign cham_story_url = '/pages/about#story'
+  if cham_story_page != blank
+    assign cham_story_url = cham_story_page.url
+  endif
+-%}
 {%- assign wordmark = section.settings.wordmark | default: 'CHẠM' -%}
 <header class="cham-header" role="banner">
   <div class="cham-shell cham-header__inner">
@@ -9,7 +16,7 @@
         <nav class="cham-mobile-nav__panel" aria-label="Điều hướng di động">
           <a href="{{ routes.root_url }}">Trang chủ</a>
           <a href="{{ routes.all_products_collection_url }}">Sản phẩm</a>
-          <a href="/pages/about#story">Câu chuyện</a>
+          <a href="{{ cham_story_url }}">Câu chuyện</a>
           <a href="/pages/about">Về CHẠM</a>
           <a href="/pages/contact">Liên hệ</a>
         </nav>
@@ -21,7 +28,7 @@
     <nav class="cham-nav" aria-label="Điều hướng chính">
       <a href="{{ routes.root_url }}">Trang chủ</a>
       <a href="{{ routes.all_products_collection_url }}">Sản phẩm</a>
-      <a href="/pages/about#story">Câu chuyện</a>
+      <a href="{{ cham_story_url }}">Câu chuyện</a>
       <a href="/pages/about">Về CHẠM</a>
       <a href="/pages/contact">Liên hệ</a>
     </nav>

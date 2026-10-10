@@ -1,3 +1,8 @@
+{% if page.handle == 'about' or page.handle == 've-cham' or page.handle == 'about-us' %}
+  {% render 'cham-about-content' %}
+{% elsif page.handle == 'story' or page.handle == 'cau-chuyen' or page.handle == 'our-story' %}
+  {% render 'cham-story-content' %}
+{% else %}
 
 
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
@@ -16,9 +21,21 @@
     "
   >
     {% content_for 'blocks' %}
+      {% if page.title != blank %}
+        <div class="cham-shell cham-generic-page">
+          <p class="cham-kicker">CHẠM / THÔNG TIN</p>
+          <h1>{{ page.title | escape }}</h1>
+          {% if page.content != blank %}
+            <div class="cham-generic-page__content rte">{{ page.content }}</div>
+          {% else %}
+            <p>Nội dung trang đang được cập nhật.</p>
+          {% endif %}
+        </div>
+      {% endif %}
   </div>
 </div>
 
+{% endif %}
 {% schema %}
 {
   "name": "t:names.page",

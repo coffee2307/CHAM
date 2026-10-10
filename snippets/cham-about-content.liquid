@@ -1,0 +1,46 @@
+<section class="cham-editorial-page cham-about-page">
+  <div class="cham-shell">
+    <header class="cham-editorial-hero" data-cham-reveal>
+      <p class="cham-kicker">VỀ CHẠM / ABOUT US</p>
+      <h1>Đồ thủ công xứng đáng có một chỗ đứng trong đời sống hôm nay.</h1>
+      <p class="cham-editorial-lead">CHẠM phát triển một không gian dành cho sản phẩm thủ công Việt Nam — nơi người mua có thể tìm một món đồ phù hợp, hiểu cách nó được làm và biết câu chuyện đằng sau giá trị của nó.</p>
+    </header>
+
+    <div class="cham-about-intro" data-cham-reveal>
+      <div><p class="cham-kicker">CHÚNG TÔI LÀ AI</p><h2>Một điểm chạm giữa người làm và người dùng.</h2></div>
+      <div class="cham-about-intro__copy">
+        <p>Đối với chúng tôi, thủ công không chỉ là một kỹ thuật sản xuất. Một chiếc giỏ, chiếc túi hay vật trang trí đều có lựa chọn về vật liệu, thời gian, đôi bàn tay và kinh nghiệm của người làm.</p>
+        <p>CHẠM định hướng trở thành nền tảng chọn lọc và giới thiệu sản phẩm thủ công Việt Nam theo cách gần gũi với người tiêu dùng hiện đại: dễ tìm, dễ hiểu, có công năng và có thông tin rõ ràng.</p>
+      </div>
+    </div>
+
+    <div class="cham-editorial-grid cham-about-pillars">
+      <article data-cham-reveal><span>01 / CHỌN LỌC</span><h2>Ít hơn, nhưng phù hợp hơn.</h2><p>Ưu tiên chất lượng hoàn thiện, mục đích sử dụng và thiết kế có thể đồng hành cùng đời sống. Không đưa mọi sản phẩm lên chỉ để làm đầy danh mục.</p></article>
+      <article data-cham-reveal><span>02 / MINH BẠCH</span><h2>Hiểu điều mình đang mua.</h2><p>Hướng tới việc công bố rõ chất liệu, kích thước, cách bảo quản, nơi sản xuất và kỹ thuật thực hiện khi có dữ liệu xác minh.</p></article>
+      <article data-cham-reveal><span>03 / CÁ NHÂN HÓA</span><h2>Một món đồ, một nhu cầu riêng.</h2><p>Từ quà tặng cá nhân đến đơn hàng doanh nghiệp, CHẠM hướng tới kết nối nhu cầu về màu sắc, kích thước, đóng gói và nhận diện riêng với cơ sở phù hợp.</p></article>
+      <article data-cham-reveal><span>04 / TÁC ĐỘNG</span><h2>Giá trị cần đến được người làm.</h2><p>CHẠM đặt mục tiêu mở thêm cơ hội tiếp cận thị trường cho các cơ sở thủ công, song song với trải nghiệm mua có trách nhiệm và bảo tồn kỹ năng nghề.</p></article>
+    </div>
+
+    <section class="cham-about-story" id="story" data-cham-reveal>
+      <p class="cham-kicker">TỪ SẢN PHẨM ĐẾN TRẢI NGHIỆM</p>
+      <h2>Không chỉ mua đồ thủ công. Còn có thể hiểu và tự tay làm thử.</h2>
+      <p>Bên cạnh việc giới thiệu sản phẩm, CHẠM đang phát triển hướng trải nghiệm tại nhà thông qua bộ dụng cụ thực hành kèm hướng dẫn, và các hình thức kết nối hoạt động thủ công khi điều kiện triển khai phù hợp.</p>
+      <div class="cham-about-story__facts">
+        <div><b>01</b><span>Đồ dùng, phụ kiện và trang trí cho cá nhân.</span></div>
+        <div><b>02</b><span>Quà tặng và giải pháp theo yêu cầu doanh nghiệp.</span></div>
+        <div><b>03</b><span>Bộ trải nghiệm tự làm và nội dung hướng dẫn.</span></div>
+      </div>
+      <a class="cham-text-link" href="{% if pages['story'] != blank %}{{ pages['story'].url }}{% elsif pages['cau-chuyen'] != blank %}{{ pages['cau-chuyen'].url }}{% else %}#story{% endif %}">Đọc câu chuyện CHẠM <span aria-hidden="true">↗</span></a>
+    </section>
+
+    <div class="cham-about-commitment" data-cham-reveal>
+      <p class="cham-kicker">ĐỊNH HƯỚNG CỦA CHÚNG TÔI</p>
+      <p>CHẠM vẫn đang ở giai đoạn xây dựng. Chúng tôi không xem mọi sản phẩm trên thị trường đều đã được kiểm chứng, cũng không công bố những con số tác động khi chưa có dữ liệu. Thay vào đó, CHẠM bắt đầu từ những thông tin và trải nghiệm có thể làm rõ từng bước.</p>
+    </div>
+
+    <div class="cham-editorial-cta" data-cham-reveal>
+      <div><p class="cham-kicker">BẮT ĐẦU TỪ ĐÂY</p><h2>Tìm một món thủ công phù hợp với bạn.</h2></div>
+      <a class="cham-button cham-button--primary" href="{{ routes.all_products_collection_url }}">Khám phá sản phẩm ↗</a>
+    </div>
+  </div>
+</section>

@@ -382,3 +382,215 @@ body.cham-site::before { display: none !important; }
     padding: 13px;
   }
 }
+
+/* CHẠM V5.1 — real imagery or typographic hero, not decorative placeholders. */
+.cham-site .cham-hero--text-only {
+  padding: clamp(68px,8vw,112px) 0 clamp(72px,8vw,118px);
+  border-bottom: 1px solid rgba(91,59,37,.12);
+}
+.cham-site .cham-hero--text-only .cham-hero__grid {
+  display: block;
+  max-width: 1010px;
+}
+.cham-site .cham-hero--text-only .cham-hero__copy {
+  max-width: 900px;
+}
+.cham-site .cham-hero--text-only .cham-hero__title {
+  max-width: 890px;
+  font-size: clamp(43px,5.8vw,84px);
+  line-height: 1.12 !important;
+}
+.cham-site .cham-hero--text-only .cham-hero__body {
+  max-width: 680px;
+}
+.cham-site .cham-hero--text-only .cham-search {
+  max-width: 640px;
+}
+.cham-site .cham-hero__visual--photo {
+  min-height: 480px;
+  background: #e9dfd0 !important;
+}
+.cham-site .cham-hero__visual--photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  object-position: center;
+  border-radius: inherit;
+}
+.cham-site .cham-hero__visual--photo::before,
+.cham-site .cham-hero__visual--photo::after { display: none; }
+
+/* Straightforward editorial content — no mock awards or generic ornamental cards. */
+.cham-site .cham-editorial-page {
+  padding: clamp(65px,7vw,104px) 0;
+  background: #fffaf1;
+}
+.cham-site .cham-editorial-hero {
+  max-width: 1050px;
+  margin-bottom: clamp(43px,5vw,75px);
+  padding-left: 0;
+}
+.cham-site .cham-editorial-hero::before { display: none !important; }
+.cham-site .cham-editorial-hero h1 {
+  max-width: 1000px;
+  font-size: clamp(39px,4.8vw,69px);
+  line-height: 1.16 !important;
+  letter-spacing: -.035em !important;
+}
+.cham-site .cham-editorial-lead {
+  max-width: 780px;
+  line-height: 1.75;
+  font-size: clamp(17px,1.45vw,21px);
+  color: #695549;
+}
+.cham-site .cham-about-intro,
+.cham-site .cham-story-lead {
+  display: grid;
+  grid-template-columns: minmax(0,.82fr) minmax(0,1.18fr);
+  gap: clamp(25px,5vw,84px);
+  padding: clamp(36px,5vw,70px) 0;
+  border-top: 1px solid rgba(76,48,32,.15);
+}
+.cham-site .cham-about-intro h2,
+.cham-site .cham-story-lead h2,
+.cham-site .cham-story-outro h2 {
+  margin: 7px 0 20px;
+  font-size: clamp(27px,2.7vw,39px);
+  line-height: 1.24 !important;
+  letter-spacing: -.025em !important;
+}
+.cham-site .cham-about-intro__copy p,
+.cham-site .cham-story-lead p:not(.cham-kicker),
+.cham-site .cham-story-outro p:not(.cham-kicker) {
+  font-size: 16px;
+  line-height: 1.85;
+  color: #665346;
+  margin: 0 0 19px;
+}
+.cham-site .cham-editorial-grid.cham-about-pillars {
+  gap: 12px;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  border: 0;
+}
+.cham-site .cham-about-pillars article,
+.cham-site .cham-about-pillars article:nth-child(n) {
+  min-height: 270px;
+  padding: clamp(22px,3vw,35px);
+  background: #f2e7d7;
+  color: #30231b;
+  border: 1px solid rgba(80,53,36,.12);
+  border-radius: 8px;
+}
+.cham-site .cham-about-pillars article:nth-child(2),
+.cham-site .cham-about-pillars article:nth-child(3) { background: #e9dcc9; }
+.cham-site .cham-about-pillars article h2 {
+  margin: 45px 0 14px;
+  font-size: clamp(22px,2vw,29px);
+  line-height: 1.25 !important;
+}
+.cham-site .cham-about-pillars article p,
+.cham-site .cham-about-pillars article:nth-child(n) p { color: #675447; line-height: 1.75; }
+.cham-site .cham-about-pillars article span { color: #945a3c; }
+.cham-site .cham-about-story {
+  padding: clamp(28px,5vw,64px);
+  margin: clamp(49px,7vw,100px) 0;
+  background: #eee0cc;
+  border-radius: 8px;
+}
+.cham-site .cham-about-story h2 {
+  font-size: clamp(28px,3vw,43px);
+  line-height: 1.23 !important;
+}
+.cham-site .cham-about-story__facts {
+  margin: 25px 0;
+  gap: 12px;
+}
+.cham-site .cham-text-link {
+  display: inline-flex;
+  gap: 10px;
+  padding: 11px 0;
+  color: #33251c;
+  text-decoration: none;
+  border-bottom: 1px solid #8c614a;
+  font-weight: 700;
+}
+.cham-site .cham-about-commitment,
+.cham-site .cham-story-outro {
+  max-width: 810px;
+  padding: 10px 0 50px;
+}
+.cham-site .cham-about-commitment>p:last-child {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #665346;
+}
+.cham-site .cham-story-timeline {
+  max-width: 1040px;
+  margin: 0;
+}
+.cham-site .cham-story-timeline article {
+  grid-template-columns: 65px minmax(0,1fr);
+  padding: clamp(26px,4vw,48px) 0;
+  gap: 20px;
+}
+.cham-site .cham-story-timeline h2 {
+  max-width: 740px;
+  font-size: clamp(25px,3vw,39px);
+  line-height: 1.2 !important;
+}
+.cham-site .cham-story-manifesto {
+  padding: clamp(27px,5vw,64px);
+  border-radius: 9px !important;
+  background: #342920;
+}
+.cham-site .cham-story-manifesto strong {
+  font-size: clamp(27px,3.7vw,53px);
+  line-height: 1.2 !important;
+}
+.cham-site .cham-story-outro {
+  max-width: 850px;
+  padding-top: clamp(50px,6vw,90px);
+  padding-bottom: clamp(35px,5vw,65px);
+}
+.cham-site .cham-editorial-cta {
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+  padding: clamp(27px,4vw,52px);
+  border-radius: 9px;
+}
+.cham-site .cham-editorial-cta h2 {
+  max-width: 650px;
+  font-size: clamp(27px,3.2vw,43px);
+  line-height: 1.2 !important;
+}
+.cham-site .cham-generic-page {
+  padding-block: clamp(40px,6vw,82px);
+}
+.cham-site .cham-generic-page h1 {
+  font-size: clamp(32px,5vw,60px);
+  line-height: 1.2 !important;
+}
+.cham-site .cham-generic-page__content {
+  max-width: 850px;
+  font-size: 16px;
+  line-height: 1.75;
+}
+@media (max-width: 760px) {
+  .cham-site .cham-about-intro,
+  .cham-site .cham-story-lead { grid-template-columns: 1fr; gap: 15px; }
+  .cham-site .cham-about-pillars { grid-template-columns: 1fr !important; }
+  .cham-site .cham-about-pillars article,
+  .cham-site .cham-about-pillars article:nth-child(n) { min-height: auto; padding: 25px; }
+  .cham-site .cham-about-pillars article h2 { margin-top: 26px; }
+  .cham-site .cham-story-timeline article { grid-template-columns: 38px minmax(0,1fr); gap: 13px; }
+  .cham-site .cham-editorial-page { padding: 49px 0 70px; }
+  .cham-site .cham-editorial-hero { margin-bottom: 43px; }
+  .cham-site .cham-editorial-hero h1 { font-size: clamp(33px,8vw,45px); }
+  .cham-site .cham-hero--text-only { padding: 59px 0 62px; }
+  .cham-site .cham-hero--text-only .cham-hero__title { font-size: clamp(35px,9vw,47px); }
+  .cham-site .cham-hero__visual--photo { min-height: 280px; }
+}
