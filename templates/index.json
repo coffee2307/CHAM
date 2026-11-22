@@ -1,15 +1,82 @@
 {
   "sections": {
     "story": {
-      "type": "cham5-story",
-      "settings": {}
-    },
-    "explore": {
-      "type": "cham5-explore",
+      "type": "cham6-story",
+      "blocks": {
+        "clay": {
+          "type": "craft_step",
+          "settings": {
+            "title": "Chọn và xử lý đất",
+            "description": "Đất được làm sạch và điều chỉnh độ ẩm theo cách tạo hình. Khi đổ khuôn, người thợ dùng đất đã pha thành dạng lỏng. Khi vuốt tay, đất cần đủ dẻo để giữ dáng.",
+            "asset": "cham6-craft-clay",
+            "alt": "Ba người thợ rót đất lỏng vào khuôn",
+            "caption": "Đổ đất lỏng vào khuôn · Thuận An, Bình Dương"
+          }
+        },
+        "shape": {
+          "type": "craft_step",
+          "settings": {
+            "title": "Nhào đất và tạo hình",
+            "description": "Đất dẻo có thể được nhào để độ ẩm đều hơn. Tùy món đồ, người thợ vuốt trên bàn xoay, nặn bằng tay hoặc dùng khuôn để dựng hình.",
+            "asset": "cham6-craft-shape",
+            "alt": "Nghệ nhân thao tác trên phôi đất tại làng gốm Thanh Hà",
+            "caption": "Tạo hình bằng tay · Thanh Hà, Hội An"
+          }
+        },
+        "trim": {
+          "type": "craft_step",
+          "settings": {
+            "title": "Hong khô và sửa dáng",
+            "description": "Sau khi phôi se lại, người thợ có thể gọt chân, sửa miệng hoặc làm phẳng bề mặt. Hong đều giúp giảm chênh lệch độ ẩm giữa phần dày và mỏng.",
+            "asset": "cham6-craft-trim",
+            "alt": "Bàn tay dùng dụng cụ sửa phần chân của phôi gốm",
+            "caption": "Sửa phôi gốm · Bát Tràng, Hà Nội"
+          }
+        },
+        "decoration": {
+          "type": "craft_step",
+          "settings": {
+            "title": "Trang trí và phủ men",
+            "description": "Người thợ có thể vẽ, khắc hoặc phủ men tùy loại gốm. Có món được trang trí trước một lần nung khác, có món để mộc.",
+            "asset": "cham6-craft-decoration",
+            "alt": "Người thợ xử lý bề mặt những chiếc chén nhỏ tại Bát Tràng",
+            "caption": "Xử lý bề mặt · Bát Tràng, Hà Nội"
+          }
+        },
+        "kiln": {
+          "type": "craft_step",
+          "settings": {
+            "title": "Nung và kiểm tra",
+            "description": "Nhiệt trong lò làm đất cứng lại và, nếu có men, làm lớp men biến đổi. Khi gốm nguội đủ, người thợ kiểm tra bề mặt, vết nứt và độ ổn định của món đồ.",
+            "asset": "cham6-craft-kiln",
+            "alt": "Miệng lò củi trong khu làm gốm ở Việt Nam",
+            "caption": "Lò đốt củi · Ảnh tư liệu tại Việt Nam",
+            "asset_width": 1200
+          }
+        },
+        "use": {
+          "type": "craft_step",
+          "settings": {
+            "title": "Khi đồ gốm vào đời sống",
+            "description": "Từ bát đĩa trên bàn đến chiếc nồi trên bếp, công dụng giúp người mua chọn được món đồ phù hợp. Đồ gốm dùng trên lửa cần được làm cho mục đích đó.",
+            "asset": "cham6-craft-use",
+            "alt": "Những nồi đất có nắp được dùng để nấu trên bếp",
+            "caption": "Nồi đất trong sử dụng · Việt Nam"
+          }
+        }
+      },
+      "block_order": [
+        "clay",
+        "shape",
+        "trim",
+        "decoration",
+        "kiln",
+        "use"
+      ],
       "settings": {}
     },
     "market": {
-      "type": "cham5-market",
+      "type": "cham6-market",
       "settings": {
         "products_limit": 6
       }
@@ -17,7 +84,6 @@
   },
   "order": [
     "story",
-    "explore",
     "market"
   ]
 }

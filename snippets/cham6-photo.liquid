@@ -1,0 +1,13 @@
+{%- assign photo_loading = 'lazy' -%}
+{%- if hero -%}{%- assign photo_loading = 'eager' -%}{%- endif -%}
+{%- if image != blank -%}
+  {{ image | image_url: width: 1600 | image_tag: loading: photo_loading, widths: '560, 960, 1280, 1600', sizes: '(max-width: 700px) 94vw, 65vw', alt: alt }}
+{%- elsif asset != blank -%}
+  {%- assign large_asset = asset | append: '.webp' -%}
+  {%- assign small_asset = asset | append: '-640.webp' -%}
+  <img src="{{ large_asset | asset_url }}"
+    srcset="{{ small_asset | asset_url }} 640w, {{ large_asset | asset_url }} {{ width }}w"
+    sizes="{% if hero %}(max-width: 700px) 94vw, 51vw{% else %}(max-width: 700px) 94vw, 65vw{% endif %}"
+    width="{{ width }}" height="{{ height }}" alt="{{ alt | escape }}"
+    loading="{{ photo_loading }}" decoding="async"{% if hero %} fetchpriority="high"{% endif %}>
+{%- endif -%}

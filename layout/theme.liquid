@@ -25,8 +25,8 @@
     {% endif %}
     {{ 'cham-v4.css' | asset_url | stylesheet_tag }}
     {% if template.name == 'index' %}
-      {{ 'cham5-home.css' | asset_url | stylesheet_tag }}
-      <script src="{{ 'cham5-home.js' | asset_url }}" defer></script>
+      {{ 'cham6-home.css' | asset_url | stylesheet_tag }}
+      <script src="{{ 'cham6-home.js' | asset_url }}" defer></script>
     {% endif %}
     <script src="{{ 'cham-demo-core.js' | asset_url }}" defer></script>
     {% if template.suffix == 'cham-play' %}
@@ -43,7 +43,7 @@
     {% if request.design_mode %}{%- render 'theme-editor' -%}{% endif %}
     {{ content_for_header }}
   </head>
-  <body class="cham-site page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}{% if template.suffix == 'cham-play' %} cham-play-mode{% endif %}{% if template.name == 'index' %} cham5-home{% endif %}">
+  <body class="cham-site page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}{% if template.suffix == 'cham-play' %} cham-play-mode{% endif %}{% if template.name == 'index' %} cham6-home{% endif %}">
     {% render 'skip-to-content-link', href: '#MainContent', text: 'Bỏ qua đến nội dung chính', literal: true %}
     <div id="header-group">{% sections 'header-group' %}</div>
     <main id="MainContent" class="content-for-layout" role="main"

@@ -1,0 +1,266 @@
+@font-face {
+  font-family: 'Phudu';
+  src: url('./cham6-phudu.woff2') format('woff2');
+  font-weight: 300 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Be Vietnam Pro';
+  src: url('./cham6-be-400.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Be Vietnam Pro';
+  src: url('./cham6-be-600.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+
+body.cham6-home #header-group { position: sticky; top: 0; z-index: 20; }
+body.cham6-home::before { display: none; }
+
+.cham6 {
+  --cham-font-body: 'Be Vietnam Pro', system-ui, sans-serif;
+  --paper: #f8f5ee;
+  --cream: #eee6d9;
+  --ink: #211e1a;
+  --muted: #625a50;
+  --clay: #843c28;
+  --edge: clamp(18px, 5vw, 96px);
+  --bar: var(--cham6-header-height, 72px);
+  --space: clamp(64px, 9vw, 160px);
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 1rem/1.65 'Be Vietnam Pro', system-ui, sans-serif;
+}
+
+.cham6 *,
+.cham6 *::before,
+.cham6 *::after { box-sizing: border-box; }
+
+body.cham6-home .cham6 :is(h1, h2, h3) {
+  margin: 0;
+  color: inherit;
+  /* The shared theme explicitly forces Arial on all headings. */
+  font-family: 'Phudu', 'Be Vietnam Pro', system-ui, sans-serif !important;
+  font-weight: 700;
+  letter-spacing: -.035em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+body.cham6-home .cham6 h2 { font-size: clamp(2.05rem, 4vw, 5rem); }
+body.cham6-home .cham6 h3 { font-size: clamp(1.35rem, 2.45vw, 2.7rem); }
+body.cham6-home .cham6 :is(.cham6-maker h2, .cham6-step h3, .cham6-life h2, .cham6-play h2, .cham6-catalog__subhead) {
+  font-family: 'Be Vietnam Pro', system-ui, sans-serif !important;
+  font-weight: 600;
+  letter-spacing: -.045em;
+}
+.cham6 :is(p, figure, ul, ol) { margin: 0; }
+.cham6 :is(ul, ol) { padding: 0; list-style: none; }
+.cham6 img { display: block; max-inline-size: 100%; }
+.cham6 p { color: var(--muted); max-inline-size: 55ch; }
+.cham6 figcaption { margin-block-start: .6rem; color: var(--muted); font-size: .75rem; }
+.cham6 :focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.cham6 [id] { scroll-margin-top: calc(var(--bar) + 10px); }
+
+.cham6-wrap { padding-inline: var(--edge); }
+.cham6-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem clamp(16px, 2vw, 32px); }
+.cham6 :is(.cham6-button, .cham6-link) {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  width: fit-content;
+  font-size: .86rem;
+  font-weight: 600;
+}
+.cham6 .cham6-button { padding: .72rem 1rem; color: #fff9ef; background: var(--ink); text-decoration: none; }
+.cham6 .cham6-button:hover { background: var(--clay); color: #fff9ef; }
+.cham6 .cham6-link { color: var(--clay); text-decoration: underline; text-underline-offset: .28em; }
+.cham6 .cham6-link:hover { color: var(--ink); }
+
+.cham6-hero {
+  min-height: calc(100svh - var(--bar));
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.22fr);
+  align-items: center;
+  gap: clamp(22px, 4.5vw, 88px);
+  padding-block: clamp(37px, 5.5vw, 98px);
+}
+body.cham6-home .cham6 .cham6-hero h1 {
+  font-size: clamp(5.2rem, 13vw, 16rem);
+  line-height: 1;
+  letter-spacing: -.068em;
+  margin-inline-start: -.035em;
+  margin-block-end: .055em;
+}
+.cham6 .cham6-hero__lead {
+  color: var(--ink);
+  font-size: clamp(1.22rem, 2.15vw, 2.5rem);
+  line-height: 1.3;
+  font-weight: 600;
+  text-wrap: balance;
+  max-inline-size: 25ch;
+}
+.cham6-hero__lead + p { margin-block-start: .85rem; }
+.cham6-hero .cham6-actions { margin-block-start: 1.45rem; }
+.cham6-hero__media img {
+  inline-size: 100%;
+  block-size: clamp(330px, 42vw, 660px);
+  object-fit: cover;
+  object-position: 58% center;
+}
+
+.cham6-maker {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: clamp(30px, 7vw, 145px);
+  align-items: center;
+  padding-block: var(--space);
+  background: var(--cream);
+}
+.cham6-maker__media { overflow: clip; }
+.cham6-maker__media img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transform: scale(var(--cham6-photo-scale, 1));
+}
+.cham6 :is(.cham6-maker__copy, .cham6-life__copy, .cham6-play__copy) p { margin-block: 1.2rem .9rem; }
+
+.cham6-making { background: var(--cream); }
+.cham6-making__stage { padding-block: clamp(36px, 5vw, 96px); }
+.cham6-making__heading { display: grid; gap: .45rem; margin-block-end: clamp(18px, 2.3vw, 38px); }
+.cham6-making__track { display: grid; gap: clamp(22px, 4vw, 70px); }
+.cham6-step {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(20px, 4vw, 72px);
+  min-width: 0;
+}
+.cham6-step:has(.cham6-step__photo) .cham6-step__copy { padding-inline-end: 4px; }
+.cham6-step:not(:has(.cham6-step__photo)) {
+  grid-template-columns: minmax(0, 1fr);
+  border-block: 1px solid #c7b6a3;
+  padding-block: clamp(30px, 9vw, 125px);
+}
+.cham6-step__photo img {
+  inline-size: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+.cham6-step__copy p { margin-block-start: .75rem; }
+.cham6-step__photo:has(figcaption) { display: grid; grid-template-rows: minmax(0, 1fr) auto; }
+
+.cham6-making[data-enhanced] .cham6-making__stage {
+  position: sticky;
+  top: var(--bar);
+  padding-block: clamp(14px, 3svh, 45px);
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  height: calc(100svh - var(--bar));
+}
+.cham6-making[data-enhanced] .cham6-making__viewport { overflow: clip; }
+.cham6-making[data-enhanced] .cham6-making__track {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  height: 100%;
+  transform: translate3d(var(--cham6-track-x, 0px), 0, 0);
+}
+.cham6-making[data-enhanced] .cham6-step {
+  flex: 0 0 100%;
+  min-width: 0;
+  padding-inline-end: 1px;
+}
+.cham6-making[data-enhanced] .cham6-step__photo { min-height: 0; height: 100%; }
+.cham6-making[data-enhanced] .cham6-step__photo img { height: 100%; }
+.cham6-making__controls:not([hidden]) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto auto;
+  gap: .55rem;
+  align-items: center;
+  padding-block-start: .6rem;
+}
+.cham6-making__meter { display: block; height: 2px; background: #c4b3a2; }
+.cham6-making__meter span {
+  display: block;
+  height: 100%;
+  transform: scaleX(var(--cham6-progress, 0));
+  transform-origin: left center;
+  background: var(--clay);
+}
+.cham6 .cham6-making__counter { font-variant-numeric: tabular-nums; font-size: .82rem; white-space: nowrap; margin-inline: .4rem; }
+.cham6-making__controls button {
+  width: 44px;
+  height: 44px;
+  border: 1px solid #a69888;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+.cham6-making__controls button:hover { color: var(--clay); border-color: var(--clay); }
+.cham6-making__controls button[aria-disabled='true'] { opacity: .55; cursor: default; }
+
+.cham6-life {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.2fr);
+  gap: clamp(26px, 5vw, 95px);
+  align-items: center;
+  padding-block: var(--space);
+  border-block-end: 1px solid #d5cabb;
+}
+.cham6-life__media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.cham6-credits { grid-column: 1 / -1; font-size: .78rem; color: var(--muted); }
+.cham6-credits summary { cursor: pointer; width: fit-content; padding-block: .5rem; min-height: 44px; }
+.cham6-credits p + p { margin-block-start: .45rem; }
+
+.cham6-catalog { padding-block: var(--space); }
+.cham6-catalog__heading { display: flex; flex-wrap: wrap; gap: .6rem 1.3rem; justify-content: space-between; align-items: end; }
+.cham6-categories, .cham6-products { display: grid; gap: clamp(12px, 2vw, 36px); }
+.cham6 .cham6-categories { grid-template-columns: repeat(5, minmax(0, 1fr)); margin-block: clamp(22px, 3.3vw, 54px) clamp(56px, 7vw, 110px); }
+.cham6 .cham6-products { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-block: clamp(18px, 2.5vw, 36px); row-gap: 2rem; }
+.cham6 .cham6-card { display: grid; align-content: start; gap: .36rem; text-decoration: none; color: var(--ink); font-weight: 600; }
+.cham6 .cham6-card:hover span { text-decoration: underline; text-underline-offset: .23em; }
+.cham6-card__photo { overflow: hidden; background: var(--cream); margin-block-end: .25rem; }
+.cham6-card__photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.cham6-card small { font-weight: 400; color: var(--muted); }
+.cham6 .cham6-catalog__note { font-size: .8rem; }
+
+.cham6-play { background: var(--cream); }
+.cham6-play__inner { padding-block: clamp(38px, 6vw, 104px); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 2rem; }
+.cham6-play__sprite { width: clamp(95px, 18vw, 240px); aspect-ratio: 1; overflow: clip; }
+.cham6-play__sprite img { width: 1000%; height: 100%; max-width: none; }
+.cham6-end { background: #131211; color: #f8f5ee; }
+.cham6-end__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+  min-height: min(680px, 88svh);
+  padding-block: clamp(46px, 7vw, 114px);
+}
+body.cham6-home .cham6 .cham6-end h2 { font-size: clamp(5rem, 13vw, 15rem); line-height: 1; letter-spacing: -.065em; }
+.cham6 .cham6-end p { color: #e2d7cb; font-size: clamp(.96rem, 1.8vw, 1.7rem); }
+.cham6 .cham6-end .cham6-link { color: #f8f5ee; }
+.cham6-end .cham6-actions { margin-block-start: 1rem; }
+.cham6-end__ink { width: 100%; height: min(43vw, 480px); object-fit: contain; filter: grayscale(1) invert(1); mix-blend-mode: screen; opacity: .29; pointer-events: none; }
+
+@media (max-width: 1023px) {
+  .cham6 .cham6-categories { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+  .cham6-hero, .cham6-maker, .cham6-step, .cham6-life { grid-template-columns: minmax(0, 1fr); }
+  .cham6-hero { min-height: auto; gap: 24px; }
+  body.cham6-home .cham6 .cham6-hero h1 { font-size: clamp(4.5rem, 24vw, 9rem); }
+  .cham6 .cham6-hero__lead { margin-block-start: .22rem; }
+  .cham6-hero__media img { height: auto; aspect-ratio: 4 / 3; }
+  .cham6-maker__copy { grid-row: 1; }
+  .cham6-making__track { gap: 46px; }
+  .cham6-step { gap: 12px; }
+  .cham6 .cham6-categories, .cham6 .cham6-products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cham6-end__inner { grid-template-columns: minmax(0, 1fr); min-height: auto; }
+  .cham6-end__ink { width: 45%; justify-self: end; margin-block-start: -7px; }
+  body.cham6-home .cham6 .cham6-end h2 { font-size: clamp(4.5rem, 24vw, 9rem); }
+}

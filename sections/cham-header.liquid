@@ -5,13 +5,17 @@
     assign cham_story_url = cham_story_page.url
   endif
 -%}
+{%- assign cham_catalog_url = routes.all_products_collection_url -%}
+{%- if request.page_type == 'index' -%}
+  {%- assign cham_catalog_url = '#cham6-catalog' -%}
+{%- endif -%}
 {%- assign wordmark = section.settings.wordmark | default: 'CHẠM' -%}
 <header class="cham-header" role="banner" data-cham-header>
   <div class="cham-shell cham-header__inner">
     <a class="cham-wordmark" href="{{ routes.root_url }}" aria-label="{{ wordmark | escape }} — Trang chủ">{{ wordmark }}</a>
 
     <nav class="cham-nav" aria-label="Điều hướng chính">
-      <a href="{{ routes.all_products_collection_url }}"{% if request.page_type == 'collection' or request.page_type == 'product' %} aria-current="page"{% endif %}>Sản phẩm</a>
+      <a href="{{ cham_catalog_url }}"{% if request.page_type == 'collection' or request.page_type == 'product' %} aria-current="page"{% endif %}>Sản phẩm</a>
       <a href="/pages/cham-play"{% if page.handle == 'cham-play' %} aria-current="page"{% endif %}>CHẠM Play</a>
       <a href="{{ cham_story_url }}"{% if page.handle == 'story' %} aria-current="page"{% endif %}>Câu chuyện</a>
     </nav>
@@ -40,7 +44,7 @@
         </summary>
         <nav class="cham-mobile-nav__panel" aria-label="Menu CHẠM">
           <a href="{{ routes.root_url }}">Trang chủ</a>
-          <a href="{{ routes.all_products_collection_url }}">Sản phẩm</a>
+          <a href="{{ cham_catalog_url }}">Sản phẩm</a>
           <a href="/pages/cham-play">CHẠM Play</a>
           <a href="/pages/cham-club">CHẠM Club</a>
           <a href="{{ cham_story_url }}">Câu chuyện</a>
