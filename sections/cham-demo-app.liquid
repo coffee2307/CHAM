@@ -3,6 +3,16 @@
     {% render 'cham-avatar-data' %}
   {% endif %}
   {% if section.settings.mode == 'play' %}
+    <script type="application/json" id="cham-dino-assets">
+      {
+        "run": {{ 'cham-dino-run.webp' | asset_url | json }},
+        "jump": {{ 'cham-dino-jump.webp' | asset_url | json }},
+        "idle": {{ 'cham-dino-idle.webp' | asset_url | json }},
+        "landscape": {{ 'cham-dino-landscape.svg' | asset_url | json }},
+        "pottery": {{ 'cham-dino-pottery.svg' | asset_url | json }},
+        "stump": {{ 'cham-dino-stump.svg' | asset_url | json }}
+      }
+    </script>
     <script type="application/json" id="cham-play-scenes">
       [
       {% assign has_photo = false %}

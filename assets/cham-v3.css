@@ -7,30 +7,30 @@
 .cham-site .cham-craft-categories__all{display:inline-flex;gap:10px;align-items:center;text-decoration:none;font-size:13px;font-weight:600;color:#42362b;white-space:nowrap;border-bottom:1px solid #b8a18b;padding-bottom:6px;transition:color .2s,border-color .2s}
 .cham-site .cham-craft-categories__all:hover{color:#a85239;border-color:#a85239}
 .cham-site .cham-craft-categories__grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:31px 18px}
-.cham-site .cham-craft-tile{grid-column:span 2;min-width:0;display:flex;flex-direction:column;gap:13px;text-decoration:none;color:#30271f}
-.cham-site .cham-craft-tile:nth-child(1),.cham-site .cham-craft-tile:nth-child(2){grid-column:span 3}
-.cham-site .cham-craft-tile__photo{position:relative;display:block;width:100%;aspect-ratio:1.42;overflow:hidden;border-radius:7px;background:#e4d7c6}
-.cham-site .cham-craft-tile:nth-child(n+3) .cham-craft-tile__photo{aspect-ratio:1.29}
-.cham-site .cham-craft-tile__photo img{width:100%;height:100%;display:block;object-fit:cover;object-position:center;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
-.cham-site .cham-craft-tile:hover .cham-craft-tile__photo img{transform:scale(1.045)}
-.cham-site .cham-craft-tile__arrow{position:absolute;right:16px;top:16px;width:38px;height:38px;display:grid;place-items:center;background:rgba(255,253,248,.95);border-radius:50%;font-size:17px;color:#41352a;transform:translateY(6px);opacity:0;transition:transform .23s,opacity .23s}
-.cham-site .cham-craft-tile:hover .cham-craft-tile__arrow,.cham-site .cham-craft-tile:focus-visible .cham-craft-tile__arrow{opacity:1;transform:translateY(0)}
-.cham-site .cham-craft-tile__caption{position:static!important;inset:auto!important;display:flex!important;align-items:baseline;justify-content:space-between;gap:16px;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;transform:none!important;color:#30271f!important;text-shadow:none!important}
-.cham-site .cham-craft-tile__caption strong{font:600 clamp(14px,1.4vw,18px)/1.5 'Be Vietnam Pro',sans-serif;letter-spacing:-.015em;color:#30271f}
-.cham-site .cham-craft-tile__caption small{font:400 11px/1.5 'Be Vietnam Pro',sans-serif;white-space:nowrap;color:#82776a}
-.cham-site .cham-craft-tile:hover .cham-craft-tile__caption strong{color:#9e4e39}
-.cham-site .cham-craft-tile__fallback{display:grid;place-items:center;height:100%;font:700 24px 'Be Vietnam Pro',sans-serif;color:#9b8d7d}
+.cham-site .cham-category-photo-card{grid-column:span 2;min-width:0;display:flex;flex-direction:column;gap:13px;text-decoration:none;color:#30271f}
+.cham-site .cham-category-photo-card:nth-child(1),.cham-site .cham-category-photo-card:nth-child(2){grid-column:span 3}
+.cham-site .cham-category-photo-card__photo{position:relative;display:block;width:100%;aspect-ratio:1.42;overflow:hidden;border-radius:7px;background:#e4d7c6}
+.cham-site .cham-category-photo-card:nth-child(n+3) .cham-category-photo-card__photo{aspect-ratio:1.29}
+.cham-site .cham-category-photo-card__photo img{width:100%;height:100%;display:block;object-fit:cover;object-position:center;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.cham-site .cham-category-photo-card:hover .cham-category-photo-card__photo img{transform:scale(1.045)}
+.cham-site .cham-category-photo-card__arrow{position:absolute;right:16px;top:16px;width:38px;height:38px;display:grid;place-items:center;background:rgba(255,253,248,.95);border-radius:50%;font-size:17px;color:#41352a;transform:translateY(6px);opacity:0;transition:transform .23s,opacity .23s}
+.cham-site .cham-category-photo-card:hover .cham-category-photo-card__arrow,.cham-site .cham-category-photo-card:focus-visible .cham-category-photo-card__arrow{opacity:1;transform:translateY(0)}
+.cham-site .cham-category-photo-card__caption{position:static!important;inset:auto!important;display:flex!important;align-items:baseline;justify-content:space-between;gap:16px;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;transform:none!important;color:#30271f!important;text-shadow:none!important}
+.cham-site .cham-category-photo-card__caption strong{font:600 clamp(14px,1.4vw,18px)/1.5 'Be Vietnam Pro',sans-serif;letter-spacing:-.015em;color:#30271f}
+.cham-site .cham-category-photo-card__caption small{font:400 11px/1.5 'Be Vietnam Pro',sans-serif;white-space:nowrap;color:#82776a}
+.cham-site .cham-category-photo-card:hover .cham-category-photo-card__caption strong{color:#9e4e39}
+.cham-site .cham-category-photo-card__fallback{display:grid;place-items:center;height:100%;font:700 24px 'Be Vietnam Pro',sans-serif;color:#9b8d7d}
 @media(max-width:780px){
 .cham-site .cham-craft-categories__grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:21px 13px}
-.cham-site .cham-craft-tile,.cham-site .cham-craft-tile:nth-child(1),.cham-site .cham-craft-tile:nth-child(2){grid-column:span 1}
-.cham-site .cham-craft-tile:last-child:nth-child(odd){grid-column:span 2}
-.cham-site .cham-craft-tile:last-child:nth-child(odd) .cham-craft-tile__photo{aspect-ratio:2.15}
-.cham-site .cham-craft-tile__photo,.cham-site .cham-craft-tile:nth-child(n+3) .cham-craft-tile__photo{aspect-ratio:1.1}
-.cham-site .cham-craft-tile__caption{flex-direction:column;gap:1px}
-.cham-site .cham-craft-tile__caption strong{font-size:14px}
+.cham-site .cham-category-photo-card,.cham-site .cham-category-photo-card:nth-child(1),.cham-site .cham-category-photo-card:nth-child(2){grid-column:span 1}
+.cham-site .cham-category-photo-card:last-child:nth-child(odd){grid-column:span 2}
+.cham-site .cham-category-photo-card:last-child:nth-child(odd) .cham-category-photo-card__photo{aspect-ratio:2.15}
+.cham-site .cham-category-photo-card__photo,.cham-site .cham-category-photo-card:nth-child(n+3) .cham-category-photo-card__photo{aspect-ratio:1.1}
+.cham-site .cham-category-photo-card__caption{flex-direction:column;gap:1px}
+.cham-site .cham-category-photo-card__caption strong{font-size:14px}
 .cham-site .cham-craft-categories__head{align-items:start;flex-direction:column;gap:12px}
 }
-@media(prefers-reduced-motion:reduce){.cham-site .cham-craft-tile__photo img,.cham-site .cham-craft-tile__arrow{transition:none!important;transform:none!important}}
+@media(prefers-reduced-motion:reduce){.cham-site .cham-category-photo-card__photo img,.cham-site .cham-category-photo-card__arrow{transition:none!important;transform:none!important}}
 
 /* CHẠM hero gallery */
 .cham-site .cham-hero--v3 .cham-hero__gallery{min-width:0;display:flex;flex-direction:column;gap:12px}
@@ -138,21 +138,21 @@
 @media(prefers-reduced-motion:reduce){.cham-site .cham-hero__featured-img{transition:none!important;transform:none!important}}
 
 /* Flex items must never shrink into each other when a Shopify base card rule sets min-height. */
-.cham-site .cham-craft-tile{height:auto!important;min-height:0!important;align-self:start;align-content:start}
-.cham-site .cham-craft-tile__photo{flex-shrink:0!important;flex-grow:0!important}
-.cham-site .cham-craft-tile__caption{flex-shrink:0!important;flex-grow:0!important;min-height:0!important}
-.cham-site .cham-craft-tile__photo{top:0!important;bottom:auto!important;left:auto!important;right:auto!important;transform:none!important}
+.cham-site .cham-category-photo-card{height:auto!important;min-height:0!important;align-self:start;align-content:start}
+.cham-site .cham-category-photo-card__photo{flex-shrink:0!important;flex-grow:0!important}
+.cham-site .cham-category-photo-card__caption{flex-shrink:0!important;flex-grow:0!important;min-height:0!important}
+.cham-site .cham-category-photo-card__photo{top:0!important;bottom:auto!important;left:auto!important;right:auto!important;transform:none!important}
 
 /* Defensive block flow fixes overwritten aspect-size calculations from legacy theme CSS */
-.cham-site a.cham-craft-tile{display:block!important;position:relative!important;height:auto!important;min-height:0!important}
-.cham-site a.cham-craft-tile>.cham-craft-tile__photo{display:block!important;position:relative!important;margin:0!important;aspect-ratio:1.42;min-height:0!important;height:auto!important}
-.cham-site a.cham-craft-tile>.cham-craft-tile__caption{display:flex!important;position:static!important;margin:16px 0 0!important;transform:none!important;top:auto!important;bottom:auto!important}
-.cham-site a.cham-craft-tile:nth-child(n+3)>.cham-craft-tile__photo{aspect-ratio:1.29}
-@media(max-width:780px){.cham-site a.cham-craft-tile>.cham-craft-tile__photo,.cham-site a.cham-craft-tile:nth-child(n+3)>.cham-craft-tile__photo{aspect-ratio:1.1}.cham-site a.cham-craft-tile:last-child:nth-child(odd)>.cham-craft-tile__photo{aspect-ratio:2.15}}
+.cham-site a.cham-category-photo-card{display:block!important;position:relative!important;height:auto!important;min-height:0!important}
+.cham-site a.cham-category-photo-card>.cham-category-photo-card__photo{display:block!important;position:relative!important;margin:0!important;aspect-ratio:1.42;min-height:0!important;height:auto!important}
+.cham-site a.cham-category-photo-card>.cham-category-photo-card__caption{display:flex!important;position:static!important;margin:16px 0 0!important;transform:none!important;top:auto!important;bottom:auto!important}
+.cham-site a.cham-category-photo-card:nth-child(n+3)>.cham-category-photo-card__photo{aspect-ratio:1.29}
+@media(max-width:780px){.cham-site a.cham-category-photo-card>.cham-category-photo-card__photo,.cham-site a.cham-category-photo-card:nth-child(n+3)>.cham-category-photo-card__photo{aspect-ratio:1.1}.cham-site a.cham-category-photo-card:last-child:nth-child(odd)>.cham-category-photo-card__photo{aspect-ratio:2.15}}
 
 /* Fix base-theme intrinsic sizing constraints: occupy the grid cell exactly */
-.cham-site .cham-craft-categories__grid>a.cham-craft-tile{width:100%!important;max-width:none!important;justify-self:stretch!important;align-self:start!important;box-sizing:border-box!important;min-width:0!important;transform:none!important}
-.cham-site .cham-craft-categories__grid>a.cham-craft-tile>.cham-craft-tile__photo{display:block!important;width:100%!important;max-width:none!important;min-width:0!important;box-sizing:border-box!important;transform:none!important;overflow:hidden!important;aspect-ratio:1.42!important}
-.cham-site .cham-craft-categories__grid>a.cham-craft-tile>.cham-craft-tile__caption{display:flex!important;width:100%!important;max-width:none!important;box-sizing:border-box!important}
-.cham-site .cham-craft-categories__grid>a.cham-craft-tile:nth-child(n+3)>.cham-craft-tile__photo{aspect-ratio:1.29!important}
-@media(max-width:780px){.cham-site .cham-craft-categories__grid>a.cham-craft-tile>.cham-craft-tile__photo,.cham-site .cham-craft-categories__grid>a.cham-craft-tile:nth-child(n+3)>.cham-craft-tile__photo{aspect-ratio:1.1!important}}
+.cham-site .cham-craft-categories__grid>a.cham-category-photo-card{width:100%!important;max-width:none!important;justify-self:stretch!important;align-self:start!important;box-sizing:border-box!important;min-width:0!important;transform:none!important}
+.cham-site .cham-craft-categories__grid>a.cham-category-photo-card>.cham-category-photo-card__photo{display:block!important;width:100%!important;max-width:none!important;min-width:0!important;box-sizing:border-box!important;transform:none!important;overflow:hidden!important;aspect-ratio:1.42!important}
+.cham-site .cham-craft-categories__grid>a.cham-category-photo-card>.cham-category-photo-card__caption{display:flex!important;width:100%!important;max-width:none!important;box-sizing:border-box!important}
+.cham-site .cham-craft-categories__grid>a.cham-category-photo-card:nth-child(n+3)>.cham-category-photo-card__photo{aspect-ratio:1.29!important}
+@media(max-width:780px){.cham-site .cham-craft-categories__grid>a.cham-category-photo-card>.cham-category-photo-card__photo,.cham-site .cham-craft-categories__grid>a.cham-category-photo-card:nth-child(n+3)>.cham-category-photo-card__photo{aspect-ratio:1.1!important}}

@@ -27,7 +27,7 @@ function mount(root,core){
  }
  function banner(){
   const st=get(),p=st.profile;
-  return '<div class="cc-banner"><div class="cc-banner__identity"><div class="cc-avatar">'+avatarTag(p.avatar,'cc-avatar-img')+'</div><div><p class="cc-banner__eyebrow">TÀI KHOẢN TRẢI NGHIỆM</p><h1>'+esc(p.name)+'</h1><p>Giữ lại những món đồ yêu thích và tiếp tục hành trình tại CHẠM.</p></div></div><div class="cc-banner__wallet"><span>Số dư CHẠM Points</span><strong>'+core.points()+'</strong><a href="/pages/cham-club?tab=rewards">Đổi ưu đãi <span aria-hidden="true">→</span></a></div></div>';
+  return '<div class="cc-banner"><div class="cc-banner__identity"><div class="cc-avatar-wrap"><div class="cc-avatar">'+avatarTag(p.avatar,'cc-avatar-img')+'</div><button type="button" class="cc-avatar-camera" data-cc-avatar-open aria-label="Thay ảnh đại diện" title="Thay ảnh đại diện"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h3l2-2h6l2 2h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"/><circle cx="12" cy="13" r="3.6"/></svg></button></div><div><p class="cc-banner__eyebrow">TÀI KHOẢN TRẢI NGHIỆM</p><h1>'+esc(p.name)+'</h1><p>Giữ lại những món đồ yêu thích và tiếp tục hành trình tại CHẠM.</p></div></div><div class="cc-banner__wallet"><span>Số dư CHẠM Points</span><strong>'+core.points()+'</strong><a href="/pages/cham-club?tab=rewards">Đổi ưu đãi <span aria-hidden="true">→</span></a></div></div>';
  }
  function overview(){
   const st=get();
