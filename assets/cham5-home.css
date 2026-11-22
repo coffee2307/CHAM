@@ -330,3 +330,61 @@ body.cham5-home .cham6-hero__title{animation:cham6-title-reveal .88s cubic-bezie
  body.cham5-home .cham5-bridge__foot p{margin:0 auto 11px!important;max-width:430px}
 }
 @media(min-width:768px){body.cham5-home .cham6-watch__intro{top:4%}body.cham5-home .cham6-watch__image{clip-path:inset(36% 22% 8% 22% round 3px)}}
+/* CHẠM – restrained art direction. No decorative punctuation belongs to the brand name. */
+body.cham5-home .cham6-hero__title{
+  font-family:"CHAM Phudu","Be Vietnam Pro",sans-serif!important;
+  font-weight:760!important;
+  font-size:clamp(118px,24.4vw,450px)!important;
+  line-height:.96!important;
+  letter-spacing:-.052em!important;
+  text-align:center;
+  width:auto;
+  max-width:100%;
+  text-wrap:nowrap;
+}
+body.cham5-home .cham6-hero__punct,
+body.cham5-home .cham5-end h2>span{display:none!important}
+body.cham5-home .cham6-hero__title-wrap{padding-top:clamp(22px,4vw,80px)}
+body.cham5-home .cham6-hero__introduction{padding-top:clamp(36px,4vw,66px);padding-bottom:clamp(35px,3.3vw,55px)}
+body.cham5-home .cham5-end h2{
+  font-family:"CHAM Phudu","Be Vietnam Pro",sans-serif!important;
+  font-weight:740!important;
+  font-size:clamp(150px,24.2vw,450px)!important;
+  letter-spacing:-.052em!important;
+  line-height:1.02!important;
+}
+body.cham5-home .cham6-hero__print img{backface-visibility:hidden}
+body.cham5-home .cham5-bridge__large,
+body.cham5-home .cham5-bridge__small{will-change:transform}
+body.cham5-home .cham5-bridge__images img{transition:filter .4s ease}
+body.cham5-home .cham5-category,
+body.cham5-home .cham5-product{transition:transform .4s cubic-bezier(.22,.74,.2,1)}
+body.cham5-home .cham5-category:focus-within,
+body.cham5-home .cham5-product:focus-within{position:relative;z-index:2}
+body.cham5-home .cham5-category__caption h3,
+body.cham5-home .cham5-product__info h3{transition:color .25s ease}
+body.cham5-home .cham5-category:hover .cham5-category__caption h3,
+body.cham5-home .cham5-category:focus-visible .cham5-category__caption h3{color:#a85239!important}
+body.cham5-home .cham5-further a{transition:color .25s ease,transform .25s ease,border-color .25s ease}
+body.cham5-home .cham5-further a:hover,
+body.cham5-home .cham5-further a:focus-visible{transform:translateX(5px);border-color:#a85239}
+body.cham5-home .cham5-process__panel .cham5-process__photo img{transition:transform .85s cubic-bezier(.2,.65,.2,1)}
+body.cham5-home .cham5-process__panel.cham7-process-current .cham5-process__photo img{transform:scale(1.025)}
+/* Keep large text balanced at intermediate breakpoints. */
+@media(min-width:768px) and (max-width:1240px){
+ body.cham5-home .cham6-hero__title{font-size:clamp(120px,23.8vw,300px)!important}
+ body.cham5-home .cham5-end h2{font-size:23.5vw!important}
+}
+@media(max-width:767px){
+ body.cham5-home .cham6-hero__title{font-size:clamp(100px,28.6vw,209px)!important;letter-spacing:-.061em!important;line-height:1.08!important}
+ body.cham5-home .cham6-hero__title-wrap{padding-top:58px}
+ body.cham5-home .cham6-hero__introduction{padding-top:53px;padding-bottom:20px}
+ body.cham5-home .cham5-end h2{font-size:clamp(90px,26.6vw,195px)!important;line-height:1.07!important}
+ body.cham5-home .cham5-bridge__large,
+ body.cham5-home .cham5-bridge__small{will-change:auto}
+}
+@media(prefers-reduced-motion:reduce){
+ body.cham5-home .cham5-bridge__large,
+ body.cham5-home .cham5-bridge__small{will-change:auto!important;transform:none!important}
+ body.cham5-home .cham5-further a{transform:none!important}
+}

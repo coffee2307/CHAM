@@ -112,6 +112,7 @@ mm.add('(min-width:1024px) and (pointer:fine) and (prefers-reduced-motion:no-pre
           if(progress)progress.style.transform='scaleX('+Math.max(.005,self.progress).toFixed(4)+')';
           const number=Math.max(1,Math.min(steps.length,Math.floor(self.progress*(steps.length-1)+.48)+1));
           if(counter)counter.textContent=String(number);
+          steps.forEach((panel,index)=>panel.classList.toggle('cham7-process-current',index===number-1));
         }
       }
     });
@@ -129,4 +130,112 @@ window.addEventListener('load',refresh,{once:true});
 document.fonts?.ready.then(refresh).catch(()=>{});
 if(header&&'ResizeObserver'in window)new ResizeObserver(refresh).observe(header);
 window.addEventListener('orientationchange',refresh,{passive:true});
+})();
+
+/* CHẠM – motion direction for the rest of the editorial journey.
+   One progress-led visual action per chapter, with full static fallback. */
+(()=>{'use strict';
+if(!document.querySelector('.cham5-home')&&!document.body.classList.contains('cham5-home'))return;
+if(!window.gsap||!window.ScrollTrigger)return;
+const gsap=window.gsap,ScrollTrigger=window.ScrollTrigger;
+gsap.registerPlugin(ScrollTrigger);
+const mm=gsap.matchMedia();
+mm.add('(prefers-reduced-motion: no-preference)',()=>{
+ const ctx=gsap.context(()=>{
+  const scroll=(trigger,start='top 84%',end='top 40%')=>({
+    trigger,start,end,scrub:.85,invalidateOnRefresh:true
+  });
+  // Titles read as a paced sequence of editorial chapters, not repeated fade-ins.
+  const chapters=[
+   ['.cham5-thesis__inner h2','.cham5-thesis','top 85%','top 30%',42],
+   ['.cham5-process__heading h2','.cham5-process__heading','top 88%','top 39%',35],
+   ['.cham5-bridge__text h2','.cham5-bridge','top 82%','top 38%',42],
+   ['.cham5-categories .cham5-market__heading h2','.cham5-categories','top 84%','top 48%',32],
+   ['.cham5-products .cham5-market__heading h2','.cham5-products','top 85%','top 47%',32],
+   ['.cham5-end__main h2','.cham5-end','top 90%','top 40%',62]
+  ];
+  for(const [selector,section,start,end,y] of chapters){
+   const el=document.querySelector(selector),trigger=document.querySelector(section);
+   if(!el||!trigger)continue;
+   gsap.fromTo(el,{y,opacity:.82},{
+     y:0,opacity:1,ease:'none',
+     immediateRender:false,
+     scrollTrigger:scroll(trigger,start,end)
+   });
+  }
+  // Supporting copy follows the headline only when it becomes relevant.
+  for(const [selector,section] of [
+   ['.cham5-thesis__inner>p:last-child','.cham5-thesis'],
+   ['.cham5-bridge__text>p:last-child','.cham5-bridge'],
+   ['.cham5-end__sub','.cham5-end']
+  ]){
+   const el=document.querySelector(selector),trigger=document.querySelector(section);
+   if(!el||!trigger)continue;
+   gsap.fromTo(el,{y:20,opacity:.70},{
+     y:0,opacity:1,ease:'none',immediateRender:false,
+     scrollTrigger:scroll(trigger,'top 73%','top 25%')
+   });
+  }
+  // During the material chapter, photos move in different directions while
+  // the middle reading column stays still and readable.
+  const bridge=document.querySelector('.cham5-bridge');
+  const wider=window.matchMedia('(min-width: 1024px) and (pointer: fine)').matches;
+  if(bridge&&wider){
+   const left=bridge.querySelector('.cham5-bridge__large');
+   const right=bridge.querySelector('.cham5-bridge__small');
+   if(left)gsap.fromTo(left,{y:-55},{
+     y:45,ease:'none',immediateRender:false,
+     scrollTrigger:scroll(bridge,'top 95%','bottom 3%')
+   });
+   if(right)gsap.fromTo(right,{y:65},{
+     y:-45,ease:'none',immediateRender:false,
+     scrollTrigger:scroll(bridge,'top 95%','bottom 3%')
+   });
+   // Directional image unveiling: photographs emerge as the visitor approaches
+   // the material rather than simply fading in as ordinary cards.
+   for(const [photo,first] of [[left,'inset(0% 0% 20% 0%)'],[right,'inset(0% 0% 30% 0%)']]){
+     if(!photo)continue;
+     gsap.fromTo(photo,{clipPath:first},{
+       clipPath:'inset(0% 0% 0% 0%)',ease:'none',immediateRender:false,
+       scrollTrigger:scroll(bridge,'top 96%','top 28%')
+     });
+   }
+  }
+  // Let product photography reveal the catalog; do not animate interactive
+  // cards while users are actively trying to select a product.
+  for(const [containerSelector,itemSelector,start,end,shift] of [
+   ['.cham5-categories__grid','.cham5-category','top 91%','top 43%',38],
+   ['.cham5-products__grid','.cham5-product','top 92%','top 39%',34],
+   ['.cham5-further','.cham5-further a','top 86%','top 32%',17]
+  ]){
+   const container=document.querySelector(containerSelector);
+   if(!container)continue;
+   const items=[...container.querySelectorAll(itemSelector)];
+   if(!items.length)continue;
+   gsap.fromTo(items,{y:shift,opacity:.80},{
+     y:0,opacity:1,stagger:.13,ease:'none',immediateRender:false,
+     scrollTrigger:scroll(container,start,end)
+   });
+   // A shallow photo mask follows the same chapter progress. Interactive cards
+   // remain in place; only the images are uncovered as the layout enters view.
+   if(itemSelector!=='.cham5-further a'){
+     const photoFrames=items.map(x=>x.querySelector('.cham5-category__image,.cham5-product__image')).filter(Boolean);
+     gsap.fromTo(photoFrames,{clipPath:'inset(0% 0% 13% 0%)'},{
+       clipPath:'inset(0% 0% 0% 0%)',ease:'none',stagger:.13,
+       immediateRender:false,scrollTrigger:scroll(container,start,end)
+     });
+   }
+  }
+  // Closing exhibition panel gradually darkens as the visitor reaches it.
+  const ending=document.querySelector('.cham5-end');
+  if(ending){
+   gsap.fromTo(ending,{backgroundColor:'#27221e'},{
+     backgroundColor:'#0b0b0c',ease:'none',immediateRender:false,
+     scrollTrigger:scroll(ending,'top 96%','top 22%')
+   });
+  }
+ },document.body);
+ requestAnimationFrame(()=>ScrollTrigger.refresh());
+ return()=>ctx.revert();
+});
 })();
