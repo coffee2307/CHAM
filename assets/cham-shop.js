@@ -121,7 +121,7 @@
     shop.addEventListener('change',e=>{if(e.target.matches('[data-cham-filter-price],[data-cham-filter-sort]'))updateFilters(shop);});
     updateFilters(shop);
   }
-  const animated=$$('[data-cham-scroll] .cham-section-head, [data-cham-scroll] .cham-home-club__copy, [data-cham-scroll] .cham-home-about__inner');
+  const animated=$$('[data-cham-scroll] .cham-section-head, [data-cham-scroll] .cham-home-club__copy, [data-cham-scroll] .cham-home-about__inner, [data-cham-scroll] .cham-craft-categories__head, [data-cham-scroll] .cham-craft-tile, [data-cham-scroll] .cham-catalog__heading, [data-cham-scroll] .cham-catalog__body, [data-cham-scroll] .cham-about-v3__intro, [data-cham-scroll] .cham-about-v3__statement-grid, [data-cham-scroll] .cham-about-v3__editorial-copy');
   const prefersReduced=window.matchMedia('(prefers-reduced-motion: reduce)');
   if(!prefersReduced.matches && 'IntersectionObserver' in window){
     const observer=new IntersectionObserver(entries=>{
