@@ -148,3 +148,10 @@ body.cham-site{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 }
 @media(max-width:350px){.cd-overview{grid-template-columns:1fr 1fr}.cd-overview-card:last-child{grid-column:1/-1}.cd-game-top{align-items:start;flex-direction:column}.cd-game-bottom{flex-direction:column}.cd-lead h1{font-size:2.2rem}}
 @media(prefers-reduced-motion:reduce){.cd-btn,.cd-game-card,.cd-overview-card{transition:none!important;animation:none!important;transform:none!important}}
+
+.cham-product-card{position:relative}
+.cham-product-card>.cham-favorite-button{position:absolute;z-index:3;right:12px;top:12px;box-shadow:0 4px 20px rgba(42,31,19,.09);font-size:1.3rem}
+.cham-product-context__custom>.cham-favorite-button{flex-shrink:0;margin-left:auto}
+.cart__ctas a.cart__checkout-button{min-height:50px;display:flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;background:var(--cd-clay);color:#fff;border-radius:12px}
+.cart__ctas a.cart__checkout-button:hover{background:#853c29;color:#fff}
+@media(max-width:750px){.cham-product-card>.cham-favorite-button{right:8px;top:8px}.cart__ctas a.cart__checkout-button{font-size:.81rem;padding:12px}}
