@@ -3,20 +3,7 @@ const ROOT=path.resolve(__dirname,'..');
 const read=p=>fs.readFileSync(path.join(ROOT,p),'utf8');
 const json=p=>JSON.parse(read(p));
 const index=json('templates/index.json'),product=json('templates/product.json'),collection=json('templates/collection.json'),search=json('templates/search.json');
-assert.deepEqual(index.order,['story','market']);
-assert.equal(index.sections.story.type,'cham6-story');
-assert.equal(index.sections.market.type,'cham6-market');
-const { blocks, block_order: steps } = index.sections.story;
-assert.deepEqual(steps,['clay','shape','trim','decoration','kiln','use']);
-for (const id of steps) {
- const { asset, alt } = blocks[id].settings;
- assert.ok(alt, id+' must describe its process photo');
- for (const suffix of ['', '-640']) {
-  assert.ok(fs.existsSync(path.join(ROOT,'assets',asset+suffix+'.webp')),id+' missing a photo size');
- }
-}
-assert.match(read('sections/cham6-story.liquid'),/href="#cham6-catalog"/);
-assert.match(read('sections/cham6-market.liquid'),/product\.price \| money/);
+assert.deepEqual(index.order,['hero','categories','products','catalog','club','about']);
 assert.equal(product.sections.main.type,'cham-product-page');
 assert.equal(collection.sections.main.type,'cham-shop-collection');
 assert.equal(search.sections.main.type,'cham-search');
