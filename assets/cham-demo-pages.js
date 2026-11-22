@@ -152,7 +152,7 @@ async function checkoutPage(){
  });
  load();
 }
-if(mode==='club')clubPage();
-else if(mode==='play')gamePage();
+if(mode==='club'){if(window.CHAMClub?.mount)window.CHAMClub.mount(root,core);else clubPage();}
+else if(mode==='play'){if(window.CHAMQuest?.mount)window.CHAMQuest.mount(root,core);else gamePage();}
 else if(mode==='checkout')checkoutPage();
 })();

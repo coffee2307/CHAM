@@ -1,5 +1,6 @@
 # Local-only development and backups
 .backup/
+.qa/
 .shopify/
 node_modules/
 .env

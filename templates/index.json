@@ -16,6 +16,10 @@
         "body": "Gốm, mây tre, vải dệt và những món quà nhỏ."
       }
     },
+    "catalog": {
+      "type": "cham-catalog",
+      "settings": {}
+    },
     "club": {
       "type": "cham-home-club",
       "settings": {}
@@ -29,6 +33,7 @@
     "hero",
     "categories",
     "products",
+    "catalog",
     "club",
     "about"
   ]

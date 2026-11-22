@@ -17,8 +17,21 @@
     {{ 'cham-demo.css' | asset_url | stylesheet_tag }}
     {{ 'cham-minimal.css' | asset_url | stylesheet_tag }}
     {{ 'cham-polish.css' | asset_url | stylesheet_tag }}
+    {{ 'cham-v3.css' | asset_url | stylesheet_tag }}
+    {% if template.suffix == 'cham-play' %}
+      {{ 'cham-quest.css' | asset_url | stylesheet_tag }}
+    {% elsif template.suffix == 'cham-club' %}
+      {{ 'cham-club-v3.css' | asset_url | stylesheet_tag }}
+    {% endif %}
     <script src="{{ 'cham-demo-core.js' | asset_url }}" defer></script>
+    {% if template.suffix == 'cham-play' %}
+      <script src="{{ 'cham-craft-knowledge.js' | asset_url }}" defer></script>
+      <script src="{{ 'cham-quest.js' | asset_url }}" defer></script>
+    {% elsif template.suffix == 'cham-club' %}
+      <script src="{{ 'cham-club-v3.js' | asset_url }}" defer></script>
+    {% endif %}
     <script src="{{ 'cham-demo-pages.js' | asset_url }}" defer></script>
+    <script src="{{ 'cham-v3.js' | asset_url }}" defer></script>
     <script src="{{ 'cham-theme.js' | asset_url }}" defer></script>
     <script src="{{ 'cham-mobile-menu.js' | asset_url }}" defer></script>
     <script src="{{ 'cham-shop.js' | asset_url }}" defer></script>

@@ -1,24 +1,51 @@
-<section class="cham-editorial-page cham-about-page">
+{% assign item_one = collections.all.products[0] %}
+{% assign item_two = collections.all.products[7] %}
+{% assign item_three = collections.all.products[10] %}
+<section class="cham-about-v3" data-cham-scroll>
   <div class="cham-shell">
-    <header class="cham-editorial-hero" data-cham-scroll>
-      <p class="cham-kicker">Về CHẠM</p>
-      <h1>Thủ công Việt, dễ tìm và dễ hiểu.</h1>
-      <p class="cham-editorial-lead">CHẠM là dự án xây dựng trải nghiệm mua sắm dành cho các sản phẩm thủ công Việt Nam. Chúng tôi muốn người mua chọn được món đồ phù hợp và tìm hiểu thông tin về sản phẩm một cách thuận tiện.</p>
-    </header>
-    <div class="cham-about-intro" data-cham-scroll>
-      <div><h2>Bắt đầu từ những điều gần gũi.</h2></div>
-      <div class="cham-about-intro__copy">
-        <p>Một chiếc ly gốm, một chiếc giỏ mây hay món quà nhỏ có thể được chọn vì hình dáng, công dụng hoặc câu chuyện phía sau. CHẠM đặt những sản phẩm đó trong một không gian dễ khám phá và dễ sử dụng.</p>
-        <p>Định hướng của chúng tôi là công bố rõ thông tin chất liệu, kích thước, cách bảo quản và nguồn gốc khi có dữ liệu xác minh, thay vì chỉ dựa vào hình ảnh đẹp.</p>
+    <div class="cham-about-v3__hero">
+      <div class="cham-about-v3__intro">
+        <p class="cham-about-v3__eyebrow">Câu chuyện của CHẠM</p>
+        <h1>Gần hơn với những món đồ được làm bằng tay.</h1>
+        <p>CHẠM muốn đưa sản phẩm thủ công Việt Nam đến gần người mua qua một trải nghiệm dễ tìm, dễ hiểu và dễ lựa chọn.</p>
+        <a href="{{ routes.all_products_collection_url }}" class="cham-about-v3__link">Khám phá sản phẩm <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="cham-about-v3__hero-images">
+        {% if item_one.featured_image %}
+          {{ item_one.featured_image | image_url: width: 1200 | image_tag: loading: 'eager', widths: '300, 600, 900, 1200', sizes: '(max-width: 768px) 72vw, 35vw', alt: item_one.title, class: 'cham-about-v3__main-img' }}
+        {% endif %}
+        {% if item_two.featured_image %}
+          {{ item_two.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', widths: '240, 450, 600', sizes: '(max-width: 768px) 40vw, 17vw', alt: item_two.title, class: 'cham-about-v3__float-img' }}
+        {% endif %}
       </div>
     </div>
-    <div class="cham-about-commitment" data-cham-scroll>
-      <h2>CHẠM hiện ở giai đoạn thử nghiệm.</h2>
-      <p>Những sản phẩm và mức giá trên website là dữ liệu minh họa. Chúng tôi chưa thực hiện bán hàng hoặc giao nhận thực tế. Đây là bản trình diễn các chức năng mua sắm, hồ sơ thành viên và tích điểm.</p>
+  </div>
+  <div class="cham-about-v3__statement">
+    <div class="cham-shell cham-about-v3__statement-grid">
+      <p class="cham-about-v3__eyebrow">Điểm bắt đầu</p>
+      <div><h2>Một sản phẩm có nhiều điều đáng biết hơn hình ảnh và giá bán.</h2><p>Chất liệu, cách sử dụng, thông tin nghề và câu chuyện của người làm đều đáng được tìm hiểu. Khi có nguồn xác minh, CHẠM muốn đưa những thông tin ấy đến gần quyết định mua sắm.</p></div>
     </div>
-    <div class="cham-editorial-cta" data-cham-scroll>
-      <div><h2>Khám phá sản phẩm</h2></div>
-      <a class="cham-button cham-button--primary" href="{{ routes.all_products_collection_url }}">Xem danh mục</a>
+  </div>
+  <div class="cham-shell">
+    <div class="cham-about-v3__features">
+      <div><span class="cham-about-v3__symbol" aria-hidden="true">◌</span><h3>Chọn món đồ phù hợp</h3><p>Tìm kiếm, xem hình ảnh và so sánh các nhóm sản phẩm trong cùng một cửa hàng.</p></div>
+      <div><span class="cham-about-v3__symbol" aria-hidden="true">◇</span><h3>Khám phá làng nghề</h3><p>Học những kiến thức ngắn về thủ công Việt Nam qua trò chơi tương tác.</p></div>
+      <div><span class="cham-about-v3__symbol" aria-hidden="true">✳</span><h3>Thử mua sắm</h3><p>Giỏ hàng, đơn hàng, tích điểm và voucher đều có thể trải nghiệm trong bản demo.</p></div>
     </div>
+    <div class="cham-about-v3__editorial">
+      {% if item_three.featured_image %}
+        <div class="cham-about-v3__editorial-image">{{ item_three.featured_image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '450, 750, 1100', sizes: '(max-width: 768px) 94vw, 42vw', alt: item_three.title }}</div>
+      {% endif %}
+      <div class="cham-about-v3__editorial-copy">
+        <p class="cham-about-v3__eyebrow">Chạm để khám phá</p>
+        <h2>Học về nghề. Hiểu thêm về sản phẩm.</h2>
+        <p>Từ nghề gốm Bát Tràng đến dệt lụa Vạn Phúc và mây tre đan Phú Vinh, mỗi thử thách trong CHẠM Play là cơ hội biết thêm một chút về nghề truyền thống.</p>
+        <a class="cham-about-v3__primary" href="/pages/cham-play">Trải nghiệm CHẠM Play</a>
+      </div>
+    </div>
+    <aside class="cham-about-v3__disclosure">
+      <strong>CHẠM đang trong giai đoạn thử nghiệm.</strong>
+      <p>Các sản phẩm, giá bán và đơn hàng trên website phục vụ trình diễn. CHẠM không thu tiền hay nhận đơn hàng thực tế qua phiên bản này.</p>
+    </aside>
   </div>
 </section>

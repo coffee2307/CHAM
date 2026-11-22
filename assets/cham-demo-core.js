@@ -19,7 +19,7 @@
   const money = amount => new Intl.NumberFormat('vi-VN',{style:'currency',currency:'VND',maximumFractionDigits:0}).format(Math.max(0,Number(amount)||0));
   const initial = () => ({
     schema: VERSION,
-    profile: { name:'Khách trải nghiệm', avatar:'🌿' },
+    profile: { name:'Khách trải nghiệm', avatar:'cham-avatar-default.svg' },
     favoriteProducts: [],
     orders: [],
     ledger:[{id:'welcome:v2',kind:'welcome',delta:100,description:'Điểm chào mừng · DEMO',createdAt:new Date().toISOString()}],
@@ -95,7 +95,7 @@
     return commit({...state,profile:{...state.profile,name:cleaned}});
   }
   function setAvatar(avatar){
-    if(!['🌿','🌼','🏺','🧶','☀️','🪴','🌸','🍃'].includes(avatar)) return false;
+    if(!/^cham-avatar-(?:\d{2,3}|default)\.svg$/.test(String(avatar)) && !['🌿','🌼','🏺','🧶','☀️','🪴','🌸','🍃'].includes(avatar)) return false;
     return commit({...state,profile:{...state.profile,avatar}});
   }
   function toggleFavorite(product){

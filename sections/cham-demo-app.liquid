@@ -1,6 +1,26 @@
 <section class="cham-demo-app" aria-label="{{ section.settings.heading | escape }}">
+  {% if section.settings.mode == 'club' or section.settings.mode == 'play' %}
+    {% render 'cham-avatar-data' %}
+  {% endif %}
+  {% if section.settings.mode == 'play' %}
+    <script type="application/json" id="cham-play-scenes">
+      [
+      {% assign has_photo = false %}
+      {% for group in collections %}
+        {% unless group.handle == 'frontpage' or group.handle == 'all' %}
+          {% assign photo = group.image | default: group.products.first.featured_image %}
+          {% if photo != blank %}
+            {% if has_photo %},{% endif %}
+            {{ photo | image_url: width: 1000 | json }}
+            {% assign has_photo = true %}
+          {% endif %}
+        {% endunless %}
+      {% endfor %}
+      ]
+    </script>
+  {% endif %}
   <div data-cham-demo-app data-mode="{{ section.settings.mode | escape }}">
-    <div class="cd-shell"><h1>{{ section.settings.heading }}</h1><p>Đang khởi tạo phiên trải nghiệm trên trình duyệt…</p></div>
+    <div class="cd-shell"><h1>{{ section.settings.heading }}</h1><p>Đang mở phiên trải nghiệm…</p></div>
   </div>
 </section>
 {% schema %}

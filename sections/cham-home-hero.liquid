@@ -1,50 +1,46 @@
 {%- liquid
   assign primary_link = section.settings.primary_link | default: routes.all_products_collection_url
-  assign story_page = pages['story'] | default: pages['cau-chuyen']
-  assign story_url = '/pages/about'
-  if story_page != blank
-    assign story_url = story_page.url
-  endif
-  assign secondary_link = section.settings.secondary_link | default: story_url
-  assign hero_image = section.settings.image
-  if hero_image == blank
-    assign hero_image = collections.all.products.first.featured_image
+  assign secondary_link = section.settings.secondary_link | default: '/pages/about'
+  assign featured = section.settings.image
+  if featured == blank
+    assign featured = collections.all.products.first.featured_image
   endif
 -%}
-<section class="cham-hero cham-hero--signature cham-hero--minimal{% if hero_image == blank %} cham-hero--text-only{% endif %}" data-cham-hero>
+<section class="cham-hero cham-hero--signature cham-hero--minimal cham-hero--v3" data-cham-hero>
   <div class="cham-shell cham-hero__grid">
     <div class="cham-hero__copy">
-      <p class="cham-kicker">{{ section.settings.eyebrow }}</p>
-      <h1 class="cham-hero__title">{{ section.settings.heading | escape | newline_to_br }}</h1>
-      <div class="cham-hero__body">{{ section.settings.body }}</div>
+      <p class="cham-kicker">Đồ thủ công Việt Nam</p>
+      <h1 class="cham-hero__title">Thủ công Việt,<br>cho mỗi ngày.</h1>
+      <div class="cham-hero__body"><p>Chọn một món đồ có ích, một món quà ý nghĩa, hoặc đơn giản là tìm hiểu thêm về nghề thủ công Việt.</p></div>
       <div class="cham-hero__actions">
-        <a class="cham-button cham-button--primary" href="{{ primary_link }}">{{ section.settings.primary_label }}</a>
-        <a class="cham-hero__story-link" href="{{ secondary_link }}">{{ section.settings.secondary_label }} <span aria-hidden="true">→</span></a>
+        <a class="cham-button cham-button--primary" href="{{ primary_link }}">Khám phá sản phẩm</a>
+        <a class="cham-hero__story-link" href="{{ secondary_link }}">Câu chuyện CHẠM <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="cham-hero__aside"><span class="cham-hero__aside-line" aria-hidden="true"></span><p>Gốm, mây tre, vải dệt, phụ kiện và quà tặng.</p></div>
+    </div>
+    <div class="cham-hero__gallery">
+      {% assign first_product = collections.all.products.first %}
+      <a data-cham-hero-photo-link href="{{ first_product.url | default: routes.all_products_collection_url }}" class="cham-hero__featured-photo">
+        {% if featured != blank %}
+          {{ featured | image_url: width: 1400 | image_tag: loading: 'eager', widths: '400, 600, 900, 1400', sizes: '(max-width: 860px) 95vw, 46vw', alt: 'Sản phẩm thủ công CHẠM', class: 'cham-hero__featured-img' }}
+        {% endif %}
+        <span class="cham-hero__featured-label" data-cham-hero-photo-label>{{ first_product.title | default: 'Khám phá CHẠM' }}</span>
+      </a>
+      <div class="cham-hero__switcher" aria-label="Chọn hình ảnh sản phẩm nổi bật">
+        {% for group in collections %}
+          {% unless group.handle == 'frontpage' or group.handle == 'all' %}
+            {% assign sample = group.products.first %}
+            {% if sample and sample.featured_image %}
+              <button type="button" class="cham-hero__mini{% if forloop.first %} is-active{% endif %}" data-cham-hero-picker data-url="{{ sample.featured_image | image_url: width: 1200 }}" data-href="{{ sample.url }}" data-label="{{ sample.title | escape }}" aria-pressed="false" aria-label="Xem sản phẩm {{ sample.title | escape }}">
+                {{ sample.featured_image | image_url: width: 240 | image_tag: loading: 'lazy', widths: '120, 180, 240', sizes: '80px', alt: sample.title }}
+              </button>
+            {% endif %}
+          {% endunless %}
+        {% endfor %}
       </div>
     </div>
-    {% if hero_image != blank %}
-      <figure class="cham-hero__figure">
-        <div class="cham-hero__visual cham-hero__visual--signature cham-hero__visual--photo">
-          {{ hero_image | image_url: width: 1440 | image_tag: loading: 'eager', widths: '400, 600, 800, 1100, 1440', sizes: '(max-width: 860px) 90vw, 46vw', alt: hero_image.alt | default: 'Sản phẩm thủ công minh họa tại CHẠM' }}
-        </div>
-      </figure>
-    {% endif %}
   </div>
 </section>
 {% schema %}
-{
-  "name":"CHẠM · Mở đầu",
-  "tag":"section",
-  "settings":[
-    {"type":"text","id":"eyebrow","label":"Dòng nhỏ","default":"ĐỒ THỦ CÔNG VIỆT NAM"},
-    {"type":"textarea","id":"heading","label":"Tiêu đề","default":"Thủ công Việt,\ncho mỗi ngày."},
-    {"type":"richtext","id":"body","label":"Mô tả","default":"<p>Gốm, mây tre, vải dệt và những món quà được chọn cho đời sống hôm nay.</p>"},
-    {"type":"text","id":"primary_label","label":"Nút chính","default":"Xem sản phẩm"},
-    {"type":"url","id":"primary_link","label":"Liên kết nút chính"},
-    {"type":"text","id":"secondary_label","label":"Nút phụ","default":"Về CHẠM"},
-    {"type":"url","id":"secondary_link","label":"Liên kết nút phụ"},
-    {"type":"image_picker","id":"image","label":"Ảnh mở đầu"}
-  ],
-  "presets":[{"name":"CHẠM · Mở đầu","category":"CHẠM"}]
-}
+{"name":"CHẠM · Mở đầu","tag":"section","settings":[{"type":"image_picker","id":"image","label":"Ảnh mở đầu"},{"type":"url","id":"primary_link","label":"Liên kết mua sắm"},{"type":"url","id":"secondary_link","label":"Liên kết câu chuyện"}],"presets":[{"name":"CHẠM · Mở đầu","category":"CHẠM"}]}
 {% endschema %}

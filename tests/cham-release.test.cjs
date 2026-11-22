@@ -3,7 +3,7 @@ const ROOT=path.resolve(__dirname,'..');
 const read=p=>fs.readFileSync(path.join(ROOT,p),'utf8');
 const json=p=>JSON.parse(read(p));
 const index=json('templates/index.json'),product=json('templates/product.json'),collection=json('templates/collection.json'),search=json('templates/search.json');
-assert.deepEqual(index.order,['hero','categories','products','club','about']);
+assert.deepEqual(index.order,['hero','categories','products','catalog','club','about']);
 assert.equal(product.sections.main.type,'cham-product-page');
 assert.equal(collection.sections.main.type,'cham-shop-collection');
 assert.equal(search.sections.main.type,'cham-search');

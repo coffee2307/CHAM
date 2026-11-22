@@ -1,0 +1,47 @@
+<section class="cham-catalog" data-cham-scroll data-cham-catalog>
+  <div class="cham-shell">
+    <div class="cham-catalog__heading">
+      <p class="cham-catalog__overline">XEM VÀ CHỌN</p>
+      <h2>Một góc thủ công trong nhà bạn.</h2>
+      <p>Chọn một nhóm sản phẩm để xem hình ảnh và khám phá những món đồ phù hợp.</p>
+    </div>
+    <div class="cham-catalog__body">
+      <div class="cham-catalog__display">
+        {% assign initial_done = false %}
+        {% for group in collections %}
+          {% unless group.handle == 'frontpage' or group.handle == 'all' %}
+            {% assign cat_image = group.image | default: group.products.first.featured_image %}
+            <article class="cham-catalog__panel" data-catalog-panel="{{ group.handle }}" {% if initial_done %}hidden{% endif %}>
+              {% if cat_image %}
+                {{ cat_image | image_url: width: 1500 | image_tag: loading: 'lazy', widths: '480, 750, 1100, 1500', sizes: '(max-width: 800px) 94vw, 53vw', alt: group.title }}
+              {% endif %}
+              <div class="cham-catalog__panel-caption">
+                <div><span>CHẠM chọn lọc</span><h3>{{ group.title }}</h3></div>
+                <a href="{{ group.url }}" aria-label="Xem sản phẩm thuộc {{ group.title }}">Xem sản phẩm <span aria-hidden="true">→</span></a>
+              </div>
+            </article>
+            {% assign initial_done = true %}
+          {% endunless %}
+        {% endfor %}
+      </div>
+      <div class="cham-catalog__index">
+        <p class="cham-catalog__index-heading">Khám phá bộ sưu tập</p>
+        {% assign first_item = true %}
+        {% for group in collections %}
+          {% unless group.handle == 'frontpage' or group.handle == 'all' %}
+            <button class="cham-catalog__select{% if first_item %} is-selected{% endif %}" type="button" data-catalog-select="{{ group.handle }}" aria-pressed="{% if first_item %}true{% else %}false{% endif %}">
+              <span class="cham-catalog__select-name">{{ group.title }}</span>
+              <span class="cham-catalog__select-count">{{ group.products_count }} món</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-7-7 7 7-7 7"/></svg>
+            </button>
+            {% assign first_item = false %}
+          {% endunless %}
+        {% endfor %}
+        <a href="{{ routes.all_products_collection_url }}" class="cham-catalog__all">Xem toàn bộ catalog <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{"name":"CHẠM · Catalog tương tác","tag":"section","settings":[],"presets":[{"name":"CHẠM · Catalog tương tác","category":"CHẠM"}]}
+{% endschema %}
