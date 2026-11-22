@@ -1,0 +1,26 @@
+<section class="cham-search-page cham-shell">
+  <div class="cham-shop-page__heading"><div><h1>Tìm sản phẩm</h1><p>Gốm, mây tre, vải dệt và quà tặng.</p></div></div>
+  <form action="{{ routes.search_url }}" method="get" role="search" class="cham-search-page__form">
+    <label for="ChamSearchTerm" class="visually-hidden">Từ khóa tìm kiếm</label>
+    <input id="ChamSearchTerm" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Nhập tên sản phẩm" required>
+    <input type="hidden" name="type" value="product">
+    <button type="submit">Tìm kiếm</button>
+  </form>
+  {% if search.performed %}
+    {% paginate search.results by 24 %}
+      <p class="cham-search-page__count">{{ search.results_count }} kết quả cho “{{ search.terms | escape }}”</p>
+      <div class="cham-shop-grid">
+        {% for item in search.results %}
+          {% if item.object_type == 'product' %}
+            {% render 'cham-shop-card', product: item %}
+          {% endif %}
+        {% endfor %}
+      </div>
+      {% if search.results_count == 0 %}<p>Không có sản phẩm phù hợp. Thử từ khóa khác.</p>{% endif %}
+      {% if paginate.pages > 1 %}<nav class="cham-shop-page__pagination">{{ paginate | default_pagination }}</nav>{% endif %}
+    {% endpaginate %}
+  {% endif %}
+</section>
+{% schema %}
+{"name":"CHẠM · Tìm kiếm","tag":"section","settings":[],"presets":[]}
+{% endschema %}

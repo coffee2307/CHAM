@@ -4,44 +4,17 @@
     assign source_collection = collections.all
   endif
 -%}
-<section class="cham-section cham-featured-section">
+<section class="cham-section cham-featured-section" data-cham-scroll>
   <div class="cham-shell">
     <div class="cham-section-head">
-      <div><p class="cham-kicker">{{ section.settings.eyebrow }}</p><h2 class="cham-section-title">{{ section.settings.heading }}</h2></div>
-      <a class="cham-pill" href="{{ source_collection.url | default: routes.all_products_collection_url }}">{{ section.settings.view_all_label }}</a>
+      <div><h2 class="cham-section-title">{{ section.settings.heading }}</h2><p class="cham-section-copy">{{ section.settings.body }}</p></div>
+      <a class="cham-more-link" href="{{ source_collection.url | default: routes.all_products_collection_url }}">Xem tất cả</a>
     </div>
-    <div class="cham-product-grid">
+    <div class="cham-shop-grid">
       {% for product in source_collection.products limit: section.settings.product_limit %}
-        <article class="cham-product-card">
-          <a class="cham-product-card__media" href="{{ product.url }}">
-            {% if product.featured_image != blank %}
-              {{ product.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '280, 460, 700, 900', sizes: '(max-width: 560px) 50vw, (max-width: 1100px) 33vw, 25vw', alt: product.featured_image.alt | default: product.title }}
-            {% else %}{{ 'product-1' | placeholder_svg_tag }}{% endif %}
-          </a>
-          <button class="cham-favorite-button" type="button" data-cham-favorite data-product-id="{{ product.id }}" data-product-title="{{ product.title | escape }}" data-product-url="{{ product.url }}" data-product-image="{% if product.featured_image %}{{ product.featured_image | image_url: width: 320 }}{% endif %}" data-product-price="{{ product.price }}" aria-label="Thêm {{ product.title | escape }} vào yêu thích" aria-pressed="false">♡</button>
-          <div class="cham-product-card__body">
-            <div class="cham-product-card__meta"><span>{{ product.type | default: 'Đồ thủ công' }}</span>{% if product.vendor != blank %}<span>{{ product.vendor }}</span>{% endif %}</div>
-            <h3 class="cham-product-card__title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
-            <div class="cham-product-card__price">{% if product.price_varies %}Từ {% endif %}{{ product.price | money }}</div>
-            {% if product.tags contains 'custom' or product.tags contains 'Custom' or product.tags contains 'tuy-chinh' %}<span class="cham-badge">Có thể tùy chỉnh</span>{% endif %}
-          </div>
-        </article>
+        {% render 'cham-shop-card', product: product %}
       {% else %}
-        <div class="cham-empty-collection">
-          <div class="cham-empty-collection__logo">
-            {% if section.settings.placeholder_logo != blank %}
-              {{ section.settings.placeholder_logo | image_url: width: 520 | image_tag: loading: 'lazy', class: 'cham-empty-collection__logo-image', alt: 'Logo CHẠM' }}
-            {% else %}
-              <span class="cham-empty-collection__logo-label" aria-label="Vị trí đặt logo">LOGO</span>
-            {% endif %}
-          </div>
-          <div>
-            <span class="cham-kicker">CHẠM / SẢN PHẨM</span>
-            <h3>Đang hoàn thiện danh mục chọn lọc.</h3>
-            <p>Những sản phẩm đầu tiên sẽ xuất hiện tại đây khi thông tin về chất liệu, kích thước và khả năng cung ứng được xác nhận.</p>
-            <a href="/pages/about">Tìm hiểu về CHẠM <span aria-hidden="true">↗</span></a>
-          </div>
-        </div>
+        <p>CHẠM đang cập nhật danh sách sản phẩm.</p>
       {% endfor %}
     </div>
   </div>
@@ -51,12 +24,10 @@
   "name":"CHẠM · Sản phẩm nổi bật",
   "tag":"section",
   "settings":[
-    {"type":"text","id":"eyebrow","label":"Dòng nhỏ","default":"ĐƯỢC CHỌN TẠI CHẠM"},
-    {"type":"text","id":"heading","label":"Tiêu đề","default":"Những món thủ công đáng để sống cùng."},
-    {"type":"image_picker","id":"placeholder_logo","label":"Logo khi chưa có sản phẩm"},
+    {"type":"text","id":"heading","label":"Tiêu đề","default":"Sản phẩm được chọn"},
+    {"type":"textarea","id":"body","label":"Mô tả ngắn","default":"Gốm, mây tre, vải dệt và những món quà nhỏ."},
     {"type":"collection","id":"collection","label":"Bộ sưu tập"},
-    {"type":"range","id":"product_limit","label":"Số sản phẩm","min":4,"max":12,"step":1,"default":8},
-    {"type":"text","id":"view_all_label","label":"Nhãn xem tất cả","default":"Xem tất cả"}
+    {"type":"range","id":"product_limit","label":"Số sản phẩm","min":4,"max":12,"step":1,"default":8}
   ],
   "presets":[{"name":"CHẠM · Sản phẩm nổi bật","category":"CHẠM"}]
 }

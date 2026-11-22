@@ -1,42 +1,28 @@
-{%- assign category_limit = section.settings.category_limit | default: 6 -%}
-<section class="cham-section cham-section--paper cham-categories-section">
+<section class="cham-section cham-categories-section" data-cham-scroll>
   <div class="cham-shell">
     <div class="cham-section-head">
-      <div><p class="cham-kicker">{{ section.settings.eyebrow }}</p><h2 class="cham-section-title">{{ section.settings.heading }}</h2></div>
-      <p class="cham-section-copy">{{ section.settings.body }}</p>
+      <div><h2 class="cham-section-title">Khám phá theo danh mục</h2></div>
+      <a class="cham-more-link" href="{{ routes.all_products_collection_url }}">Tất cả sản phẩm</a>
     </div>
-    <div class="cham-category-grid">
-      {% assign shown = 0 %}
-      {% for collection in collections %}
-        {% if collection.handle != 'frontpage' and shown < category_limit %}
-          {% assign category_image = collection.image | default: collection.products.first.featured_image %}
-          <a class="cham-category-card" href="{{ collection.url }}">
-            {% if category_image != blank %}<span class="cham-category-card__media">{{ category_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '240, 420, 700', sizes: '(max-width: 560px) 50vw, 16vw', alt: collection.title }}</span>{% endif %}
-            <span class="cham-category-card__index">0{{ shown | plus: 1 }}</span>
-            <span class="cham-category-card__text">{{ collection.title }}</span>
+    <div class="cham-category-grid cham-category-grid--clean">
+      {% for group in collections %}
+        {% unless group.handle == 'frontpage' or group.handle == 'all' %}
+          {% assign category_image = group.image | default: group.products.first.featured_image %}
+          <a class="cham-category-card" href="{{ group.url }}">
+            <span class="cham-category-card__media">
+              {% if category_image != blank %}
+                {{ category_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '240, 420, 700', sizes: '(max-width: 600px) 42vw, 17vw', alt: group.title }}
+              {% else %}
+                <span class="cham-category-card__fallback">CHẠM</span>
+              {% endif %}
+            </span>
+            <span class="cham-category-card__text">{{ group.title }}</span>
           </a>
-          {% assign shown = shown | plus: 1 %}
-        {% endif %}
+        {% endunless %}
       {% endfor %}
-      {% if shown == 0 %}
-        {% assign labels = 'Trang trí nhà cửa|Phụ kiện|Đồ dùng hằng ngày|Quà tặng|Trải nghiệm thủ công|Sản phẩm tùy chỉnh' | split: '|' %}
-        {% for label in labels %}
-          <a class="cham-category-card" href="{{ routes.all_products_collection_url }}"><span class="cham-category-card__index">0{{ forloop.index }}</span><span class="cham-category-card__text">{{ label }}</span></a>
-        {% endfor %}
-      {% endif %}
     </div>
   </div>
 </section>
 {% schema %}
-{
-  "name":"CHẠM · Danh mục",
-  "tag":"section",
-  "settings":[
-    {"type":"text","id":"eyebrow","label":"Dòng nhỏ","default":"KHÁM PHÁ THEO NHU CẦU"},
-    {"type":"text","id":"heading","label":"Tiêu đề","default":"Thủ công không chỉ để ngắm."},
-    {"type":"textarea","id":"body","label":"Mô tả","default":"CHẠM sắp xếp sản phẩm theo cách chúng hiện diện trong đời sống — từ đồ dùng, phụ kiện, trang trí đến quà tặng và nhu cầu tùy chỉnh."},
-    {"type":"range","id":"category_limit","label":"Số danh mục","min":3,"max":12,"step":1,"default":6}
-  ],
-  "presets":[{"name":"CHẠM · Danh mục","category":"CHẠM"}]
-}
+{"name":"CHẠM · Danh mục","tag":"section","settings":[],"presets":[{"name":"CHẠM · Danh mục","category":"CHẠM"}]}
 {% endschema %}

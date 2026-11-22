@@ -1,30 +1,11 @@
 {
   "sections": {
-    "header": {
-      "type": "cham-collection-header",
-      "settings": {}
-    },
     "main": {
-      "type": "main-collection",
-      "settings": {
-        "layout_type": "grid",
-        "product_card_size": "medium",
-        "mobile_product_card_size": "small",
-        "enable_infinite_scroll": true,
-        "product_grid_width": "centered",
-        "full_width_on_mobile": true,
-        "columns_gap_horizontal": 18,
-        "columns_gap_vertical": 24,
-        "padding-inline-start": 0,
-        "padding-inline-end": 0,
-        "color_scheme": "scheme-1",
-        "padding-block-start": 12,
-        "padding-block-end": 56
-      }
+      "type": "cham-shop-collection",
+      "settings": {}
     }
   },
   "order": [
-    "header",
     "main"
   ]
 }

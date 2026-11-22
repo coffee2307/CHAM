@@ -12,7 +12,7 @@
       <div class="cham-product-context__item"><span class="cham-product-context__label">Kỹ thuật</span><span class="cham-product-context__value">{{ craft | default: section.settings.craft_fallback }}</span></div>
     </div>
     <div class="cham-product-context__custom">
-      <strong>CHẠM 2.0 — SẢN PHẨM DEMO</strong>
+      <strong>Sản phẩm minh họa</strong>
       <span>Sản phẩm và mức giá chỉ là dữ liệu minh họa, không có hàng thật.</span>
       <button class="cham-favorite-button" type="button" data-cham-favorite data-product-id="{{ product.id }}" data-product-title="{{ product.title | escape }}" data-product-url="{{ product.url }}" data-product-image="{% if product.featured_image %}{{ product.featured_image | image_url: width: 320 }}{% endif %}" data-product-price="{{ product.price }}" aria-pressed="false" aria-label="Lưu {{ product.title | escape }} vào yêu thích">♡</button>
     </div>

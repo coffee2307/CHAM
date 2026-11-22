@@ -1,0 +1,79 @@
+{%- liquid
+  assign selected_variant = product.selected_or_first_available_variant
+  assign main_image = product.featured_image
+-%}
+<section class="cham-product-page cham-shell">
+  <nav class="cham-breadcrumb" aria-label="Đường dẫn">
+    <a href="{{ routes.root_url }}">Trang chủ</a><span aria-hidden="true">›</span>
+    <a href="{{ routes.all_products_collection_url }}">Sản phẩm</a><span aria-hidden="true">›</span>
+    <span aria-current="page">{{ product.title }}</span>
+  </nav>
+  <div class="cham-product-page__main">
+    <div class="cham-product-page__gallery">
+      <div class="cham-product-page__image-stage">
+      {% if main_image != blank %}
+        {{ main_image | image_url: width: 1440 | image_tag: id: 'ChamProductImage', loading: 'eager', widths: '440, 720, 1000, 1440', sizes: '(max-width: 860px) 94vw, 47vw', alt: product.title }}
+      {% else %}
+        <div class="cham-product-page__image-empty">CHẠM</div>
+      {% endif %}
+      </div>
+      {% if product.images.size > 1 %}
+        <div class="cham-product-page__thumbs" aria-label="Ảnh sản phẩm">
+          {% for image in product.images limit: 8 %}
+            <button type="button" class="cham-product-page__thumb{% if forloop.first %} is-current{% endif %}" data-cham-gallery-src="{{ image | image_url: width: 1440 }}" data-cham-gallery-alt="{{ image.alt | default: product.title | escape }}" aria-label="Xem ảnh {{ forloop.index }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">
+              {{ image | image_url: width: 180 | image_tag: loading: 'lazy', alt: product.title }}
+            </button>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+    <div class="cham-product-page__info">
+      <p class="cham-product-page__eyebrow">{{ product.type | default: 'Sản phẩm thủ công' }}</p>
+      <h1>{{ product.title }}</h1>
+      <p class="cham-product-page__price" data-cham-product-price>{{ selected_variant.price | money }}</p>
+      <div class="cham-product-page__description">{{ product.description }}</div>
+      <div class="cham-product-page__controls">
+        {% form 'product', product, id: 'ChamProductForm', class: 'cham-product-page__form', data-cham-add-cart: '' %}
+          {% if product.has_only_default_variant %}
+            <input type="hidden" name="id" value="{{ selected_variant.id }}">
+          {% else %}
+            <label for="ChamVariant">Phiên bản</label>
+            <select id="ChamVariant" name="id" data-cham-variant-select>
+              {% for variant in product.variants %}
+                <option value="{{ variant.id }}" data-price="{{ variant.price | money | escape }}" {% unless variant.available %}disabled{% endunless %} {% if variant.id == selected_variant.id %}selected{% endif %}>{{ variant.title }}{% unless variant.available %} · Hết hàng{% endunless %}</option>
+              {% endfor %}
+            </select>
+          {% endif %}
+          <label for="ChamQuantity">Số lượng</label>
+          <div class="cham-product-page__purchase">
+            <div class="cham-product-page__quantity">
+              <button type="button" data-cham-quantity="-1" aria-label="Giảm số lượng">−</button>
+              <input id="ChamQuantity" type="number" name="quantity" value="1" min="1" max="10" inputmode="numeric" required>
+              <button type="button" data-cham-quantity="1" aria-label="Tăng số lượng">+</button>
+            </div>
+            <button type="submit" class="cham-product-page__add" {% unless selected_variant.available %}disabled{% endunless %}>{% if selected_variant.available %}Thêm vào giỏ hàng{% else %}Không có sẵn{% endif %}</button>
+          </div>
+        {% endform %}
+        <button type="button" class="cham-product-page__save" data-cham-favorite data-product-id="{{ product.id }}" data-product-title="{{ product.title | escape }}" data-product-url="{{ product.url }}" data-product-price="{{ product.price }}" data-product-image="{% if product.featured_image %}{{ product.featured_image | image_url: width: 320 }}{% endif %}" aria-pressed="false"><span aria-hidden="true">♡</span> Lưu sản phẩm</button>
+      </div>
+      <div class="cham-product-page__info-note">
+        <p>Thông tin và giá bán minh họa cho trải nghiệm CHẠM. Không tiếp nhận đơn hàng thật.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cham-product-page__related">
+    <div class="cham-section-head"><div><h2 class="cham-section-title">Có thể bạn cũng thích</h2></div><a href="{{ routes.all_products_collection_url }}">Xem tất cả</a></div>
+    <div class="cham-shop-grid">
+      {% assign related_count = 0 %}
+      {% for related in collections.all.products %}
+        {% if related.id != product.id and related_count < 4 %}
+          {% render 'cham-shop-card', product: related %}
+          {% assign related_count = related_count | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{"name":"CHẠM · Chi tiết sản phẩm","tag":"section","settings":[],"presets":[],"enabled_on":{"templates":["product"]}}
+{% endschema %}

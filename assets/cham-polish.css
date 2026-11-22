@@ -1,0 +1,183 @@
+
+/* CHẠM 2.2 — restrained commerce system */
+:root{--cham-paper:#f8f3e9;--cham-text:#26251f;--cham-muted:#6a6156;--cham-earth:#a85239;--cham-border:#dfd5c5;--cham-surface:#fffdf8}
+.cham-site .cham-shell{max-width:1260px}
+.cham-site .cham-section{padding-block:clamp(46px,6vw,88px)}
+.cham-site .cham-section-head{display:flex;align-items:end;justify-content:space-between;gap:26px;margin-bottom:24px}
+.cham-site .cham-section-head .cham-section-title{font-size:clamp(28px,3.15vw,43px);line-height:1.2;letter-spacing:-.035em;margin:0;font-weight:500}
+.cham-site .cham-section-head .cham-section-copy{margin:10px 0 0;color:var(--cham-muted);font-size:14px;line-height:1.6}
+.cham-site .cham-more-link,.cham-site .cham-section-head a{color:var(--cham-text);font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;border-bottom:1px solid #bcae99;padding:0 0 5px;transition:color .2s,border-color .2s}
+.cham-site .cham-more-link:hover,.cham-site .cham-section-head a:hover{color:var(--cham-earth);border-color:var(--cham-earth)}
+.cham-site .cham-hero__figure figcaption{display:none!important}
+.cham-site .cham-category-grid--clean{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
+.cham-site .cham-category-grid--clean .cham-category-card{display:flex;flex-direction:column;gap:12px;border:0!important;background:transparent!important;padding:0!important;text-decoration:none;overflow:visible;box-shadow:none!important;transform:none!important;min-width:0}
+.cham-site .cham-category-grid--clean .cham-category-card__media{aspect-ratio:4/5;border-radius:6px;overflow:hidden;background:#ebe1d3;display:block;width:100%;height:auto}
+.cham-site .cham-category-grid--clean .cham-category-card__media img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .42s cubic-bezier(.22,.75,.25,1)}
+.cham-site .cham-category-grid--clean .cham-category-card:hover .cham-category-card__media img{transform:scale(1.045)!important}
+.cham-site .cham-category-grid--clean .cham-category-card__text{position:static!important;inset:auto!important;display:block;padding:0!important;margin:0;font-size:14px;font-weight:600;color:var(--cham-text);line-height:1.4;letter-spacing:-.01em;text-transform:none;transition:color .2s}
+.cham-site .cham-category-grid--clean .cham-category-card:hover .cham-category-card__text{color:var(--cham-earth)}
+.cham-site .cham-category-card__fallback{display:grid;place-items:center;height:100%;font-weight:700;letter-spacing:.02em;color:#a38e76}
+.cham-site .cham-shop-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px 17px!important;margin:0!important;padding:0!important;list-style:none}
+.cham-site .cham-shop-card{position:relative;display:flex;flex-direction:column;min-width:0;gap:0;background:none!important;border:0!important;box-shadow:none!important;transform:none!important}
+.cham-site .cham-shop-card__visual{aspect-ratio:4/5;border-radius:6px;overflow:hidden;position:relative;background:#e8ddcd}
+.cham-site .cham-shop-card__visual>a{display:block;width:100%;height:100%}
+.cham-site .cham-shop-card__visual>a>img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .45s cubic-bezier(.22,.8,.22,1)}
+.cham-site .cham-shop-card:hover .cham-shop-card__visual>a>img{transform:scale(1.035)}
+.cham-site .cham-shop-card__missing{height:100%;display:grid;place-items:center;font-size:20px;font-weight:700;color:#9d8773}
+.cham-site .cham-shop-card__favorite{position:absolute;top:11px;right:11px;display:grid;place-items:center;width:40px;height:40px;min-width:40px;min-height:40px;border-radius:50%;background:rgba(255,253,248,.94);color:#3c3329;border:1px solid rgba(43,37,30,.07);cursor:pointer;font-size:22px;line-height:1;transition:background-color .2s,color .2s,transform .2s;z-index:2}
+.cham-site .cham-shop-card__favorite:hover,.cham-site .cham-shop-card__favorite[aria-pressed="true"]{background:#a85239;color:white;transform:scale(1.035)}
+.cham-site .cham-shop-card__details{padding:14px 1px 0;display:flex;flex-direction:column;flex:1}
+.cham-site .cham-shop-card__type{font-size:11px!important;color:#81776d!important;line-height:1.4;margin:0 0 6px!important;letter-spacing:.025em}
+.cham-site .cham-shop-card__details h3{font-family:'Be Vietnam Pro',sans-serif!important;font-size:15px;line-height:1.5;font-weight:600;letter-spacing:-.012em;margin:0 0 10px;min-height:2.9em}
+.cham-site .cham-shop-card__details h3 a{color:var(--cham-text);text-decoration:none;transition:color .2s}
+.cham-site .cham-shop-card__details h3 a:hover{color:var(--cham-earth)}
+.cham-site .cham-shop-card__bottom{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:auto}
+.cham-site .cham-shop-card__price{font-size:15px;font-weight:700;line-height:1.6;white-space:nowrap;color:var(--cham-text)}
+.cham-site .cham-shop-card__quickadd{width:40px;height:40px;min-width:40px;min-height:40px;display:grid;place-items:center;border:1px solid #bdb09d;border-radius:50%;background:transparent;color:var(--cham-text);cursor:pointer;text-decoration:none;transition:background-color .18s,border-color .18s,color .18s,transform .18s;font-family:inherit}
+.cham-site .cham-shop-card__quickadd span{font-size:23px;font-weight:300;line-height:1}
+.cham-site .cham-shop-card__quickadd:hover{background:var(--cham-text);color:#fff;border-color:var(--cham-text);transform:translateY(-2px)}
+.cham-site .cham-shop-card__quickadd:disabled{opacity:.45;cursor:wait}
+.cham-site .cham-shop-card[hidden]{display:none!important}
+.cham-site .cham-home-club{background:#e9ddc9;padding:clamp(40px,6vw,80px) 0;overflow:hidden}
+.cham-site .cham-home-club__inner{display:grid;grid-template-columns:1.3fr .7fr;gap:32px;align-items:center}
+.cham-site .cham-home-club__copy{max-width:680px}
+.cham-site .cham-home-club__eyebrow{font-size:12px;font-weight:700;color:#8e4b36;letter-spacing:.09em;margin:0 0 14px}
+.cham-site .cham-home-club h2{font-size:clamp(32px,4.25vw,60px);line-height:1.16;letter-spacing:-.045em;font-weight:500;margin:0 0 13px}
+.cham-site .cham-home-club p:not(.cham-home-club__eyebrow){font-size:15px;line-height:1.7;color:#695e51;max-width:530px}
+.cham-site .cham-home-club__actions{display:flex;gap:24px;align-items:center;margin-top:27px;flex-wrap:wrap}
+.cham-site .cham-home-club__primary{background:#26251f;color:white;padding:14px 22px;border-radius:4px;min-height:48px;font-size:13px;font-weight:700;transition:background-color .2s,text-decoration-color .2s;text-decoration:none}
+.cham-site .cham-home-club__primary:hover{background:#a85239}
+.cham-site .cham-home-club__secondary{font-size:13px;color:#26251f;font-weight:600;border-bottom:1px solid #a99a84;min-height:44px;display:flex;align-items:center;text-decoration:none;transition:color .2s,border-color .2s}
+.cham-site .cham-home-club__secondary:hover{color:#a85239;border-color:#a85239}
+.cham-site .cham-home-club__art{position:relative;min-height:220px;display:grid;place-items:center}
+.cham-site .cham-home-club__sun{font-family:Georgia,serif;font-size:230px;line-height:1;color:#a85239;opacity:.78;transform:rotate(-10deg)}
+.cham-site .cham-home-club__ring{position:absolute;width:70%;aspect-ratio:1;border:1px solid rgba(121,83,53,.22);border-radius:50%;transform:rotate(-9deg) scaleX(.8)}
+.cham-site .cham-home-about{padding:clamp(55px,7vw,100px) 0}
+.cham-site .cham-home-about__inner{display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(28px,5vw,94px);align-items:start}
+.cham-site .cham-home-about h2{font-weight:500;font-size:clamp(28px,3.5vw,49px);line-height:1.3;letter-spacing:-.04em;margin:0}
+.cham-site .cham-home-about p{font-size:15px;line-height:1.9;color:#695f55;max-width:480px;margin:0 0 24px}
+.cham-site .cham-footer--compact{padding:50px 0 20px!important;background:#26251f;color:#eee6d9}
+.cham-site .cham-footer--compact .cham-footer__grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:36px}
+.cham-site .cham-footer--compact .cham-footer__brand{font-size:33px;letter-spacing:-.045em}
+.cham-site .cham-footer--compact .cham-footer__tagline{font-size:13px;color:#c9bdb0;line-height:1.75;max-width:280px}
+.cham-site .cham-footer--compact .cham-footer__heading{font-size:13px;color:#fff;font-weight:700;margin:5px 0 14px}
+.cham-site .cham-footer--compact .cham-footer__menu{padding:0;margin:0;list-style:none}
+.cham-site .cham-footer--compact .cham-footer__menu li{margin-bottom:9px}
+.cham-site .cham-footer--compact .cham-footer__menu a{font-size:13px;color:#c9bdb0;text-decoration:none;transition:color .2s}
+.cham-site .cham-footer--compact .cham-footer__menu a:hover{color:#fff}
+.cham-site .cham-footer--compact .cham-footer__bottom{display:flex;gap:24px;justify-content:space-between;flex-wrap:wrap;padding-top:23px;margin-top:30px;border-top:1px solid rgba(255,255,255,.12);font-size:11px;color:#c8bbac}
+/* Listing */
+.cham-site .cham-shop-page,.cham-site .cham-product-page,.cham-site .cham-search-page{width:min(1260px,calc(100% - 44px));margin-inline:auto;padding-block:48px 84px}
+.cham-site .cham-shop-page__heading{display:flex;align-items:end;justify-content:space-between;gap:22px;margin:0 0 28px}
+.cham-site .cham-shop-page__eyebrow{font-size:11px;font-weight:700;letter-spacing:.1em;color:#a85239;margin:0 0 12px}
+.cham-site .cham-shop-page__heading h1,.cham-site .cham-search-page h1{font-size:clamp(34px,4vw,54px);line-height:1.18;font-weight:500;letter-spacing:-.045em;margin:0}
+.cham-site .cham-shop-page__heading p{font-size:14px;line-height:1.7;color:#75695c;margin:13px 0 0}
+.cham-site .cham-shop-page__total{font-size:12px;color:#766d60;white-space:nowrap}
+.cham-site .cham-shop-page__tabs{display:flex;gap:8px;overflow-x:auto;padding:0 0 18px;border-bottom:1px solid #ded3c3;scrollbar-width:thin;margin-bottom:22px}
+.cham-site .cham-shop-page__tabs a{display:flex;align-items:center;min-height:44px;padding:9px 15px;color:#665e53;font-size:13px;text-decoration:none;white-space:nowrap;border-radius:4px;transition:background-color .18s,color .18s}
+.cham-site .cham-shop-page__tabs a[aria-current="page"],.cham-site .cham-shop-page__tabs a:hover{background:#e8dccb;color:#2a251f}
+.cham-site .cham-shop-page__toolbar{display:flex;gap:11px;align-items:center;margin-bottom:28px}
+.cham-site .cham-shop-page__search{display:flex;align-items:center;flex:1;min-width:0;max-width:480px;gap:10px;border:1px solid #d7cbbb;background:#fffdf8;padding:0 14px;border-radius:6px}
+.cham-site .cham-shop-page__search svg{width:18px;height:18px;stroke:#766d60;fill:none;stroke-width:1.6}
+.cham-site .cham-shop-page__search input{border:0;outline:0;background:none;width:100%;min-height:45px;font-family:'Be Vietnam Pro',sans-serif;font-size:13px}
+.cham-site .cham-shop-page__search:focus-within{outline:2px solid #627a66;outline-offset:2px}
+.cham-site .cham-shop-page__select{min-width:0}
+.cham-site .cham-shop-page__select select{min-height:46px;max-width:100%;border:1px solid #d7cbbb;border-radius:6px;background:#fffdf8;padding:8px 13px;font:500 13px 'Be Vietnam Pro',sans-serif;color:#494137;cursor:pointer}
+.cham-site .cham-shop-page__empty{padding:35px;text-align:center;color:#75695c}
+.cham-site .cham-shop-page__empty[hidden]{display:none}
+.cham-site .cham-shop-page__empty button{border:0;border-bottom:1px solid currentColor;color:#a85239;background:none;cursor:pointer;font:inherit}
+.cham-site .cham-shop-page__pagination{display:flex;justify-content:center;gap:18px;margin-top:35px}
+/* Product */
+.cham-site .cham-breadcrumb{display:flex;flex-wrap:wrap;gap:9px;align-items:center;color:#897e70;font-size:12px;margin-bottom:28px}
+.cham-site .cham-breadcrumb a{color:#645d53;text-decoration:none}
+.cham-site .cham-breadcrumb a:hover{color:#a85239}
+.cham-site .cham-product-page__main{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(35px,6vw,95px);align-items:start}
+.cham-site .cham-product-page__gallery{min-width:0}
+.cham-site .cham-product-page__image-stage{aspect-ratio:4/5;background:#eee3d5;overflow:hidden;border-radius:5px}
+.cham-site .cham-product-page__image-stage>img{display:block;width:100%;height:100%;object-fit:cover}
+.cham-site .cham-product-page__image-empty{display:grid;place-items:center;height:100%;font-size:40px;color:#a9937c}
+.cham-site .cham-product-page__thumbs{display:flex;gap:10px;overflow-x:auto;margin-top:12px}
+.cham-site .cham-product-page__thumb{flex:0 0 72px;width:72px;height:80px;border:1px solid #d6c6b6;padding:0;background:#eee3d5;cursor:pointer;border-radius:3px;overflow:hidden}
+.cham-site .cham-product-page__thumb.is-current,.cham-site .cham-product-page__thumb:hover{border-color:#a85239}
+.cham-site .cham-product-page__thumb img{width:100%;height:100%;object-fit:cover}
+.cham-site .cham-product-page__info{padding-top:18px;min-width:0}
+.cham-site .cham-product-page__eyebrow{font-size:12px;color:#a85239;letter-spacing:.04em;margin:0 0 14px}
+.cham-site .cham-product-page__info h1{font-size:clamp(33px,3.9vw,54px);line-height:1.2;letter-spacing:-.045em;font-weight:500;margin:0 0 17px}
+.cham-site .cham-product-page__price{font-size:25px;font-weight:700;color:#26251f;margin:0 0 26px}
+.cham-site .cham-product-page__description{font-size:14px;line-height:1.8;color:#645b50;border-top:1px solid #e2d6c7;padding-top:19px}
+.cham-site .cham-product-page__description p{margin:0 0 14px}
+.cham-site .cham-product-page__controls{margin-top:28px}
+.cham-site .cham-product-page__form>label{display:block;font-size:12px;font-weight:600;margin-bottom:10px;color:#645b50}
+.cham-site .cham-product-page__form select{min-height:45px;width:100%;margin-bottom:20px;padding:10px;border:1px solid #d5c8b9;border-radius:4px;background:#fffdf8}
+.cham-site .cham-product-page__purchase{display:flex;gap:12px;align-items:stretch}
+.cham-site .cham-product-page__quantity{display:flex;align-items:center;border:1px solid #d7cbbb;border-radius:5px;background:#fffdf8;height:52px}
+.cham-site .cham-product-page__quantity button{border:0;background:transparent;width:42px;height:50px;font-size:21px;cursor:pointer;color:#544b3e}
+.cham-site .cham-product-page__quantity button:hover{background:#f1e7d8}
+.cham-site .cham-product-page__quantity input{border:0;background:transparent;width:32px;height:48px;text-align:center;font:600 15px 'Be Vietnam Pro',sans-serif;appearance:textfield;-moz-appearance:textfield}
+.cham-site .cham-product-page__quantity input::-webkit-inner-spin-button,.cham-site .cham-product-page__quantity input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.cham-site .cham-product-page__add{flex:1;min-height:52px;border-radius:5px;border:1px solid #26251f;background:#26251f;color:#fff;font:600 14px 'Be Vietnam Pro',sans-serif;cursor:pointer;transition:background-color .2s,border-color .2s}
+.cham-site .cham-product-page__add:hover{background:#a85239;border-color:#a85239}
+.cham-site .cham-product-page__add:disabled{opacity:.5;cursor:not-allowed}
+.cham-site .cham-product-page__save{margin-top:17px;border:0;background:transparent;color:#4f473d;cursor:pointer;font:500 13px 'Be Vietnam Pro',sans-serif;padding:10px 0;min-height:44px}
+.cham-site .cham-product-page__save span{font-size:20px;margin-right:7px}
+.cham-site .cham-product-page__save:hover,.cham-site .cham-product-page__save[aria-pressed="true"]{color:#a85239}
+.cham-site .cham-product-page__info-note{margin-top:25px;padding-top:20px;border-top:1px solid #e2d6c7;font-size:12px;color:#776a5e;line-height:1.7}
+.cham-site .cham-product-page__related{margin-top:clamp(65px,8vw,110px)}
+.cham-site .cham-search-page__form{display:flex;gap:10px;margin:25px 0 36px;max-width:700px}
+.cham-site .cham-search-page__form input{min-width:0;flex:1;border:1px solid #d7cbbb;background:#fffdf8;border-radius:5px;padding:14px;font:14px 'Be Vietnam Pro',sans-serif}
+.cham-site .cham-search-page__form button{min-height:48px;padding:11px 23px;border:0;background:#26251f;color:#fff;border-radius:5px;cursor:pointer;font:600 13px 'Be Vietnam Pro',sans-serif}
+.cham-site .cham-search-page__form button:hover{background:#a85239}
+.cham-site .cham-search-page__count{font-size:13px;color:#736a60}
+.cham-shop-toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%);padding:14px 20px;background:#2c382f;color:white;border-radius:5px;box-shadow:0 8px 26px #0002;z-index:140;font-size:13px}
+.cham-shop-toast[hidden]{display:none}
+.cham-site .cham-header__actions a,.cham-site .cham-hero__story-link,.cham-site .cham-more-link{transition:color .2s,background-color .2s,border-color .2s,transform .2s}
+.cham-site .cham-header__actions a:hover{transform:translateY(-1px)}
+@media(max-width:980px){
+.cham-site .cham-shop-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.cham-site .cham-category-grid--clean{grid-template-columns:repeat(3,minmax(0,1fr))}
+.cham-site .cham-product-page__main{gap:32px}
+}
+@media(max-width:750px){
+.cham-site .cham-section{padding-block:46px}
+.cham-site .cham-shop-page,.cham-site .cham-product-page,.cham-site .cham-search-page{width:calc(100% - 30px);padding-block:34px 60px}
+.cham-site .cham-category-grid--clean{grid-template-columns:repeat(2,minmax(0,1fr));gap:19px 12px}
+.cham-site .cham-shop-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:23px 12px!important}
+.cham-site .cham-shop-card__details h3{font-size:13px;line-height:1.5;min-height:2.9em}
+.cham-site .cham-shop-card__type{font-size:10px!important}
+.cham-site .cham-shop-card__price{font-size:13px}
+.cham-site .cham-shop-card__quickadd{width:36px;height:36px;min-width:36px;min-height:36px}
+.cham-site .cham-shop-card__favorite{width:38px;height:38px;min-width:38px;min-height:38px}
+.cham-site .cham-home-club__inner,.cham-site .cham-home-about__inner{grid-template-columns:1fr}
+.cham-site .cham-home-club__art{display:none}
+.cham-site .cham-home-club{padding:52px 0}
+.cham-site .cham-home-about{padding:52px 0}
+.cham-site .cham-footer--compact .cham-footer__grid{grid-template-columns:1fr 1fr;gap:26px}
+.cham-site .cham-footer--compact .cham-footer__brand-wrap{grid-column:1/-1}
+.cham-site .cham-footer--compact .cham-footer__bottom{flex-direction:column;gap:8px}
+.cham-site .cham-shop-page__heading{align-items:start;flex-direction:column;gap:8px}
+.cham-site .cham-shop-page__toolbar{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cham-site .cham-shop-page__search{grid-column:1/-1;max-width:none}
+.cham-site .cham-shop-page__select select{width:100%;font-size:12px}
+.cham-site .cham-product-page__main{grid-template-columns:1fr;gap:22px}
+.cham-site .cham-product-page__info{padding-top:0}
+.cham-site .cham-product-page__image-stage{aspect-ratio:4/4.5}
+.cham-site .cham-breadcrumb{margin-bottom:17px}
+}
+@media(max-width:350px){
+.cham-site .cham-product-page__purchase{flex-direction:column}
+.cham-site .cham-product-page__quantity{width:160px}
+.cham-site .cham-shop-page__toolbar{grid-template-columns:1fr}
+.cham-site .cham-shop-page__search{grid-column:1}
+.cham-site .cham-section-head{align-items:start;flex-direction:column;gap:8px}
+}
+@media(prefers-reduced-motion:reduce){.cham-site .cham-shop-card img,.cham-site .cham-category-card img,.cham-site .cham-shop-card__quickadd,.cham-site .cham-shop-card__favorite,.cham-site .cham-more-link,.cham-site .cham-product-page__add{transition:none!important;transform:none!important}}
+
+/* Visible rewards information replaces decorative artwork. */
+.cham-site .cham-home-club__benefits{border-top:1px solid #c8b7a0;max-width:420px;width:100%}
+.cham-site .cham-home-club__benefits>div{display:flex;justify-content:space-between;align-items:center;gap:22px;min-height:66px;border-bottom:1px solid #c8b7a0;font-size:13px}
+.cham-site .cham-home-club__benefits span{color:#6e6052}
+.cham-site .cham-home-club__benefits strong{font-size:14px;color:#332b23;font-weight:700;white-space:nowrap}
+@media(max-width:750px){.cham-site .cham-home-club__benefits{max-width:none;margin-top:12px}.cham-site .cham-home-club__benefits>div{min-height:56px}}
+
+.cham-site .cham-contact .cham-form select{width:100%;min-height:46px;border:1px solid #d7cbbb;background:#fffdf8;border-radius:5px;padding:10px 12px;color:#26251f;font:14px 'Be Vietnam Pro',sans-serif}
+.cham-site .cham-contact .cham-form [data-cham-contact-result]:not([hidden]){display:block;background:#e9efe6;color:#34563b;padding:14px;border-radius:5px;font-size:13px;line-height:1.7;margin-top:14px}

@@ -1,0 +1,51 @@
+<section class="cham-shop-page cham-shell" data-cham-shop>
+  <div class="cham-shop-page__heading">
+    <div>
+      <p class="cham-shop-page__eyebrow">CHẠM</p>
+      <h1>{% if collection.handle == 'all' %}Tất cả sản phẩm{% else %}{{ collection.title }}{% endif %}</h1>
+      <p>Khám phá những vật dụng thủ công dành cho không gian sống và mỗi ngày.</p>
+    </div>
+    <span class="cham-shop-page__total">{{ collection.products_count }} sản phẩm</span>
+  </div>
+  <nav class="cham-shop-page__tabs" aria-label="Danh mục sản phẩm">
+    <a href="{{ routes.all_products_collection_url }}" {% if collection.handle == 'all' %}aria-current="page"{% endif %}>Tất cả</a>
+    {% for group in collections %}
+      {% unless group.handle == 'frontpage' or group.handle == 'all' %}
+        <a href="{{ group.url }}" {% if group.handle == collection.handle %}aria-current="page"{% endif %}>{{ group.title }}</a>
+      {% endunless %}
+    {% endfor %}
+  </nav>
+  <div class="cham-shop-page__toolbar">
+    <label class="cham-shop-page__search">
+      <span class="visually-hidden">Tìm trong danh mục</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+      <input type="search" data-cham-filter-search placeholder="Tìm theo tên sản phẩm" autocomplete="off">
+    </label>
+    <label class="cham-shop-page__select"><span class="visually-hidden">Khoảng giá</span>
+      <select data-cham-filter-price aria-label="Lọc theo giá">
+        <option value="all">Mọi mức giá</option><option value="0-200000">Dưới 200.000đ</option><option value="200000-400000">200.000–400.000đ</option><option value="400000-999999999">Trên 400.000đ</option>
+      </select>
+    </label>
+    <label class="cham-shop-page__select"><span class="visually-hidden">Sắp xếp</span>
+      <select data-cham-filter-sort aria-label="Sắp xếp sản phẩm">
+        <option value="featured">Đề xuất</option><option value="low">Giá tăng dần</option><option value="high">Giá giảm dần</option><option value="name">Theo tên</option>
+      </select>
+    </label>
+  </div>
+  {% paginate collection.products by 24 %}
+    <div class="cham-shop-grid cham-shop-grid--collection" data-cham-shop-grid>
+      {% for item in collection.products %}
+        {% render 'cham-shop-card', product: item %}
+      {% else %}
+        <p class="cham-shop-page__empty">Chưa có sản phẩm trong danh mục này.</p>
+      {% endfor %}
+    </div>
+    <div class="cham-shop-page__empty" data-cham-no-matches hidden>Không tìm thấy sản phẩm phù hợp. <button type="button" data-cham-reset-filters>Xóa bộ lọc</button></div>
+    {% if paginate.pages > 1 %}
+      <nav class="cham-shop-page__pagination" aria-label="Trang kết quả">{{ paginate | default_pagination }}</nav>
+    {% endif %}
+  {% endpaginate %}
+</section>
+{% schema %}
+{"name":"CHẠM · Cửa hàng","tag":"section","settings":[],"presets":[],"enabled_on":{"templates":["collection"]}}
+{% endschema %}

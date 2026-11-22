@@ -1,0 +1,29 @@
+{%- assign cham_variant = product.selected_or_first_available_variant -%}
+<article class="cham-shop-card" data-cham-item data-cham-title="{{ product.title | escape }}" data-cham-price="{{ product.price | divided_by: 100.0 }}" data-cham-type="{{ product.type | escape }}">
+  <div class="cham-shop-card__visual">
+    <a href="{{ product.url }}" aria-label="Xem {{ product.title | escape }}">
+      {% if product.featured_image != blank %}
+        {{ product.featured_image | image_url: width: 720 | image_tag: loading: 'lazy', widths: '240, 360, 540, 720', sizes: '(max-width: 600px) 48vw, (max-width: 980px) 32vw, 23vw', alt: product.title }}
+      {% else %}<span class="cham-shop-card__missing">CHẠM</span>{% endif %}
+    </a>
+    <button type="button" class="cham-shop-card__favorite" data-cham-favorite data-product-id="{{ product.id }}" data-product-title="{{ product.title | escape }}" data-product-url="{{ product.url }}" data-product-price="{{ product.price }}" data-product-image="{% if product.featured_image %}{{ product.featured_image | image_url: width: 320 }}{% endif %}" aria-label="Lưu {{ product.title | escape }} vào yêu thích" aria-pressed="false">
+      <span aria-hidden="true">♡</span>
+    </button>
+  </div>
+  <div class="cham-shop-card__details">
+    <p class="cham-shop-card__type">{{ product.type | default: 'Thủ công' }}</p>
+    <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+    <div class="cham-shop-card__bottom">
+      <span class="cham-shop-card__price">{{ product.price | money }}</span>
+      {% if cham_variant.available and product.has_only_default_variant %}
+        <form action="{{ routes.cart_add_url }}" method="post" data-cham-add-cart>
+          <input type="hidden" name="id" value="{{ cham_variant.id }}">
+          <input type="hidden" name="quantity" value="1">
+          <button type="submit" class="cham-shop-card__quickadd" aria-label="Thêm {{ product.title | escape }} vào giỏ hàng"><span aria-hidden="true">+</span></button>
+        </form>
+      {% else %}
+        <a class="cham-shop-card__quickadd" href="{{ product.url }}" aria-label="Xem lựa chọn {{ product.title | escape }}"><span aria-hidden="true">+</span></a>
+      {% endif %}
+    </div>
+  </div>
+</article>

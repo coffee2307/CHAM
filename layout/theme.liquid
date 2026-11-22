@@ -16,15 +16,16 @@
     {{ 'cham-refinement.css' | asset_url | stylesheet_tag }}
     {{ 'cham-demo.css' | asset_url | stylesheet_tag }}
     {{ 'cham-minimal.css' | asset_url | stylesheet_tag }}
+    {{ 'cham-polish.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'cham-demo-core.js' | asset_url }}" defer></script>
     <script src="{{ 'cham-demo-pages.js' | asset_url }}" defer></script>
     <script src="{{ 'cham-theme.js' | asset_url }}" defer></script>
     <script src="{{ 'cham-mobile-menu.js' | asset_url }}" defer></script>
+    <script src="{{ 'cham-shop.js' | asset_url }}" defer></script>
     {% if request.design_mode %}{%- render 'theme-editor' -%}{% endif %}
     {{ content_for_header }}
   </head>
   <body class="cham-site page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
-    <div class="cham-demo-notice" role="note">CHẠM 2.0 <span>DEMO</span> · Sản phẩm và giao dịch chỉ là minh họa</div>
     {% render 'skip-to-content-link', href: '#MainContent', text: 'Bỏ qua đến nội dung chính', literal: true %}
     <div id="header-group">{% sections 'header-group' %}</div>
     <main id="MainContent" class="content-for-layout" role="main"
