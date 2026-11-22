@@ -258,31 +258,10 @@
 </div>
 
 <div class="cart__ctas">
-  <button
-    type="submit"
-    id="checkout"
-    class="cart__checkout-button button"
-    name="checkout"
-    {% if cart == empty %}
-      disabled
-    {% endif %}
-    form="cart-form"
-  >
-    <span class="button-text">
-      {{ 'content.checkout' | t }}
-    </span>
-  </button>
-
-  {% if additional_checkout_buttons and settings.show_accelerated_checkout_buttons %}
-    <div
-      class="
-        additional-checkout-buttons
-        {% if accelerated_checkout_buttons_layout == 'vertical' %}additional-checkout-buttons--vertical{% endif %}
-      "
-    >
-      {{ content_for_additional_checkout_buttons }}
-    </div>
-  {% endif %}
+  <a href="/pages/demo-checkout" class="cart__checkout-button button" data-cham-demo-checkout-link>
+    <span class="button-text">Xác nhận đơn hàng DEMO · Không thu tiền</span>
+  </a>
+  <p class="cd-muted">Đây là cửa hàng trình diễn; không có thanh toán hoặc vận chuyển thực tế.</p>
 </div>
 
 {% stylesheet %}

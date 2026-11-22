@@ -1,0 +1,31 @@
+const fs=require('node:fs');const vm=require('node:vm');const assert=require('node:assert/strict');const source=fs.readFileSync(require('node:path').join(__dirname,'../assets/cham-demo-core.js'),'utf8');
+const values=new Map();const storage={getItem:key=>values.has(key)?values.get(key):null,setItem:(key,value)=>values.set(key,String(value))};
+function load(){
+ const document={addEventListener:()=>{},dispatchEvent:()=>{},querySelector:()=>null,querySelectorAll:()=>[],createElement:()=>({setAttribute:()=>{},textContent:'',hidden:false,className:''}),body:{append:()=>{}}};
+ const window={addEventListener:()=>{}};
+ const context={window,document,localStorage:storage,Intl,Date,Math,JSON,Number,String,Array,Object,CustomEvent:class{},setTimeout,clearTimeout,console};
+ vm.runInNewContext(source,context,{filename:'cham-demo-core.js'});
+ return window.CHAMDemo;
+}
+const app=load();assert.ok(app);
+assert.equal(app.points(),100,'new visitor gets welcome points');
+assert.equal(app.checkin(),true);assert.equal(app.points(),110);
+assert.equal(app.checkin(),false);assert.equal(app.points(),110,'no duplicate daily reward');
+assert.equal(app.gameAward(8),true);assert.equal(app.gameAward(9),false);assert.equal(app.points(),130,'no duplicate game reward');
+const reward=app.redeem('CHAM10');assert.equal(reward.ok,true);assert.equal(app.points(),30);
+assert.equal(app.redeem('CHAM20').ok,false,'no redemption with insufficient points');
+assert.equal(app.getState().vouchers.length,1);
+assert.equal(app.setName('Người thử nghiệm'),true);
+app.toggleFavorite({id:'demo-5',title:'Bình gốm',url:'/products/demo-5',price:28900000});
+assert.equal(app.getState().favoriteProducts.length,1);
+const validOrder={items:[{id:1,variant_id:2,product_title:'Ly gốm',quantity:1,final_line_price:45000000}],shipping:{name:'Tên thật',phone:'0909999999',address:'Địa chỉ nhạy cảm',note:'Nội dung riêng'},subtotal:450000,total:440000,discountId:reward.voucher.id};
+const created=app.makeOrder(validOrder);assert.equal(created.ok,true);assert.equal(created.pointsEarned,44);
+assert.equal(app.points(),74,'order rewards after redeem');
+assert.equal(app.getState().vouchers[0].used,true);
+assert.equal(app.getState().orders[0].shipping.phone,'Không lưu','do not persist personal phone');
+assert.equal(app.getState().orders[0].shipping.address,'Không lưu','do not persist personal address');
+assert.equal(app.getState().orders[0].shipping.name,'Khách demo','do not persist entered name');
+assert.equal(app.redeem('CHAM50').ok,false);
+const next=load();assert.equal(next.points(),74,'reload persisted points');assert.equal(next.getState().orders.length,1);
+assert.equal(next.reset(),true);assert.equal(next.points(),100);assert.equal(next.getState().orders.length,0);assert.equal(next.getState().vouchers.length,0);
+console.log('PASS: 17 cases covering persistence, rewards idempotence, vouchers, favorites, demo orders, privacy and reset');

@@ -11,6 +11,11 @@
       <div class="cham-product-context__item"><span class="cham-product-context__label">Chất liệu</span><span class="cham-product-context__value">{{ material | default: section.settings.material_fallback }}</span></div>
       <div class="cham-product-context__item"><span class="cham-product-context__label">Kỹ thuật</span><span class="cham-product-context__value">{{ craft | default: section.settings.craft_fallback }}</span></div>
     </div>
+    <div class="cham-product-context__custom">
+      <strong>CHẠM 2.0 — SẢN PHẨM DEMO</strong>
+      <span>Sản phẩm và mức giá chỉ là dữ liệu minh họa, không có hàng thật.</span>
+      <button class="cham-favorite-button" type="button" data-cham-favorite data-product-id="{{ product.id }}" data-product-title="{{ product.title | escape }}" data-product-url="{{ product.url }}" data-product-image="{% if product.featured_image %}{{ product.featured_image | image_url: width: 320 }}{% endif %}" data-product-price="{{ product.price }}" aria-pressed="false" aria-label="Lưu {{ product.title | escape }} vào yêu thích">♡</button>
+    </div>
     {% if section.settings.show_custom %}
       <div class="cham-product-context__custom">
         <div><strong>{{ section.settings.custom_heading }}</strong><div>{{ section.settings.custom_text }}</div></div>
@@ -24,9 +29,9 @@
   "name":"CHẠM · Thông tin sản phẩm",
   "tag":"section",
   "settings":[
-    {"type":"text","id":"origin_fallback","label":"Nguồn gốc mặc định","default":"Việt Nam · cập nhật theo sản phẩm"},
+    {"type":"text","id":"origin_fallback","label":"Nguồn gốc mặc định","default":"Dữ liệu minh họa · chưa xác minh"},
     {"type":"text","id":"material_fallback","label":"Chất liệu mặc định","default":"Xem mô tả sản phẩm"},
-    {"type":"text","id":"craft_fallback","label":"Kỹ thuật mặc định","default":"Thủ công · cập nhật theo sản phẩm"},
+    {"type":"text","id":"craft_fallback","label":"Kỹ thuật mặc định","default":"Kỹ thuật minh họa · chưa xác minh"},
     {"type":"checkbox","id":"show_custom","label":"Hiện tùy chỉnh","default":true},
     {"type":"text","id":"custom_heading","label":"Tiêu đề tùy chỉnh","default":"Bạn cần một phiên bản riêng?"},
     {"type":"textarea","id":"custom_text","label":"Mô tả tùy chỉnh","default":"Hỏi CHẠM về màu, kích thước, nhãn riêng, đóng gói quà hoặc đơn số lượng lớn. Khả năng tùy chỉnh phụ thuộc từng sản phẩm."},

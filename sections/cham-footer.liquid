@@ -20,6 +20,9 @@
           <li><a href="{{ routes.all_products_collection_url }}">Tất cả sản phẩm</a></li>
           <li><a href="{{ cham_story_url }}">Câu chuyện CHẠM</a></li>
           <li><a href="/pages/about">Về CHẠM</a></li>
+          <li><a href="/pages/cham-club">CHẠM Club</a></li>
+          <li><a href="/pages/cham-play">CHẠM Play</a></li>
+          <li><a href="/pages/faq">Hỏi đáp</a></li>
         </ul>
       </div>
       <div>
@@ -33,12 +36,8 @@
       <div class="cham-footer__newsletter">
         <p class="cham-footer__heading">{{ section.settings.newsletter_heading }}</p>
         <p class="cham-footer__tagline">{{ section.settings.newsletter_text }}</p>
-        {% form 'customer', class: 'cham-footer__form' %}
-          <input type="hidden" name="contact[tags]" value="newsletter">
-          <label class="visually-hidden" for="ChamNewsletter-{{ section.id }}">Email</label>
-          <input id="ChamNewsletter-{{ section.id }}" type="email" name="contact[email]" placeholder="Email của bạn" autocomplete="email" required>
-          <button type="submit">Đăng ký</button>
-        {% endform %}
+        <a class="cham-button cham-button--primary" href="/pages/cham-club">Trải nghiệm CHẠM Club</a>
+        <small>Website demo không thu thập email đăng ký nhận tin.</small>
       </div>
     </div>
     <div class="cham-footer__bottom">

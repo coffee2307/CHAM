@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "cham-demo-app",
+      "settings": {
+        "mode": "checkout",
+        "heading": "Đặt hàng demo"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

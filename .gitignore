@@ -1,7 +1,11 @@
-# Local tooling / generated state
-backend/.wrangler/
-_live-theme-check*/
-_rc-theme-check*/
-_rc-verify/
-_rc-settings-check/
-.qa/
+# Local-only development and backups
+.backup/
+.shopify/
+node_modules/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+Thumbs.db
+.theme-check-local.*

@@ -18,6 +18,7 @@
               {{ product.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '280, 460, 700, 900', sizes: '(max-width: 560px) 50vw, (max-width: 1100px) 33vw, 25vw', alt: product.featured_image.alt | default: product.title }}
             {% else %}{{ 'product-1' | placeholder_svg_tag }}{% endif %}
           </a>
+          <button class="cham-favorite-button" type="button" data-cham-favorite data-product-id="{{ product.id }}" data-product-title="{{ product.title | escape }}" data-product-url="{{ product.url }}" data-product-image="{% if product.featured_image %}{{ product.featured_image | image_url: width: 320 }}{% endif %}" data-product-price="{{ product.price }}" aria-label="Thêm {{ product.title | escape }} vào yêu thích" aria-pressed="false">♡</button>
           <div class="cham-product-card__body">
             <div class="cham-product-card__meta"><span>{{ product.type | default: 'Đồ thủ công' }}</span>{% if product.vendor != blank %}<span>{{ product.vendor }}</span>{% endif %}</div>
             <h3 class="cham-product-card__title"><a href="{{ product.url }}">{{ product.title }}</a></h3>

@@ -24,6 +24,10 @@
         <a class="cham-button cham-button--primary" href="{{ primary_link }}"><span>{{ section.settings.primary_label }}</span><span aria-hidden="true">↗</span></a>
         <a class="cham-button cham-button--soft" href="{{ secondary_link }}"><span>{{ section.settings.secondary_label }}</span></a>
       </div>
+      <div class="cham-hero-demo-link">
+        <a class="cham-pill" href="/pages/cham-play">Chơi CHẠM Play · Nhận điểm</a>
+        <a class="cham-pill" href="/pages/cham-club">CHẠM Club · Hồ sơ</a>
+      </div>
 
       {% if section.settings.show_search %}
         <form class="cham-search" action="{{ routes.search_url }}" method="get" role="search">
@@ -36,10 +40,11 @@
       {% endif %}
 
       <div class="cham-hero__chips" aria-label="Khám phá sản phẩm">
-        <a href="{{ routes.all_products_collection_url }}">Trang trí</a>
-        <a href="{{ routes.all_products_collection_url }}">Phụ kiện</a>
-        <a href="{{ routes.all_products_collection_url }}">Đồ dùng</a>
-        <a href="{{ routes.all_products_collection_url }}">Quà tặng</a>
+        <a href="/collections/gốm-trang-tri">Gốm & Trang trí</a>
+        <a href="/collections/may-tre-dan">Mây tre đan</a>
+        <a href="/collections/vải-dệt-thủ-cong">Vải & Dệt</a>
+        <a href="/collections/phụ-kiện">Phụ kiện</a>
+        <a href="/collections/qua-tặng">Quà tặng</a>
       </div>
     </div>
 

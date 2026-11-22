@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "cham-demo-app",
+      "settings": {
+        "mode": "club",
+        "heading": "CHẠM Club"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

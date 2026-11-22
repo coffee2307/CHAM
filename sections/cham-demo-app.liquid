@@ -1,0 +1,20 @@
+<section class="cham-demo-app" aria-label="{{ section.settings.heading | escape }}">
+  <div data-cham-demo-app data-mode="{{ section.settings.mode | escape }}">
+    <div class="cd-shell"><p class="cd-label">CHẠM 2.0 · DEMO</p><h1>{{ section.settings.heading }}</h1><p>Đang khởi tạo phiên trải nghiệm trên trình duyệt…</p></div>
+  </div>
+</section>
+{% schema %}
+{
+  "name":"CHẠM · Ứng dụng demo",
+  "tag":"section",
+  "settings":[
+    {"type":"text","id":"heading","label":"Tiêu đề dự phòng","default":"CHẠM Club"},
+    {"type":"select","id":"mode","label":"Chức năng","options":[
+      {"value":"club","label":"CHẠM Club · Hồ sơ"},
+      {"value":"play","label":"CHẠM Play · Mini game"},
+      {"value":"checkout","label":"Checkout mô phỏng"}
+    ],"default":"club"}
+  ],
+  "presets":[{"name":"CHẠM · Ứng dụng demo","category":"CHẠM"}]
+}
+{% endschema %}
