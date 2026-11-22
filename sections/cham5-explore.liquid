@@ -1,0 +1,71 @@
+{%- liquid
+  assign pottery_col = collections['gốm-trang-tri']
+  assign weave_col = collections['may-tre-dan']
+  assign textile_col = collections['vải-dệt-thủ-cong']
+  assign gift_col = collections['qua-tặng']
+  assign pottery = pottery_col.products.first
+  assign weave = weave_col.products.first
+  assign textile = textile_col.products.first
+  assign gift = gift_col.products.first
+  assign accessory = collections['phụ-kiện'].products.first
+-%}
+<div class="cham5-explore cham5">
+  <section class="cham5-materials" id="cham5-materials" aria-labelledby="cham5-materials-title">
+    <div class="cham5-materials__intro">
+      <div><p class="cham5-small-cap">Chất liệu và đời sống</p><h2 id="cham5-materials-title">Mỗi chất liệu.<br>Một cách chạm.</h2></div>
+      <p>Khám phá những nhóm sản phẩm CHẠM đang giới thiệu. Chọn một chất liệu để xem ảnh và mở bộ sưu tập tương ứng.</p>
+    </div>
+    <div class="cham5-materials__accordion" role="tablist" aria-label="Khám phá chất liệu">
+      <article class="cham5-material is-active" data-cham5-material-panel>
+        <button type="button" class="cham5-material__tab" role="tab" id="cham5-mat-tab-1" aria-selected="true" aria-controls="cham5-mat-panel-1" data-cham5-material-tab><span class="cham5-material__num">01</span><span class="cham5-material__name">Gốm</span><span class="cham5-material__plus" aria-hidden="true">+</span></button>
+        <div class="cham5-material__body" role="tabpanel" id="cham5-mat-panel-1" aria-labelledby="cham5-mat-tab-1">
+          <div class="cham5-material__photo">{% if pottery.featured_image %}{{ pottery.featured_image | image_url: width: 950 | image_tag: loading: 'lazy', widths: '400, 650, 950', sizes: '(max-width: 760px) 92vw, 39vw', alt: pottery.title }}{% endif %}</div>
+          <div class="cham5-material__detail"><h3>Đất và men.</h3><p>Từ bình hoa đến ly uống nước, đồ gốm đem chất liệu gần gũi vào không gian sống.</p><a href="{{ pottery_col.url }}">Xem đồ gốm <span aria-hidden="true">→</span></a></div>
+        </div>
+      </article>
+      <article class="cham5-material" data-cham5-material-panel>
+        <button type="button" class="cham5-material__tab" role="tab" id="cham5-mat-tab-2" aria-selected="false" aria-controls="cham5-mat-panel-2" tabindex="-1" data-cham5-material-tab><span class="cham5-material__num">02</span><span class="cham5-material__name">Mây tre</span><span class="cham5-material__plus" aria-hidden="true">+</span></button>
+        <div class="cham5-material__body" role="tabpanel" id="cham5-mat-panel-2" aria-labelledby="cham5-mat-tab-2" hidden>
+          <div class="cham5-material__photo">{% if weave.featured_image %}{{ weave.featured_image | image_url: width: 950 | image_tag: loading: 'lazy', widths: '400, 650, 950', sizes: '(max-width: 760px) 92vw, 39vw', alt: weave.title }}{% endif %}</div>
+          <div class="cham5-material__detail"><h3>Nan và nếp đan.</h3><p>Vật liệu linh hoạt, từ giỏ đựng đến đèn trang trí, tạo nên cấu trúc có công dụng rõ ràng.</p><a href="{{ weave_col.url }}">Xem mây tre <span aria-hidden="true">→</span></a></div>
+        </div>
+      </article>
+      <article class="cham5-material" data-cham5-material-panel>
+        <button type="button" class="cham5-material__tab" role="tab" id="cham5-mat-tab-3" aria-selected="false" aria-controls="cham5-mat-panel-3" tabindex="-1" data-cham5-material-tab><span class="cham5-material__num">03</span><span class="cham5-material__name">Vải dệt</span><span class="cham5-material__plus" aria-hidden="true">+</span></button>
+        <div class="cham5-material__body" role="tabpanel" id="cham5-mat-panel-3" aria-labelledby="cham5-mat-tab-3" hidden>
+          <div class="cham5-material__photo">{% if textile.featured_image %}{{ textile.featured_image | image_url: width: 950 | image_tag: loading: 'lazy', widths: '400, 650, 950', sizes: '(max-width: 760px) 92vw, 39vw', alt: textile.title }}{% endif %}</div>
+          <div class="cham5-material__detail"><h3>Sợi và hoa văn.</h3><p>Từ khăn đến túi vải, kết cấu sợi và các họa tiết tạo nét riêng cho món đồ.</p><a href="{{ textile_col.url }}">Xem vải dệt <span aria-hidden="true">→</span></a></div>
+        </div>
+      </article>
+      <article class="cham5-material" data-cham5-material-panel>
+        <button type="button" class="cham5-material__tab" role="tab" id="cham5-mat-tab-4" aria-selected="false" aria-controls="cham5-mat-panel-4" tabindex="-1" data-cham5-material-tab><span class="cham5-material__num">04</span><span class="cham5-material__name">Tặng phẩm</span><span class="cham5-material__plus" aria-hidden="true">+</span></button>
+        <div class="cham5-material__body" role="tabpanel" id="cham5-mat-panel-4" aria-labelledby="cham5-mat-tab-4" hidden>
+          <div class="cham5-material__photo">{% if gift.featured_image %}{{ gift.featured_image | image_url: width: 950 | image_tag: loading: 'lazy', widths: '400, 650, 950', sizes: '(max-width: 760px) 92vw, 39vw', alt: gift.title }}{% endif %}</div>
+          <div class="cham5-material__detail"><h3>Những món quà nhỏ.</h3><p>Kết hợp nhiều món đồ trong một bộ quà gọn gàng, dễ lựa chọn và trao tặng.</p><a href="{{ gift_col.url }}">Xem quà tặng <span aria-hidden="true">→</span></a></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="cham5-gallery" data-cham5-track="gallery" aria-labelledby="cham5-gallery-title">
+    <div class="cham5-gallery__top"><p class="cham5-small-cap">Bộ sưu tập chọn lọc</p><h2 id="cham5-gallery-title">Những món đồ<br>được nhìn gần hơn.</h2><a href="#cham5-categories" class="cham5-underline">Tìm theo danh mục <span aria-hidden="true">→</span></a></div>
+    <div class="cham5-gallery__composition">
+      <figure class="cham5-gallery__piece cham5-gallery__piece--a">
+        <a href="{{ pottery.url | default: routes.all_products_collection_url }}">{% if pottery.featured_image %}{{ pottery.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '450, 800, 1200', sizes: '(max-width: 800px) 90vw, 43vw', alt: pottery.title }}{% endif %}<span>{{ pottery.title }}</span></a>
+      </figure>
+      <figure class="cham5-gallery__piece cham5-gallery__piece--b">
+        <a href="{{ accessory.url | default: routes.all_products_collection_url }}">{% if accessory.featured_image %}{{ accessory.featured_image | image_url: width: 760 | image_tag: loading: 'lazy', widths: '350, 550, 760', sizes: '(max-width: 800px) 86vw, 27vw', alt: accessory.title }}{% endif %}<span>{{ accessory.title }}</span></a>
+      </figure>
+      <figure class="cham5-gallery__piece cham5-gallery__piece--c">
+        <a href="{{ weave.url | default: routes.all_products_collection_url }}">{% if weave.featured_image %}{{ weave.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '400, 700, 1000', sizes: '(max-width: 800px) 90vw, 32vw', alt: weave.title }}{% endif %}<span>{{ weave.title }}</span></a>
+      </figure>
+      <figure class="cham5-gallery__piece cham5-gallery__piece--d">
+        <a href="{{ textile.url | default: routes.all_products_collection_url }}">{% if textile.featured_image %}{{ textile.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '400, 650, 900', sizes: '(max-width: 800px) 90vw, 30vw', alt: textile.title }}{% endif %}<span>{{ textile.title }}</span></a>
+      </figure>
+      <p class="cham5-gallery__footnote">Ảnh sản phẩm hiện có trong cửa hàng CHẠM, phục vụ trình diễn.</p>
+    </div>
+  </section>
+</div>
+{% schema %}
+{"name":"CHẠM 5 · Chất liệu","tag":"section","settings":[],"presets":[{"name":"CHẠM 5 · Chất liệu","category":"CHẠM 5"}]}
+{% endschema %}

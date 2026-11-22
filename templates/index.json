@@ -1,40 +1,23 @@
 {
   "sections": {
-    "hero": {
-      "type": "cham-home-hero",
+    "story": {
+      "type": "cham5-story",
       "settings": {}
     },
-    "categories": {
-      "type": "cham-category-grid",
+    "explore": {
+      "type": "cham5-explore",
       "settings": {}
     },
-    "products": {
-      "type": "cham-featured-products",
+    "market": {
+      "type": "cham5-market",
       "settings": {
-        "product_limit": 8,
-        "heading": "Sản phẩm được chọn",
-        "body": "Gốm, mây tre, vải dệt và những món quà nhỏ."
+        "products_limit": 6
       }
-    },
-    "catalog": {
-      "type": "cham-catalog",
-      "settings": {}
-    },
-    "club": {
-      "type": "cham-home-club",
-      "settings": {}
-    },
-    "about": {
-      "type": "cham-home-about",
-      "settings": {}
     }
   },
   "order": [
-    "hero",
-    "categories",
-    "products",
-    "catalog",
-    "club",
-    "about"
+    "story",
+    "explore",
+    "market"
   ]
 }

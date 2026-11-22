@@ -1,0 +1,92 @@
+{%- liquid
+  assign pottery = collections['gốm-trang-tri'].products.first
+  assign basket = collections['may-tre-dan'].products.first
+  assign textile = collections['vải-dệt-thủ-cong'].products.first
+  assign gift = collections['qua-tặng'].products.first
+-%}
+<div class="cham5-story cham5" data-cham5-root>
+  <div class="cham5-intro" aria-hidden="true"><span>Từ Việt Nam, bằng đôi tay.</span></div>
+
+  <section class="cham5-cover" id="cham5-top" data-cham5-track="cover" aria-labelledby="cham5-cover-heading">
+    <div class="cham5-cover__viewport" data-cham5-stage>
+      <div class="cham5-cover__eyebrow"><span>Thủ công Việt Nam</span><span>CHẠM · Một hành trình khám phá</span></div>
+      <div class="cham5-cover__masthead">
+        <h1 id="cham5-cover-heading" class="cham5-cover__word">CHẠM</h1>
+        <span class="cham5-cover__pen">Được làm bằng tay.</span>
+        <img class="cham5-cover__drawing cham5-cover__drawing--pottery" src="{{ 'cham5-ink-ceramic.webp' | asset_url }}" alt="" width="450" height="600" fetchpriority="high">
+        <img class="cham5-cover__drawing cham5-cover__drawing--bamboo" src="{{ 'cham5-ink-weave.webp' | asset_url }}" alt="" width="380" height="520" loading="eager">
+        <img class="cham5-cover__drawing cham5-cover__drawing--thread" src="{{ 'cham5-ink-textile.webp' | asset_url }}" alt="" width="280" height="380" loading="lazy">
+      </div>
+      <div class="cham5-cover__lower">
+        <div class="cham5-cover__message"><p>Gần hơn với những món đồ<br>được làm bằng tay.</p><a href="#cham5-categories" class="cham5-underline">Khám phá sản phẩm <span aria-hidden="true">→</span></a></div>
+        <p class="cham5-cover__scroll-note">Cuộn để khám phá <span aria-hidden="true">↓</span></p>
+      </div>
+      <div class="cham5-cover__photos" aria-label="Hình ảnh sản phẩm thủ công minh họa">
+        <figure class="cham5-cover__photo cham5-cover__photo--one">
+          {% if pottery.featured_image %}{{ pottery.featured_image | image_url: width: 760 | image_tag: loading: 'eager', widths: '380, 560, 760', sizes: '(max-width: 768px) 41vw, 23vw', alt: pottery.title }}{% endif %}
+        </figure>
+        <figure class="cham5-cover__photo cham5-cover__photo--two">
+          {% if basket.featured_image %}{{ basket.featured_image | image_url: width: 760 | image_tag: loading: 'lazy', widths: '380, 560, 760', sizes: '(max-width: 768px) 42vw, 23vw', alt: basket.title }}{% endif %}
+        </figure>
+        <figure class="cham5-cover__photo cham5-cover__photo--three">
+          {% if textile.featured_image %}{{ textile.featured_image | image_url: width: 760 | image_tag: loading: 'lazy', widths: '380, 560, 760', sizes: '(max-width: 768px) 42vw, 23vw', alt: textile.title }}{% endif %}
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="cham5-storybook" data-cham5-track="storybook" aria-label="Câu chuyện chất liệu và thành phẩm">
+    <div class="cham5-storybook__viewport" data-cham5-stage>
+      <div class="cham5-storybook__header"><span>Khám phá thủ công</span><span>Chất liệu · Cách làm · Thành phẩm</span></div>
+      <div class="cham5-storybook__rail" aria-hidden="true"><span class="cham5-storybook__rail-fill"></span></div>
+      <article class="cham5-storybook__chapter" data-cham5-chapter="0">
+        <div class="cham5-storybook__chapter-copy"><p class="cham5-small-cap">Chất liệu</p><h2>Mọi thứ bắt đầu từ những gì rất đỗi quen thuộc.</h2><p>Đất, tre, mây và sợi. Chúng có kết cấu, độ bền và vẻ đẹp khác nhau trước khi trở thành một món đồ.</p></div>
+        <div class="cham5-storybook__art cham5-storybook__art--first">
+          <img class="cham5-storybook__main-photo" src="{{ 'cham5-detail-ceramic.webp' | asset_url }}" loading="lazy" width="850" height="650" alt="Ảnh cận cảnh chất liệu từ sản phẩm gốm minh họa">
+          <img class="cham5-storybook__ink" src="{{ 'cham5-ink-ceramic.webp' | asset_url }}" loading="lazy" width="450" height="600" alt="">
+        </div>
+      </article>
+      <article class="cham5-storybook__chapter" data-cham5-chapter="1">
+        <div class="cham5-storybook__chapter-copy"><p class="cham5-small-cap">Đôi tay</p><h2>Giá trị nằm trong cách một món đồ được tạo nên.</h2><p>Mỗi kỹ thuật tạo hình, đan hoặc dệt đều cần sự khéo léo. Người mua xứng đáng được tìm hiểu về quá trình ấy.</p></div>
+        <div class="cham5-storybook__art cham5-storybook__art--second">
+          {% if basket.featured_image %}{{ basket.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '450, 750, 1000', sizes: '(max-width: 850px) 80vw, 48vw', alt: basket.title, class: 'cham5-storybook__main-photo' }}{% endif %}
+          <img class="cham5-storybook__ink" src="{{ 'cham5-ink-weave.webp' | asset_url }}" width="440" height="600" loading="lazy" alt="">
+        </div>
+      </article>
+      <article class="cham5-storybook__chapter" data-cham5-chapter="2">
+        <div class="cham5-storybook__chapter-copy"><p class="cham5-small-cap">Thành phẩm</p><h2>Một món đồ tốt sẽ tìm được chỗ đứng trong đời sống.</h2><p>Hình dáng quan trọng. Công dụng và sự phù hợp còn quan trọng hơn. CHẠM bắt đầu từ mong muốn giúp mọi người lựa chọn dễ dàng hơn.</p></div>
+        <div class="cham5-storybook__art cham5-storybook__art--third">
+          {% if textile.featured_image %}{{ textile.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '450, 750, 1000', sizes: '(max-width: 850px) 80vw, 48vw', alt: textile.title, class: 'cham5-storybook__main-photo' }}{% endif %}
+          <img class="cham5-storybook__ink" src="{{ 'cham5-ink-textile.webp' | asset_url }}" width="440" height="600" loading="lazy" alt="">
+        </div>
+      </article>
+      <p class="cham5-storybook__count"><span data-cham5-chapter-count>01</span><span>/ 03</span></p>
+    </div>
+  </section>
+
+  <section class="cham5-portal" data-cham5-track="portal" aria-labelledby="cham5-portal-heading">
+    <div class="cham5-portal__viewport" data-cham5-stage>
+      <p class="cham5-portal__small">Từ chi tiết nhỏ, đến điều đáng nhớ.</p>
+      <div class="cham5-portal__image">
+        {% if gift.featured_image %}{{ gift.featured_image | image_url: width: 1800 | image_tag: loading: 'lazy', widths: '640, 960, 1400, 1800', sizes: '100vw', alt: gift.title }}{% endif %}
+      </div>
+      <div class="cham5-portal__dark"></div>
+      <h2 id="cham5-portal-heading">Nhìn gần hơn.<br>Hiểu nhiều hơn.</h2>
+    </div>
+  </section>
+
+  <section class="cham5-film" data-cham5-track="film" aria-labelledby="cham5-film-heading">
+    <div class="cham5-film__viewport" data-cham5-stage>
+      <div class="cham5-film__heading"><p class="cham5-small-cap">Chạm vào chi tiết</p><h2 id="cham5-film-heading">Những bề mặt biết kể chuyện.</h2><p>Nhìn gần hơn những vân men, đường đan và hoa văn trên món đồ.</p></div>
+      <div class="cham5-film__frames">
+        <figure class="cham5-film__frame"><img src="{{ 'cham5-detail-weave.webp' | asset_url }}" loading="lazy" width="850" height="650" alt="Cận cảnh bề mặt sản phẩm mây tre minh họa"><figcaption>Mây và tre</figcaption></figure>
+        <figure class="cham5-film__frame"><img src="{{ 'cham5-detail-plate.webp' | asset_url }}" loading="lazy" width="850" height="650" alt="Cận cảnh men và chất liệu sản phẩm gốm minh họa"><figcaption>Men gốm</figcaption></figure>
+        <figure class="cham5-film__frame"><img src="{{ 'cham5-detail-textile.webp' | asset_url }}" loading="lazy" width="850" height="650" alt="Cận cảnh hoa văn sản phẩm dệt minh họa"><figcaption>Sợi dệt</figcaption></figure>
+      </div>
+      <div class="cham5-film__foot"><span>Ảnh chi tiết từ sản phẩm demo CHẠM</span><span>Cuộn để tiếp tục <span aria-hidden="true">↓</span></span></div>
+    </div>
+  </section>
+</div>
+{% schema %}
+{"name":"CHẠM 5 · Kể chuyện","tag":"section","settings":[],"presets":[{"name":"CHẠM 5 · Kể chuyện","category":"CHẠM 5"}]}
+{% endschema %}
