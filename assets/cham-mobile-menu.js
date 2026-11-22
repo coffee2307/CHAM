@@ -44,7 +44,7 @@
         finishClosing();
       } else {
         window.clearTimeout(timer);
-        timer = window.setTimeout(finishClosing, 230);
+        timer = window.setTimeout(finishClosing, 170);
       }
     }
 

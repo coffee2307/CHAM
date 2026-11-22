@@ -15,6 +15,7 @@
     {{ 'cham-theme.css' | asset_url | stylesheet_tag }}
     {{ 'cham-refinement.css' | asset_url | stylesheet_tag }}
     {{ 'cham-demo.css' | asset_url | stylesheet_tag }}
+    {{ 'cham-minimal.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'cham-demo-core.js' | asset_url }}" defer></script>
     <script src="{{ 'cham-demo-pages.js' | asset_url }}" defer></script>
     <script src="{{ 'cham-theme.js' | asset_url }}" defer></script>
@@ -24,7 +25,6 @@
   </head>
   <body class="cham-site page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
     <div class="cham-demo-notice" role="note">CHẠM 2.0 <span>DEMO</span> · Sản phẩm và giao dịch chỉ là minh họa</div>
-    <div class="cham-cursor-light" aria-hidden="true"></div>
     {% render 'skip-to-content-link', href: '#MainContent', text: 'Bỏ qua đến nội dung chính', literal: true %}
     <div id="header-group">{% sections 'header-group' %}</div>
     <main id="MainContent" class="content-for-layout" role="main"
@@ -34,12 +34,5 @@
       {{ content_for_layout }}
     </main>
     <footer>{% sections 'footer-group' %}</footer>
-    <nav class="cham-mobile-bottom" aria-label="Điều hướng chính trên di động">
-      <a href="/" aria-label="Trang chủ"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8v9H3zM9 20v-7h6v7"/></svg>Trang chủ</a>
-      <a href="/collections/all" aria-label="Danh mục"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Danh mục</a>
-      <a href="/pages/cham-play" aria-label="CHẠM Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l4 6-2 6-5-3H9l-5 3-2-6zM7 13h5m-2.5-2.5v5M17 12h.01M19 14h.01"/></svg>CHẠM Play</a>
-      <a href="/cart" aria-label="Giỏ hàng"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.5 11h11L21 8H6M10 20h.01M18 20h.01"/></svg>Giỏ hàng</a>
-      <a href="/pages/cham-club" aria-label="Hồ sơ demo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-7 15-7 16 0"/></svg>Cá nhân</a>
-    </nav>
   </body>
 </html>

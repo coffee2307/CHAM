@@ -1,0 +1,88 @@
+/* CHẠM 2.1 — minimal header/hero/scroll refinement.
+   Scoped to the approved CHẠM brand; no changes to commerce logic. */
+#header-group{position:sticky;top:0;z-index:95}
+body.cham-site{padding-bottom:0!important}
+.cham-site .cham-header{position:relative!important;top:auto!important;left:auto;right:auto;width:100%!important;margin:0!important;border:0!important;border-bottom:1px solid rgba(50,45,38,.10)!important;border-radius:0!important;background:rgba(248,243,233,.97)!important;box-shadow:none!important;backdrop-filter:blur(12px);transition:background-color .2s ease,border-color .2s ease}
+.cham-site .cham-header[data-scrolled]{background:rgba(248,243,233,.99)!important;border-bottom-color:rgba(50,45,38,.18)!important;box-shadow:0 4px 18px rgba(40,35,27,.04)!important}
+.cham-site .cham-header__inner{width:min(1260px,calc(100% - 64px));min-height:72px!important;display:grid!important;grid-template-columns:auto minmax(0,1fr) auto!important;gap:clamp(22px,3.5vw,66px)!important;align-items:center;transition:min-height .22s ease}
+.cham-site .cham-header[data-scrolled] .cham-header__inner{min-height:60px!important}
+.cham-site .cham-wordmark{font-family:'Be Vietnam Pro',Arial,sans-serif!important;font-size:clamp(21px,2.2vw,26px)!important;font-weight:700!important;letter-spacing:-.055em!important;white-space:nowrap;line-height:1.2}
+.cham-site .cham-nav{display:flex;align-items:center;justify-content:center;gap:clamp(16px,2.6vw,36px)!important;min-width:0}
+.cham-site .cham-nav a{font-family:'Be Vietnam Pro',Arial,sans-serif!important;font-size:13px!important;font-weight:500!important;letter-spacing:0!important;line-height:1.2;color:#5f5a50;text-decoration:none;white-space:nowrap;transition:color .17s ease}
+.cham-site .cham-nav a:hover,.cham-site .cham-nav a[aria-current="page"]{color:#26251f}
+.cham-site .cham-nav a[aria-current="page"]{text-decoration:underline;text-decoration-color:#a85239;text-underline-offset:8px}
+.cham-site .cham-header__actions{display:flex;align-items:center;gap:4px!important}
+.cham-site .cham-icon-link{width:42px!important;min-width:42px;height:42px!important;min-height:42px;display:inline-flex;align-items:center;justify-content:center;position:relative;border-radius:4px;transition:background-color .18s ease;color:#26251f}
+.cham-site .cham-icon-link:hover{background:rgba(38,37,31,.055)}
+.cham-site .cham-icon-link svg{height:19px;width:19px;stroke:currentColor;stroke-width:1.55;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.cham-site .cham-cart-count{position:absolute;right:-2px;top:-1px;min-width:16px;height:16px;font-size:10px}
+.cham-demo-notice{font-family:'Be Vietnam Pro',Arial,sans-serif;background:#f0e9df!important;color:#665a4e!important;border-bottom:1px solid rgba(40,35,25,.06);min-height:0!important;padding:5px 12px!important;font-size:10px!important;font-weight:400;letter-spacing:.02em!important}
+.cham-demo-notice span{font-weight:700}
+/* One brand statement, one photographed product, two purposeful actions */
+.cham-site .cham-hero--minimal,.cham-site .cham-hero--minimal.cham-hero--text-only{min-height:0!important;padding:clamp(42px,6.3vw,95px) 0 clamp(50px,6.8vw,98px)!important;background:#f8f3e9!important;border:0!important}
+.cham-site .cham-hero--minimal::before,.cham-site .cham-hero--minimal::after,.cham-site .cham-hero--minimal .cham-hero__grid::after{display:none!important;content:none!important}
+.cham-site .cham-hero--minimal .cham-hero__grid{max-width:1260px!important;display:grid!important;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr)!important;align-items:center!important;gap:clamp(36px,6vw,90px)!important}
+.cham-site .cham-hero--minimal .cham-hero__copy{padding:0!important;max-width:650px!important}
+.cham-site .cham-hero--minimal .cham-kicker{margin:0 0 24px!important;letter-spacing:.13em!important;font-size:11px!important;font-weight:600!important;color:#8d4b38!important}
+.cham-site .cham-hero--minimal .cham-hero__title,.cham-site .cham-hero--minimal.cham-hero--text-only .cham-hero__title{font-family:'Lora',Georgia,serif!important;font-size:clamp(43px,5.2vw,79px)!important;line-height:1.16!important;letter-spacing:-.055em!important;font-weight:500!important;text-wrap:balance;max-width:720px!important;margin:0!important;color:#26251f!important}
+.cham-site .cham-hero--minimal .cham-hero__body{margin-top:24px!important;max-width:480px!important;font-size:clamp(14px,1.2vw,17px)!important;line-height:1.75!important;color:#6a6156!important}
+.cham-site .cham-hero--minimal .cham-hero__body p{margin:0!important;font-size:inherit!important;line-height:inherit!important}
+.cham-site .cham-hero--minimal .cham-hero__actions{display:flex!important;align-items:center!important;gap:24px!important;flex-wrap:wrap!important;margin-top:31px!important}
+.cham-site .cham-hero--minimal .cham-hero__actions .cham-button{min-height:48px!important;border-radius:4px!important;padding:13px 22px!important;font-size:13px!important;font-weight:600!important;background:#26251f!important;border:1px solid #26251f!important;color:#fffdf8!important;white-space:nowrap;text-decoration:none;box-shadow:none!important;transform:none!important}
+.cham-site .cham-hero--minimal .cham-hero__actions .cham-button:hover{background:#a85239!important;border-color:#a85239!important}
+.cham-site .cham-hero__story-link{display:inline-flex;align-items:center;gap:12px;min-height:44px;color:#26251f;text-decoration:none;border-bottom:1px solid #a79a87;font-size:13px;font-weight:600;line-height:1.4;transition:color .18s ease,border-color .18s ease}
+.cham-site .cham-hero__story-link:hover{color:#a85239;border-color:#a85239}
+.cham-site .cham-hero__story-link span{font-size:20px;font-weight:400}
+.cham-site .cham-hero__figure{min-width:0;max-width:100%;margin:0}
+.cham-site .cham-hero--minimal .cham-hero__visual,.cham-site .cham-hero--minimal .cham-hero__visual--signature{width:100%;height:clamp(390px,39vw,550px)!important;min-height:0!important;max-height:none!important;position:relative!important;border:0!important;border-radius:3px!important;background:#e7dac9!important;box-shadow:none!important;overflow:hidden!important}
+.cham-site .cham-hero--minimal .cham-hero__visual::before,.cham-site .cham-hero--minimal .cham-hero__visual::after{content:none!important;display:none!important}
+.cham-site .cham-hero--minimal .cham-hero__visual img{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;border-radius:0!important}
+.cham-site .cham-hero__figure figcaption{font-size:10px;line-height:1.7;letter-spacing:.03em;margin-top:10px;color:#827366}
+.cham-site .cham-hero--minimal.cham-hero--text-only .cham-hero__grid{display:block!important}
+.cham-site .cham-hero--minimal.cham-hero--text-only .cham-hero__copy{max-width:900px!important}
+/* Remove old scroll staging and tilt without breaking semantic content */
+html.cham-js .cham-site [data-cham-reveal],html.cham-js .cham-site .cham-section-head,html.cham-js .cham-site .cham-category-card,html.cham-js .cham-site .cham-product-card,html.cham-js .cham-site .cham-value,html.cham-js .cham-site .cham-custom,html.cham-js .cham-site .cham-product-context__item,html.cham-js .cham-site .cham-process__steps article,html.cham-js .cham-site .cham-showcase article,html.cham-js .cham-site .cham-editorial-grid article,html.cham-js .cham-site .cham-story-timeline article,html.cham-js .cham-site .cham-story-manifesto,html.cham-js .cham-site .cham-editorial-cta{opacity:1!important;transform:none!important;transition-delay:0s!important}
+.cham-site .cham-category-card:hover,.cham-site .cham-product-card:hover,.cham-site .cham-value:hover{transform:none!important}
+.cham-site .cham-hero__figure img{transition:none}
+/* Mobile: one short navigation drawer; no redundant fixed bottom bar */
+.cham-site .cham-mobile-bottom{display:none!important}
+@media(max-width:860px){
+  .cham-site .cham-header__inner{width:calc(100% - 36px);grid-template-columns:minmax(0,1fr) auto auto!important;gap:5px!important;min-height:64px!important}
+  .cham-site .cham-header[data-scrolled] .cham-header__inner{min-height:56px!important}
+  .cham-site .cham-nav{display:none!important}
+  .cham-site .cham-mobile-nav{display:block!important;position:static}
+  .cham-site .cham-mobile-nav summary{width:42px!important;height:42px!important;display:grid;place-items:center;background:transparent;border:1px solid transparent!important;border-radius:4px!important;padding:0;cursor:pointer}
+  .cham-site .cham-mobile-nav summary:hover,.cham-site .cham-mobile-nav details.is-open summary{background:rgba(38,37,31,.06)!important}
+  .cham-site .cham-mobile-nav summary svg{height:21px;width:21px;stroke:#26251f;stroke-width:1.65;fill:none;stroke-linecap:round}
+  .cham-site .cham-mobile-nav__panel{position:absolute!important;top:calc(100% + 1px)!important;left:auto!important;right:clamp(12px,3vw,28px)!important;width:min(310px,calc(100vw - 24px))!important;padding:10px 20px 14px!important;background:#f8f3e9!important;border:1px solid #e4d8c7!important;border-radius:0 0 5px 5px!important;box-shadow:0 18px 36px rgba(43,35,27,.10)!important;z-index:120}
+  .cham-site .cham-mobile-nav__panel a{font-size:14px!important;font-weight:500!important;line-height:1.3!important;padding:12px 6px!important;color:#26251f!important;min-height:44px!important;transition:color .17s ease!important;border-bottom:1px solid rgba(73,60,44,.1)!important}
+  .cham-site .cham-mobile-nav__panel a:hover{background:transparent!important;color:#a85239!important}
+  .cham-site .cham-mobile-nav__panel a:last-child{border-bottom:0!important}
+  html.cham-js .cham-mobile-nav details[open] .cham-mobile-nav__panel{transform:translateY(-8px)!important;transition:opacity 170ms ease,transform 170ms ease,visibility 170ms!important}
+  html.cham-js .cham-mobile-nav details.is-open[open] .cham-mobile-nav__panel{transform:translateY(0)!important}
+  .cham-site .cham-hero--minimal,.cham-site .cham-hero--minimal.cham-hero--text-only{padding:clamp(35px,7vw,64px) 0 60px!important}
+  .cham-site .cham-hero--minimal .cham-hero__grid{grid-template-columns:1fr!important;gap:36px!important}
+  .cham-site .cham-hero--minimal .cham-hero__copy{max-width:700px!important}
+  .cham-site .cham-hero--minimal .cham-hero__title,.cham-site .cham-hero--minimal.cham-hero--text-only .cham-hero__title{font-size:clamp(40px,7vw,61px)!important;line-height:1.17!important}
+  .cham-site .cham-hero--minimal .cham-hero__visual,.cham-site .cham-hero--minimal .cham-hero__visual--signature{height:clamp(290px,56vw,460px)!important}
+}
+@media(max-width:560px){
+  .cham-site .cham-header__inner{width:calc(100% - 28px);gap:3px!important}
+  .cham-site .cham-wordmark{font-size:23px!important}
+  .cham-site .cham-header__actions{gap:0!important}
+  .cham-site .cham-icon-link{width:39px!important;min-width:39px!important;height:40px!important}
+  .cham-site .cham-account-link{display:none!important}
+  .cham-site .cham-hero--minimal,.cham-site .cham-hero--minimal.cham-hero--text-only{padding:38px 0 47px!important}
+  .cham-site .cham-hero--minimal .cham-hero__grid{gap:29px!important}
+  .cham-site .cham-hero--minimal .cham-kicker{font-size:10px!important;margin-bottom:15px!important}
+  .cham-site .cham-hero--minimal .cham-hero__title,.cham-site .cham-hero--minimal.cham-hero--text-only .cham-hero__title{font-size:clamp(39px,10.2vw,49px)!important;letter-spacing:-.045em!important;line-height:1.17!important}
+  .cham-site .cham-hero--minimal .cham-hero__body{margin-top:17px!important;font-size:14px!important}
+  .cham-site .cham-hero--minimal .cham-hero__actions{margin-top:20px!important;gap:14px!important}
+  .cham-site .cham-hero--minimal .cham-hero__actions .cham-button{padding:11px 17px!important;min-height:44px!important}
+  .cham-site .cham-hero__story-link{font-size:12px!important}
+  .cham-site .cham-hero--minimal .cham-hero__visual,.cham-site .cham-hero--minimal .cham-hero__visual--signature{height:clamp(255px,84vw,355px)!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .cham-site .cham-header,.cham-site .cham-header__inner,.cham-site .cham-hero__story-link,.cham-site .cham-hero--minimal .cham-hero__actions .cham-button{transition:none!important;animation:none!important}
+  html.cham-js .cham-mobile-nav details[open] .cham-mobile-nav__panel{transition:none!important;transform:none!important}
+}

@@ -1,7 +1,7 @@
 {%- liquid
   assign primary_link = section.settings.primary_link | default: routes.all_products_collection_url
   assign story_page = pages['story'] | default: pages['cau-chuyen']
-  assign story_url = '/pages/about#story'
+  assign story_url = '/pages/about'
   if story_page != blank
     assign story_url = story_page.url
   endif
@@ -11,55 +11,25 @@
     assign hero_image = collections.all.products.first.featured_image
   endif
 -%}
-<section class="cham-hero cham-hero--signature{% if hero_image == blank %} cham-hero--text-only{% endif %}" data-cham-hero>
+<section class="cham-hero cham-hero--signature cham-hero--minimal{% if hero_image == blank %} cham-hero--text-only{% endif %}" data-cham-hero>
   <div class="cham-shell cham-hero__grid">
-    <div class="cham-hero__copy" data-cham-reveal>
-      <div class="cham-hero__eyebrow-row">
-        <p class="cham-kicker">{{ section.settings.eyebrow }}</p>
-        <span class="cham-hero__edition">THỦ CÔNG VIỆT NAM</span>
-      </div>
-      <h1 class="cham-hero__title">{{ section.settings.heading }}</h1>
+    <div class="cham-hero__copy">
+      <p class="cham-kicker">{{ section.settings.eyebrow }}</p>
+      <h1 class="cham-hero__title">{{ section.settings.heading | escape | newline_to_br }}</h1>
       <div class="cham-hero__body">{{ section.settings.body }}</div>
       <div class="cham-hero__actions">
-        <a class="cham-button cham-button--primary" href="{{ primary_link }}"><span>{{ section.settings.primary_label }}</span><span aria-hidden="true">↗</span></a>
-        <a class="cham-button cham-button--soft" href="{{ secondary_link }}"><span>{{ section.settings.secondary_label }}</span></a>
-      </div>
-      <div class="cham-hero-demo-link">
-        <a class="cham-pill" href="/pages/cham-play">Chơi CHẠM Play · Nhận điểm</a>
-        <a class="cham-pill" href="/pages/cham-club">CHẠM Club · Hồ sơ</a>
-      </div>
-
-      {% if section.settings.show_search %}
-        <form class="cham-search" action="{{ routes.search_url }}" method="get" role="search">
-          <span class="cham-search__mark" aria-hidden="true">⌕</span>
-          <label class="visually-hidden" for="ChamHeroSearch-{{ section.id }}">Tìm sản phẩm thủ công</label>
-          <input id="ChamHeroSearch-{{ section.id }}" type="search" name="q" placeholder="{{ section.settings.search_placeholder }}" autocomplete="off">
-          <input type="hidden" name="options[prefix]" value="last">
-          <button type="submit">Tìm</button>
-        </form>
-      {% endif %}
-
-      <div class="cham-hero__chips" aria-label="Khám phá sản phẩm">
-        <a href="/collections/gốm-trang-tri">Gốm & Trang trí</a>
-        <a href="/collections/may-tre-dan">Mây tre đan</a>
-        <a href="/collections/vải-dệt-thủ-cong">Vải & Dệt</a>
-        <a href="/collections/phụ-kiện">Phụ kiện</a>
-        <a href="/collections/qua-tặng">Quà tặng</a>
+        <a class="cham-button cham-button--primary" href="{{ primary_link }}">{{ section.settings.primary_label }}</a>
+        <a class="cham-hero__story-link" href="{{ secondary_link }}">{{ section.settings.secondary_label }} <span aria-hidden="true">→</span></a>
       </div>
     </div>
-
     {% if hero_image != blank %}
-      <div class="cham-hero__visual cham-hero__visual--signature cham-hero__visual--photo">
-        {{ hero_image | image_url: width: 1400 | image_tag: loading: 'eager', widths: '480, 720, 960, 1200, 1400', sizes: '(max-width: 820px) 100vw, 48vw', alt: hero_image.alt }}
-      </div>
+      <figure class="cham-hero__figure">
+        <div class="cham-hero__visual cham-hero__visual--signature cham-hero__visual--photo">
+          {{ hero_image | image_url: width: 1440 | image_tag: loading: 'eager', widths: '400, 600, 800, 1100, 1440', sizes: '(max-width: 860px) 90vw, 46vw', alt: hero_image.alt | default: 'Sản phẩm thủ công minh họa tại CHẠM' }}
+        </div>
+        <figcaption>Hình ảnh sản phẩm minh họa · CHẠM 2.0</figcaption>
+      </figure>
     {% endif %}
-  </div>
-
-  <div class="cham-material-strip" aria-hidden="true">
-    <div class="cham-material-strip__track">
-      <span>THỦ CÔNG</span><i>•</i><span>CHỌN LỌC</span><i>•</i><span>MINH BẠCH</span><i>•</i><span>TÙY CHỈNH</span><i>•</i><span>VĂN HÓA</span><i>•</i><span>ĐỜI SỐNG</span><i>•</i>
-      <span>THỦ CÔNG</span><i>•</i><span>CHỌN LỌC</span><i>•</i><span>MINH BẠCH</span><i>•</i><span>TÙY CHỈNH</span><i>•</i><span>VĂN HÓA</span><i>•</i><span>ĐỜI SỐNG</span><i>•</i>
-    </div>
   </div>
 </section>
 {% schema %}
@@ -67,15 +37,13 @@
   "name":"CHẠM · Mở đầu",
   "tag":"section",
   "settings":[
-    {"type":"text","id":"eyebrow","label":"Dòng nhỏ","default":"ĐỒ THỦ CÔNG VIỆT NAM · CHỌN LỌC"},
-    {"type":"textarea","id":"heading","label":"Tiêu đề","default":"Chạm vào những điều được làm bằng tay."},
-    {"type":"richtext","id":"body","label":"Mô tả","default":"<p>CHẠM chọn lọc đồ thủ công Việt Nam cho đời sống hiện đại — dễ tiếp cận, rõ câu chuyện và vẫn giữ được dấu vết của bàn tay làm ra chúng.</p>"},
-    {"type":"text","id":"primary_label","label":"Nút chính","default":"Khám phá đồ thủ công"},
+    {"type":"text","id":"eyebrow","label":"Dòng nhỏ","default":"ĐỒ THỦ CÔNG VIỆT NAM"},
+    {"type":"textarea","id":"heading","label":"Tiêu đề","default":"Thủ công Việt,\ncho mỗi ngày."},
+    {"type":"richtext","id":"body","label":"Mô tả","default":"<p>Gốm, mây tre, vải dệt và những món quà được chọn cho đời sống hôm nay.</p>"},
+    {"type":"text","id":"primary_label","label":"Nút chính","default":"Xem sản phẩm"},
     {"type":"url","id":"primary_link","label":"Liên kết nút chính"},
-    {"type":"text","id":"secondary_label","label":"Nút phụ","default":"Câu chuyện CHẠM"},
+    {"type":"text","id":"secondary_label","label":"Nút phụ","default":"Về CHẠM"},
     {"type":"url","id":"secondary_link","label":"Liên kết nút phụ"},
-    {"type":"checkbox","id":"show_search","label":"Hiện ô tìm kiếm","default":true},
-    {"type":"text","id":"search_placeholder","label":"Gợi ý tìm kiếm","default":"Tìm đồ trang trí, phụ kiện, quà tặng..."},
     {"type":"image_picker","id":"image","label":"Ảnh mở đầu"}
   ],
   "presets":[{"name":"CHẠM · Mở đầu","category":"CHẠM"}]

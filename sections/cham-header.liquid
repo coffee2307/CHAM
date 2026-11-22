@@ -1,57 +1,52 @@
 {%- liquid
   assign cham_story_page = pages['story'] | default: pages['cau-chuyen']
-  assign cham_story_url = '/pages/about#story'
+  assign cham_story_url = '/pages/about'
   if cham_story_page != blank
     assign cham_story_url = cham_story_page.url
   endif
 -%}
 {%- assign wordmark = section.settings.wordmark | default: 'CHẠM' -%}
-<header class="cham-header" role="banner">
+<header class="cham-header" role="banner" data-cham-header>
   <div class="cham-shell cham-header__inner">
+    <a class="cham-wordmark" href="{{ routes.root_url }}" aria-label="{{ wordmark | escape }} — Trang chủ">{{ wordmark }}</a>
+
+    <nav class="cham-nav" aria-label="Điều hướng chính">
+      <a href="{{ routes.all_products_collection_url }}"{% if request.page_type == 'collection' or request.page_type == 'product' %} aria-current="page"{% endif %}>Sản phẩm</a>
+      <a href="/pages/cham-play"{% if page.handle == 'cham-play' %} aria-current="page"{% endif %}>CHẠM Play</a>
+      <a href="{{ cham_story_url }}"{% if page.handle == 'story' %} aria-current="page"{% endif %}>Câu chuyện</a>
+    </nav>
+
+    <div class="cham-header__actions">
+      {% if section.settings.show_search %}
+        <a class="cham-icon-link" href="{{ routes.search_url }}" aria-label="Tìm sản phẩm" title="Tìm sản phẩm">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+        </a>
+      {% endif %}
+      {% if section.settings.show_account %}
+        <a class="cham-icon-link cham-account-link" href="/pages/cham-club" aria-label="CHẠM Club — Hồ sơ demo" title="CHẠM Club">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.7-4 3-6 6.5-6s5.8 2 6.5 6"/></svg>
+        </a>
+      {% endif %}
+      <a class="cham-icon-link cham-cart-link" href="{{ routes.cart_url }}" aria-label="Giỏ hàng{% if cart.item_count > 0 %}, {{ cart.item_count }} sản phẩm{% endif %}" title="Giỏ hàng">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h2l2 10h9l2-7H7"/><circle cx="10" cy="19" r="1"/><circle cx="17" cy="19" r="1"/></svg>
+        {% if cart.item_count > 0 %}<span class="cham-cart-count" aria-hidden="true">{{ cart.item_count }}</span>{% endif %}
+      </a>
+    </div>
+
     <div class="cham-mobile-nav">
       <details>
-        <summary aria-label="Mở menu">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <summary aria-label="Mở menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
         </summary>
-        <nav class="cham-mobile-nav__panel" aria-label="Điều hướng di động">
+        <nav class="cham-mobile-nav__panel" aria-label="Menu CHẠM">
           <a href="{{ routes.root_url }}">Trang chủ</a>
           <a href="{{ routes.all_products_collection_url }}">Sản phẩm</a>
           <a href="/pages/cham-play">CHẠM Play</a>
           <a href="/pages/cham-club">CHẠM Club</a>
           <a href="{{ cham_story_url }}">Câu chuyện</a>
-          <a href="/pages/about">Về CHẠM</a>
           <a href="/pages/contact">Liên hệ</a>
         </nav>
       </details>
-    </div>
-
-    <a class="cham-wordmark" href="{{ routes.root_url }}" aria-label="{{ wordmark | escape }} — Trang chủ">{{ wordmark }}</a>
-
-    <nav class="cham-nav" aria-label="Điều hướng chính">
-      <a href="{{ routes.root_url }}">Trang chủ</a>
-      <a href="{{ routes.all_products_collection_url }}">Sản phẩm</a>
-      <a href="/pages/cham-play">CHẠM Play</a>
-      <a href="/pages/cham-club">CHẠM Club</a>
-      <a href="{{ cham_story_url }}">Câu chuyện</a>
-      <a href="/pages/about">Về CHẠM</a>
-      <a href="/pages/contact">Liên hệ</a>
-    </nav>
-
-    <div class="cham-header__actions">
-      {% if section.settings.show_search %}
-        <a class="cham-icon-link" href="{{ routes.search_url }}" aria-label="Tìm kiếm" title="Tìm kiếm">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
-        </a>
-      {% endif %}
-      {% if section.settings.show_account and shop.customer_accounts_enabled %}
-        <a class="cham-icon-link cham-account-link" href="{{ routes.account_url }}" aria-label="Tài khoản" title="Tài khoản">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.7-4 3-6 6.5-6s5.8 2 6.5 6"/></svg>
-        </a>
-      {% endif %}
-      <a class="cham-icon-link cham-cart-link" href="{{ routes.cart_url }}" aria-label="Giỏ hàng" title="Giỏ hàng">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h2l2 10h9l2-7H7"/><circle cx="10" cy="19" r="1"/><circle cx="17" cy="19" r="1"/></svg>
-        {% if cart.item_count > 0 %}<span class="cham-cart-count">{{ cart.item_count }}</span>{% endif %}
-      </a>
     </div>
   </div>
 </header>
@@ -63,7 +58,7 @@
   "settings":[
     {"type":"text","id":"wordmark","label":"Tên thương hiệu","default":"CHẠM"},
     {"type":"checkbox","id":"show_search","label":"Hiện tìm kiếm","default":true},
-    {"type":"checkbox","id":"show_account","label":"Hiện tài khoản","default":true}
+    {"type":"checkbox","id":"show_account","label":"Hiện hồ sơ demo","default":true}
   ],
   "presets":[{"name":"CHẠM · Đầu trang","category":"Đầu trang"}],
   "enabled_on":{"groups":["header"]}
