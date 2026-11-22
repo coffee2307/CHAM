@@ -1,36 +1,57 @@
 <div class="cham5 cham5-editorial" data-cham5-root>
-  <section class="cham5-cover" id="cham5-top" aria-labelledby="cham5-cover-heading">
-    <div class="cham5-cover__layout">
-      <div class="cham5-cover__copy">
-        <p class="cham5-eyebrow">Thủ công Việt Nam, theo một cách gần gũi hơn.</p>
-        <h1 id="cham5-cover-heading">CHẠM<span class="cham5-cover__dot" aria-hidden="true">.</span></h1>
-        <h2>Nơi khám phá và mua sắm sản phẩm thủ công Việt Nam.</h2>
-        <p class="cham5-cover__description">Gốm, mây tre, vải dệt, phụ kiện và quà tặng. Những món đồ quen thuộc, cùng câu chuyện về cách chúng được tạo nên.</p>
-        <div class="cham5-cover__actions">
-          <a class="cham5-primary" href="#cham5-categories">Khám phá sản phẩm <span aria-hidden="true">→</span></a>
-          <a class="cham5-textlink" href="#cham5-process">Xem câu chuyện nghề <span aria-hidden="true">↓</span></a>
-        </div>
+  <section class="cham6-hero" id="cham5-top" aria-labelledby="cham6-hero-title">
+    <div class="cham6-hero__topline"><span>Thủ công Việt Nam</span><span>Khám phá, hiểu và lựa chọn</span></div>
+    <div class="cham6-hero__title-wrap">
+      <h1 id="cham6-hero-title" class="cham6-hero__title">CHẠM<span class="cham6-hero__punct" aria-hidden="true">.</span></h1>
+      <span class="cham6-hero__handwritten" aria-hidden="true">Từ Việt Nam, bằng đôi tay.</span>
+    </div>
+    <div class="cham6-hero__introduction">
+      <h2>Không chỉ là một món đồ.</h2>
+      <p>CHẠM là nơi khám phá và mua sắm sản phẩm thủ công Việt Nam: từ gốm, mây tre đến vải dệt, phụ kiện và quà tặng.</p>
+      <div class="cham6-hero__actions">
+        <a href="#cham5-categories" class="cham5-primary">Khám phá sản phẩm <span aria-hidden="true">→</span></a>
+        <a href="#cham5-process" class="cham5-textlink">Đi theo câu chuyện nghề <span aria-hidden="true">↓</span></a>
       </div>
-      <figure class="cham5-cover__visual">
-        <img src="{{ 'cham6-bat-trang-cover.webp' | asset_url }}"
-          srcset="{{ 'cham6-bat-trang-cover-640.webp' | asset_url }} 640w, {{ 'cham6-bat-trang-cover.webp' | asset_url }} 1600w"
-          sizes="(max-width: 767px) 100vw, 52vw"
-          width="1600" height="1200" alt="Người thợ thực hiện công đoạn gốm tại làng Bát Tràng"
-          loading="eager" fetchpriority="high" decoding="async">
-        <figcaption>Tư liệu làng gốm Bát Tràng · Steven C. Price</figcaption>
+    </div>
+    <div class="cham6-hero__gallery" aria-label="Tư liệu các công đoạn chế tác gốm Việt Nam">
+      <svg class="cham6-hero__thread" viewBox="0 0 1600 440" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M-40 44 C430 205 1130 230 1640 38" fill="none" stroke="#B78856" stroke-width="2" stroke-linecap="round"/></svg>
+      <figure class="cham6-hero__print cham6-hero__print--a" data-cham6-float="1">
+        <img src="{{ 'cham6-craft-clay-640.webp' | asset_url }}" width="640" height="427" loading="eager" fetchpriority="low" decoding="async" alt="Người thợ đổ đất gốm vào khuôn tại Bình Dương">
+        <figcaption>Đất</figcaption>
+      </figure>
+      <figure class="cham6-hero__print cham6-hero__print--b" data-cham6-float="2">
+        <img src="{{ 'cham6-craft-shape-640.webp' | asset_url }}" width="640" height="480" loading="eager" fetchpriority="low" decoding="async" alt="Nghệ nhân tạo hình đồ gốm bằng tay">
+        <figcaption>Đôi tay</figcaption>
+      </figure>
+      <figure class="cham6-hero__print cham6-hero__print--c" data-cham6-float="3">
+        <img src="{{ 'cham6-craft-decoration-640.webp' | asset_url }}" width="640" height="480" loading="eager" fetchpriority="low" decoding="async" alt="Người thợ xử lý bề mặt và họa tiết của phôi gốm">
+        <figcaption>Đường nét</figcaption>
+      </figure>
+      <figure class="cham6-hero__print cham6-hero__print--d" data-cham6-float="4">
+        <img src="{{ 'cham6-craft-use-640.webp' | asset_url }}" width="640" height="427" loading="eager" fetchpriority="low" decoding="async" alt="Nồi đất thủ công trong gian bếp truyền thống">
+        <figcaption>Đời sống</figcaption>
       </figure>
     </div>
-    <div class="cham5-cover__bottom"><span>Từ đôi tay người thợ, đến đời sống hôm nay.</span><span>Cuộn xuống để khám phá <span aria-hidden="true">↓</span></span></div>
+    <div class="cham6-hero__endline"><span>Ảnh tư liệu nghề thủ công, không phải quy trình sản xuất riêng của CHẠM</span><a href="#cham6-watch">Cuộn để khám phá <span aria-hidden="true">↓</span></a></div>
   </section>
-
+  <section class="cham6-watch" id="cham6-watch" aria-labelledby="cham6-watch-heading">
+    <div class="cham6-watch__stage" data-cham6-watch-stage>
+      <div class="cham6-watch__intro"><p class="cham5-eyebrow">Một hành trình phía sau món đồ</p><h2 id="cham6-watch-heading">HÃY NHÌN<br>GẦN HƠN.</h2></div>
+      <div class="cham6-watch__image" data-cham6-watch-image>
+        <img src="{{ 'cham6-craft-trim-640.webp' | asset_url }}" srcset="{{ 'cham6-craft-trim-640.webp' | asset_url }} 640w, {{ 'cham6-craft-trim.webp' | asset_url }} 1600w" sizes="(max-width: 767px) 100vw, 85vw" width="1600" height="1200" loading="lazy" decoding="async" alt="Cận cảnh bàn tay nghệ nhân chỉnh sửa phần chân phôi gốm">
+      </div>
+      <div class="cham6-watch__overlay" data-cham6-watch-overlay>
+        <p>Từ những động tác quen thuộc của người thợ, một món đồ dần thành hình.</p>
+      </div>
+    </div>
+  </section>
   <section class="cham5-thesis" aria-labelledby="cham5-thesis-title">
     <div class="cham5-thesis__inner">
-      <p class="cham5-eyebrow">Tại sao là CHẠM?</p>
+      <p class="cham5-eyebrow">Từ chất liệu đến thành phẩm</p>
       <h2 id="cham5-thesis-title">Mỗi món đồ đều bắt đầu từ một cách làm.</h2>
       <p>Trước khi trở thành chiếc bình trên bàn hay chiếc giỏ trong nhà, đó là đất, là sợi tre, là đôi bàn tay và thời gian. CHẠM muốn việc tìm hiểu và lựa chọn những sản phẩm ấy trở nên dễ dàng hơn.</p>
     </div>
   </section>
-
   <section class="cham5-process" id="cham5-process" aria-labelledby="cham5-process-heading">
     <div class="cham5-process__heading">
       <p class="cham5-eyebrow">Một hành trình nghề truyền thống</p>
