@@ -26,7 +26,7 @@ function mount(root,core){
  const footerNote='Điểm thưởng chỉ có giá trị trong bản trình diễn.';
  const character='<span class="dino-hero-character" aria-label="Khủng long xanh" role="img"></span>';
  const status=message=>{const node=$('[data-dino-status]',root);if(node)node.textContent=message;};
- const worldMarkup=()=>'<div class="dino-landscape" style="--dino-landscape:url(&quot;'+esc(art.landscape)+'&quot;)"><div class="dino-shimmer"></div><div class="dino-hills"></div><div class="dino-ground"></div><div class="dino-character" data-dino-character role="img" aria-label="Khủng long đang chạy"><span class="dino-character__sprite"></span><span class="dino-character__shadow"></span></div><div class="dino-objects" data-dino-objects></div><div class="dino-world-overlays" data-dino-overlays></div></div>';
+ const worldMarkup=()=>'<div class="dino-landscape"><img class="dino-landscape__image" src="'+esc(art.landscape)+'" alt="" aria-hidden="true"><div class="dino-shimmer"></div><div class="dino-hills"></div><div class="dino-ground"></div><div class="dino-character" data-dino-character role="img" aria-label="Khủng long đang chạy"><span class="dino-character__sprite"></span><span class="dino-character__shadow"></span></div><div class="dino-objects" data-dino-objects></div><div class="dino-world-overlays" data-dino-overlays></div></div>';
  const hud=()=>'<div class="dino-topbar"><div class="dino-brand"><small>CHẠM PLAY</small><strong>KHỦNG LONG LÀNG NGHỀ</strong></div><div class="dino-progress"><span>Kiến thức <b data-dino-progress>0/5</b></span><div class="dino-progress-track"><span data-dino-progress-bar></span></div></div><div class="dino-stats"><span>Điểm chơi <b data-dino-score>0</b></span><span class="dino-hearts" aria-label="Còn 3 mạng" data-dino-hearts>♥ ♥ ♥</span></div><button class="dino-top-pause" data-dino-pause type="button" aria-label="Tạm dừng trò chơi">II</button></div>';
  const controls=()=>'<div class="dino-controls"><div class="dino-control-hint"><span data-dino-status role="status" aria-live="polite">Nhấn Space, phím ↑ hoặc chạm để nhảy.</span><small>Thu thập bình gốm để mở câu hỏi về nghề truyền thống.</small></div><div class="dino-control-buttons"><button type="button" data-dino-jump class="dino-jump-button" aria-label="Nhảy lên"><span aria-hidden="true">↑</span> NHẢY</button></div></div>';
  const structure=()=>'<div class="dino-app">'+hud()+worldMarkup()+controls()+'</div>';
@@ -44,9 +44,15 @@ function mount(root,core){
  function layer(content){const el=overlays();if(el)el.innerHTML=content;}
  const modal=(cls,title,content)=>'<section class="dino-modal '+cls+'" role="dialog" aria-modal="true" aria-label="'+esc(title)+'"><div class="dino-modal-card">'+content+'</div></section>';
  function intro(){
-  stop();state='intro';root.innerHTML=structure();setVisual();
-  layer(modal('dino-modal--intro','Giới thiệu trò chơi',
-   '<div class="dino-intro-main"><div class="dino-intro-illustration">'+character+'<span class="dino-intro-spark">✳</span></div><div class="dino-intro-content"><p class="dino-eyebrow">CHẠM PLAY</p><h1>Khủng long đi tìm làng nghề.</h1><p>Chạy, nhảy qua chướng ngại vật và thu thập bình gốm. Mỗi lần nhặt được một bình, bạn sẽ mở khóa một câu hỏi về nghề truyền thống Việt Nam.</p><div class="dino-tags"><span>Nhảy để tránh vật cản</span><span>5 câu hỏi</span><span>+20 điểm mỗi ngày</span></div><button data-dino-start class="dino-primary" type="button">Bắt đầu chơi <span aria-hidden="true">→</span></button><small>'+footerNote+'</small></div></div>'));
+  stop();state='intro';
+  root.innerHTML='<section class="dino-menu" aria-label="Menu trò chơi CHẠM Quest">'+
+   '<div class="dino-menu__art"><img class="dino-menu__landscape" src="'+esc(art.landscape)+'" alt="" aria-hidden="true"><span class="dino-menu__character" role="img" aria-label="Khủng long hoạt hình"></span><span class="dino-menu__sun" aria-hidden="true">✳</span><span class="dino-menu__decor" aria-hidden="true"></span></div>'+
+   '<div class="dino-menu__copy"><p class="dino-eyebrow">CHẠM PLAY · KHÁM PHÁ LÀNG NGHỀ</p><h1>Khủng long đi tìm làng nghề.</h1>'+
+   '<p>Nhảy qua gốc cây, thu thập bình gốm và giải các câu hỏi về nghề thủ công Việt Nam.</p>'+
+   '<div class="dino-menu__steps"><span><b>01</b> Nhảy tránh chướng ngại</span><span><b>02</b> Nhặt bình gốm để mở câu hỏi</span><span><b>03</b> Hoàn thành năm thử thách</span></div>'+
+   '<div class="dino-menu__actions"><button type="button" data-dino-start class="dino-primary">Bắt đầu chơi <span aria-hidden="true">→</span></button><a href="/pages/cham-club" class="dino-menu__profile">Xem điểm của bạn</a></div>'+
+   '<p class="dino-menu__note">Space, ↑ hoặc chạm để nhảy. '+footerNote+'</p></div></section>';
+  const btn=$('[data-dino-start]',root);if(btn)btn.focus({preventScroll:true});
  }
  function start(){
   stop();score=0;found=0;lives=3;elapsed=0;sinceSpawn=0;pace=1;y=0;velocity=0;objects=[];sequence=0;current=null;chosen=false;

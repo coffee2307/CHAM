@@ -96,11 +96,24 @@ const server=http.createServer((req,res)=>{
    page.on('pageerror',e=>errors.push(e.message));
    await page.goto(url+'/pages/cham-play',{waitUntil:'domcontentloaded'});
    await page.locator('[data-dino-start]').waitFor();
+   assert.equal(await page.locator('.dino-menu').isVisible(),true,'start menu must appear before gameplay at '+width);
+   assert.equal(await page.locator('.dino-topbar').count(),0,'HUD must not appear before starting at '+width);
+   await page.locator('.dino-menu__landscape').evaluate(img=>img.decode());
+   const menuMetrics=await page.locator('.dino-menu').evaluate(el=>({height:el.getBoundingClientRect().height,imageLoaded:el.querySelector('img')?.naturalWidth>0,characterBackground:getComputedStyle(el.querySelector('.dino-menu__character')).backgroundImage,viewport:innerHeight}));
+   assert.ok(menuMetrics.height>menuMetrics.viewport*.70,'menu must occupy available viewport at '+width+': '+JSON.stringify(menuMetrics));
+   assert.ok(menuMetrics.imageLoaded,'menu landscape must load at '+width);
+   assert.ok(menuMetrics.characterBackground.includes('cham-dino-idle.webp'),'menu dino sprite must load at '+width);
    if(width===1440){fs.mkdirSync(path.join(root,'.qa'),{recursive:true});await page.screenshot({path:path.join(root,'.qa','dino-intro-1440.png'),fullPage:true});}
    assert.equal(await page.locator('footer').evaluate(el=>getComputedStyle(el).display),'none','game footer hidden');
    await page.evaluate(()=>window.CHAMCraftKnowledge.buildQuestion=f=>({question:'Nghề nào ở '+f.village+'?',options:['Đúng','Sai 1','Sai 2','Sai 3'],answerIndex:0,answer:'Đúng',explanation:'Thông tin nghề được đối chiếu với nguồn du lịch.',source:f.source}));
    await assertContrast(page,'game intro '+width);
    await page.locator('[data-dino-start]').click();
+   await page.locator('.dino-landscape__image').evaluate(img=>img.decode());
+   const sceneMetrics=await page.locator('.dino-landscape').evaluate(el=>({height:el.getBoundingClientRect().height,width:el.getBoundingClientRect().width,imageLoaded:el.querySelector('.dino-landscape__image')?.naturalWidth>0,dinoBackground:getComputedStyle(el.querySelector('.dino-character__sprite')).backgroundImage,controlsTop:el.nextElementSibling?.getBoundingClientRect().top}));
+   assert.ok(sceneMetrics.height>200,'game world must have usable height at '+width+': '+JSON.stringify(sceneMetrics));
+   assert.ok(sceneMetrics.imageLoaded,'game landscape image must load at '+width);
+   assert.ok(sceneMetrics.dinoBackground.includes('cham-dino-run.webp'),'running sprite must load at '+width);
+   assert.ok(sceneMetrics.controlsTop>=0,'controls must remain visible at '+width);
    await page.locator('[data-dino-jump]').click();
    await page.waitForTimeout(120);
    assert.ok(await page.locator('[data-dino-character]').evaluate(el=>parseFloat(el.style.getPropertyValue('--jump-height')))>0,'jump actually moves character');

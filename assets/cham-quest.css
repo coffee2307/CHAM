@@ -137,3 +137,168 @@ body.cham-site.cham-play-mode :is(button,a):focus-visible{outline:3px solid #f3a
  .dino-character__sprite{background-image:var(--dino-idle)!important;background-size:1000% 100%!important;background-position:0 0!important}
  .dino-primary,.dino-secondary,.dino-jump-button{transition:none!important;transform:none!important}
 }
+
+/* CHẠM Quest repair: viewport-safe gameplay and dedicated start menu.
+   The Shopify page wrappers do not determine the height of the game. */
+body.cham-site.cham-play-mode #MainContent,
+body.cham-site.cham-play-mode #MainContent > *,
+body.cham-site.cham-play-mode .shopify-section:has(.cham-demo-app),
+body.cham-site.cham-play-mode .cham-demo-app,
+body.cham-site.cham-play-mode [data-cham-demo-app]{
+  transform:none!important;min-height:0!important;max-height:none!important;
+}
+body.cham-site.cham-play-mode .dino-app,
+body.cham-site.cham-play-mode .dino-menu{
+  position:fixed!important;
+  top:var(--cham-game-header-height,64px)!important;
+  right:0!important;bottom:0!important;left:0!important;
+  width:100vw!important;height:auto!important;min-height:0!important;
+  max-height:none!important;margin:0!important;
+  z-index:75!important;overflow:hidden!important;
+}
+body.cham-site.cham-play-mode #header-group{position:relative;z-index:95!important;}
+body.cham-site.cham-play-mode .dino-app{
+  display:grid!important;grid-template-areas:"hud" "world" "controls"!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  grid-template-rows:auto minmax(0,1fr) auto!important;
+  background:#d3e3d4;
+}
+body.cham-site.cham-play-mode .dino-topbar{grid-area:hud!important}
+body.cham-site.cham-play-mode .dino-landscape{
+  grid-area:world!important;display:block!important;position:relative!important;
+  min-width:0!important;min-height:0!important;height:100%!important;
+  overflow:hidden!important;isolation:isolate;
+}
+body.cham-site.cham-play-mode .dino-controls{grid-area:controls!important}
+body.cham-site.cham-play-mode .dino-landscape::before{display:none!important;content:none!important}
+body.cham-site.cham-play-mode .dino-landscape__image{
+  position:absolute!important;inset:0!important;
+  display:block!important;width:100%!important;height:100%!important;
+  max-width:none!important;max-height:none!important;
+  object-fit:cover!important;object-position:center 54%!important;
+  filter:none!important;opacity:1!important;mix-blend-mode:normal!important;
+  pointer-events:none!important;user-select:none;
+}
+body.cham-site.cham-play-mode .dino-landscape .dino-ground{
+  z-index:2;bottom:0;height:20%;
+}
+body.cham-site.cham-play-mode .dino-character{
+  z-index:8!important;
+  display:block!important;opacity:1!important;visibility:visible!important;
+}
+body.cham-site.cham-play-mode .dino-character__sprite{
+  display:block!important;visibility:visible!important;opacity:1!important;
+}
+body.cham-site.cham-play-mode .dino-world-overlays{
+  z-index:30!important;position:absolute!important;inset:0!important;
+  display:grid!important;place-items:center!important;
+}
+body.cham-site.cham-play-mode .dino-world-overlays:empty{display:none!important}
+/* Start screen: shown before loading the HUD and runner controls. */
+body.cham-site.cham-play-mode .dino-menu{
+  display:grid!important;
+  grid-template-columns:minmax(0,1.12fr) minmax(350px,.88fr)!important;
+  grid-template-rows:minmax(0,1fr)!important;
+  background:#f6eee0!important;
+}
+body.cham-site.cham-play-mode .dino-menu__art{
+  min-height:0!important;height:100%!important;position:relative!important;
+  background:linear-gradient(160deg,#afccbd,#e0e6cb 62%,#dfb992)!important;
+  overflow:hidden!important;
+}
+body.cham-site.cham-play-mode .dino-menu__landscape{
+  position:absolute!important;inset:0!important;
+  width:100%!important;height:100%!important;max-width:none!important;
+  display:block!important;object-fit:cover!important;
+  object-position:45% 50%!important;filter:none!important;opacity:1!important;
+}
+body.cham-site.cham-play-mode .dino-menu__art::after{
+  content:'';position:absolute;left:0;right:0;bottom:0;height:22%;
+  background:linear-gradient(0deg,rgba(45,67,45,.2),transparent);pointer-events:none;
+}
+body.cham-site.cham-play-mode .dino-menu__character{
+  position:absolute;left:51%;bottom:7%;z-index:5;
+  display:block;width:clamp(230px,33vw,510px);aspect-ratio:1;
+  transform:translateX(-50%);
+  background-image:var(--dino-idle)!important;
+  background-size:1000% 100%!important;background-position:0 0;
+  background-repeat:no-repeat!important;
+  animation:dino-idle-frame 1.28s steps(9,end) infinite;
+  filter:drop-shadow(0 20px 16px rgba(38,45,28,.3));
+}
+body.cham-site.cham-play-mode .dino-menu__sun{
+  position:absolute;z-index:3;top:8%;right:12%;font:400 clamp(40px,6vw,92px) Georgia,serif;
+  color:#fcf0b0;text-shadow:0 7px 27px #e8cf8a55;
+  animation:dino-menu-sun 7s ease-in-out infinite;
+}
+@keyframes dino-menu-sun{50%{transform:rotate(28deg) scale(1.04)}}
+body.cham-site.cham-play-mode .dino-menu__copy{
+  display:flex!important;flex-direction:column!important;
+  justify-content:center!important;align-items:flex-start!important;
+  min-width:0!important;padding:clamp(30px,4.7vw,84px)!important;
+  overflow-y:auto!important;
+  background:#f6eee0!important;
+}
+body.cham-site.cham-play-mode .dino-menu__copy h1{
+  font:500 clamp(39px,4.8vw,74px)/1.12 'Lora',Georgia,serif!important;
+  letter-spacing:-.05em!important;color:#29382e!important;
+  margin:0 0 22px!important;max-width:650px;
+}
+body.cham-site.cham-play-mode .dino-menu__copy>p:not(.dino-eyebrow):not(.dino-menu__note){
+  max-width:515px;color:#72665a;font-size:14px;line-height:1.9;margin:0 0 25px;
+}
+body.cham-site.cham-play-mode .dino-menu__steps{
+  display:flex;flex-wrap:wrap;gap:9px 10px;max-width:520px;margin:0 0 31px;
+}
+body.cham-site.cham-play-mode .dino-menu__steps span{
+  border:1px solid #d1c7b5;background:#eee5d5;color:#435043;
+  border-radius:5px;padding:10px 13px;font:600 11px/1.4 'Be Vietnam Pro',sans-serif;
+}
+body.cham-site.cham-play-mode .dino-menu__steps b{font-weight:700;color:#a26143;margin-right:5px}
+body.cham-site.cham-play-mode .dino-menu__actions{
+  display:flex;align-items:center;gap:23px;flex-wrap:wrap;margin-bottom:19px;
+}
+body.cham-site.cham-play-mode .dino-menu__actions .dino-primary{min-height:54px;padding:15px 25px;font-size:13px}
+body.cham-site.cham-play-mode .dino-menu__profile{
+  min-height:44px;display:inline-flex;align-items:center;color:#384a3b!important;
+  text-decoration:none;border-bottom:1px solid #aaa68c;font:600 12px 'Be Vietnam Pro',sans-serif;
+}
+body.cham-site.cham-play-mode .dino-menu__profile:hover{color:#ad6547!important;border-color:#ad6547}
+body.cham-site.cham-play-mode .dino-menu__note{
+  font-size:11px;line-height:1.8;color:#928573;margin:0;
+}
+@media(max-width:850px){
+ body.cham-site.cham-play-mode .dino-menu{
+   grid-template-columns:minmax(0,1fr)!important;
+   grid-template-rows:minmax(180px,.73fr) minmax(0,1.27fr)!important;
+ }
+ body.cham-site.cham-play-mode .dino-menu__character{
+   width:clamp(155px,34vw,285px);bottom:0;
+ }
+ body.cham-site.cham-play-mode .dino-menu__copy{
+   padding:clamp(21px,4vw,35px)!important;justify-content:flex-start!important;
+ }
+ body.cham-site.cham-play-mode .dino-menu__copy h1{font-size:clamp(30px,6vw,47px)!important;margin-bottom:12px!important}
+ body.cham-site.cham-play-mode .dino-menu__copy>p:not(.dino-eyebrow):not(.dino-menu__note){
+   font-size:12px;line-height:1.65;margin-bottom:15px;
+ }
+ body.cham-site.cham-play-mode .dino-menu__steps{margin-bottom:17px}
+ body.cham-site.cham-play-mode .dino-menu__steps span{font-size:10px;padding:8px}
+}
+@media(max-width:440px){
+ body.cham-site.cham-play-mode .dino-menu{
+   grid-template-rows:minmax(150px,.60fr) minmax(0,1.40fr)!important;
+ }
+ body.cham-site.cham-play-mode .dino-menu__character{width:185px;bottom:-10px}
+ body.cham-site.cham-play-mode .dino-menu__copy h1{font-size:clamp(28px,8vw,39px)!important}
+ body.cham-site.cham-play-mode .dino-menu__copy{padding:19px!important}
+ body.cham-site.cham-play-mode .dino-menu__steps{gap:6px}
+ body.cham-site.cham-play-mode .dino-menu__steps span{padding:7px 9px}
+ body.cham-site.cham-play-mode .dino-menu__actions{gap:14px;margin-bottom:8px}
+ body.cham-site.cham-play-mode .dino-menu__actions .dino-primary{min-height:47px;padding:11px 16px}
+}
+@media(prefers-reduced-motion:reduce){
+ body.cham-site.cham-play-mode .dino-menu__character,body.cham-site.cham-play-mode .dino-menu__sun{
+  animation:none!important;
+ }
+}
