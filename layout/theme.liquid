@@ -25,7 +25,11 @@
     {% endif %}
     {{ 'cham-v4.css' | asset_url | stylesheet_tag }}
     {% if template.name == 'index' %}
+      {{ 'cham6-phudu.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
       {{ 'cham5-home.css' | asset_url | stylesheet_tag }}
+      <script src="{{ 'cham-gsap.min.js' | asset_url }}" defer></script>
+      <script src="{{ 'cham-scrolltrigger.min.js' | asset_url }}" defer></script>
+      <script src="{{ 'cham-lenis.min.js' | asset_url }}" defer></script>
       <script src="{{ 'cham5-home.js' | asset_url }}" defer></script>
     {% endif %}
     <script src="{{ 'cham-demo-core.js' | asset_url }}" defer></script>

@@ -2,11 +2,11 @@
   assign products_source = collections.all
   assign card_limit = section.settings.products_limit | default: 6
 -%}
-<div class="cham5-market cham5">
+<div class="cham5 cham5-market">
   <section class="cham5-categories" id="cham5-categories" aria-labelledby="cham5-categories-title">
     <div class="cham5-market__heading">
-      <div><p class="cham5-small-cap">Khám phá CHẠM</p><h2 id="cham5-categories-title">Tìm một món đồ<br>theo cách của bạn.</h2></div>
-      <a href="{{ routes.all_products_collection_url }}" class="cham5-underline">Tất cả sản phẩm <span aria-hidden="true">→</span></a>
+      <div><p class="cham5-eyebrow">Khám phá cửa hàng CHẠM</p><h2 id="cham5-categories-title">Khám phá danh mục.</h2></div>
+      <a href="{{ routes.all_products_collection_url }}" class="cham5-textlink">Tất cả sản phẩm <span aria-hidden="true">→</span></a>
     </div>
     <div class="cham5-categories__grid">
       {% for group in collections %}
@@ -15,11 +15,10 @@
           <a class="cham5-category" href="{{ group.url }}" aria-label="Xem danh mục {{ group.title }}">
             <div class="cham5-category__image">
               {% if photo %}
-                {{ photo | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '350, 550, 800, 1100', sizes: '(max-width: 730px) 47vw, (max-width: 1050px) 40vw, 30vw', alt: group.title }}
+                {{ photo | image_url: width: 1080 | image_tag: loading: 'lazy', decoding: 'async', widths: '360, 540, 760, 1080', sizes: '(max-width: 767px) 46vw, 30vw', alt: group.title }}
               {% endif %}
-              <span class="cham5-category__circle" aria-hidden="true">→</span>
             </div>
-            <div class="cham5-category__caption"><h3>{{ group.title }}</h3><small>{{ group.products_count }} sản phẩm</small></div>
+            <div class="cham5-category__caption"><h3>{{ group.title }}</h3><small>{{ group.products_count }} sản phẩm <span aria-hidden="true">→</span></small></div>
           </a>
         {% endunless %}
       {% endfor %}
@@ -28,53 +27,46 @@
 
   <section class="cham5-products" id="cham5-products" aria-labelledby="cham5-products-title">
     <div class="cham5-market__heading">
-      <div><p class="cham5-small-cap">Tuyển chọn trong cửa hàng</p><h2 id="cham5-products-title">Đồ thủ công,<br>đời sống hôm nay.</h2></div>
-      <div class="cham5-products__heading-aside"><p>Những món đồ dành cho không gian sống, mỗi ngày và những dịp trao tặng.</p><a href="{{ routes.all_products_collection_url }}" class="cham5-underline">Xem toàn bộ <span aria-hidden="true">→</span></a></div>
+      <div><p class="cham5-eyebrow">Một số món đồ ở CHẠM</p><h2 id="cham5-products-title">Những lựa chọn dành cho đời sống.</h2></div>
+      <a href="{{ routes.all_products_collection_url }}" class="cham5-textlink">Khám phá thêm <span aria-hidden="true">→</span></a>
     </div>
     <div class="cham5-products__grid">
       {% for product in products_source.products limit: card_limit %}
         <article class="cham5-product">
           <a href="{{ product.url }}" class="cham5-product__image" aria-label="Xem {{ product.title }}">
             {% if product.featured_image %}
-              {{ product.featured_image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '350, 550, 800, 1100', sizes: '(max-width: 720px) 45vw, (max-width: 1050px) 30vw, 25vw', alt: product.title }}
+              {{ product.featured_image | image_url: width: 960 | image_tag: loading: 'lazy', decoding: 'async', widths: '340, 520, 760, 960', sizes: '(max-width: 767px) 46vw, 30vw', alt: product.title }}
             {% endif %}
-            <span class="cham5-product__arrow" aria-hidden="true">→</span>
           </a>
-          <div class="cham5-product__info"><a href="{{ product.url }}"><h3>{{ product.title }}</h3></a><p>{{ product.price | money }}</p></div>
+          <div class="cham5-product__info">
+            <a href="{{ product.url }}"><h3>{{ product.title }}</h3></a>
+            <p>{{ product.price | money }}</p>
+          </div>
         </article>
       {% else %}
         <p>CHẠM đang cập nhật sản phẩm.</p>
       {% endfor %}
     </div>
-    <div class="cham5-products__notice">Sản phẩm và giá trên website phục vụ mục đích trình diễn. Không thực hiện giao dịch thật.</div>
+    <p class="cham5-products__notice">Sản phẩm và giá trên website phục vụ mục đích trình diễn, chưa có giao dịch thật.</p>
   </section>
 
-  <section class="cham5-play" aria-labelledby="cham5-play-title">
-    <div class="cham5-play__visual" aria-hidden="true" style="--cham5-dino: url('{{ 'cham-dino-idle.webp' | asset_url }}');">
-      <img class="cham5-play__landscape" src="{{ 'cham-dino-landscape.svg' | asset_url }}" loading="lazy" width="1600" height="720" alt="">
-      <span class="cham5-play__dino"></span>
-      <img class="cham5-play__pottery" src="{{ 'cham-dino-pottery.svg' | asset_url }}" width="120" height="150" loading="lazy" alt="">
-      <span class="cham5-play__sun" aria-hidden="true">✳</span>
-    </div>
-    <div class="cham5-play__copy"><p class="cham5-small-cap">Một cách khám phá khác</p><h2 id="cham5-play-title">Chơi một chút.<br>Biết thêm một điều.</h2><p>Chạy, nhảy và thu thập vật phẩm để mở những câu hỏi về nghề truyền thống Việt Nam trong CHẠM Play.</p><a class="cham5-button cham5-button--dark" href="/pages/cham-play">Khám phá CHẠM Play <span aria-hidden="true">→</span></a></div>
-  </section>
-
-  <section class="cham5-more" aria-labelledby="cham5-more-title">
-    <div class="cham5-more__heading"><p class="cham5-small-cap">Còn nhiều điều để xem</p><h2 id="cham5-more-title">Ở lại CHẠM thêm một chút.</h2></div>
-    <nav class="cham5-more__links" aria-label="Khám phá thêm các trang CHẠM">
-      <a href="/pages/about"><span class="cham5-more__name">Về CHẠM</span><span class="cham5-more__desc">Tìm hiểu mục tiêu và cách hoạt động của dự án</span><span aria-hidden="true" class="cham5-more__arrow">→</span></a>
-      <a href="/pages/story"><span class="cham5-more__name">Câu chuyện</span><span class="cham5-more__desc">Một góc nhìn khác về đồ thủ công</span><span aria-hidden="true" class="cham5-more__arrow">→</span></a>
-      <a href="/pages/cham-club"><span class="cham5-more__name">CHẠM Club</span><span class="cham5-more__desc">Hồ sơ, điểm thưởng và voucher demo</span><span aria-hidden="true" class="cham5-more__arrow">→</span></a>
-    </nav>
-  </section>
+  <nav class="cham5-further" aria-label="Khám phá thêm về CHẠM">
+    <p class="cham5-eyebrow">Khám phá thêm</p>
+    <a href="/pages/about">Về CHẠM <span aria-hidden="true">→</span></a>
+    <a href="/pages/story">Câu chuyện CHẠM <span aria-hidden="true">→</span></a>
+    <a href="/pages/cham-club">Hồ sơ thành viên <span aria-hidden="true">→</span></a>
+  </nav>
 
   <section class="cham5-end" aria-labelledby="cham5-end-title">
-    <div class="cham5-end__mark" aria-hidden="true"><img src="{{ 'cham5-ink-bamboo.webp' | asset_url }}" alt="" loading="lazy" width="500" height="800"></div>
-    <div class="cham5-end__top"><p>Từ Việt Nam, bằng đôi tay.</p><a href="#cham5-top" class="cham5-end__up">Lên đầu trang <span aria-hidden="true">↑</span></a></div>
-    <div class="cham5-end__copy"><p class="cham5-small-cap">Hẹn gặp lại ở CHẠM</p><h2 id="cham5-end-title"><span>CHẠM</span><small>Khám phá những giá trị<br>được làm bằng tay.</small></h2><div class="cham5-end__actions"><a href="{{ routes.all_products_collection_url }}">Khám phá sản phẩm <span aria-hidden="true">→</span></a><a href="/pages/cham-play">CHẠM Play <span aria-hidden="true">→</span></a></div></div>
-    <p class="cham5-end__disclaimer">CHẠM là website trình diễn. Sản phẩm và giao dịch mang tính minh họa.</p>
+    <div class="cham5-end__top"><p>Thủ công Việt Nam, theo một cách gần gũi hơn.</p><a href="#cham5-top">Lên đầu trang <span aria-hidden="true">↑</span></a></div>
+    <div class="cham5-end__main">
+      <p class="cham5-eyebrow">Từ Việt Nam, bằng đôi tay.</p>
+      <h2 id="cham5-end-title">CHẠM<span aria-hidden="true">.</span></h2>
+      <div class="cham5-end__sub"><p>Khám phá những giá trị được làm bằng tay.</p><a class="cham5-primary cham5-primary--light" href="{{ routes.all_products_collection_url }}">Khám phá sản phẩm <span aria-hidden="true">→</span></a></div>
+    </div>
+    <p class="cham5-end__legal">CHẠM là website trình diễn · Sản phẩm, điểm thưởng và đơn hàng đều là dữ liệu minh họa.</p>
   </section>
 </div>
 {% schema %}
-{"name":"CHẠM 5 · Mua sắm","tag":"section","settings":[{"type":"range","id":"products_limit","label":"Số sản phẩm nổi bật","min":4,"max":12,"step":1,"default":6}],"presets":[{"name":"CHẠM 5 · Mua sắm","category":"CHẠM 5"}]}
+{"name":"CHẠM · Cửa hàng","tag":"section","settings":[{"type":"range","id":"products_limit","label":"Số sản phẩm nổi bật","min":4,"max":12,"step":1,"default":6}],"presets":[{"name":"CHẠM · Cửa hàng","category":"CHẠM"}]}
 {% endschema %}
