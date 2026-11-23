@@ -91,48 +91,8 @@ const server=http.createServer((req,res)=>{
    qa.push('club '+width+' PASS');
    await ctx.close();
   }
-  for(const width of [390,1440]){
-   const ctx=await chrome.newContext({viewport:{width,height:900}}),page=await ctx.newPage(),errors=[];
-   page.on('pageerror',e=>errors.push(e.message));
-   await page.goto(url+'/pages/cham-play',{waitUntil:'domcontentloaded'});
-   await page.locator('[data-dino-start]').waitFor();
-   assert.equal(await page.locator('.dino-menu').isVisible(),true,'start menu must appear before gameplay at '+width);
-   assert.equal(await page.locator('.dino-topbar').count(),0,'HUD must not appear before starting at '+width);
-   await page.locator('.dino-menu__landscape').evaluate(img=>img.decode());
-   const menuMetrics=await page.locator('.dino-menu').evaluate(el=>({height:el.getBoundingClientRect().height,imageLoaded:el.querySelector('img')?.naturalWidth>0,characterBackground:getComputedStyle(el.querySelector('.dino-menu__character')).backgroundImage,viewport:innerHeight}));
-   assert.ok(menuMetrics.height>menuMetrics.viewport*.70,'menu must occupy available viewport at '+width+': '+JSON.stringify(menuMetrics));
-   assert.ok(menuMetrics.imageLoaded,'menu landscape must load at '+width);
-   assert.ok(menuMetrics.characterBackground.includes('cham-dino-idle.webp'),'menu dino sprite must load at '+width);
-   if(width===1440){fs.mkdirSync(path.join(root,'.qa'),{recursive:true});await page.screenshot({path:path.join(root,'.qa','dino-intro-1440.png'),fullPage:true});}
-   assert.equal(await page.locator('footer').evaluate(el=>getComputedStyle(el).display),'none','game footer hidden');
-   await page.evaluate(()=>window.CHAMCraftKnowledge.buildQuestion=f=>({question:'Nghề nào ở '+f.village+'?',options:['Đúng','Sai 1','Sai 2','Sai 3'],answerIndex:0,answer:'Đúng',explanation:'Thông tin nghề được đối chiếu với nguồn du lịch.',source:f.source}));
-   await assertContrast(page,'game intro '+width);
-   await page.locator('[data-dino-start]').click();
-   await page.locator('.dino-landscape__image').evaluate(img=>img.decode());
-   const sceneMetrics=await page.locator('.dino-landscape').evaluate(el=>({height:el.getBoundingClientRect().height,width:el.getBoundingClientRect().width,imageLoaded:el.querySelector('.dino-landscape__image')?.naturalWidth>0,dinoBackground:getComputedStyle(el.querySelector('.dino-character__sprite')).backgroundImage,controlsTop:el.nextElementSibling?.getBoundingClientRect().top}));
-   assert.ok(sceneMetrics.height>200,'game world must have usable height at '+width+': '+JSON.stringify(sceneMetrics));
-   assert.ok(sceneMetrics.imageLoaded,'game landscape image must load at '+width);
-   assert.ok(sceneMetrics.dinoBackground.includes('cham-dino-run.webp'),'running sprite must load at '+width);
-   assert.ok(sceneMetrics.controlsTop>=0,'controls must remain visible at '+width);
-   await page.locator('[data-dino-jump]').click();
-   await page.waitForTimeout(120);
-   assert.ok(await page.locator('[data-dino-character]').evaluate(el=>parseFloat(el.style.getPropertyValue('--jump-height')))>0,'jump actually moves character');
-   for(let i=0;i<5;i++){
-    await page.evaluate(()=>window.CHAMQuestQA.pickup());
-    await assertContrast(page,'game question '+width);
-    await page.locator('[data-dino-choice="0"]').click();
-    await page.locator('[data-dino-continue]').click();
-   }
-   await page.locator('.dino-end').waitFor();
-   await assertContrast(page,'game victory '+width);
-   assert.equal(await page.evaluate(()=>window.CHAMDemo.points()),120);
-   assert.equal(errors.length,0,'browser errors quest '+width+': '+errors.join('|'));
-   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'quest overflow '+width);
-   const gameHeight=await page.locator('#MainContent').evaluate(el=>el.getBoundingClientRect().height);
-   assert.ok(gameHeight>550&&gameHeight<850,'full-height game beneath header '+width);
-   qa.push('dino quest '+width+' PASS');
-   await ctx.close();
-  }
+  // New five-game suite: tests/cham-play-browser.test.cjs.
+  qa.push('CHẠM Play 2.0 tested separately');
   console.log('BROWSER_FIXTURE_QA',qa.join(' | '),'SVG',avatars.length);
  }finally{await chrome.close();}
 })().catch(e=>{console.error(e);process.exitCode=1}).finally(()=>server.close());

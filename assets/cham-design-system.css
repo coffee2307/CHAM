@@ -1,0 +1,77 @@
+/* CHẠM DESIGN SYSTEM — unified type, pointer/keyboard feedback and reversible scroll.
+   Applies to the actual storefront, not checkout iframe or external integrations. */
+body.cham-site{
+  --cham-font-body:"Be Vietnam Pro","Segoe UI",Arial,sans-serif;
+  --cham-font-display:"Be Vietnam Pro","Segoe UI",Arial,sans-serif;
+  --cham-ui-ink:#302820;
+  --cham-ui-accent:#926044;
+  --cham-ui-ease:cubic-bezier(.22,.73,.2,1);
+  font-family:var(--cham-font-body)!important;
+}
+body.cham-site :is(
+  h1,h2,h3,h4,h5,h6,p,a,button,input,textarea,select,label,summary,
+  small,blockquote,figcaption,legend,li,dt,dd,th,td,time
+){font-family:var(--cham-font-body)!important}
+body.cham-site :is(.cham-story-v4,.cham-about-report,.cc-shell,.cham-demo-app,.cham-product-page,.cham-collection-page){
+  font-family:var(--cham-font-body)!important;
+}
+body.cham-site :is(h1,h2,h3,h4){font-kerning:normal}
+body.cham-site :is(h1,h2,h3,h4) {text-wrap:balance}
+body.cham-site :is(button,a,input,textarea,select):focus-visible{
+  outline:2px solid #a36744!important;outline-offset:3px!important;
+}
+/* Decorative arrows are not added to CTAs; hover is expressed through type,
+   the existing image, and border rather than translating entire layouts. */
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  body.cham-site :is(.cham-header__nav a,.cham-mobile-nav a,.cham-footer a,
+  .cham-story-v4__text-link,.cham-story-v4__status a,.cc-tabs a,.cd-tabs a){
+    transition:color .28s ease,border-color .3s ease,background-color .3s ease;
+  }
+  body.cham-site :is(.cham-header__nav a,.cham-mobile-nav a,.cham-footer a,
+  .cham-story-v4__text-link,.cham-story-v4__status a,.cc-tabs a,.cd-tabs a):hover{
+    color:var(--cham-ui-accent)!important;
+  }
+  body.cham-site :is(.cham-story-v4__card-photo,.cham-category-photo-card__photo,
+  .cham-product-card__image,.cham-product-page__media,.cham-craft-tile__photo){
+    overflow:hidden;
+  }
+  body.cham-site :is(.cham-story-v4__card-photo,.cham-category-photo-card__photo,
+  .cham-product-card__image,.cham-product-page__media,.cham-craft-tile__photo) img{
+    transition:transform .65s var(--cham-ui-ease),filter .4s ease;
+    backface-visibility:hidden;
+  }
+  body.cham-site :is(.cham-story-v4__card-photo,.cham-category-photo-card__photo,
+  .cham-product-card__image,.cham-product-page__media,.cham-craft-tile__photo):is(:hover,:focus-within) img{
+    transform:scale(1.035);
+  }
+  body.cham-site :is(.cc-btn,.cd-btn,.cham-button--primary,.cham-button--soft,
+  .cham-product-page__add,.cham-story-v4__cta):not(:disabled){
+    transition:background-color .25s ease,border-color .25s ease,
+      color .25s ease,box-shadow .32s var(--cham-ui-ease);
+  }
+  body.cham-site :is(.cc-btn,.cd-btn,.cham-button--primary,.cham-button--soft,
+  .cham-product-page__add,.cham-story-v4__cta):hover:not(:disabled){
+    box-shadow:0 7px 19px rgba(46,31,21,.12);
+  }
+  body.cham-site :is(.cc-voucher-card,.cc-panel,.cham-category-photo-card):focus-within{
+    border-color:#a8896d;
+  }
+}
+/* One-way entrance animations are replaced by position-coupled progress that
+   runs backward as users scroll up. Never hide content before JS initializes. */
+body.cham-site [data-cham-motion-item]{
+  opacity:calc(.9 + .1 * var(--cham-motion-progress,1))!important;
+  transform:translate3d(0,calc((1 - var(--cham-motion-progress,1)) * 12px),0);
+  transition:none!important;
+}
+@media(prefers-reduced-motion:reduce){
+  body.cham-site [data-cham-motion-item]{
+    opacity:1!important;transform:none!important;
+  }
+}
+@media(hover:none),(pointer:coarse){
+  body.cham-site :is(.cham-story-v4__card-photo,.cham-category-photo-card__photo,
+  .cham-product-card__image,.cham-product-page__media,.cham-craft-tile__photo) img{
+    transition:none!important;
+  }
+}

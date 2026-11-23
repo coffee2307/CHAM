@@ -3,30 +3,15 @@
     {% render 'cham-avatar-data' %}
   {% endif %}
   {% if section.settings.mode == 'play' %}
-    <script type="application/json" id="cham-dino-assets">
+    <script type="application/json" id="cham-play-assets">
       {
-        "run": {{ 'cham-dino-run.webp' | asset_url | json }},
-        "jump": {{ 'cham-dino-jump.webp' | asset_url | json }},
-        "idle": {{ 'cham-dino-idle.webp' | asset_url | json }},
-        "landscape": {{ 'cham-dino-landscape.svg' | asset_url | json }},
-        "pottery": {{ 'cham-dino-pottery.svg' | asset_url | json }},
-        "stump": {{ 'cham-dino-stump.svg' | asset_url | json }}
+        "hero": {{ 'cham6-craft-shape-640.webp' | asset_url | json }},
+        "memory": {{ 'cham6-craft-clay-640.webp' | asset_url | json }},
+        "quiz": {{ 'cham6-craft-decoration-640.webp' | asset_url | json }},
+        "match": {{ 'cham5-detail-weave.webp' | asset_url | json }},
+        "word": {{ 'cham6-craft-trim-640.webp' | asset_url | json }},
+        "speed": {{ 'cham6-craft-kiln-640.webp' | asset_url | json }}
       }
-    </script>
-    <script type="application/json" id="cham-play-scenes">
-      [
-      {% assign has_photo = false %}
-      {% for group in collections %}
-        {% unless group.handle == 'frontpage' or group.handle == 'all' %}
-          {% assign photo = group.image | default: group.products.first.featured_image %}
-          {% if photo != blank %}
-            {% if has_photo %},{% endif %}
-            {{ photo | image_url: width: 1000 | json }}
-            {% assign has_photo = true %}
-          {% endif %}
-        {% endunless %}
-      {% endfor %}
-      ]
     </script>
   {% endif %}
   <div data-cham-demo-app data-mode="{{ section.settings.mode | escape }}">

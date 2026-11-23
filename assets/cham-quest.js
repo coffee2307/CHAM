@@ -1,200 +1,260 @@
-/* CHẠM DINO QUEST | original educational side runner.
-   Character sprite: Free Dino Sprites by pzUH, CC0; scenery illustrated for CHẠM.
-   Questions: CHAMCraftKnowledge; rewards: CHAMDemo browser-local ledger. */
+/* CHẠM Play — five distinct craft mini games, no mascot/scenery dependencies.
+   Uses the browser-local CHAMDemo wallet; at most one demo game reward per day. */
 (() => {
-'use strict';
-const $=(s,p=document)=>p.querySelector(s);
-const $$=(s,p=document)=>[...p.querySelectorAll(s)];
-const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const getJSON=id=>{try{return JSON.parse(document.getElementById(id)?.textContent||'{}')}catch(_){return {}}};
-function mount(root,core){
- const facts=window.CHAMCraftKnowledge;
- const art=getJSON('cham-dino-assets');
- if(!root||!core||!facts||!art.run){if(root)root.textContent='Không thể tải trò chơi. Vui lòng làm mới trang.';return;}
- for(const key of ['run','jump','idle','landscape']){
-  if(typeof art[key]==='string'&&art[key].length<1800)root.style.setProperty('--dino-'+key,'url("'+art[key].replace(/["\\]/g,'')+'")');
- }
- let state='intro',raf=0,last=0,elapsed=0,sinceSpawn=0,pace=1.0,y=0,velocity=0;
- let lives=3,score=0,found=0,objects=[],runFacts=[],current=null,chosen=false,sequence=0;
- let lastSpawnKind='obstacle',lastInput=0,originalFocus=null;
- const clamp=(v,min,max)=>Math.min(max,Math.max(min,v));
- const siteHeader=$('#header-group');
- function measureHeader(){document.documentElement.style.setProperty('--cham-game-header-height',(siteHeader?.getBoundingClientRect().height||64)+'px');}
- measureHeader();
- if('ResizeObserver'in window&&siteHeader)new ResizeObserver(measureHeader).observe(siteHeader);
- const awardClaimed=()=>core.getState().ledger.some(l=>l.id==='game:'+core.dateKey());
- const footerNote='Điểm thưởng chỉ có giá trị trong bản trình diễn.';
- const character='<span class="dino-hero-character" aria-label="Khủng long xanh" role="img"></span>';
- const status=message=>{const node=$('[data-dino-status]',root);if(node)node.textContent=message;};
- const worldMarkup=()=>'<div class="dino-landscape"><img class="dino-landscape__image" src="'+esc(art.landscape)+'" alt="" aria-hidden="true"><div class="dino-shimmer"></div><div class="dino-hills"></div><div class="dino-ground"></div><div class="dino-character" data-dino-character role="img" aria-label="Khủng long đang chạy"><span class="dino-character__sprite"></span><span class="dino-character__shadow"></span></div><div class="dino-objects" data-dino-objects></div><div class="dino-world-overlays" data-dino-overlays></div></div>';
- const hud=()=>'<div class="dino-topbar"><div class="dino-brand"><small>CHẠM PLAY</small><strong>KHỦNG LONG LÀNG NGHỀ</strong></div><div class="dino-progress"><span>Kiến thức <b data-dino-progress>0/5</b></span><div class="dino-progress-track"><span data-dino-progress-bar></span></div></div><div class="dino-stats"><span>Điểm chơi <b data-dino-score>0</b></span><span class="dino-hearts" aria-label="Còn 3 mạng" data-dino-hearts>♥ ♥ ♥</span></div><button class="dino-top-pause" data-dino-pause type="button" aria-label="Tạm dừng trò chơi">II</button></div>';
- const controls=()=>'<div class="dino-controls"><div class="dino-control-hint"><span data-dino-status role="status" aria-live="polite">Nhấn Space, phím ↑ hoặc chạm để nhảy.</span><small>Thu thập bình gốm để mở câu hỏi về nghề truyền thống.</small></div><div class="dino-control-buttons"><button type="button" data-dino-jump class="dino-jump-button" aria-label="Nhảy lên"><span aria-hidden="true">↑</span> NHẢY</button></div></div>';
- const structure=()=>'<div class="dino-app">'+hud()+worldMarkup()+controls()+'</div>';
- const scene=()=>$('.dino-landscape',root);
- const overlays=()=> $('[data-dino-overlays]',root);
- const actor=()=> $('[data-dino-character]',root);
- function setVisual(){
-  const actorNode=actor();if(actorNode){actorNode.style.setProperty('--jump-height',y+'px');actorNode.classList.toggle('is-jumping',y>4);}
-  const counter=$('[data-dino-score]',root);if(counter)counter.textContent=String(score);
-  const progress=$('[data-dino-progress]',root);if(progress)progress.textContent=found+'/5';
-  const bar=$('[data-dino-progress-bar]',root);if(bar)bar.style.width=(found/5*100)+'%';
-  const hearts=$('[data-dino-hearts]',root);if(hearts){hearts.textContent=('♥ '.repeat(lives)+'♡ '.repeat(Math.max(0,3-lives))).trim();hearts.setAttribute('aria-label','Còn '+lives+' mạng');}
- }
- const stop=()=>{cancelAnimationFrame(raf);raf=0;last=0;};
- function layer(content){const el=overlays();if(el)el.innerHTML=content;}
- const modal=(cls,title,content)=>'<section class="dino-modal '+cls+'" role="dialog" aria-modal="true" aria-label="'+esc(title)+'"><div class="dino-modal-card">'+content+'</div></section>';
- function intro(){
-  stop();state='intro';
-  root.innerHTML='<section class="dino-menu" aria-label="Menu trò chơi CHẠM Quest">'+
-   '<div class="dino-menu__art"><img class="dino-menu__landscape" src="'+esc(art.landscape)+'" alt="" aria-hidden="true"><span class="dino-menu__character" role="img" aria-label="Khủng long hoạt hình"></span><span class="dino-menu__sun" aria-hidden="true">✳</span><span class="dino-menu__decor" aria-hidden="true"></span></div>'+
-   '<div class="dino-menu__copy"><p class="dino-eyebrow">CHẠM PLAY · KHÁM PHÁ LÀNG NGHỀ</p><h1>Khủng long đi tìm làng nghề.</h1>'+
-   '<p>Nhảy qua gốc cây, thu thập bình gốm và giải các câu hỏi về nghề thủ công Việt Nam.</p>'+
-   '<div class="dino-menu__steps"><span><b>01</b> Nhảy tránh chướng ngại</span><span><b>02</b> Nhặt bình gốm để mở câu hỏi</span><span><b>03</b> Hoàn thành năm thử thách</span></div>'+
-   '<div class="dino-menu__actions"><button type="button" data-dino-start class="dino-primary">Bắt đầu chơi <span aria-hidden="true">→</span></button><a href="/pages/cham-club" class="dino-menu__profile">Xem điểm của bạn</a></div>'+
-   '<p class="dino-menu__note">Space, ↑ hoặc chạm để nhảy. '+footerNote+'</p></div></section>';
-  const btn=$('[data-dino-start]',root);if(btn)btn.focus({preventScroll:true});
- }
- function start(){
-  stop();score=0;found=0;lives=3;elapsed=0;sinceSpawn=0;pace=1;y=0;velocity=0;objects=[];sequence=0;current=null;chosen=false;
-  runFacts=facts.generateRun(5);lastSpawnKind='obstacle';root.innerHTML=structure();setVisual();
-  state='run';status('Nhảy để thu thập bình gốm.');raf=requestAnimationFrame(tick);
- }
- function jump(){
-  if(state==='intro'){start();return;}
-  if(state!=='run')return;
-  if(y>1)return;
-  const field=scene();const height=field?.clientHeight||450;
-  velocity=Math.max(650,Math.min(920,height*1.85));
-  y=2;
-  setVisual();
- }
- function spawn(kind){
-  const holder=$('[data-dino-objects]',root);if(!holder)return;
-  const field=scene();const width=field?.clientWidth||1100;
-  const item={id:++sequence,kind,x:width+100,hit:false,el:document.createElement('div')};
-  item.el.className='dino-object dino-object--'+kind;
-  const img=document.createElement('img');img.src=kind==='pottery'?art.pottery:art.stump;img.alt='';img.decoding='async';
-  item.el.append(img);holder.append(item.el);
-  objects.push(item);lastSpawnKind=kind;
- }
- function remove(item){item.el.remove();item.removed=true;}
- function pickup(item){
-  remove(item);
-  score+=10;
-  setVisual();
-  askQuestion();
- }
- function damage(item){
-  remove(item);lives--;setVisual();
-  status('Bạn vấp phải gốc cây. Hãy canh thời điểm nhảy!');
-  const char=actor();char?.classList.add('is-hit');setTimeout(()=>char?.classList.remove('is-hit'),650);
-  if(lives<=0)finish(false);
- }
- function tick(stamp){
-  if(state!=='run')return;
-  if(!last)last=stamp;
-  const dt=Math.min(.045,(stamp-last)/1000);last=stamp;
-  elapsed+=dt;sinceSpawn+=dt;pace=Math.min(1.55,1+elapsed/95);
-  const field=scene();if(!field)return;
-  const worldWidth=field.clientWidth,worldHeight=field.clientHeight;
-  const base=Math.max(84,worldHeight*.19);
-  velocity-=Math.max(1650,worldHeight*4.0)*dt;
-  y=Math.max(0,y+velocity*dt);
-  if(y===0)velocity=0;
-  if(sinceSpawn>(lastSpawnKind==='pottery'?2.05:1.9)){
-   sinceSpawn=0;
-   spawn(lastSpawnKind==='pottery'?'obstacle':'pottery');
+  'use strict';
+  const $=(s,p=document)=>p.querySelector(s);
+  const $$=(s,p=document)=>Array.from(p.querySelectorAll(s));
+  const shuffle=(arr)=>{const out=[...arr];for(let i=out.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[out[i],out[j]]=[out[j],out[i]];}return out;};
+  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const games=[
+    {id:'memory',name:'Ghép cặp thủ công',type:'Trí nhớ',time:'2–3 phút',description:'Lật các thẻ và tìm đúng cặp nghề thủ công.',art:'memory',detail:'8 thẻ · 4 cặp'},
+    {id:'quiz',name:'Đoán nghề Việt',type:'Kiến thức',time:'2–3 phút',description:'Chọn câu trả lời đúng từ tư liệu làng nghề.',art:'quiz',detail:'5 câu hỏi'},
+    {id:'match',name:'Nối chất liệu',type:'Ghép nối',time:'3 phút',description:'Ghép nghề với nguyên liệu thường dùng.',art:'match',detail:'5 cặp tương ứng'},
+    {id:'word',name:'Ô chữ thủ công',type:'Giải đố',time:'3–5 phút',description:'Tìm tên chất liệu và sản phẩm trong bảng chữ.',art:'word',detail:'5 từ cần tìm'},
+    {id:'speed',name:'Thử thách nhanh',type:'Thời gian',time:'45 giây',description:'Trả lời năm câu hỏi trước khi hết thời gian.',art:'speed',detail:'5 câu · 45 giây'}
+  ];
+  const normalize=v=>String(v).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/Đ/g,'D').toUpperCase();
+  const WORDS=[
+    {word:'GOM',label:'Gốm',hint:'Chất liệu tạo tác từ đất sét',row:0,col:1,axis:'h'},
+    {word:'TRE',label:'Tre',hint:'Vật liệu dùng trong nghề đan',row:1,col:4,axis:'v'},
+    {word:'LUA',label:'Lụa',hint:'Loại vải gắn với nghề dệt',row:4,col:1,axis:'h'},
+    {word:'NON',label:'Nón',hint:'Vật dụng thường làm từ lá',row:5,col:4,axis:'h'},
+    {word:'MAY',label:'Mây',hint:'Vật liệu đan lát',row:7,col:0,axis:'h'}
+  ];
+  const size=8;
+  function wordGrid(){
+    const cells=Array(size*size).fill(null);
+    WORDS.forEach(({word,row,col,axis})=>[...word].forEach((c,i)=>{
+      const pos=(row+(axis==='v'?i:0))*size+col+(axis==='h'?i:0);
+      if(cells[pos]&&cells[pos]!==c)throw Error('Ô chữ chồng sai ký tự');
+      cells[pos]=c;
+    }));
+    const filler='ANHTRELOIAVUONGDCMYSB';
+    for(let i=0;i<cells.length;i++)if(!cells[i])cells[i]=filler[(i*13+7)%filler.length];
+    return cells;
   }
-  const playerX=worldWidth*.20;
-  for(const obj of objects){
-   obj.x-=Math.max(220,worldWidth*.36)*pace*dt;
-   obj.el.style.left=obj.x+'px';
-   if(!obj.hit&&Math.abs(obj.x-playerX)<Math.min(38,worldWidth*.038)){
-    obj.hit=true;
-    if(obj.kind==='pottery'){
-      if(y>Math.max(12,worldHeight*.045)){pickup(obj);break;}
-      obj.hit=false;
-    }else if(y<Math.max(58,worldHeight*.19)){damage(obj);if(state!=='run')break;}
-   }
-   if(obj.x<-110)remove(obj);
+  function mount(root,core){
+    if(!root||!core)return;
+    const facts=window.CHAMCraftKnowledge;
+    const assets=(()=>{try{return JSON.parse($('#cham-play-assets')?.textContent||'{}')}catch(_){return {}}})();
+    const craftRecords=Array.isArray(facts?.records)?facts.records:[];
+    if(craftRecords.length<5){
+      root.innerHTML='<div class="cp-error" role="alert">Chưa tải được dữ liệu câu hỏi. Vui lòng tải lại trang.</div>';
+      return;
+    }
+    let kind='hub',state={},timer=null,delay=null,destroyed=false;
+    let completed=new Set();
+    try{completed=new Set(JSON.parse(sessionStorage.getItem('cham-play-finished-v1')||'[]'))}catch(_){}
+    const claimed=()=>core.getState().ledger.some(l=>l.id==='game:'+core.dateKey());
+    function stopTimers(){
+      if(timer){clearInterval(timer);timer=null;}
+      if(delay){clearTimeout(delay);delay=null;}
+    }
+    const stopUI=()=>{stopTimers();state={};};
+    const progress=(done,total)=>'<div class="cp-progress" aria-label="Tiến trình: '+done+'/'+total+'"><div style="width:'+((done/total)*100).toFixed(2)+'%"></div></div>';
+    const gameHeading=(game)=>'<header class="cp-session-header"><button type="button" class="cp-back" data-cp-back>Trở về trò chơi</button><div class="cp-session-copy"><span>'+esc(game.type)+'</span><h1>'+esc(game.name)+'</h1><p>'+esc(game.description)+'</p></div><div class="cp-session-wallet"><strong>'+core.points()+'</strong><span>Điểm demo</span></div></header>';
+    const avatar=(id)=>assets[id]?'<img src="'+esc(assets[id])+'" loading="lazy" decoding="async" alt="">':'';
+    function hub(filter='Tất cả'){
+      kind='hub';stopUI();
+      const categories=['Tất cả','Trí nhớ','Kiến thức','Ghép nối','Giải đố','Thời gian'];
+      const cards=games.filter(g=>filter==='Tất cả'||g.type===filter).map(g=>
+        '<article class="cp-card"><button type="button" class="cp-card__open" data-cp-game="'+g.id+'" aria-label="Chơi '+esc(g.name)+'">'+
+          '<span class="cp-card__media cp-card__media--'+g.art+'">'+avatar(g.art)+'</span>'+
+          '<span class="cp-card__content"><span class="cp-card__category">'+esc(g.type)+' · '+esc(g.time)+'</span>'+
+          '<strong>'+esc(g.name)+'</strong><span class="cp-card__description">'+esc(g.description)+'</span>'+
+          '<span class="cp-card__bottom"><span>'+esc(g.detail)+'</span><span class="cp-card__action">'+(completed.has(g.id)?'Chơi lại':'Chơi ngay')+'</span></span></span>'+
+        '</button></article>').join('');
+      const tabs=categories.map(c=>'<button type="button" class="cp-filter'+(filter===c?' is-active':'')+'" data-cp-filter="'+c+'" aria-pressed="'+(filter===c)+'">'+c+'</button>').join('');
+      root.innerHTML='<div class="cp-app cp-hub">'+
+        '<section class="cp-hero"><div class="cp-hero__copy"><p class="cp-eyebrow">CHẠM Play</p><h1>Chơi một chút,<br>hiểu nghề thêm một chút.</h1>'+
+        '<p>Khám phá vật liệu, sản phẩm và những nghề thủ công Việt Nam qua năm trò chơi ngắn, mỗi trò một cách trải nghiệm.</p>'+
+        '<div class="cp-hero__links"><a href="#cp-games" class="cp-primary cp-hero__cta">Khám phá trò chơi</a><a href="/pages/cham-club?tab=rewards" class="cp-quiet-link">Xem điểm và phần thưởng</a></div></div>'+
+        '<div class="cp-hero__photo">'+avatar('hero')+'<div class="cp-hero__caption">Chất liệu và bàn tay người thợ</div></div></section>'+
+        '<section class="cp-summary" aria-label="Tổng quan điểm thưởng"><div><span>Điểm của bạn</span><strong data-cp-wallet>'+core.points()+'</strong></div>'+
+        '<div><span>Trò đã hoàn thành trong phiên</span><strong>'+completed.size+' / 5</strong></div>'+
+        '<div><span>Thưởng trò chơi hôm nay</span><strong>'+(claimed()?'Đã nhận':'Chưa nhận')+'</strong></div>'+
+        '<p>Chỉ là điểm và voucher mô phỏng lưu trên trình duyệt. Hoàn thành trò chơi đủ điều kiện để nhận tối đa 20 điểm demo mỗi ngày.</p></section>'+
+        '<section id="cp-games" class="cp-games"><div class="cp-section-head"><h2>Chọn trò chơi</h2><p>Chọn một cách khám phá phù hợp. Không cần cài đặt.</p></div>'+
+        '<div class="cp-filter-row" role="group" aria-label="Lọc trò chơi">'+tabs+'</div>'+
+        '<div class="cp-grid">'+cards+'</div></section>'+
+        '<section class="cp-foot"><div><h2>Hiểu món đồ trước khi lựa chọn.</h2><p>Tìm hiểu câu chuyện chất liệu và cách thực hiện trên CHẠM.</p></div>'+
+        '<a href="/collections/all" class="cp-quiet-link">Xem sản phẩm</a></section></div>';
+      root.dispatchEvent(new CustomEvent('cham:play-rendered',{bubbles:true}));
+    }
+    function start(id){
+      const game=games.find(g=>g.id===id);if(!game)return;
+      kind=id;stopUI();
+      if(id==='memory'){
+        const pairs=shuffle(craftRecords).slice(0,4).map(r=>({id:r.id,label:r.craft}));
+        state={deck:shuffle(pairs.flatMap(p=>[0,1].map((_,idx)=>({...p,instance:p.id+'-'+idx})))),open:[],found:new Set(),turns:0,locked:false};
+      }else if(id==='quiz'||id==='speed'){
+        state={questions:facts.generateRun(5).map(x=>facts.buildQuestion(x)),index:0,correct:0,answer:null,remaining:45};
+      }else if(id==='match'){
+        const pairs=shuffle(craftRecords).slice(0,5);
+        state={left:pairs,right:shuffle(pairs),selected:null,found:new Set(),misses:0};
+      }else if(id==='word'){
+        state={letters:wordGrid(),selected:null,found:new Set(),foundPositions:new Set(),attempts:0};
+      }
+      render();
+      if(id==='speed')startClock();
+    }
+    function outcome(won,message){
+      stopTimers();
+      const game=games.find(g=>g.id===kind);
+      const type=kind;
+      let reward=false;
+      if(won){
+        completed.add(type);
+        try{sessionStorage.setItem('cham-play-finished-v1',JSON.stringify([...completed]))}catch(_){}
+        reward=core.gameAward(type==='memory'?Math.max(1,state.turns):Math.max(1,state.correct||state.attempts||5));
+      }
+      kind='result';
+      root.innerHTML='<div class="cp-app cp-session"><header class="cp-session-header"><button type="button" data-cp-back class="cp-back">Tất cả trò chơi</button></header>'+
+        '<section class="cp-result"><div class="cp-result__symbol" aria-hidden="true">'+(won?'✓':'↺')+'</div><h1>'+(won?'Hoàn thành '+esc(game.name):'Thử lại '+esc(game.name))+'</h1>'+
+        '<p>'+esc(message)+'</p>'+
+        '<p class="cp-result__award">'+(won?(reward?'Bạn vừa nhận 20 điểm CHẠM demo.':'Đã hoàn thành. Phần thưởng demo hôm nay chỉ được nhận một lần.'):'Chơi lại để hoàn thành thử thách. Không có điểm bị trừ.')+'</p>'+
+        '<div class="cp-result__actions"><button type="button" class="cp-primary" data-cp-game="'+type+'">Chơi lại</button><button type="button" class="cp-secondary" data-cp-back>Chọn trò khác</button><a class="cp-quiet-link" href="/pages/cham-club?tab=rewards">Ví điểm demo</a></div></section></div>';
+    }
+    function render(){
+      const game=games.find(g=>g.id===kind);if(!game)return;
+      let body='';
+      if(kind==='memory'){
+        const s=state;
+        body='<div class="cp-board"><div class="cp-board__top"><strong>Ghép hai thẻ giống nhau</strong><span>'+s.found.size+'/4 cặp · '+s.turns+' lượt</span></div>'+
+          progress(s.found.size,4)+
+          '<div class="cp-memory-grid">'+s.deck.map((card,i)=>{
+            const shown=s.open.includes(i)||s.found.has(card.id);
+            return '<button class="cp-memory-cell'+(shown?' is-revealed':'')+(s.found.has(card.id)?' is-matched':'')+'" data-cp-memory="'+i+'" type="button" '+(s.found.has(card.id)?'disabled':'')+' aria-label="Thẻ '+(i+1)+(shown?': '+esc(card.label):': đang úp')+'"><span>'+ (shown?esc(card.label):'CHẠM')+'</span></button>';
+          }).join('')+'</div><p class="cp-help" role="status">Lật từng cặp thẻ. Trò chơi hoàn thành khi bạn tìm đủ bốn cặp.</p></div>';
+      }
+      if(kind==='quiz'||kind==='speed'){
+        const s=state,q=s.questions[s.index];
+        body='<div class="cp-board cp-quiz"><div class="cp-board__top"><strong>Câu hỏi '+(s.index+1)+'/5</strong>'+
+          '<span>'+(kind==='speed'?'<span class="cp-clock" data-cp-clock aria-live="off">'+Math.ceil(s.remaining)+' giây</span>':'Đúng '+s.correct+' câu')+'</span></div>'+
+          progress(s.index,5)+'<p class="cp-question-type">'+esc(q.kind)+'</p><h2>'+esc(q.question)+'</h2>'+
+          '<div class="cp-options">'+q.options.map((o,i)=>{
+            const selected=s.answer===i,answered=s.answer!==null,correct=i===q.answerIndex;
+            return '<button type="button" data-cp-choice="'+i+'" '+(answered?'disabled':'')+' class="cp-option'+(answered&&correct?' is-correct':'')+(answered&&selected&&!correct?' is-wrong':'')+'"><span>'+String.fromCharCode(65+i)+'</span>'+esc(o)+'</button>';
+          }).join('')+'</div>'+
+          (s.answer!==null?'<div class="cp-feedback" role="status"><strong>'+(s.answer===q.answerIndex?'Chính xác':'Chưa đúng')+'</strong><p>'+esc(q.explanation)+'</p>'+
+          (q.source?'<a href="'+esc(q.source)+'" target="_blank" rel="noopener noreferrer">Nguồn tham khảo</a>':'')+
+          '<button type="button" data-cp-next class="cp-primary">'+(s.index===4?'Xem kết quả':'Câu tiếp theo')+'</button></div>':'<p class="cp-help">Chọn một đáp án để tiếp tục.</p>')+
+          '</div>';
+      }
+      if(kind==='match'){
+        const s=state;
+        const left=s.left.map(p=>'<button type="button" data-cp-left="'+esc(p.id)+'" '+(s.found.has(p.id)?'disabled':'')+' class="cp-match-option'+(s.selected===p.id?' is-selected':'')+(s.found.has(p.id)?' is-found':'')+'">'+esc(p.craft)+'</button>').join('');
+        const right=s.right.map(p=>'<button type="button" data-cp-right="'+esc(p.id)+'" '+(s.found.has(p.id)?'disabled':'')+' class="cp-match-option'+(s.found.has(p.id)?' is-found':'')+'">'+esc(p.material)+'</button>').join('');
+        body='<div class="cp-board"><div class="cp-board__top"><strong>Nghề và chất liệu</strong><span>'+s.found.size+'/5 cặp</span></div>'+progress(s.found.size,5)+
+          '<p class="cp-help">Chọn một nghề bên trái, sau đó chọn nguyên liệu tương ứng bên phải.</p>'+
+          '<div class="cp-match-grid"><div><h2>Nghề thủ công</h2>'+left+'</div><div><h2>Chất liệu</h2>'+right+'</div></div>'+
+          '<p class="cp-help" role="status">'+(s.selected?'Đã chọn nghề. Hãy chọn chất liệu.':'Các cặp đúng sẽ được giữ lại.')+'</p></div>';
+      }
+      if(kind==='word'){
+        const s=state;
+        body='<div class="cp-board"><div class="cp-board__top"><strong>Tìm các từ trong bảng chữ</strong><span>'+s.found.size+'/5 từ</span></div>'+progress(s.found.size,5)+
+          '<p class="cp-help">Chạm chữ đầu và chữ cuối của một từ theo hàng ngang hoặc cột dọc. Có thể chọn theo chiều ngược lại.</p>'+
+          '<div class="cp-word-layout"><div class="cp-word-grid" role="group" aria-label="Bảng ô chữ">'+s.letters.map((c,i)=>
+            '<button type="button" data-cp-cell="'+i+'" class="cp-word-cell'+(s.foundPositions.has(i)?' is-found':'')+(s.selected===i?' is-selected':'')+'" aria-label="Hàng '+(Math.floor(i/size)+1)+', cột '+(i%size+1)+', chữ '+c+'">'+c+'</button>').join('')+'</div>'+
+          '<div class="cp-word-clues"><h2>Từ cần tìm</h2>'+WORDS.map(w=>'<p class="'+(s.found.has(w.word)?'is-found':'')+'"><strong>'+esc(w.label)+'</strong><span>'+esc(w.hint)+'</span></p>').join('')+
+          '<button type="button" data-cp-word-clear class="cp-secondary">Bỏ chọn</button></div></div></div>';
+      }
+      root.innerHTML='<div class="cp-app cp-session">'+gameHeading(game)+
+        '<div class="cp-session-layout"><main class="cp-session-main">'+body+'</main>'+
+        '<aside class="cp-aside"><p class="cp-eyebrow">CHẠM Play</p><h2>Khám phá qua từng thao tác.</h2>'+
+        '<p>Trò chơi sử dụng dữ liệu kiến thức làng nghề và kết quả chỉ được ghi trong trình duyệt này.</p>'+
+        '<p>Hoàn thành thử thách để được nhận điểm demo; một ngày chỉ có một phần thưởng trò chơi.</p>'+
+        '<a class="cp-quiet-link" href="/pages/cham-club?tab=rewards">Xem ví CHẠM</a></aside></div></div>';
+    }
+    function selectMemory(i){
+      const s=state;if(s.locked||s.found.has(s.deck[i]?.id)||s.open.includes(i))return;
+      s.open.push(i);
+      if(s.open.length===2){
+        s.turns++;s.locked=true;
+        const [a,b]=s.open;
+        if(s.deck[a].id===s.deck[b].id){
+          s.found.add(s.deck[a].id);s.open=[];s.locked=false;render();
+          if(s.found.size===4)outcome(true,'Bạn đã tìm đúng tất cả bốn cặp thẻ sau '+s.turns+' lượt.');
+          return;
+        }
+        render();
+        delay=setTimeout(()=>{if(kind!=='memory')return;s.open=[];s.locked=false;render();delay=null;},820);
+      }else render();
+    }
+    function answer(i){
+      const s=state;if(s.answer!==null||!s.questions[s.index])return;
+      s.answer=i;
+      if(i===s.questions[s.index].answerIndex)s.correct++;
+      render();
+    }
+    function nextQuestion(){
+      const s=state;if(s.answer===null)return;
+      if(s.index===4){
+        const won=s.correct>=3;
+        outcome(won,'Bạn trả lời đúng '+s.correct+'/5 câu.'+(won?'':' Cần ít nhất ba câu đúng để hoàn thành.'));
+      }else{s.index++;s.answer=null;render();}
+    }
+    function startClock(){
+      let previous=performance.now();
+      timer=setInterval(()=>{
+        if(kind!=='speed')return;
+        const now=performance.now();
+        if(document.hidden){previous=now;return;}
+        if(state.answer!==null){previous=now;return;} // time to read explanation
+        state.remaining=Math.max(0,state.remaining-(now-previous)/1000);
+        previous=now;
+        const node=$('[data-cp-clock]',root);
+        if(node)node.textContent=Math.ceil(state.remaining)+' giây';
+        if(state.remaining<=0){outcome(false,'Hết thời gian. Bạn có thể thử lại với bộ câu hỏi mới.');}
+      },100);
+    }
+    function matchPair(side,id){
+      const s=state;
+      if(s.found.has(id))return;
+      if(side==='left'){s.selected=id;render();return;}
+      if(!s.selected)return;
+      if(s.selected===id){s.found.add(id);s.selected=null;render();
+        if(s.found.size===5)outcome(true,'Bạn đã ghép đúng cả năm cặp nghề và chất liệu.');
+      }else{s.misses++;s.selected=null;render();const help=$('.cp-match-grid + .cp-help',root);if(help)help.textContent='Chưa đúng. Hãy thử chọn cặp khác.';}
+    }
+    const indicesBetween=(a,b)=>{
+      const ar=Math.floor(a/size),ac=a%size,br=Math.floor(b/size),bc=b%size;
+      if(ar!==br&&ac!==bc)return [];
+      const dr=Math.sign(br-ar),dc=Math.sign(bc-ac),n=Math.max(Math.abs(br-ar),Math.abs(bc-ac));
+      return Array.from({length:n+1},(_,i)=>(ar+dr*i)*size+ac+dc*i);
+    };
+    function chooseWord(i){
+      const s=state;
+      if(s.selected===null){s.selected=i;render();return;}
+      const indices=indicesBetween(s.selected,i);
+      const str=indices.map(j=>s.letters[j]).join('');
+      const target=WORDS.find(w=>(w.word===str||w.word===[...str].reverse().join(''))&&!s.found.has(w.word));
+      if(target){s.found.add(target.word);indices.forEach(x=>s.foundPositions.add(x));s.selected=null;render();
+        if(s.found.size===5)outcome(true,'Bạn đã tìm được năm từ khóa về thủ công.');
+      }else{
+        s.selected=i;render();
+      }
+    }
+    root.addEventListener('click',event=>{
+      const el=event.target.closest('button,a');if(!el||!root.contains(el))return;
+      if(el.hasAttribute('data-cp-back')){hub();return;}
+      if(el.hasAttribute('data-cp-filter')){hub(el.dataset.cpFilter);return;}
+      if(el.hasAttribute('data-cp-game')){start(el.dataset.cpGame);return;}
+      if(kind==='memory'&&el.hasAttribute('data-cp-memory')){selectMemory(Number(el.dataset.cpMemory));return;}
+      if((kind==='quiz'||kind==='speed')&&el.hasAttribute('data-cp-choice')){answer(Number(el.dataset.cpChoice));return;}
+      if((kind==='quiz'||kind==='speed')&&el.hasAttribute('data-cp-next')){nextQuestion();return;}
+      if(kind==='match'&&el.hasAttribute('data-cp-left')){matchPair('left',el.dataset.cpLeft);return;}
+      if(kind==='match'&&el.hasAttribute('data-cp-right')){matchPair('right',el.dataset.cpRight);return;}
+      if(kind==='word'&&el.hasAttribute('data-cp-cell')){chooseWord(Number(el.dataset.cpCell));return;}
+      if(kind==='word'&&el.hasAttribute('data-cp-word-clear')){state.selected=null;render();}
+    });
+    // No keyboard interception on the page: button roles provide native Enter/Space support.
+    const onVisibility=()=>{if(document.hidden&&kind==='speed'){}};
+    document.addEventListener('visibilitychange',onVisibility);
+    window.CHAMPlayQA=['127.0.0.1','localhost'].includes(location.hostname)?{
+      start,hub,chooseWord,getState:()=>({kind,state,completed:[...completed]})
+    }:undefined;
+    hub();
   }
-  objects=objects.filter(o=>!o.removed);
-  setVisual();
-  if(state==='run')raf=requestAnimationFrame(tick);
- }
- function askQuestion(){
-  stop();state='quiz';chosen=false;
-  current=facts.buildQuestion(runFacts[found]);
-  const choices=current.options.map((option,i)=>'<button type="button" data-dino-choice="'+i+'" class="dino-choice"><span>'+String.fromCharCode(65+i)+'</span>'+esc(option)+'</button>').join('');
-  const panel='<p class="dino-eyebrow">BẠN ĐÃ NHẶT ĐƯỢC BÌNH GỐM</p><span class="dino-question-step">Câu hỏi '+(found+1)+' trên 5</span><h2>'+esc(current.question)+'</h2><div class="dino-choices">'+choices+'</div><div class="dino-feedback" data-dino-feedback hidden></div>';
-  layer(modal('dino-modal--question','Câu hỏi làng nghề',panel));
-  originalFocus=document.activeElement;
-  $('[data-dino-choice]',root)?.focus();
- }
- function choose(index){
-  if(state!=='quiz'||chosen||!current)return;
-  chosen=true;const correct=index===current.answerIndex;
-  $$('[data-dino-choice]',root).forEach((button,i)=>{button.disabled=true;if(i===current.answerIndex)button.classList.add('is-correct');if(i===index&&!correct)button.classList.add('is-wrong');});
-  if(correct){found++;score+=100;}else{lives=Math.max(0,lives-1);}
-  setVisual();
-  const feedback=$('[data-dino-feedback]',root);
-  if(!feedback)return;
-  feedback.hidden=false;
-  feedback.innerHTML='<strong class="'+(correct?'is-correct':'is-wrong')+'">'+(correct?'Chính xác!':'Chưa đúng rồi.')+'</strong><p>'+esc(current.explanation)+'</p><a href="'+esc(current.source)+'" target="_blank" rel="noopener noreferrer">Đọc nguồn tham khảo</a><button type="button" class="dino-primary" data-dino-continue>'+(found===5?'Xem kết quả':lives===0?'Xem kết quả':'Tiếp tục chạy')+' <span aria-hidden="true">→</span></button>';
-  $('[data-dino-continue]',root)?.focus();
- }
- function continueGame(){
-  if(state!=='quiz'||!chosen)return;
-  layer('');
-  if(lives<=0){finish(false);return;}
-  if(found===5){finish(true);return;}
-  // do not reset running score or level; the next pottery immediately opens another distinct question.
-  state='run';last=0;sinceSpawn=.1;
-  objects.forEach(remove);objects=[];
-  status('Rất tốt! Nhảy để nhặt bình gốm tiếp theo.');
-  $('[data-dino-jump]',root)?.focus();
-  raf=requestAnimationFrame(tick);
- }
- function pause(){
-  if(state==='run'){
-   stop();state='pause';layer(modal('dino-modal--pause','Trò chơi tạm dừng','<p class="dino-eyebrow">TẠM DỪNG</p><h2>Nghỉ một chút nhé.</h2><p>Bạn có thể tiếp tục từ vị trí hiện tại.</p><button data-dino-resume class="dino-primary" type="button">Tiếp tục chơi</button><button data-dino-restart class="dino-secondary" type="button">Chơi lại từ đầu</button>'));
-   $('[data-dino-resume]',root)?.focus();
-  }else if(state==='pause'){layer('');state='run';last=0;raf=requestAnimationFrame(tick);}
- }
- function finish(won){
-  stop();state=won?'won':'lost';
-  const reward=won?core.gameAward(Math.max(5,score)):false;
-  const text=won?(reward?'Bạn nhận được 20 điểm CHẠM.':'Bạn đã nhận điểm thưởng hôm nay; vẫn có thể chơi lại để học thêm.'):'Bạn có thể bắt đầu lại để thử các kiến thức khác.';
-  layer(modal('dino-modal--end',won?'Chinh phục thành công':'Hết lượt chơi',
-   '<div class="dino-end"><p class="dino-eyebrow">'+(won?'CHÚC MỪNG':'THỬ LẠI NHÉ')+'</p><h2>'+(won?'Một chuyến đi đáng nhớ.':'Hành trình chưa kết thúc.')+'</h2><p>'+esc(text)+'</p><div class="dino-end-stats"><div><strong>'+score+'</strong><span>Điểm trò chơi</span></div><div><strong>'+found+'/5</strong><span>Câu trả lời đúng</span></div><div><strong>'+(reward?'+20':won?'Đã nhận':'—')+'</strong><span>Điểm CHẠM</span></div></div><div class="dino-end-actions"><button data-dino-restart class="dino-primary" type="button">Chơi lại</button><a href="/pages/cham-club?tab=rewards" class="dino-secondary">Xem ví điểm</a></div></div>'));
- }
- root.addEventListener('click',e=>{
-  const button=e.target.closest('button');
-  if(button){
-   if(button.hasAttribute('data-dino-start')||button.hasAttribute('data-dino-restart')){start();return;}
-   if(button.hasAttribute('data-dino-jump')){jump();return;}
-   if(button.hasAttribute('data-dino-pause')||button.hasAttribute('data-dino-resume')){pause();return;}
-   if(button.hasAttribute('data-dino-choice')){choose(Number(button.dataset.dinoChoice));return;}
-   if(button.hasAttribute('data-dino-continue')){continueGame();return;}
-  }
-  if(state==='run'&&e.target.closest('.dino-landscape'))jump();
- });
- document.addEventListener('keydown',e=>{
-  if(!root.isConnected)return;
-  if(e.target.closest('input,textarea,select'))return;
-  if(['Space','ArrowUp','KeyW'].includes(e.code)){
-   if(state==='run'){e.preventDefault();jump();}
-  }
-  if(e.code==='KeyP'&&(state==='run'||state==='pause')){e.preventDefault();pause();}
-  if(e.code==='Escape'&&state==='pause')pause();
- });
- document.addEventListener('visibilitychange',()=>{if(document.hidden&&state==='run')pause();});
- document.addEventListener('cham:state',()=>{const wallet=$('[data-dino-wallet]',root);if(wallet)wallet.textContent=core.points();});
- // In isolated local tests only. The published Shopify storefront never exposes this test hook.
- if(['127.0.0.1','localhost'].includes(location.hostname)){
-   window.CHAMQuestQA={pickup:()=>{if(state==='run')pickup({el:document.createElement('div'),removed:false});},getState:()=>({state,lives,score,found})};
- }
- intro();
-}
-window.CHAMQuest={mount};
+  window.CHAMQuest={mount};
 })();

@@ -38,6 +38,8 @@
       <script src="{{ 'cham5-home.js' | asset_url }}" defer></script>
       <script src="{{ 'cham8-story.js' | asset_url }}" defer></script>
     {% endif %}
+    {{ 'cham-design-system.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'cham-unified-motion.js' | asset_url }}" defer></script>
     <script src="{{ 'cham-demo-core.js' | asset_url }}" defer></script>
     {% if template.suffix == 'cham-play' %}
       <script src="{{ 'cham-craft-knowledge.js' | asset_url }}" defer></script>
