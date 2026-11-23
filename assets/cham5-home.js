@@ -96,18 +96,14 @@ mm.add('(min-width:0px) and (prefers-reduced-motion:no-preference)',()=>{
     tl.fromTo(watchOverlay,{opacity:0},{opacity:1,ease:'none',duration:.24},.70);
   }
   if(distance()>0){
-    // A deliberate transition: hold the first frame while the visitor understands
-    // the direction shift, travel across the scenes, then hold the last frame.
-    // One ScrollTrigger controls the entire sequence (no nested scroll hijack).
-    const handoff=$('[data-cham10-handoff]',process);
-    const timeline=gsap.timeline({
-      defaults:{ease:'none'},
+    gsap.to(track,{
+      x:()=>-distance(),ease:'none',
       scrollTrigger:{
         id:'cham-horizontal-craft',
         trigger:pin,
         start:'top top',
-        end:()=>'+='+Math.round(distance()*(window.innerWidth<768?1.27:1.17)),
-        scrub:1.18,
+        end:()=>'+='+Math.round(distance()*(window.innerWidth<768?1.09:1)),
+        scrub:.88,
         pin:true,
         pinSpacing:true,
         anticipatePin:2,
@@ -115,18 +111,12 @@ mm.add('(min-width:0px) and (prefers-reduced-motion:no-preference)',()=>{
         invalidateOnRefresh:true,
         onUpdate:self=>{
           if(progress)progress.style.transform='scaleX('+Math.max(.005,self.progress).toFixed(4)+')';
-          const movement=Math.max(0,Math.min(1,(self.progress-.12)/.77));
-          const number=Math.max(1,Math.min(steps.length,Math.floor(movement*(steps.length-1)+.48)+1));
+          const number=Math.max(1,Math.min(steps.length,Math.floor(self.progress*(steps.length-1)+.48)+1));
           if(counter)counter.textContent=String(number);
           steps.forEach((panel,index)=>panel.classList.toggle('cham8-scene--active',index===number-1));
         }
       }
     });
-    // The first 12% is a vertical-to-horizontal visual handoff.
-    if(handoff)timeline.fromTo(handoff,{autoAlpha:1,y:0},{autoAlpha:0,y:-25,duration:.10},0);
-    timeline.to(track,{x:()=>-distance(),duration:.77,ease:'none'},.12);
-    // Last 11% holds the final image, allowing a calm release back to vertical.
-    timeline.to({step:0},{step:1,duration:.11},.89);
   }
  },root);
  requestAnimationFrame(()=>ScrollTrigger.refresh());
