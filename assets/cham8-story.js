@@ -9,7 +9,9 @@
   const figures=[...root.querySelectorAll('[data-cham8-reveal]')];
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   const wide=matchMedia('(min-width: 1024px) and (pointer: fine)');
-  if(reduced.matches || !('IntersectionObserver' in window))return;
+  // Mobile keeps all photographs and text static. Only the horizontal track moves;
+  // separate per-photo masks and text transforms previously amplified scroll jitter.
+  if(reduced.matches || matchMedia('(max-width:767px)').matches || !('IntersectionObserver' in window))return;
 
   const clamp=n=>Math.max(0,Math.min(1,n));
   const ease=n=>{n=clamp(n);return n*n*(3-2*n);};

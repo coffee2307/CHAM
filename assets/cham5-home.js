@@ -67,7 +67,7 @@ function startLenis(){
  }catch(e){stopLenis();}
 }
 const mm=gsap.matchMedia();
-mm.add('(min-width:0px) and (prefers-reduced-motion:no-preference)',()=>{
+const setupScroll=()=>{
  // Use native scrolling for consistent pinning, especially when entering on touch devices.
  if(!track||!pin||!viewport||steps.length<2)return ()=>stopLenis();
  if(window.innerWidth<768 && window.innerHeight<630)return ()=>stopLenis();
@@ -96,40 +96,69 @@ mm.add('(min-width:0px) and (prefers-reduced-motion:no-preference)',()=>{
     tl.fromTo(watchOverlay,{opacity:0},{opacity:1,ease:'none',duration:.24},.70);
   }
   if(distance()>0){
-    gsap.to(track,{
-      x:()=>-distance(),ease:'none',
-      scrollTrigger:{
-        id:'cham-horizontal-craft',
-        trigger:pin,
-        start:'top top',
-        end:()=>'+='+Math.round(distance()*(window.innerWidth<768?1.09:1)),
-        scrub:.88,
-        pin:true,
-        pinSpacing:true,
-        anticipatePin:2,
-        refreshPriority:2,
-        invalidateOnRefresh:true,
-        onUpdate:self=>{
-          if(progress)progress.style.transform='scaleX('+Math.max(.005,self.progress).toFixed(4)+')';
-          const number=Math.max(1,Math.min(steps.length,Math.floor(self.progress*(steps.length-1)+.48)+1));
-          if(counter)counter.textContent=String(number);
-          steps.forEach((panel,index)=>panel.classList.toggle('cham8-scene--active',index===number-1));
+    const onUpdate=self=>{
+      if(progress)progress.style.transform='scaleX('+Math.max(.005,self.progress).toFixed(4)+')';
+      const number=Math.max(1,Math.min(steps.length,Math.floor(self.progress*(steps.length-1)+.48)+1));
+      if(counter)counter.textContent=String(number);
+      steps.forEach((panel,index)=>panel.classList.toggle('cham8-scene--active',index===number-1));
+    };
+    // Mobile uses native CSS sticky, not ScrollTrigger pin reparenting:
+    // no pin-spacer, fixed-position swap or delayed scrub near section boundaries.
+    if(window.innerWidth<768){
+      process.classList.add('is-native-sticky');
+      const updateLength=()=>{
+        const span=Math.max(0,track.scrollWidth-viewport.clientWidth);
+        const panelHeight=pin.offsetHeight;
+        process.style.height=Math.ceil(panelHeight+span)+'px';
+      };
+      updateLength();
+      gsap.to(track,{
+        x:()=>-distance(),ease:'none',overwrite:true,
+        scrollTrigger:{
+          id:'cham-horizontal-craft',
+          trigger:process,
+          start:'top top',
+          end:()=>'+='+distance(),
+          scrub:true,
+          invalidateOnRefresh:true,
+          refreshPriority:2,
+          onRefresh:updateLength,
+          onUpdate
         }
-      }
-    });
+      });
+    } else {
+      gsap.to(track,{
+        x:()=>-distance(),ease:'none',
+        scrollTrigger:{
+          id:'cham-horizontal-craft',
+          trigger:pin,
+          start:'top top',
+          end:()=>'+='+distance(),
+          scrub:.88,
+          pin:true,
+          pinSpacing:true,
+          anticipatePin:2,
+          refreshPriority:2,
+          invalidateOnRefresh:true,
+          onUpdate
+        }
+      });
+    }
   }
  },root);
  requestAnimationFrame(()=>ScrollTrigger.refresh());
  return()=>{
-  context.revert();process.classList.remove('is-enhanced');
+  context.revert();process.classList.remove('is-enhanced','is-native-sticky');process.style.removeProperty('height');
   track.style.removeProperty('transform');if(progress)progress.style.transform='scaleX(.005)';
   if(counter)counter.textContent='1';stopLenis();
  };
-});
+};
+mm.add('(max-width:767px) and (prefers-reduced-motion:no-preference)',setupScroll);
+mm.add('(min-width:768px) and (prefers-reduced-motion:no-preference)',setupScroll);
 const refresh=()=>{cancelAnimationFrame(refreshRAF);refreshRAF=requestAnimationFrame(()=>{measure();ScrollTrigger.refresh();});};
 window.addEventListener('load',refresh,{once:true});
 document.fonts?.ready.then(refresh).catch(()=>{});
-if(header&&'ResizeObserver'in window)new ResizeObserver(refresh).observe(header);
+if(window.innerWidth>=768&&header&&'ResizeObserver'in window)new ResizeObserver(refresh).observe(header);
 window.addEventListener('orientationchange',refresh,{passive:true});
 })();
 

@@ -1,0 +1,200 @@
+
+/* CHẠM 11 — MOBILE EDITORIAL CLEANUP
+   One Vietnamese font, one purposeful link, no decorative instructions.
+   The sticky chapter is controlled by native browser layout rather than GSAP pin-spacer.
+*/
+body.cham5-home .cham5-editorial,
+body.cham5-home .cham5-editorial :is(h1,h2,h3,h4,p,a,span,small,figcaption,summary,button,div){
+ font-family:"Be Vietnam Pro",Arial,sans-serif!important;
+}
+body.cham5-home .cham9-hero__subword{
+ font-family:"Be Vietnam Pro",Arial,sans-serif!important;
+ font-style:italic!important;
+ font-weight:430!important;letter-spacing:-.04em!important;
+}
+body.cham5-home .cham8-scene__step{
+ font-family:"Be Vietnam Pro",Arial,sans-serif!important;
+ font-style:normal!important;
+}
+body.cham5-home .cham9-hero__bottom,
+body.cham5-home .cham9-hero__rule,
+body.cham5-home .cham9-hero__year,
+body.cham5-home .cham5-process__hint,
+body.cham5-home .cham5-process__chrome{display:none!important}
+body.cham5-home .cham5-process__pin{
+ grid-template-rows:minmax(0,1fr) 2px!important;
+}
+body.cham5-home .cham5-process__viewport{
+ grid-row:1!important;grid-column:1!important;
+}
+body.cham5-home .cham5-process__progress{
+ grid-row:2!important;grid-column:1!important;height:2px!important;
+}
+body.cham5-home .cham5-process__progress span{background:#8f6e51!important}
+body.cham5-home .cham9-hero__art figcaption{display:none!important}
+body.cham5-home .cham9-hero__discover{gap:0!important}
+body.cham5-home .cham9-hero__hand{display:none!important}
+@media(max-width:767px){
+ html,body.cham5-home{scroll-behavior:auto!important}
+ body.cham5-home .cham9-hero{
+   display:flex!important;min-height:0!important;height:auto!important;
+   padding:clamp(28px,6vw,40px) 7% 39px!important;
+   gap:0!important;background:#fcfaf7!important;
+ }
+ body.cham5-home .cham9-hero__masthead{
+   margin:0!important;padding:0!important;
+ }
+ body.cham5-home .cham9-hero__masthead h1{
+   font-size:clamp(43px,12vw,66px)!important;
+   line-height:1.09!important;letter-spacing:-.06em!important;
+ }
+ body.cham5-home .cham9-hero__word{
+   font-size:inherit!important;line-height:inherit!important;
+ }
+ body.cham5-home .cham9-hero__subword{
+   display:block!important;position:relative!important;
+   right:auto!important;bottom:auto!important;
+   text-align:left!important;white-space:normal!important;
+   font-size:clamp(24px,6.2vw,34px)!important;
+   line-height:1.25!important;margin:3px 0 0!important;padding:0!important;
+   color:#87644c!important;
+ }
+ body.cham5-home .cham9-hero__spread{
+   display:grid!important;grid-template-columns:1fr!important;
+   grid-template-rows:auto auto!important;gap:0!important;
+   padding:20px 0 0!important;margin:0!important;min-height:0!important;
+ }
+ body.cham5-home .cham9-hero__art--potter{
+   display:block!important;grid-column:1!important;grid-row:1!important;
+   justify-self:center!important;align-self:center!important;
+   width:85%!important;max-width:325px!important;
+ }
+ body.cham5-home .cham9-hero__art--potter img{
+   width:100%!important;height:auto!important;max-height:275px!important;
+   object-fit:contain!important;
+ }
+ body.cham5-home .cham9-hero__art--vendor{display:none!important}
+ body.cham5-home .cham9-hero__essay{
+   grid-column:1!important;grid-row:2!important;
+   justify-self:stretch!important;align-self:start!important;
+   max-width:100%!important;text-align:left!important;
+   margin:14px 0 0!important;padding:0!important;
+ }
+ body.cham5-home .cham9-hero__essay>p:not(.cham9-hero__hand){
+   font-size:14px!important;line-height:1.72!important;
+   max-width:540px!important;margin:0!important;color:#53493e!important;
+ }
+ body.cham5-home .cham9-hero__discover{
+   min-height:44px!important;margin-top:12px!important;
+   padding:8px 0!important;font-size:14px!important;
+   text-decoration:none!important;border-bottom:1px solid #9e8d7c!important;
+ }
+ body.cham5-home .cham6-watch,
+ body.cham5-home .cham5-thesis{display:none!important}
+ body.cham5-home .cham5-process{
+   margin:0!important;padding:0!important;
+   background:#f7f1e9!important;
+ }
+ body.cham5-home .cham5-process.is-native-sticky{
+   position:relative!important;
+   overflow:visible!important;
+   contain:none!important;
+ }
+ body.cham5-home .cham5-process.is-native-sticky .cham5-process__pin{
+   position:sticky!important;top:0!important;left:0!important;
+   height:100svh!important;min-height:0!important;max-height:none!important;
+   padding:0!important;margin:0!important;
+   will-change:auto!important;
+   transform:none!important;
+   box-sizing:border-box!important;
+   grid-template-rows:minmax(0,1fr) 2px!important;
+ }
+ body.cham5-home .cham5-process.is-native-sticky .cham5-process__viewport{
+   min-height:0!important;overflow:hidden!important;touch-action:pan-y!important;
+   scroll-snap-type:none!important;
+ }
+ body.cham5-home .cham5-process__progress{height:2px!important}
+ body.cham5-home .cham5-process .cham8-scene{
+   height:100%!important;min-height:0!important;
+ }
+ body.cham5-home .cham8-scene__step{
+   display:none!important;
+ }
+ body.cham5-home .cham8-scene h3{
+   font-size:clamp(27px,7.3vw,34px)!important;
+   line-height:1.17!important;
+   letter-spacing:-.035em!important;
+ }
+ body.cham5-home .cham8-scene p{
+   font-size:14px!important;line-height:1.62!important;
+ }
+ body.cham5-home .cham9-scene-sketch{display:none!important}
+ body.cham5-home .cham5-eyebrow{display:none!important}
+ body.cham5-home .cham5-market__heading :is(h2,p){
+   max-width:100%!important;letter-spacing:-.025em!important;
+ }
+ body.cham5-home .cham5-category__caption small{font-size:12px!important}
+ body.cham5-home .cham5-further a,
+ body.cham5-home .cham5-textlink,
+ body.cham5-home .cham5-primary{
+   font-size:13px!important;letter-spacing:0!important;
+ }
+ body.cham5-home .cham5-bridge{padding-top:48px!important;padding-bottom:48px!important}
+ body.cham5-home .cham5-end{padding:32px 7%!important}
+}
+@media(max-width:767px) and (max-height:629px){
+ body.cham5-home .cham5-process:not(.is-native-sticky){
+   height:auto!important;overflow:hidden!important;
+ }
+ body.cham5-home .cham5-process__viewport{
+   overflow-x:auto!important;scroll-snap-type:x mandatory!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ body.cham5-home .cham5-process__viewport{overflow-x:auto!important;scroll-snap-type:x mandatory!important}
+ body.cham5-home .cham5-process__track{transform:none!important}
+}
+
+
+/* Art-directed mobile chapter layouts: override legacy generic display:block.
+   All text and imagery must fit inside the sticky viewport on small screens. */
+@media(max-width:767px){
+ body.cham5-home .cham5-process .cham8-scene--earth,
+ body.cham5-home .cham5-process .cham8-scene--hands,
+ body.cham5-home .cham5-process .cham8-scene--precision,
+ body.cham5-home .cham5-process .cham8-scene--surface,
+ body.cham5-home .cham5-process .cham8-scene--life{
+   display:grid!important;
+   grid-template-columns:minmax(0,1fr)!important;
+   align-content:stretch!important;
+   min-height:0!important;
+ }
+ body.cham5-home .cham5-process .cham8-scene--earth{
+   grid-template-rows:32% 68%!important;
+ }
+ body.cham5-home .cham5-process .cham8-scene--hands{
+   grid-template-rows:62% 38%!important;
+ }
+ body.cham5-home .cham5-process .cham8-scene--precision{
+   grid-template-rows:29% 71%!important;
+ }
+ body.cham5-home .cham5-process .cham8-scene--surface{
+   grid-template-rows:33% 32% 35%!important;
+ }
+ body.cham5-home .cham5-process .cham8-scene--life{
+   grid-template-rows:36% 64%!important;
+ }
+ body.cham5-home .cham8-earth__essay,
+ body.cham5-home .cham8-hands__narrative,
+ body.cham5-home .cham8-precision__text,
+ body.cham5-home .cham8-surface__copy,
+ body.cham5-home .cham8-life__copy{
+   box-sizing:border-box!important;min-height:0!important;
+ }
+ body.cham5-home .cham8-hands__narrative{
+   overflow:hidden!important;padding:17px 7% 15px!important;
+ }
+ body.cham5-home .cham8-precision__text{overflow:hidden!important}
+ body.cham5-home .cham8-surface__copy{overflow:hidden!important}
+ body.cham5-home .cham8-life__copy{overflow:hidden!important}
+}

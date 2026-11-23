@@ -6,7 +6,7 @@
   <section class="cham5-categories" id="cham5-categories" aria-labelledby="cham5-categories-title">
     <div class="cham5-market__heading">
       <div><p class="cham5-eyebrow">Khám phá cửa hàng CHẠM</p><h2 id="cham5-categories-title">Khám phá danh mục.</h2></div>
-      <a href="{{ routes.all_products_collection_url }}" class="cham5-textlink">Tất cả sản phẩm <span aria-hidden="true">→</span></a>
+      <a href="{{ routes.all_products_collection_url }}" class="cham5-textlink">Tất cả sản phẩm</a>
     </div>
     <div class="cham5-categories__grid">
       {% for group in collections %}
@@ -18,7 +18,7 @@
                 {{ photo | image_url: width: 1080 | image_tag: loading: 'lazy', decoding: 'async', widths: '360, 540, 760, 1080', sizes: '(max-width: 767px) 46vw, 30vw', alt: group.title }}
               {% endif %}
             </div>
-            <div class="cham5-category__caption"><h3>{{ group.title }}</h3><small>{{ group.products_count }} sản phẩm <span aria-hidden="true">→</span></small></div>
+            <div class="cham5-category__caption"><h3>{{ group.title }}</h3><small>{{ group.products_count }} sản phẩm</small></div>
           </a>
         {% endunless %}
       {% endfor %}
@@ -28,7 +28,7 @@
   <section class="cham5-products" id="cham5-products" aria-labelledby="cham5-products-title">
     <div class="cham5-market__heading">
       <div><p class="cham5-eyebrow">Một số món đồ ở CHẠM</p><h2 id="cham5-products-title">Những lựa chọn dành cho đời sống.</h2></div>
-      <a href="{{ routes.all_products_collection_url }}" class="cham5-textlink">Khám phá thêm <span aria-hidden="true">→</span></a>
+      <a href="{{ routes.all_products_collection_url }}" class="cham5-textlink">Khám phá thêm</a>
     </div>
     <div class="cham5-products__grid">
       {% for product in products_source.products limit: card_limit %}
@@ -52,17 +52,17 @@
 
   <nav class="cham5-further" aria-label="Khám phá thêm về CHẠM">
     <p class="cham5-eyebrow">Khám phá thêm</p>
-    <a href="/pages/about">Về CHẠM <span aria-hidden="true">→</span></a>
-    <a href="/pages/story">Câu chuyện CHẠM <span aria-hidden="true">→</span></a>
-    <a href="/pages/cham-club">Hồ sơ thành viên <span aria-hidden="true">→</span></a>
+    <a href="/pages/about">Về CHẠM</a>
+    <a href="/pages/story">Câu chuyện CHẠM</a>
+    <a href="/pages/cham-club">Hồ sơ thành viên</a>
   </nav>
 
   <section class="cham5-end" aria-labelledby="cham5-end-title">
-    <div class="cham5-end__top"><p>Thủ công Việt Nam, theo một cách gần gũi hơn.</p><a href="#cham5-top">Lên đầu trang <span aria-hidden="true">↑</span></a></div>
+    <div class="cham5-end__top"><p>Thủ công Việt Nam, theo một cách gần gũi hơn.</p><a href="#cham5-top">Lên đầu trang</a></div>
     <div class="cham5-end__main">
       <p class="cham5-eyebrow">Từ Việt Nam, bằng đôi tay.</p>
       <h2 id="cham5-end-title">CHẠM</h2>
-      <div class="cham5-end__sub"><p>Khám phá những giá trị được làm bằng tay.</p><a class="cham5-primary cham5-primary--light" href="{{ routes.all_products_collection_url }}">Khám phá sản phẩm <span aria-hidden="true">→</span></a></div>
+      <div class="cham5-end__sub"><p>Khám phá những giá trị được làm bằng tay.</p><a class="cham5-primary cham5-primary--light" href="{{ routes.all_products_collection_url }}">Khám phá sản phẩm</a></div>
     </div>
     <p class="cham5-end__legal">CHẠM là website trình diễn · Sản phẩm, điểm thưởng và đơn hàng đều là dữ liệu minh họa.</p>
   </section>

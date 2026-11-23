@@ -12,9 +12,13 @@ assert.ok(read('sections/cham5-story.liquid').includes('class="cham9-hero"'),'ed
 assert.ok(!read('sections/cham5-story.liquid').includes('cham5-process__heading'),'redundant intro removed');
 assert.ok(!read('sections/cham5-story.liquid').includes('Một hành trình nghề truyền thống'),'obsolete copy removed');
 assert.ok(read('sections/cham5-story.liquid').includes('cham10-potter.webp'),'original editorial drawing included');
-assert.ok(read('assets/cham5-home.js').includes("mm.add('(min-width:0px)"),'mobile shares pinned horizontal story');
+assert.ok(read('assets/cham5-home.js').includes("mm.add('(max-width:767px)"),'mobile-specific scroll setup');
+assert.ok(read('assets/cham5-home.js').includes("process.classList.add('is-native-sticky')"),'native sticky horizontal scene on mobile');
+assert.ok(read('assets/cham8-story.js').includes("matchMedia('(max-width:767px)').matches"),'static mobile images reduce scroll jitter');
+assert.ok(!read('sections/cham5-story.liquid').includes('CHẠM / THỦ CÔNG VIỆT NAM'),'decorative slash label removed');
+assert.ok(!read('sections/cham5-story.liquid').includes('NHỮNG ĐIỀU ĐƯỢC LÀM BẰNG TAY'),'unnecessary label removed');
 assert.ok(!read('layout/theme.liquid').includes("<script src=\"{{ 'cham8-hero.js'"),'retired WebGL runtime not loaded');
-for (const asset of ['cham8-home.css','cham9-home.css','cham8-story.js'])
+for (const asset of ['cham8-home.css','cham9-home.css','cham11-mobile-clean.css','cham8-story.js'])
   assert.ok(read('layout/theme.liquid').includes(asset),'homepage includes '+asset);
 assert.ok(read('assets/cham-theme.js').includes('data-cham-hidden'),'scroll-aware header');
 assert.equal(product.sections.main.type,'cham-product-page');
