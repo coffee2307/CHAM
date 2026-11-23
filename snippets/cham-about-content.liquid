@@ -1,51 +1,94 @@
-{% assign item_one = collections.all.products[0] %}
-{% assign item_two = collections.all.products[7] %}
-{% assign item_three = collections.all.products[10] %}
-<section class="cham-about-v3" data-cham-scroll>
-  <div class="cham-shell">
-    <div class="cham-about-v3__hero">
-      <div class="cham-about-v3__intro">
-        <p class="cham-about-v3__eyebrow">Câu chuyện của CHẠM</p>
-        <h1>Gần hơn với những món đồ được làm bằng tay.</h1>
-        <p>CHẠM muốn đưa sản phẩm thủ công Việt Nam đến gần người mua qua một trải nghiệm dễ tìm, dễ hiểu và dễ lựa chọn.</p>
-        <a href="{{ routes.all_products_collection_url }}" class="cham-about-v3__link">Khám phá sản phẩm <span aria-hidden="true">→</span></a>
+<section class="cham-about-report" aria-labelledby="cham-about-title">
+  <header class="cham-about-report__hero">
+    <div class="cham-about-report__shell cham-about-report__hero-grid">
+      <div class="cham-about-report__lead">
+        <p class="cham-about-report__eyebrow">VỀ CHẠM</p>
+        <h1 id="cham-about-title">Thủ công bản địa, gần hơn với đời sống trẻ.</h1>
+        <p class="cham-about-report__lead-copy">CHẠM là dự án định hướng kinh doanh tạo tác động xã hội, kết nối nhu cầu của người tiêu dùng trẻ với sản phẩm thủ công từ tài nguyên bản địa. Dự án hướng đến việc cùng cơ sở sản xuất địa phương phát triển mẫu mã, đặt hàng theo lô nhỏ và đưa sản phẩm đến người mua qua website.</p>
+        <a class="cham-about-report__link" href="#cham-about-approach">Tìm hiểu cách CHẠM thực hiện</a>
       </div>
-      <div class="cham-about-v3__hero-images">
-        {% if item_one.featured_image %}
-          {{ item_one.featured_image | image_url: width: 1200 | image_tag: loading: 'eager', widths: '300, 600, 900, 1200', sizes: '(max-width: 768px) 72vw, 35vw', alt: item_one.title, class: 'cham-about-v3__main-img' }}
-        {% endif %}
-        {% if item_two.featured_image %}
-          {{ item_two.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', widths: '240, 450, 600', sizes: '(max-width: 768px) 40vw, 17vw', alt: item_two.title, class: 'cham-about-v3__float-img' }}
-        {% endif %}
+      <aside class="cham-about-report__focus" aria-label="Định hướng thử nghiệm ban đầu">
+        <p class="cham-about-report__eyebrow">ĐỊNH HƯỚNG THỬ NGHIỆM</p>
+        <p class="cham-about-report__focus-word">Lục bình</p>
+        <p class="cham-about-report__focus-place">Xã Ba Sao, tỉnh Đồng Tháp</p>
+        <div class="cham-about-report__focus-rule"></div>
+        <p>Bộ góc học tập dự kiến gồm khay đựng đồ để bàn và giỏ mini đựng bút, vật dụng cá nhân.</p>
+        <small>Đây là sản phẩm trong kế hoạch thử nghiệm, không phải công bố đã sản xuất hoặc mở bán.</small>
+      </aside>
+    </div>
+  </header>
+
+  <div class="cham-about-report__statement">
+    <div class="cham-about-report__shell cham-about-report__statement-grid">
+      <h2>Không chỉ giới thiệu một món đồ.</h2>
+      <div>
+        <p>Nhiều sản phẩm thủ công địa phương cần được điều chỉnh để phù hợp hơn với nhu cầu sử dụng của người trẻ và có thêm kênh tiếp cận thị trường.</p>
+        <p>CHẠM đặt trọng tâm vào công năng, thiết kế, chất lượng và thông tin nguồn gốc. Giá trị xã hội là một phần ý nghĩa của sản phẩm, không thay thế cho lý do người mua lựa chọn nó.</p>
       </div>
     </div>
   </div>
-  <div class="cham-about-v3__statement">
-    <div class="cham-shell cham-about-v3__statement-grid">
-      <p class="cham-about-v3__eyebrow">Điểm bắt đầu</p>
-      <div><h2>Một sản phẩm có nhiều điều đáng biết hơn hình ảnh và giá bán.</h2><p>Chất liệu, cách sử dụng, thông tin nghề và câu chuyện của người làm đều đáng được tìm hiểu. Khi có nguồn xác minh, CHẠM muốn đưa những thông tin ấy đến gần quyết định mua sắm.</p></div>
-    </div>
+
+  <div class="cham-about-report__shell">
+    <section class="cham-about-report__section" id="cham-about-approach" aria-labelledby="cham-about-approach-title">
+      <div class="cham-about-report__section-heading">
+        <p class="cham-about-report__eyebrow">CÁCH CHẠM HOẠT ĐỘNG</p>
+        <h2 id="cham-about-approach-title">Từ nhu cầu thực tế đến sản phẩm phù hợp.</h2>
+        <p>Thay vì nhập hàng đại trà, mô hình dự kiến kết nối việc khảo sát khách hàng với phát triển mẫu và đặt hàng có kiểm soát tại cơ sở sản xuất.</p>
+      </div>
+      <div class="cham-about-report__steps">
+        <article><h3>Hiểu người sử dụng</h3><p>Khảo sát nhu cầu của học sinh, sinh viên về công năng, kiểu dáng và mức giá phù hợp.</p></article>
+        <article><h3>Làm việc với cơ sở địa phương</h3><p>Khảo sát năng lực sản xuất, cùng thống nhất mẫu mã, kích thước, kỹ thuật và tiêu chuẩn chất lượng.</p></article>
+        <article><h3>Thử nghiệm theo lô nhỏ</h3><p>Nhận báo giá, đặt lô thử nghiệm khi đủ điều kiện, kiểm tra chất lượng trước khi phân phối.</p></article>
+        <article><h3>Lắng nghe và cải tiến</h3><p>Tiếp nhận phản hồi sau sử dụng để điều chỉnh sản phẩm và đánh giá nhu cầu cho những đợt tiếp theo.</p></article>
+      </div>
+    </section>
+
+    <section class="cham-about-report__section cham-about-report__place" aria-labelledby="cham-about-place-title">
+      <div class="cham-about-report__place-header">
+        <p class="cham-about-report__eyebrow">ĐIỂM KHỞI ĐẦU DỰ KIẾN</p>
+        <h2 id="cham-about-place-title">Lục bình tại Ba Sao.</h2>
+        <p>CHẠM lựa chọn xã Ba Sao, tỉnh Đồng Tháp làm địa bàn tìm hiểu nghề đan lục bình và khảo sát đầu mối sản xuất. Dự án hướng đến kết nối với Tổ hợp tác May gia công, đan lục bình tại Ấp 7; khả năng hợp tác và cung ứng thực tế cần được xác minh bằng trao đổi, mẫu thử, báo giá và thời gian hoàn thành.</p>
+      </div>
+      <div class="cham-about-report__prototypes" aria-label="Hai sản phẩm trong kế hoạch thử nghiệm">
+        <div><span class="cham-about-report__prototype-label">DỰ KIẾN</span><h3>Khay đựng đồ để bàn</h3><p>Vật dụng nhỏ gọn cho góc học tập.</p></div>
+        <div><span class="cham-about-report__prototype-label">DỰ KIẾN</span><h3>Giỏ mini đựng bút</h3><p>Đựng bút và những vật dụng cá nhân.</p></div>
+      </div>
+    </section>
+
+    <section class="cham-about-report__section" aria-labelledby="cham-about-digital-title">
+      <div class="cham-about-report__section-heading">
+        <p class="cham-about-report__eyebrow">VAI TRÒ CỦA WEBSITE</p>
+        <h2 id="cham-about-digital-title">Một nơi để tìm hiểu trước khi lựa chọn.</h2>
+        <p>Theo đề án, website CHẠM được định hướng phát triển ba chức năng trọng tâm:</p>
+      </div>
+      <div class="cham-about-report__features">
+        <article><h3>Hồ sơ sản phẩm</h3><p>Thông tin về nguyên liệu, địa điểm và cơ sở sản xuất, quy trình thực hiện cùng đặc điểm sử dụng, khi có nguồn xác minh.</p></article>
+        <article><h3>Đặt hàng theo nhu cầu</h3><p>Hướng đến tiếp nhận nhu cầu đặt hàng và thiết kế riêng để trao đổi với cơ sở sản xuất phù hợp.</p></article>
+        <article><h3>Theo dõi tác động</h3><p>Dự kiến công khai số sản phẩm được đặt, giá trị thanh toán cho cơ sở sản xuất và vật liệu tái sử dụng có chứng từ xác minh.</p></article>
+      </div>
+    </section>
   </div>
-  <div class="cham-shell">
-    <div class="cham-about-v3__features">
-      <div><span class="cham-about-v3__symbol" aria-hidden="true">◌</span><h3>Chọn món đồ phù hợp</h3><p>Tìm kiếm, xem hình ảnh và so sánh các nhóm sản phẩm trong cùng một cửa hàng.</p></div>
-      <div><span class="cham-about-v3__symbol" aria-hidden="true">◇</span><h3>Khám phá làng nghề</h3><p>Học những kiến thức ngắn về thủ công Việt Nam qua trò chơi tương tác.</p></div>
-      <div><span class="cham-about-v3__symbol" aria-hidden="true">✳</span><h3>Thử mua sắm</h3><p>Giỏ hàng, đơn hàng, tích điểm và voucher đều có thể trải nghiệm trong bản demo.</p></div>
-    </div>
-    <div class="cham-about-v3__editorial">
-      {% if item_three.featured_image %}
-        <div class="cham-about-v3__editorial-image">{{ item_three.featured_image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '450, 750, 1100', sizes: '(max-width: 768px) 94vw, 42vw', alt: item_three.title }}</div>
-      {% endif %}
-      <div class="cham-about-v3__editorial-copy">
-        <p class="cham-about-v3__eyebrow">Chạm để khám phá</p>
-        <h2>Học về nghề. Hiểu thêm về sản phẩm.</h2>
-        <p>Từ nghề gốm Bát Tràng đến dệt lụa Vạn Phúc và mây tre đan Phú Vinh, mỗi thử thách trong CHẠM Play là cơ hội biết thêm một chút về nghề truyền thống.</p>
-        <a class="cham-about-v3__primary" href="/pages/cham-play">Trải nghiệm CHẠM Play</a>
+
+  <section class="cham-about-report__ethics" aria-labelledby="cham-about-ethics-title">
+    <div class="cham-about-report__shell cham-about-report__ethics-grid">
+      <div>
+        <p class="cham-about-report__eyebrow">NGUYÊN TẮC CỦA DỰ ÁN</p>
+        <h2 id="cham-about-ethics-title">Minh bạch trước những lời khẳng định.</h2>
+      </div>
+      <div class="cham-about-report__ethics-copy">
+        <p>CHẠM không mặc định sản phẩm từ lục bình là sản phẩm tái chế hoặc hoàn toàn thân thiện với môi trường. Nguồn gốc vật liệu và quá trình thu hoạch, sơ chế cần được cơ sở xác nhận.</p>
+        <p>Việc nghiên cứu tận dụng vải vụn và vật liệu dư thừa thuộc định hướng tiếp theo, chỉ thực hiện khi kiểm chứng được nguồn vật liệu, tính an toàn và khả năng gia công.</p>
+        <p>Thông tin về đối tác, kết quả kinh doanh và tác động xã hội chỉ được công bố khi có căn cứ. CHẠM tôn trọng quyền của người sản xuất đối với hình ảnh, thông tin cá nhân và kỹ thuật thủ công truyền thống.</p>
       </div>
     </div>
-    <aside class="cham-about-v3__disclosure">
-      <strong>CHẠM đang trong giai đoạn thử nghiệm.</strong>
-      <p>Các sản phẩm, giá bán và đơn hàng trên website phục vụ trình diễn. CHẠM không thu tiền hay nhận đơn hàng thực tế qua phiên bản này.</p>
-    </aside>
-  </div>
+  </section>
+
+  <footer class="cham-about-report__closing">
+    <div class="cham-about-report__shell">
+      <p class="cham-about-report__eyebrow">TÌNH TRẠNG HIỆN TẠI</p>
+      <h2>Đang ở giai đoạn thử nghiệm.</h2>
+      <p>Bản báo cáo là phương án triển khai, chưa cung cấp kết quả bán hàng thực tế, báo giá chính thức hay xác nhận hợp tác với cơ sở sản xuất. Sản phẩm, giá và đơn hàng trên phiên bản website trình diễn hiện tại là dữ liệu minh họa, chưa phải giao dịch thực tế.</p>
+      <a class="cham-about-report__link" href="{{ routes.all_products_collection_url }}">Xem giao diện sản phẩm</a>
+    </div>
+  </footer>
 </section>

@@ -12,6 +12,13 @@ assert.ok(read('sections/cham5-story.liquid').includes('class="cham9-hero"'),'ed
 assert.ok(!read('sections/cham5-story.liquid').includes('cham5-process__heading'),'redundant intro removed');
 assert.ok(!read('sections/cham5-story.liquid').includes('Một hành trình nghề truyền thống'),'obsolete copy removed');
 assert.ok(read('sections/cham5-story.liquid').includes('cham10-potter.webp'),'original editorial drawing included');
+const chamAbout=read('snippets/cham-about-content.liquid');
+for(const term of ['xã Ba Sao','tỉnh Đồng Tháp','Khay đựng đồ để bàn','Giỏ mini đựng bút','chưa cung cấp kết quả bán hàng thực tế','không mặc định sản phẩm từ lục bình'])assert.ok(chamAbout.includes(term),'report-based About must state '+term);
+assert.ok(!chamAbout.includes('đã ký hợp tác'),'About must not assert an unverified partner agreement');
+assert.ok(read('layout/theme.liquid').includes("cham14-about.css"),'About stylesheet loaded only for its template');
+const closing=read('sections/cham5-market.liquid');
+assert.equal((closing.match(/class="cham5-end__letter"/g)||[]).length,4,'four independently hoverable wordmark letters');
+assert.ok(read('assets/cham13-motion.css').includes('.cham5-end__letter:nth-child(3):hover'),'Ạ letter has an independent hover color');
 assert.ok(read('assets/cham5-home.js').includes("mm.add('(max-width:767px)"),'mobile-specific scroll setup');
 assert.ok(read('assets/cham5-home.js').includes("process.classList.add('is-native-sticky')"),'native sticky horizontal story');
 assert.ok(!read('assets/cham5-home.js').includes("id:'cham-horizontal-craft'"),'horizontal story no longer repositions the page using GSAP pin');

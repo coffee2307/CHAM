@@ -1,0 +1,218 @@
+/* CHẠM About — editorial layout grounded in the CHẠM project report.
+   No illustrative images or claimed partner badges without verified evidence. */
+body.cham-site .cham-about-report{
+  --about-ink:#28231d;--about-muted:#655a4e;--about-line:#d8cbb9;
+  --about-paper:#f8f3ea;--about-tan:#e7d7c2;--about-accent:#926044;
+  background:var(--about-paper);color:var(--about-ink);
+  font-family:"Be Vietnam Pro",Arial,sans-serif;
+  overflow:clip;
+}
+body.cham-site .cham-about-report *{box-sizing:border-box}
+body.cham-site .cham-about-report :is(h1,h2,h3,p,small,span,a){
+  font-family:"Be Vietnam Pro",Arial,sans-serif!important;
+}
+body.cham-site .cham-about-report :is(h1,h2,h3,p){margin:0}
+body.cham-site .cham-about-report :is(h1,h2,h3){color:inherit;text-wrap:balance}
+body.cham-site .cham-about-report p{line-height:1.8}
+body.cham-site .cham-about-report__shell{
+  width:min(1350px,calc(100% - clamp(36px,10vw,160px)));
+  margin-inline:auto;
+}
+body.cham-site .cham-about-report__eyebrow{
+  color:#8f5c41;font-weight:700;font-size:11px;
+  letter-spacing:.085em;line-height:1.5;margin-bottom:22px!important;
+}
+body.cham-site .cham-about-report__hero{
+  padding:clamp(70px,9vw,145px) 0 clamp(84px,10vw,155px);
+}
+body.cham-site .cham-about-report__hero-grid{
+  display:grid;grid-template-columns:minmax(0,1.45fr) minmax(290px,.65fr);
+  gap:clamp(55px,9vw,140px);align-items:end;
+}
+body.cham-site .cham-about-report__lead h1{
+  font-size:clamp(44px,6vw,94px);font-weight:650;
+  letter-spacing:-.07em;line-height:1.105;max-width:850px;margin-bottom:37px!important;
+}
+body.cham-site .cham-about-report__lead-copy{
+  max-width:660px;font-size:clamp(15px,1.2vw,18px);color:var(--about-muted);
+  margin-bottom:24px!important;
+}
+body.cham-site .cham-about-report__link{
+  display:inline-block;color:var(--about-ink)!important;
+  text-decoration:none;border-bottom:1px solid currentColor;
+  padding:11px 0;font-size:13px;font-weight:650;
+  transition:color .25s ease,border-color .25s ease;
+}
+body.cham-site .cham-about-report__link:hover,
+body.cham-site .cham-about-report__link:focus-visible{
+  color:var(--about-accent)!important;border-color:var(--about-accent);
+}
+body.cham-site .cham-about-report__focus{
+  border-top:1px solid var(--about-ink);border-bottom:1px solid var(--about-line);
+  padding:21px 0 25px;
+}
+body.cham-site .cham-about-report__focus .cham-about-report__eyebrow{margin-bottom:26px!important}
+body.cham-site .cham-about-report__focus-word{
+  font-size:clamp(50px,5.6vw,85px);font-weight:650;letter-spacing:-.075em;line-height:1.1!important;
+}
+body.cham-site .cham-about-report__focus-place{
+  font-size:14px;font-weight:600;color:var(--about-accent);
+}
+body.cham-site .cham-about-report__focus-rule{
+  height:1px;background:var(--about-line);margin:25px 0 19px;
+}
+body.cham-site .cham-about-report__focus>p:last-of-type{
+  font-size:14px;color:var(--about-ink);
+}
+body.cham-site .cham-about-report__focus small{
+  display:block;font-size:11px;color:var(--about-muted);
+  line-height:1.65;margin-top:16px;
+}
+body.cham-site .cham-about-report__statement{
+  background:var(--about-tan);
+  padding:clamp(67px,8.8vw,135px) 0;
+}
+body.cham-site .cham-about-report__statement-grid{
+  display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(45px,8vw,115px);
+}
+body.cham-site .cham-about-report__statement h2{
+  font-size:clamp(35px,4.7vw,70px);font-weight:650;
+  letter-spacing:-.058em;line-height:1.17;max-width:770px;
+}
+body.cham-site .cham-about-report__statement p{
+  color:#4e4032;font-size:clamp(15px,1.2vw,17px);
+}
+body.cham-site .cham-about-report__statement p+p{margin-top:21px}
+body.cham-site .cham-about-report__section{
+  padding:clamp(70px,9vw,140px) 0;
+  border-bottom:1px solid var(--about-line);
+}
+body.cham-site .cham-about-report__section-heading{
+  display:grid;grid-template-columns:1.2fr 1fr;column-gap:clamp(44px,7vw,120px);
+  margin-bottom:clamp(38px,5vw,70px);
+}
+body.cham-site .cham-about-report__section-heading .cham-about-report__eyebrow{
+  grid-column:1/-1;
+}
+body.cham-site .cham-about-report__section-heading h2,
+body.cham-site .cham-about-report__place h2,
+body.cham-site .cham-about-report__ethics h2{
+  font-size:clamp(34px,4vw,62px);font-weight:650;
+  letter-spacing:-.055em;line-height:1.2;max-width:760px;
+}
+body.cham-site .cham-about-report__section-heading>p:last-child,
+body.cham-site .cham-about-report__place-header>p:last-child{
+  font-size:15px;color:var(--about-muted);align-self:end;max-width:530px;
+}
+body.cham-site .cham-about-report__steps,
+body.cham-site .cham-about-report__features{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;
+}
+body.cham-site .cham-about-report__steps article,
+body.cham-site .cham-about-report__features article{
+  border-top:1px solid var(--about-ink);padding-top:24px;
+}
+body.cham-site .cham-about-report__steps h3,
+body.cham-site .cham-about-report__features h3{
+  font-weight:700;font-size:clamp(17px,1.35vw,20px);
+  letter-spacing:-.025em;line-height:1.35;margin-bottom:12px!important;
+}
+body.cham-site .cham-about-report__steps p,
+body.cham-site .cham-about-report__features p{
+  font-size:13px;color:var(--about-muted);line-height:1.8;
+}
+body.cham-site .cham-about-report__place-header{
+  display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(44px,7vw,120px);
+}
+body.cham-site .cham-about-report__place-header .cham-about-report__eyebrow{
+  grid-column:1/-1;
+}
+body.cham-site .cham-about-report__prototypes{
+  display:grid;grid-template-columns:1fr 1fr;gap:20px;
+  margin-top:clamp(40px,5vw,70px);
+}
+body.cham-site .cham-about-report__prototypes>div{
+  min-height:245px;background:#e8dccb;padding:clamp(25px,3.3vw,50px);
+  display:flex;flex-direction:column;align-items:flex-start;
+}
+body.cham-site .cham-about-report__prototypes>div:nth-child(2){background:#eee6da}
+body.cham-site .cham-about-report__prototype-label{
+  display:block;font-size:10px;font-weight:700;letter-spacing:.09em;
+  color:#895a3e;margin-bottom:auto;
+}
+body.cham-site .cham-about-report__prototypes h3{
+  font-size:clamp(24px,2.3vw,34px);font-weight:650;
+  letter-spacing:-.045em;line-height:1.25;margin:0 0 10px!important;
+}
+body.cham-site .cham-about-report__prototypes p{
+  color:var(--about-muted);font-size:13px;
+}
+body.cham-site .cham-about-report__features{grid-template-columns:repeat(3,minmax(0,1fr))}
+body.cham-site .cham-about-report__ethics{
+  background:#2d2923;color:#f5efe4;
+  padding:clamp(75px,9vw,135px) 0;
+}
+body.cham-site .cham-about-report__ethics-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(42px,8vw,125px);
+}
+body.cham-site .cham-about-report__ethics .cham-about-report__eyebrow{color:#dcb99e}
+body.cham-site .cham-about-report__ethics-copy p{
+  color:#ded2c3;font-size:15px;line-height:1.9;
+}
+body.cham-site .cham-about-report__ethics-copy p+p{
+  border-top:1px solid #6b5f52;margin-top:23px;padding-top:23px;
+}
+body.cham-site .cham-about-report__closing{
+  padding:clamp(72px,9vw,145px) 0;
+  background:#f8f3ea;
+}
+body.cham-site .cham-about-report__closing h2{
+  font-size:clamp(38px,5vw,75px);font-weight:650;
+  line-height:1.2;letter-spacing:-.06em;margin-bottom:26px!important;
+}
+body.cham-site .cham-about-report__closing p:not(.cham-about-report__eyebrow){
+  font-size:14px;color:var(--about-muted);max-width:770px;
+  margin-bottom:21px;
+}
+body.cham-site .cham-about-report a:focus-visible{
+  outline:2px solid var(--about-accent);outline-offset:5px;
+}
+@media(max-width:900px){
+  body.cham-site .cham-about-report__hero-grid,
+  body.cham-site .cham-about-report__statement-grid,
+  body.cham-site .cham-about-report__ethics-grid{
+    grid-template-columns:1fr;gap:45px;
+  }
+  body.cham-site .cham-about-report__focus{max-width:580px}
+  body.cham-site .cham-about-report__steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  body.cham-site .cham-about-report__section-heading,
+  body.cham-site .cham-about-report__place-header{
+    grid-template-columns:1fr;gap:20px;
+  }
+  body.cham-site .cham-about-report__section-heading .cham-about-report__eyebrow,
+  body.cham-site .cham-about-report__place-header .cham-about-report__eyebrow{grid-column:auto}
+}
+@media(max-width:600px){
+  body.cham-site .cham-about-report__shell{width:calc(100% - 40px)}
+  body.cham-site .cham-about-report__hero{padding:55px 0 65px}
+  body.cham-site .cham-about-report__lead h1{
+    font-size:clamp(38px,10.8vw,56px);margin-bottom:23px!important;
+  }
+  body.cham-site .cham-about-report__lead-copy{font-size:14px}
+  body.cham-site .cham-about-report__focus-word{font-size:57px}
+  body.cham-site .cham-about-report__statement{padding:65px 0}
+  body.cham-site .cham-about-report__section{padding:70px 0}
+  body.cham-site .cham-about-report__steps,
+  body.cham-site .cham-about-report__features{
+    grid-template-columns:1fr;gap:18px;
+  }
+  body.cham-site .cham-about-report__steps article,
+  body.cham-site .cham-about-report__features article{padding-top:17px}
+  body.cham-site .cham-about-report__prototypes{
+    grid-template-columns:1fr;gap:13px;
+  }
+  body.cham-site .cham-about-report__prototypes>div{min-height:190px;padding:28px}
+}
+@media(prefers-reduced-motion:reduce){
+  body.cham-site .cham-about-report__link{transition:none}
+}

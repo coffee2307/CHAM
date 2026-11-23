@@ -174,3 +174,22 @@ body.cham5-home :is(.cham5-category,.cham5-product,.cham9-hero__discover,.cham5-
   body.cham5-home .cham5-product__image img,
   body.cham5-home .cham9-hero__art img{transition:none!important;transform:none!important}
 }
+
+
+/* CHẠM closing wordmark: letters respond independently, without moving layout.
+   Override earlier generic h2 > span rules which hid decorated characters. */
+body.cham5-home .cham5-end h2 > .cham5-end__letter{
+  display:inline!important;
+  color:inherit;
+  transition:color .32s cubic-bezier(.22,.72,.2,1);
+  pointer-events:auto;
+}
+@media(hover:hover) and (pointer:fine){
+  body.cham5-home .cham5-end h2 > .cham5-end__letter:nth-child(1):hover{color:#d39d78!important}
+  body.cham5-home .cham5-end h2 > .cham5-end__letter:nth-child(2):hover{color:#e3b78c!important}
+  body.cham5-home .cham5-end h2 > .cham5-end__letter:nth-child(3):hover{color:#b9c3ae!important}
+  body.cham5-home .cham5-end h2 > .cham5-end__letter:nth-child(4):hover{color:#e0a480!important}
+}
+@media(prefers-reduced-motion:reduce){
+  body.cham5-home .cham5-end h2 > .cham5-end__letter{transition:none!important}
+}

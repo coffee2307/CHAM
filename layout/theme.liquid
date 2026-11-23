@@ -24,6 +24,9 @@
       {{ 'cham-club-v3.css' | asset_url | stylesheet_tag }}
     {% endif %}
     {{ 'cham-v4.css' | asset_url | stylesheet_tag }}
+    {% if template.suffix == 'about' %}
+      {{ 'cham14-about.css' | asset_url | stylesheet_tag }}
+    {% endif %}
     {% if template.name == 'index' %}
       {{ 'cham5-home.css' | asset_url | stylesheet_tag }}
       {{ 'cham8-home.css' | asset_url | stylesheet_tag }}
