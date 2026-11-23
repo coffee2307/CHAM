@@ -1,0 +1,143 @@
+/* CHẠM 7: immersive weaving, editorial photo chapters and adaptive navigation.
+   Scoped to the active CHẠM theme and homepage; no third-party font or video. */
+:root{--cham7-paper:#f8f1e7;--cham7-ink:#211a15;--cham7-motion:cubic-bezier(.16,1,.3,1)}
+#header-group{position:sticky;top:0;z-index:90;will-change:transform;transition:transform .23s var(--cham7-motion)}
+#header-group[data-cham-hidden]{transform:translate3d(0,calc(-100% - 22px),0)}
+#header-group .cham-header{position:relative;top:8px}
+#header-group:focus-within{transform:translate3d(0,0,0)!important}
+body.cham5-home .cham6-hero{padding-bottom:0}
+body.cham5-home .cham6-hero__topline{position:relative;z-index:3}
+body.cham5-home .cham7-hero__stage{
+ position:relative;isolation:isolate;overflow:hidden;
+ height:clamp(480px,65svh,880px);min-height:0;
+ background:radial-gradient(ellipse at 49% 48%,#fffdf8 0,#eee3d5 57%,#e4d2bb 100%);
+ border-bottom:1px solid #d8c6b3;margin-top:24px
+}
+body.cham5-home .cham7-hero__stage:before{
+ content:"";position:absolute;z-index:0;inset:0;pointer-events:none;
+ background:radial-gradient(ellipse at 65% 35%,rgba(255,255,255,.9),transparent 43%),radial-gradient(ellipse at 30% 80%,rgba(145,88,50,.09),transparent 60%)
+}
+body.cham5-home .cham7-hero__canvas{display:none;position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+body.cham5-home .cham7-hero__stage.cham7-ready .cham7-hero__canvas{display:block}
+body.cham5-home .cham7-hero__poster{position:absolute;inset:0;z-index:1;overflow:hidden}
+body.cham5-home .cham7-hero__poster img{
+ width:100%;height:100%;object-fit:cover;object-position:center 45%;
+ opacity:.41;filter:sepia(.25) saturate(.68) contrast(.8);
+ transform:scale(1.03)
+}
+body.cham5-home .cham7-hero__stage.cham7-ready .cham7-hero__poster{opacity:0}
+body.cham5-home .cham7-hero__identity{position:absolute;left:6%;top:8%;z-index:4;max-width:60%;pointer-events:none}
+body.cham5-home .cham7-hero__identity h1{
+ font:770 clamp(32px,5.3vw,85px)/1.07 "CHAM Phudu","Be Vietnam Pro",sans-serif!important;
+ letter-spacing:-.045em!important;color:#282018!important;margin:0!important;text-wrap:nowrap
+}
+body.cham5-home .cham7-hero__identity p{
+ font-size:clamp(10px,.94vw,13px);line-height:1.6;letter-spacing:.03em;
+ color:#634f3e;margin:10px 0 0!important
+}
+body.cham5-home .cham7-hero__statement{position:absolute;z-index:4;right:6%;bottom:9%;width:min(390px,42%);text-align:right;color:#33271d;pointer-events:none}
+body.cham5-home .cham7-hero__statement p{font:500 clamp(14px,1.9vw,26px)/1.42 "Be Vietnam Pro",sans-serif;margin:0!important;text-wrap:balance}
+body.cham5-home .cham7-hero__index{position:absolute;left:6%;bottom:8%;z-index:4;font-size:11px;color:#5e5041;pointer-events:none}
+body.cham5-home .cham6-hero__introduction{padding-top:clamp(30px,4vw,60px)}
+body.cham5-home .cham6-hero__endline{margin-top:0}
+body.cham5-home .cham5-process__panel{
+ display:grid!important;grid-template-columns:minmax(0,47%) minmax(0,53%)!important;
+ align-items:stretch!important;gap:0!important;background:var(--cham7-paper)
+}
+body.cham5-home .cham5-process__panel:nth-child(2n){background:#f1e6d7}
+body.cham5-home .cham7-process__left{
+ min-width:0;min-height:0;padding:clamp(25px,3vw,48px) clamp(22px,5.5vw,105px);
+ display:grid;grid-template-rows:minmax(0,1fr) auto;align-content:space-between;gap:16px
+}
+body.cham5-home .cham7-process__left .cham5-process__copy{padding:0!important;min-width:0}
+body.cham5-home .cham7-process__details{display:grid;grid-template-columns:1.13fr .87fr;gap:clamp(14px,2vw,35px);align-items:end;width:100%;max-width:515px}
+body.cham5-home .cham7-process__detail{position:relative;display:block;margin:0!important;min-width:0;overflow:hidden;background:#e0d1bf}
+body.cham5-home .cham7-process__detail:first-child{aspect-ratio:4/3}
+body.cham5-home .cham7-process__detail:last-child{aspect-ratio:3/4;margin-bottom:7%!important}
+body.cham5-home .cham7-process__detail img{display:block;width:100%;height:100%;object-fit:cover}
+body.cham5-home .cham5-process__panel>.cham5-process__photo{
+ height:100%!important;margin:0!important;min-height:0;
+ width:100%;border:0;clip-path:inset(0 0 0 0);background:#d7c4ad
+}
+body.cham5-home .cham5-process__panel>.cham5-process__photo img{width:100%;height:100%;object-fit:cover}
+body.cham5-home .cham5-process__panel>.cham5-process__photo figcaption{
+ left:auto;right:17px;bottom:17px;max-width:calc(100% - 34px);line-height:1.5
+}
+body.cham5-home .cham7-process-animated .cham5-process__panel:not(.is-revealed)>.cham5-process__photo,
+body.cham5-home .cham7-process-animated .cham5-process__panel:not(.is-revealed) .cham7-process__detail{
+ clip-path:inset(0 0 100% 0)
+}
+body.cham5-home .cham7-process-animated .cham5-process__panel>.cham5-process__photo,
+body.cham5-home .cham7-process-animated .cham7-process__detail{
+ transition:clip-path .85s var(--cham7-motion)
+}
+body.cham5-home .cham7-process-animated .cham5-process__panel.is-revealed .cham7-process__detail:first-child{transition-delay:.13s}
+body.cham5-home .cham7-process-animated .cham5-process__panel.is-revealed .cham7-process__detail:last-child{transition-delay:.26s}
+body.cham5-home .cham7-process-animated .cham5-process__panel.is-revealed>.cham5-process__photo,
+body.cham5-home .cham7-process-animated .cham5-process__panel.is-revealed .cham7-process__detail{clip-path:inset(0 0 0 0)}
+@media(max-width:1023px){
+ body.cham5-home .cham5-process__panel{
+  width:100%!important;height:auto!important;min-height:clamp(620px,77vw,790px)!important;
+  display:grid!important;grid-template-columns:minmax(0,46%) minmax(0,54%)!important;
+  padding:0!important;gap:0!important;margin:0!important;border-top:1px solid #dfd2c2
+ }
+ body.cham5-home .cham7-process__left{height:100%;padding:clamp(22px,3vw,42px) clamp(14px,3.2vw,35px);gap:13px}
+ body.cham5-home .cham5-process__copy h3{font-size:clamp(28px,4.4vw,52px)!important;line-height:1.13!important;margin:0 0 16px!important}
+ body.cham5-home .cham5-process__copy>p:not(.cham5-step-number){font-size:clamp(11px,1.4vw,14px)!important;line-height:1.68!important;overflow-wrap:break-word}
+ body.cham5-home .cham7-process__details{grid-template-columns:1fr 1fr;gap:10px}
+ body.cham5-home .cham5-process__panel>.cham5-process__photo{height:100%!important;min-height:620px}
+}
+@media(max-width:767px){
+ body.cham5-home .cham7-hero__stage{margin-top:15px;height:clamp(450px,66svh,690px);background:radial-gradient(ellipse at center,#fffef7,#e7d7c2)}
+ body.cham5-home .cham7-hero__identity{left:6%;top:7%;max-width:75%}
+ body.cham5-home .cham7-hero__identity h1{font-size:clamp(35px,10vw,58px)!important}
+ body.cham5-home .cham7-hero__statement{right:7%;bottom:12%;width:min(250px,65%)}
+ body.cham5-home .cham7-hero__statement p{font-size:clamp(14px,4.1vw,20px)}
+ body.cham5-home .cham7-hero__index{bottom:5.2%;font-size:10px}
+ body.cham5-home .cham5-process__panel{
+  display:grid!important;grid-template-columns:minmax(0,46%) minmax(0,54%)!important;
+  min-height:clamp(650px,170vw,810px)!important;align-items:stretch!important
+ }
+ body.cham5-home .cham7-process__left{padding:24px 10px 20px 17px;gap:16px;grid-template-rows:minmax(0,1fr) auto}
+ body.cham5-home .cham5-process__copy{padding:0!important}
+ body.cham5-home .cham5-process__copy h3{font-size:clamp(25px,6.3vw,36px)!important;line-height:1.12!important;letter-spacing:-.025em!important;margin-bottom:11px!important}
+ body.cham5-home .cham5-step-number{font-size:10px!important;margin-bottom:13px!important}
+ body.cham5-home .cham5-process__copy>p:not(.cham5-step-number){
+  font-size:clamp(11px,2.75vw,12.5px)!important;line-height:1.62!important;
+  margin:0!important;hyphens:auto;overflow-wrap:break-word
+ }
+ body.cham5-home .cham7-process__details{display:grid;grid-template-columns:1fr;gap:14px;max-width:100%;align-items:end}
+ body.cham5-home .cham7-process__detail:first-child{width:100%;aspect-ratio:4/3}
+ body.cham5-home .cham7-process__detail:last-child{width:80%;aspect-ratio:4/3;margin:0 0 0 auto!important}
+ body.cham5-home .cham5-process__panel>.cham5-process__photo{
+  min-height:650px;height:auto!important;align-self:stretch
+ }
+ body.cham5-home .cham5-process__panel>.cham5-process__photo figcaption{font-size:9px;bottom:10px;right:10px;padding:5px 7px}
+}
+@media(max-width:360px){
+ body.cham5-home .cham5-process__panel{min-height:725px!important}
+ body.cham5-home .cham5-process__copy h3{font-size:24px!important}
+ body.cham5-home .cham5-process__copy>p:not(.cham5-step-number){font-size:10.5px!important;line-height:1.55!important}
+ body.cham5-home .cham7-process__left{padding:18px 8px 16px 12px}
+}
+@media(prefers-reduced-motion:reduce){
+ #header-group{transition:none!important;will-change:auto}
+ #header-group[data-cham-hidden]{transform:none!important}
+ body.cham5-home .cham7-hero__canvas{display:none!important}
+ body.cham5-home .cham7-hero__poster{opacity:1!important}
+ body.cham5-home .cham7-process-animated .cham5-process__panel>.cham5-process__photo,
+ body.cham5-home .cham7-process-animated .cham7-process__detail{clip-path:none!important;transition:none!important}
+}
+
+/* Keep tall editorial imagery from determining the grid row's intrinsic height on narrow phones. */
+@media(max-width:767px){
+ body.cham5-home .cham5-process__panel>.cham5-process__photo{
+   min-height:0!important;height:100%!important;position:relative;align-self:stretch
+ }
+ body.cham5-home .cham5-process__panel>.cham5-process__photo>img{
+   position:absolute;inset:0;width:100%;height:100%;object-fit:cover
+ }
+}
+
+/* On phones the sculpture carries the hero; the detailed statement follows in the introduction. */
+@media(max-width:767px){body.cham5-home .cham7-hero__statement{display:none}}

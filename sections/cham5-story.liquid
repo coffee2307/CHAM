@@ -1,9 +1,19 @@
 <div class="cham5 cham5-editorial" data-cham5-root>
   <section class="cham6-hero" id="cham5-top" aria-labelledby="cham6-hero-title">
     <div class="cham6-hero__topline"><span>Thủ công Việt Nam</span><span>Khám phá, hiểu và lựa chọn</span></div>
-    <div class="cham6-hero__title-wrap">
-      <h1 id="cham6-hero-title" class="cham6-hero__title">CHẠM</h1>
-      <span class="cham6-hero__handwritten" aria-hidden="true">Từ Việt Nam, bằng đôi tay.</span>
+    <div class="cham7-hero__stage" data-cham7-weave>
+      <div class="cham7-hero__poster" aria-hidden="true">
+        <img src="{{ 'cham6-craft-shape-640.webp' | asset_url }}" width="640" height="480" loading="eager" fetchpriority="low" decoding="async" alt="">
+      </div>
+      <canvas class="cham7-hero__canvas" aria-hidden="true"></canvas>
+      <div class="cham7-hero__identity">
+        <h1 id="cham6-hero-title">CHẠM</h1>
+        <p>Thủ công Việt Nam, trong đời sống hôm nay.</p>
+      </div>
+      <div class="cham7-hero__statement">
+        <p>Chất liệu, bàn tay và những câu chuyện đằng sau mỗi món đồ.</p>
+      </div>
+      <span class="cham7-hero__index" aria-hidden="true">Cuộn để khám phá ↓</span>
     </div>
     <div class="cham6-hero__introduction">
       <h2>Không chỉ là một món đồ.</h2>
@@ -13,26 +23,7 @@
         <a href="#cham5-process" class="cham5-textlink">Đi theo câu chuyện nghề <span aria-hidden="true">↓</span></a>
       </div>
     </div>
-    <div class="cham6-hero__gallery" aria-label="Tư liệu các công đoạn chế tác gốm Việt Nam">
-      <svg class="cham6-hero__thread" viewBox="0 0 1600 440" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M-40 44 C430 205 1130 230 1640 38" fill="none" stroke="#B78856" stroke-width="2" stroke-linecap="round"/></svg>
-      <figure class="cham6-hero__print cham6-hero__print--a" data-cham6-float="1">
-        <img src="{{ 'cham6-craft-clay-640.webp' | asset_url }}" width="640" height="427" loading="eager" fetchpriority="low" decoding="async" alt="Người thợ đổ đất gốm vào khuôn tại Bình Dương">
-        <figcaption>Đất</figcaption>
-      </figure>
-      <figure class="cham6-hero__print cham6-hero__print--b" data-cham6-float="2">
-        <img src="{{ 'cham6-craft-shape-640.webp' | asset_url }}" width="640" height="480" loading="eager" fetchpriority="low" decoding="async" alt="Nghệ nhân tạo hình đồ gốm bằng tay">
-        <figcaption>Đôi tay</figcaption>
-      </figure>
-      <figure class="cham6-hero__print cham6-hero__print--c" data-cham6-float="3">
-        <img src="{{ 'cham6-craft-decoration-640.webp' | asset_url }}" width="640" height="480" loading="eager" fetchpriority="low" decoding="async" alt="Người thợ xử lý bề mặt và họa tiết của phôi gốm">
-        <figcaption>Đường nét</figcaption>
-      </figure>
-      <figure class="cham6-hero__print cham6-hero__print--d" data-cham6-float="4">
-        <img src="{{ 'cham6-craft-use-640.webp' | asset_url }}" width="640" height="427" loading="eager" fetchpriority="low" decoding="async" alt="Nồi đất thủ công trong gian bếp truyền thống">
-        <figcaption>Đời sống</figcaption>
-      </figure>
-    </div>
-    <div class="cham6-hero__endline"><span>Ảnh tư liệu nghề thủ công, không phải quy trình sản xuất riêng của CHẠM</span><a href="#cham6-watch">Cuộn để khám phá <span aria-hidden="true">↓</span></a></div>
+    <div class="cham6-hero__endline"><span>Tư liệu nghề truyền thống được giới thiệu trong các chương tiếp theo</span><a href="#cham6-watch">Cuộn để khám phá <span aria-hidden="true">↓</span></a></div>
   </section>
   <section class="cham6-watch" id="cham6-watch" aria-labelledby="cham6-watch-heading">
     <div class="cham6-watch__stage" data-cham6-watch-stage>
@@ -66,6 +57,13 @@
       <div class="cham5-process__viewport" data-cham5-process-viewport>
         <div class="cham5-process__track" data-cham5-process-track>
           <article class="cham5-process__panel" aria-labelledby="cham5-step-1">
+            <div class="cham7-process__left">
+              <div class="cham5-process__copy"><p class="cham5-step-number">Khởi đầu</p><h3 id="cham5-step-1">Chuẩn bị đất.</h3><p>Người thợ làm sạch và xử lý đất để có độ dẻo hoặc độ lỏng phù hợp với kỹ thuật tạo hình. Mỗi phương pháp đòi hỏi một cách chuẩn bị riêng.</p></div>
+              <div class="cham7-process__details">
+                <figure class="cham7-process__detail"><img src="{{ 'cham6-craft-shape-640.webp' | asset_url }}" width="640" height="480" loading="lazy" decoding="async" alt="Bàn tay tạo hình phôi gốm"></figure>
+                <figure class="cham7-process__detail"><img src="{{ 'cham6-craft-trim-640.webp' | asset_url }}" width="640" height="480" loading="lazy" decoding="async" alt="Cận cảnh sửa chân phôi gốm"></figure>
+              </div>
+            </div>
             <figure class="cham5-process__photo">
               <img src="{{ 'cham6-craft-clay.webp' | asset_url }}"
                 srcset="{{ 'cham6-craft-clay-640.webp' | asset_url }} 640w, {{ 'cham6-craft-clay.webp' | asset_url }} 1600w"
@@ -74,9 +72,15 @@
                 alt="Nghệ nhân rót đất lỏng vào khuôn trong một xưởng làm gốm tại Bình Dương">
               <figcaption>Đổ đất vào khuôn · Vy Van Bui</figcaption>
             </figure>
-            <div class="cham5-process__copy"><p class="cham5-step-number">Khởi đầu</p><h3 id="cham5-step-1">Chuẩn bị đất.</h3><p>Người thợ làm sạch và xử lý đất để có độ dẻo hoặc độ lỏng phù hợp với kỹ thuật tạo hình. Mỗi phương pháp đòi hỏi một cách chuẩn bị riêng.</p></div>
           </article>
           <article class="cham5-process__panel" aria-labelledby="cham5-step-2">
+            <div class="cham7-process__left">
+              <div class="cham5-process__copy"><p class="cham5-step-number">Tạo hình</p><h3 id="cham5-step-2">Dựng nên hình dáng.</h3><p>Đất được nặn bằng tay, vuốt trên bàn xoay hoặc đưa vào khuôn. Từng thao tác quyết định tỷ lệ và dáng vẻ của thành phẩm.</p></div>
+              <div class="cham7-process__details">
+                <figure class="cham7-process__detail"><img src="{{ 'cham6-craft-clay-640.webp' | asset_url }}" width="640" height="480" loading="lazy" decoding="async" alt="Đất được đưa vào khuôn tạo hình"></figure>
+                <figure class="cham7-process__detail"><img src="{{ 'cham6-craft-decoration-640.webp' | asset_url }}" width="640" height="480" loading="lazy" decoding="async" alt="Bề mặt đồ gốm trong quá trình hoàn thiện"></figure>
+              </div>
+            </div>
             <figure class="cham5-process__photo">
               <img src="{{ 'cham6-craft-shape.webp' | asset_url }}"
                 srcset="{{ 'cham6-craft-shape-640.webp' | asset_url }} 640w, {{ 'cham6-craft-shape.webp' | asset_url }} 1600w"
@@ -84,9 +88,15 @@
                 loading="lazy" decoding="async" alt="Nghệ nhân tạo hình sản phẩm gốm tại Thanh Hà, Hội An">
               <figcaption>Nghệ nhân làng gốm Thanh Hà · Lê Tấn Lộc</figcaption>
             </figure>
-            <div class="cham5-process__copy"><p class="cham5-step-number">Tạo hình</p><h3 id="cham5-step-2">Dựng nên hình dáng.</h3><p>Đất được nặn bằng tay, vuốt trên bàn xoay hoặc đưa vào khuôn. Từng thao tác quyết định tỷ lệ và dáng vẻ của thành phẩm.</p></div>
           </article>
           <article class="cham5-process__panel" aria-labelledby="cham5-step-3">
+            <div class="cham7-process__left">
+              <div class="cham5-process__copy"><p class="cham5-step-number">Chỉnh sửa</p><h3 id="cham5-step-3">Tỉ mỉ từng đường nét.</h3><p>Khi phôi đã se lại, người thợ chỉnh miệng, chân đế và bề mặt. Công đoạn này giúp sản phẩm giữ được dáng cân đối.</p></div>
+              <div class="cham7-process__details">
+                <figure class="cham7-process__detail"><img src="{{ 'cham6-craft-shape-640.webp' | asset_url }}" width="640" height="480" loading="lazy" decoding="async" alt="Thao tác tạo dáng gốm thủ công"></figure>
+                <figure class="cham7-process__detail"><img src="{{ 'cham6-craft-use-640.webp' | asset_url }}" width="640" height="480" loading="lazy" decoding="async" alt="Nồi đất trong gian bếp"></figure>
+              </div>
+            </div>
             <figure class="cham5-process__photo">
               <img src="{{ 'cham6-craft-trim.webp' | asset_url }}"
                 srcset="{{ 'cham6-craft-trim-640.webp' | asset_url }} 640w, {{ 'cham6-craft-trim.webp' | asset_url }} 1600w"
@@ -94,9 +104,15 @@
                 loading="lazy" decoding="async" alt="Người thợ dùng dụng cụ chỉnh sửa phần chân phôi gốm">
               <figcaption>Sửa phôi tại Bát Tràng · Steven C. Price</figcaption>
             </figure>
-            <div class="cham5-process__copy"><p class="cham5-step-number">Chỉnh sửa</p><h3 id="cham5-step-3">Tỉ mỉ từng đường nét.</h3><p>Khi phôi đã se lại, người thợ chỉnh miệng, chân đế và bề mặt. Công đoạn này giúp sản phẩm giữ được dáng cân đối.</p></div>
           </article>
           <article class="cham5-process__panel" aria-labelledby="cham5-step-4">
+            <div class="cham7-process__left">
+              <div class="cham5-process__copy"><p class="cham5-step-number">Hoàn thiện bề mặt</p><h3 id="cham5-step-4">Dấu ấn riêng.</h3><p>Vẽ, khắc, tạo họa tiết hoặc phủ men mang lại diện mạo khác nhau. Không phải sản phẩm gốm nào cũng sử dụng cùng một kỹ thuật.</p></div>
+              <div class="cham7-process__details">
+                <figure class="cham7-process__detail"><img src="{{ 'cham6-craft-trim-640.webp' | asset_url }}" width="640" height="480" loading="lazy" decoding="async" alt="Người thợ chỉnh sửa phôi"></figure>
+                <figure class="cham7-process__detail"><img src="{{ 'cham6-craft-kiln-640.webp' | asset_url }}" width="640" height="480" loading="lazy" decoding="async" alt="Lò nung gốm truyền thống"></figure>
+              </div>
+            </div>
             <figure class="cham5-process__photo">
               <img src="{{ 'cham6-craft-decoration.webp' | asset_url }}"
                 srcset="{{ 'cham6-craft-decoration-640.webp' | asset_url }} 640w, {{ 'cham6-craft-decoration.webp' | asset_url }} 1600w"
@@ -104,9 +120,15 @@
                 loading="lazy" decoding="async" alt="Người thợ xử lý bề mặt những chiếc chén gốm">
               <figcaption>Xử lý bề mặt gốm · Steven C. Price</figcaption>
             </figure>
-            <div class="cham5-process__copy"><p class="cham5-step-number">Hoàn thiện bề mặt</p><h3 id="cham5-step-4">Dấu ấn riêng.</h3><p>Vẽ, khắc, tạo họa tiết hoặc phủ men mang lại diện mạo khác nhau. Không phải sản phẩm gốm nào cũng sử dụng cùng một kỹ thuật.</p></div>
           </article>
           <article class="cham5-process__panel" aria-labelledby="cham5-step-5">
+            <div class="cham7-process__left">
+              <div class="cham5-process__copy"><p class="cham5-step-number">Nung</p><h3 id="cham5-step-5">Qua lửa.</h3><p>Nhiệt độ trong lò làm đất trở nên cứng chắc và có thể biến đổi lớp men. Quá trình nung yêu cầu kiểm soát nhiệt và thời gian.</p></div>
+              <div class="cham7-process__details">
+                <figure class="cham7-process__detail"><img src="{{ 'cham6-craft-decoration-640.webp' | asset_url }}" width="640" height="480" loading="lazy" decoding="async" alt="Công đoạn xử lý bề mặt"></figure>
+                <figure class="cham7-process__detail"><img src="{{ 'cham6-craft-use-640.webp' | asset_url }}" width="640" height="480" loading="lazy" decoding="async" alt="Đồ gốm trong đời sống"></figure>
+              </div>
+            </div>
             <figure class="cham5-process__photo">
               <img src="{{ 'cham6-craft-kiln.webp' | asset_url }}"
                 srcset="{{ 'cham6-craft-kiln-640.webp' | asset_url }} 640w, {{ 'cham6-craft-kiln.webp' | asset_url }} 1200w"
@@ -114,9 +136,15 @@
                 loading="lazy" decoding="async" alt="Lò củi truyền thống dùng trong hoạt động làm gốm">
               <figcaption>Lò nung gốm · Bill Bradley</figcaption>
             </figure>
-            <div class="cham5-process__copy"><p class="cham5-step-number">Nung</p><h3 id="cham5-step-5">Qua lửa.</h3><p>Nhiệt độ trong lò làm đất trở nên cứng chắc và có thể biến đổi lớp men. Quá trình nung yêu cầu kiểm soát nhiệt và thời gian.</p></div>
           </article>
           <article class="cham5-process__panel" aria-labelledby="cham5-step-6">
+            <div class="cham7-process__left">
+              <div class="cham5-process__copy"><p class="cham5-step-number">Đời sống</p><h3 id="cham5-step-6">Một món đồ có câu chuyện.</h3><p>Khi về với gian bếp hoặc góc nhà, sản phẩm thủ công trở thành một phần đời sống. CHẠM giúp người mua khám phá món đồ phù hợp với mình.</p><a href="#cham5-categories" class="cham5-textlink">Khám phá sản phẩm <span aria-hidden="true">→</span></a></div>
+              <div class="cham7-process__details">
+                <figure class="cham7-process__detail"><img src="{{ 'cham6-craft-clay-640.webp' | asset_url }}" width="640" height="480" loading="lazy" decoding="async" alt="Chuẩn bị đất làm gốm"></figure>
+                <figure class="cham7-process__detail"><img src="{{ 'cham6-craft-shape-640.webp' | asset_url }}" width="640" height="480" loading="lazy" decoding="async" alt="Nghệ nhân tạo dáng gốm"></figure>
+              </div>
+            </div>
             <figure class="cham5-process__photo">
               <img src="{{ 'cham6-craft-use.webp' | asset_url }}"
                 srcset="{{ 'cham6-craft-use-640.webp' | asset_url }} 640w, {{ 'cham6-craft-use.webp' | asset_url }} 1600w"
@@ -124,7 +152,6 @@
                 loading="lazy" decoding="async" alt="Những chiếc nồi đất đang được sử dụng trong gian bếp">
               <figcaption>Nồi đất trong đời sống · Hồng Quang Official</figcaption>
             </figure>
-            <div class="cham5-process__copy"><p class="cham5-step-number">Đời sống</p><h3 id="cham5-step-6">Một món đồ có câu chuyện.</h3><p>Khi về với gian bếp hoặc góc nhà, sản phẩm thủ công trở thành một phần đời sống. CHẠM giúp người mua khám phá món đồ phù hợp với mình.</p><a href="#cham5-categories" class="cham5-textlink">Khám phá sản phẩm <span aria-hidden="true">→</span></a></div>
           </article>
         </div>
       </div>

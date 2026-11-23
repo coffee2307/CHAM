@@ -3,7 +3,13 @@ const ROOT=path.resolve(__dirname,'..');
 const read=p=>fs.readFileSync(path.join(ROOT,p),'utf8');
 const json=p=>JSON.parse(read(p));
 const index=json('templates/index.json'),product=json('templates/product.json'),collection=json('templates/collection.json'),search=json('templates/search.json');
-assert.deepEqual(index.order,['hero','categories','products','catalog','club','about']);
+assert.deepEqual(index.order,['story','explore','market']);
+assert.equal((read('sections/cham5-story.liquid').match(/class="cham7-process__left"/g)||[]).length,6,'6 editorial spreads');
+assert.equal((read('sections/cham5-story.liquid').match(/class="cham7-process__detail"/g)||[]).length,12,'2 supporting photos per chapter');
+assert.ok(read('sections/cham5-story.liquid').includes('data-cham7-weave'),'WebGL hero stage');
+for (const asset of ['cham7-home.css','cham7-weave.js','cham7-editorial.js'])
+  assert.ok(read('layout/theme.liquid').includes(asset),'homepage includes '+asset);
+assert.ok(read('assets/cham-theme.js').includes('data-cham-hidden'),'scroll-aware header');
 assert.equal(product.sections.main.type,'cham-product-page');
 assert.equal(collection.sections.main.type,'cham-shop-collection');
 assert.equal(search.sections.main.type,'cham-search');

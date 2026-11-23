@@ -5,18 +5,40 @@
   document.documentElement.classList.add('cham-js');
 
   const header = document.querySelector('[data-cham-header]');
-  if (header) {
+  const headerGroup = document.querySelector('#header-group');
+  if (header && headerGroup) {
     let scheduled = false;
+    let lastDecisionY = Math.max(0, window.scrollY);
+    let hidden = false;
+    const reduceHeader = matchMedia('(prefers-reduced-motion: reduce)');
     const update = () => {
-      header.toggleAttribute('data-scrolled', window.scrollY > 32);
+      const y = Math.max(0, window.scrollY);
+      const menuOpen = Boolean(header.querySelector('.cham-mobile-nav details[open]'));
+      const focused = header.contains(document.activeElement);
+      header.toggleAttribute('data-scrolled', y > 32);
+      if (y < 96 || menuOpen || focused || reduceHeader.matches) {
+        hidden = false;
+        lastDecisionY = y;
+      } else if (y > 136 && y - lastDecisionY > 14) {
+        hidden = true;
+        lastDecisionY = y;
+      } else if (lastDecisionY - y > 9) {
+        hidden = false;
+        lastDecisionY = y;
+      }
+      headerGroup.toggleAttribute('data-cham-hidden', hidden);
       scheduled = false;
     };
-    update();
-    window.addEventListener('scroll', () => {
+    const requestUpdate = () => {
       if (scheduled) return;
       scheduled = true;
       window.requestAnimationFrame(update);
-    }, { passive: true });
+    };
+    update();
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    header.addEventListener('toggle', requestUpdate, true);
+    header.addEventListener('focusin', requestUpdate);
+    reduceHeader.addEventListener?.('change', requestUpdate);
   }
 
   // Legacy CSS cannot leave product or copy blocks invisible on slow devices.
