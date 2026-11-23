@@ -42,7 +42,7 @@ body.cham5-home .cham9-hero__spread{
 body.cham5-home .cham9-hero__art{position:relative;align-self:end;min-width:0;margin:0!important;max-height:100%;overflow:visible}
 body.cham5-home .cham9-hero__art img{
  width:100%;height:auto;max-height:clamp(175px,31vw,410px);object-fit:contain;object-position:bottom center;mix-blend-mode:multiply;
- display:block;filter:contrast(1.15);transform-origin:50% 100%;transition:transform .8s cubic-bezier(.19,1,.22,1)
+ display:block;filter:none;transform-origin:50% 100%;transition:transform .8s cubic-bezier(.19,1,.22,1)
 }
 body.cham5-home .cham9-hero__art--potter{justify-self:start;width:min(100%,375px)}
 body.cham5-home .cham9-hero__art--vendor{justify-self:end;width:min(100%,340px)}
@@ -317,3 +317,47 @@ body.cham5-home #cham5-process{scroll-margin-top:0!important}
  body.cham5-home .cham9-hero__art img{transform:none!important;transition:none!important}
  body.cham5-home .cham8-scene [data-cham8-reveal]{clip-path:none!important}
 }
+
+/* CHẠM 10 — vertical-to-horizontal handoff. The pin begins with a readable
+   introduction, not an immediate sideways motion. */
+body.cham5-home .cham9-story-threshold{
+  min-height:clamp(230px,38svh,430px)!important;
+  display:flex!important;gap:clamp(22px,5vw,90px)!important;
+  align-items:center!important;padding:clamp(30px,8vw,98px) clamp(22px,7vw,125px)!important;
+  background:#f7f1e9!important;
+}
+body.cham5-home .cham10-lead{flex:0 1 min(620px,60%);white-space:normal}
+body.cham5-home .cham10-lead__kicker{display:block;margin-bottom:clamp(13px,2vw,28px);font:640 12px/1.6 'Be Vietnam Pro',sans-serif;letter-spacing:.12em;color:#8a593c}
+body.cham5-home .cham10-lead p{font:640 clamp(30px,4vw,68px)/1.12 'Be Vietnam Pro',sans-serif;color:#26201b;letter-spacing:-.06em;text-wrap:balance;margin:0 0 18px}
+body.cham5-home .cham10-lead__hint{font:500 clamp(12px,1.05vw,16px)/1.5 'Be Vietnam Pro',sans-serif;color:#69584b;letter-spacing:0}
+body.cham5-home .cham10-lead__count{font-size:12px;letter-spacing:.03em;text-transform:none;color:#765f4b}
+body.cham5-home .cham10-handoff{
+ position:absolute;inset:52px 0 49px;z-index:9;pointer-events:none;
+ display:none;align-items:center;justify-content:center;flex-direction:column;gap:21px;
+ background:linear-gradient(120deg,rgba(247,241,233,.96) 0%,rgba(247,241,233,.88) 47%,rgba(247,241,233,.48) 100%);
+ color:#332820;will-change:transform,opacity;text-align:center;
+}
+body.cham5-home .cham5-process.is-enhanced .cham10-handoff{display:flex}
+body.cham5-home .cham10-handoff__kicker{font:650 clamp(10px,.9vw,14px)/1.6 'Be Vietnam Pro',sans-serif;letter-spacing:.14em;color:#8f603f}
+body.cham5-home .cham10-handoff__direction{
+ display:flex;justify-content:center;flex-wrap:wrap;align-items:center;gap:clamp(12px,3vw,43px);
+ font:620 clamp(20px,3.0vw,45px)/1.25 'Be Vietnam Pro',sans-serif;letter-spacing:-.035em
+}
+body.cham5-home .cham10-handoff__arrow{
+ font:italic 500 clamp(35px,4.7vw,80px)/1 'CHAM Cormorant',Georgia,serif;color:#b37e50;transform:rotate(0deg)
+}
+body.cham5-home .cham10-handoff__bar{width:min(220px,40vw);height:1px;background:linear-gradient(90deg,transparent,#8a593f,transparent)}
+@media(max-width:767px){
+ body.cham5-home .cham9-story-threshold{min-height:clamp(220px,34svh,330px)!important;padding:35px 7%!important}
+ body.cham5-home .cham10-lead{flex-basis:80%}
+ body.cham5-home .cham10-lead p{font-size:clamp(27px,7.6vw,38px)!important}
+ body.cham5-home .cham10-lead__count{font-size:10px}
+ body.cham5-home .cham10-handoff{inset:43px 0 39px;gap:12px}
+ body.cham5-home .cham10-handoff__direction{gap:9px;font-size:clamp(18px,5vw,26px);flex-direction:column}
+ body.cham5-home .cham10-handoff__arrow{transform:rotate(12deg);font-size:54px}
+}
+@media(prefers-reduced-motion:reduce){
+ body.cham5-home .cham10-handoff{display:none!important}
+}
+
+@media(max-width:767px) and (max-height:629px){body.cham5-home .cham10-handoff{display:none!important}}

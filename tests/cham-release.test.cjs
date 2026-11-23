@@ -11,7 +11,7 @@ assert.ok(read('sections/cham5-story.liquid').includes('cham8-scene--surface'),'
 assert.ok(read('sections/cham5-story.liquid').includes('class="cham9-hero"'),'editorial hero active');
 assert.ok(!read('sections/cham5-story.liquid').includes('cham5-process__heading'),'redundant intro removed');
 assert.ok(!read('sections/cham5-story.liquid').includes('Một hành trình nghề truyền thống'),'obsolete copy removed');
-assert.ok(read('sections/cham5-story.liquid').includes('cham9-potter-art.webp'),'original editorial drawing included');
+assert.ok(read('sections/cham5-story.liquid').includes('cham10-potter.webp'),'original editorial drawing included');
 assert.ok(read('assets/cham5-home.js').includes("mm.add('(min-width:0px)"),'mobile shares pinned horizontal story');
 assert.ok(!read('layout/theme.liquid').includes("<script src=\"{{ 'cham8-hero.js'"),'retired WebGL runtime not loaded');
 for (const asset of ['cham8-home.css','cham9-home.css','cham8-story.js'])
