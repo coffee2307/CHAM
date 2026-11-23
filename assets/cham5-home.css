@@ -210,10 +210,10 @@ body.cham5-home .cham5-end__legal{font-size:11px;color:#a69f97}
  body.cham5-home .cham5-process{padding-bottom:36px}
  body.cham5-home .cham5-process__heading{padding:75px 6% 36px}
  body.cham5-home .cham5-process__heading h2{font-size:clamp(52px,8vw,95px)!important}
- body.cham5-home .cham5-process__pin{height:auto!important;max-height:none!important;display:block!important;overflow:visible!important;background:transparent}
- body.cham5-home .cham5-process__chrome,body.cham5-home .cham5-process__progress,body.cham5-home .cham5-process__hint{display:none!important}
- body.cham5-home .cham5-process__viewport{height:auto!important;overflow:visible!important;scroll-snap-type:none!important}
- body.cham5-home .cham5-process__track{display:block!important;width:100%!important;height:auto!important;transform:none!important;will-change:auto!important}
+ body.cham5-home .cham5-process:not(.is-enhanced) .cham5-process__pin{height:auto;overflow:visible;background:transparent}
+ body.cham5-home .cham5-process:not(.is-enhanced) .cham5-process__hint{display:none}
+ body.cham5-home .cham5-process:not(.is-enhanced) .cham5-process__viewport{overflow-x:auto;scroll-snap-type:x mandatory}
+ body.cham5-home .cham5-process__track{display:flex;width:max-content;height:100%}
  body.cham5-home .cham5-process__panel{width:100%!important;min-height:0!important;height:auto!important;display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);gap:27px;padding:33px 6% 48px;border-top:1px solid #d8cabb}
  body.cham5-home .cham5-process__photo{height:clamp(280px,38vw,430px);margin:0!important}
  body.cham5-home .cham5-process__copy{padding:0 0 0 12px}

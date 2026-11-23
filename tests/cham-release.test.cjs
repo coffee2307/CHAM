@@ -8,8 +8,13 @@ assert.equal((read('sections/cham5-story.liquid').match(/class="cham8-scene cham
 assert.ok(read('sections/cham5-story.liquid').includes('cham8-scene--fire'),'full photographic kiln chapter');
 assert.ok(read('sections/cham5-story.liquid').includes('cham8-scene--precision'),'macro precision chapter');
 assert.ok(read('sections/cham5-story.liquid').includes('cham8-scene--surface'),'asymmetrical surface diptych');
-assert.ok(read('sections/cham5-story.liquid').includes('data-cham8-canvas'),'3D ceramic hero stage');
-for (const asset of ['cham8-home.css','cham8-hero.js','cham8-story.js'])
+assert.ok(read('sections/cham5-story.liquid').includes('class="cham9-hero"'),'editorial hero active');
+assert.ok(!read('sections/cham5-story.liquid').includes('cham5-process__heading'),'redundant intro removed');
+assert.ok(!read('sections/cham5-story.liquid').includes('Một hành trình nghề truyền thống'),'obsolete copy removed');
+assert.ok(read('sections/cham5-story.liquid').includes('cham9-potter-art.webp'),'original editorial drawing included');
+assert.ok(read('assets/cham5-home.js').includes("mm.add('(min-width:0px)"),'mobile shares pinned horizontal story');
+assert.ok(!read('layout/theme.liquid').includes("<script src=\"{{ 'cham8-hero.js'"),'retired WebGL runtime not loaded');
+for (const asset of ['cham8-home.css','cham9-home.css','cham8-story.js'])
   assert.ok(read('layout/theme.liquid').includes(asset),'homepage includes '+asset);
 assert.ok(read('assets/cham-theme.js').includes('data-cham-hidden'),'scroll-aware header');
 assert.equal(product.sections.main.type,'cham-product-page');

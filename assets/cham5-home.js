@@ -20,8 +20,7 @@ const watchImage=$('[data-cham6-watch-image]',watch||document);
 const watchOverlay=$('[data-cham6-watch-overlay]',watch||document);
 const header=$('#header-group');
 const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
-const fine=window.matchMedia('(min-width: 1024px) and (pointer: fine)');
-const desktop=()=>fine.matches&&!reduced.matches;
+const desktop=()=>window.innerWidth>=1024&&!reduced.matches;
 const headerHeight=()=>Math.round(Math.max(48,Math.min(150,header?.getBoundingClientRect().height||64)));
 const measure=()=>document.documentElement.style.setProperty('--cham5-header',headerHeight()+'px');
 measure();
@@ -68,9 +67,10 @@ function startLenis(){
  }catch(e){stopLenis();}
 }
 const mm=gsap.matchMedia();
-mm.add('(min-width:1024px) and (pointer:fine) and (prefers-reduced-motion:no-preference)',()=>{
- startLenis();
+mm.add('(min-width:0px) and (prefers-reduced-motion:no-preference)',()=>{
+ // Use native scrolling for consistent pinning, especially when entering on touch devices.
  if(!track||!pin||!viewport||steps.length<2)return ()=>stopLenis();
+ if(window.innerWidth<768 && window.innerHeight<630)return ()=>stopLenis();
  const distance=()=>Math.max(0,track.scrollWidth-viewport.clientWidth);
  process.classList.add('is-enhanced');
  const context=gsap.context(()=>{
@@ -80,7 +80,7 @@ mm.add('(min-width:1024px) and (pointer:fine) and (prefers-reduced-motion:no-pre
       gsap.to(el,{y:(i%2===0?-37:24),ease:'none',scrollTrigger:{trigger:hero,start:'top top',end:'bottom top',scrub:.9}});
     });
   }
-  if(watch&&watchStage&&watchImage&&watchOverlay){
+  if(window.innerWidth>=1024 && watch&&watchStage&&watchImage&&watchOverlay){
     const tl=gsap.timeline({scrollTrigger:{
       id:'cham-focus-photo',
       trigger:watch,
@@ -101,12 +101,13 @@ mm.add('(min-width:1024px) and (pointer:fine) and (prefers-reduced-motion:no-pre
       scrollTrigger:{
         id:'cham-horizontal-craft',
         trigger:pin,
-        start:()=> 'top top+='+headerHeight(),
-        end:()=>'+='+distance(),
-        scrub:.42,
+        start:'top top',
+        end:()=>'+='+Math.round(distance()*(window.innerWidth<768?1.09:1)),
+        scrub:.88,
         pin:true,
         pinSpacing:true,
-        anticipatePin:1,
+        anticipatePin:2,
+        refreshPriority:2,
         invalidateOnRefresh:true,
         onUpdate:self=>{
           if(progress)progress.style.transform='scaleX('+Math.max(.005,self.progress).toFixed(4)+')';
@@ -125,7 +126,7 @@ mm.add('(min-width:1024px) and (pointer:fine) and (prefers-reduced-motion:no-pre
   if(counter)counter.textContent='1';stopLenis();
  };
 });
-const refresh=()=>{if(!desktop())return;cancelAnimationFrame(refreshRAF);refreshRAF=requestAnimationFrame(()=>{measure();ScrollTrigger.refresh();});};
+const refresh=()=>{cancelAnimationFrame(refreshRAF);refreshRAF=requestAnimationFrame(()=>{measure();ScrollTrigger.refresh();});};
 window.addEventListener('load',refresh,{once:true});
 document.fonts?.ready.then(refresh).catch(()=>{});
 if(header&&'ResizeObserver'in window)new ResizeObserver(refresh).observe(header);

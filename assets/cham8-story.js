@@ -52,8 +52,7 @@
   };
   root.classList.add('cham8-motion-enabled');
 
-  const desktop=wide.matches&&window.ScrollTrigger;
-  const pin=desktop?window.ScrollTrigger.getById('cham-horizontal-craft'):null;
+  const pin=window.ScrollTrigger?.getById('cham-horizontal-craft')||null;
   if(pin&&pin.animation){
     pairs.forEach(pair=>{
       markReady(pair);
