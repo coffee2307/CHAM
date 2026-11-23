@@ -8,8 +8,8 @@
 body.cham5-home .cham8-hero{position:relative;isolation:isolate;overflow:hidden;min-height:clamp(670px,calc(100svh - 66px),1060px);width:100%;display:block;color:#f7ede0;background:#242821}
 body.cham5-home .cham8-hero__ambient{position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 65% 82% at 76% 53%,rgba(134,117,80,.27),transparent 72%),radial-gradient(ellipse 42% 50% at 17% 62%,rgba(160,112,70,.17),transparent 78%),linear-gradient(115deg,#20251f 0%,#272a23 47%,#20221d 100%)}
 body.cham5-home .cham8-hero__ambient:after{content:"";position:absolute;inset:0;opacity:.22;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.3'/%3E%3C/svg%3E")}
-body.cham5-home .cham8-hero__canvas{position:absolute;inset:0;z-index:2;display:none;width:100%;height:100%;pointer-events:none}
-body.cham5-home .cham8-hero--ready .cham8-hero__canvas{display:block}
+body.cham5-home .cham8-hero__canvas{position:absolute;inset:0;z-index:2;display:block;opacity:0;width:100%;height:100%;pointer-events:none;transition:opacity .5s ease}
+body.cham5-home .cham8-hero--ready .cham8-hero__canvas{opacity:1}
 body.cham5-home .cham8-hero__fallback{position:absolute;z-index:1;inset:0;pointer-events:none;opacity:.77;transition:opacity .5s ease}
 body.cham5-home .cham8-hero__fallback:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#242821 3%,rgba(36,40,33,.95) 24%,rgba(36,40,33,.05) 100%)}
 body.cham5-home .cham8-hero__fallback img{position:absolute;right:0;top:0;width:65%;height:100%;object-fit:cover;object-position:center;filter:brightness(.75) saturate(.76)}
@@ -26,7 +26,8 @@ body.cham5-home .cham8-hero__secondary{border-bottom:1px solid #b5b4a8;color:#e9
 body.cham5-home .cham8-hero__foot{position:absolute;left:clamp(26px,7.7vw,148px);bottom:clamp(24px,4vh,54px);right:clamp(24px,5vw,90px);display:flex;justify-content:space-between;gap:20px;align-items:center;z-index:4;font-size:11px;color:#d8c6ab}
 body.cham5-home .cham8-hero__foot p{margin:0!important;letter-spacing:.06em}
 body.cham5-home .cham8-hero__foot a{color:#f2dfc5!important;text-decoration:none!important}
-body.cham5-home .cham8-hero__artnote{position:absolute;right:6%;top:clamp(40px,7vh,90px);font-size:10px;z-index:4;color:#c3b59f;opacity:.72;max-width:200px;text-align:right;pointer-events:none}
+body.cham5-home .cham8-hero__artnote{position:absolute;right:6%;top:clamp(40px,7vh,90px);font-size:10px;z-index:4;color:#c3b59f;opacity:.72;max-width:200px;text-align:right;pointer-events:none;display:none}
+body.cham5-home .cham8-hero--ready .cham8-hero__artnote{display:block}
 body.cham5-home .cham5-thesis{background:var(--cham8-cream);padding:clamp(86px,11vw,165px) 7%}
 body.cham5-home .cham5-thesis h2{font-size:clamp(42px,5.2vw,87px)!important;letter-spacing:-.035em!important;max-width:950px}
 body.cham5-home .cham5-process{background:var(--cham8-paper);padding-bottom:55px}
@@ -119,75 +120,243 @@ body.cham5-home .cham5-market__heading h2{font-size:clamp(42px,5.1vw,82px)!impor
  body.cham5-home .cham5-process__hint{display:none!important}
 }
 @media(max-width:767px){
- body.cham5-home .cham8-hero{height:auto!important;min-height:clamp(730px,100svh,940px)}
- body.cham5-home .cham8-hero__fallback img{width:100%;height:67%;top:26%;filter:brightness(.6)}
- body.cham5-home .cham8-hero__fallback:after{background:linear-gradient(180deg,#242821 3%,rgba(36,40,33,.85) 22%,rgba(36,40,33,.10) 69%,#242821 97%)}
- body.cham5-home .cham8-hero__copy{padding-top:clamp(38px,6svh,75px);margin-left:6.5%;width:87%;max-width:none}
- body.cham5-home .cham8-hero__eyebrow{font-size:10px;margin-bottom:clamp(18px,2vh,28px)!important}
- body.cham5-home .cham8-hero__copy h1{font-size:clamp(42px,10.6vw,71px)!important;line-height:1.06!important;max-width:90%}
- body.cham5-home .cham8-hero__copy h1 span{white-space:normal;margin-left:4%}
- body.cham5-home .cham8-hero__description{font-size:12px;line-height:1.69;max-width:280px;margin:18px 0 0!important}
- body.cham5-home .cham8-hero__actions{margin-top:23px;gap:17px}
- body.cham5-home .cham8-hero__primary{font-size:11px;padding:12px 14px;min-height:46px;gap:15px}
- body.cham5-home .cham8-hero__secondary{font-size:11px}
- body.cham5-home .cham8-hero__foot{left:6.5%;right:6.5%;bottom:20px;font-size:10px}
- body.cham5-home .cham8-hero__artnote{top:auto;right:6.5%;bottom:70px;font-size:9px}
- body.cham5-home .cham5-thesis{padding:84px 6%}
- body.cham5-home .cham5-thesis h2{font-size:clamp(36px,9vw,59px)!important}
- body.cham5-home .cham5-process__heading{padding:70px 6% 40px}
- body.cham5-home .cham5-process__heading h2{font-size:clamp(43px,10vw,72px)!important}
- body.cham5-home .cham8-scene{width:100%!important;overflow:hidden!important;border-bottom:1px solid #ddcbb8}
- body.cham5-home .cham8-scene h3{font-size:clamp(27px,7vw,45px)!important;letter-spacing:-.045em!important;line-height:1.13!important}
- body.cham5-home .cham8-scene p{font-size:clamp(11px,2.9vw,13px);line-height:1.74}
- body.cham5-home .cham8-scene__step{font-size:10px;margin-bottom:12px}
- body.cham5-home .cham8-scene figure figcaption{font-size:9px;bottom:8px;right:7px;padding:4px 6px}
- body.cham5-home .cham8-scene--earth{height:clamp(710px,183vw,830px)!important;min-height:0!important;grid-template-columns:45% 55%}
- body.cham5-home .cham8-earth__essay{padding:24px 9px 18px 15px;gap:25px}
- body.cham5-home .cham8-earth__essay h3{font-size:clamp(23px,5.9vw,33px)!important;margin-bottom:12px!important}
- body.cham5-home .cham8-earth__essay p{font-size:clamp(10px,2.65vw,12px);line-height:1.65}
- body.cham5-home .cham8-earth__detail{width:96%;height:clamp(143px,31vw,225px);align-self:center}
- body.cham5-home .cham8-earth__large img{object-position:48% center}
- body.cham5-home .cham8-scene--hands{height:auto!important;min-height:745px!important;display:flex;flex-direction:column}
- body.cham5-home .cham8-hands__image{height:400px;flex:none}
- body.cham5-home .cham8-hands__narrative{display:block;padding:26px 7% 38px;min-height:350px}
- body.cham5-home .cham8-hands__narrative .cham8-scene__copy{width:62%}
- body.cham5-home .cham8-hands__portrait{position:absolute!important;right:5%;bottom:9%;width:31%;height:240px}
- body.cham5-home .cham8-hands__narrative p{font-size:12px}
- body.cham5-home .cham8-scene--precision{height:760px!important;min-height:0!important}
- body.cham5-home .cham8-precision__text{left:7%;top:7%;width:83%}
- body.cham5-home .cham8-precision__text h3{margin-bottom:11px!important}
- body.cham5-home .cham8-precision__text p{margin-top:10px!important;max-width:82%}
- body.cham5-home .cham8-precision__macro{top:37%;left:6%;height:55%;width:88%}
- body.cham5-home .cham8-precision__annotation{display:none}
- body.cham5-home .cham8-scene--surface{height:790px!important;min-height:0!important;display:block;position:relative}
- body.cham5-home .cham8-surface__one{position:absolute!important;top:4%;left:6%;width:62%;height:41%;margin:0!important}
- body.cham5-home .cham8-surface__two{position:absolute!important;bottom:4%;right:5%;width:70%;height:27%;margin:0!important}
- body.cham5-home .cham8-surface__copy{position:absolute;z-index:4;left:7%;top:47%;width:76%;padding:0!important;text-align:left}
- body.cham5-home .cham8-surface__copy h3{font-size:clamp(30px,7vw,40px)!important;margin-bottom:10px!important}
- body.cham5-home .cham8-surface__copy p{font-size:11px;max-width:100%;text-align:left!important}
- body.cham5-home .cham8-scene--fire{height:760px!important}
- body.cham5-home .cham8-fire__scene img{object-position:47% center}
- body.cham5-home .cham8-fire__scene:after{background:linear-gradient(180deg,rgba(16,13,11,.13),rgba(16,13,11,.78) 67%,rgba(16,13,11,.96))}
- body.cham5-home .cham8-fire__copy{top:auto;bottom:15%;left:8%;width:83%}
- body.cham5-home .cham8-fire__copy h3{font-size:clamp(74px,17vw,125px)!important}
- body.cham5-home .cham8-fire__copy p{font-size:13px}
- body.cham5-home .cham8-scene--life{height:770px!important}
- body.cham5-home .cham8-life__copy{left:7%;top:6%;width:86%}
- body.cham5-home .cham8-life__copy p{max-width:82%;font-size:12px}
- body.cham5-home .cham8-life__action{margin-top:17px;font-size:11px}
- body.cham5-home .cham8-life__living{inset:46% 0 0 0}
- body.cham5-home .cham8-life__object{left:auto;right:6%;bottom:11%;width:30%;height:30%;border-width:4px}
- body.cham5-home .cham5-bridge__text h2{font-size:clamp(39px,9vw,59px)!important}
- body.cham5-home .cham5-market__heading h2{font-size:clamp(34px,8vw,56px)!important}
+ /* Mobile art direction: welcoming editorial cover, then strong photographic chapters. */
+ body.cham5-home .cham8-hero{
+   height:clamp(750px,calc(100svh - 56px),900px)!important;
+   min-height:750px!important;max-height:none;
+   background:#f1e6d7!important;color:#29231d!important
+ }
+ body.cham5-home .cham8-hero__ambient{
+   background:radial-gradient(ellipse 80% 53% at 68% 73%,#d1b89a 0%,transparent 79%),
+    linear-gradient(180deg,#f4eadc 0%,#eee1d0 75%,#d8c1a5 100%)!important
+ }
+ body.cham5-home .cham8-hero__ambient:after{opacity:.07}
+ body.cham5-home .cham8-hero__fallback{inset:43% 0 0;opacity:1;transition:opacity .45s ease}
+ body.cham5-home .cham8-hero__fallback img{
+   position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;
+   object-position:center 48%;filter:brightness(.91) contrast(.96) saturate(.83) sepia(.07)
+ }
+ body.cham5-home .cham8-hero__fallback:after{
+   background:linear-gradient(180deg,#eee3d5 0%,rgba(238,227,213,.02) 30%,rgba(24,20,17,.54) 100%)
+ }
+ body.cham5-home .cham8-hero__canvas{inset:43% 0 0;display:block;width:100%;height:57%;opacity:0}
+ body.cham5-home .cham8-hero--ready .cham8-hero__canvas{opacity:1}
+ body.cham5-home .cham8-hero__copy{
+   position:relative;z-index:4;margin-left:6.5%;width:87%;max-width:560px;
+   padding-top:clamp(64px,8svh,82px)
+ }
+ body.cham5-home .cham8-hero__eyebrow{
+   font-size:12px;letter-spacing:.09em;color:#876447;
+   margin:0 0 17px!important
+ }
+ body.cham5-home .cham8-hero__copy h1{
+   font-size:clamp(37px,9.8vw,57px)!important;
+   line-height:1.065!important;letter-spacing:-.058em!important;
+   max-width:100%;color:#2b241d!important
+ }
+ body.cham5-home .cham8-hero__copy h1 span{color:#885f40!important;white-space:normal;margin-left:3%}
+ body.cham5-home .cham8-hero__description{
+   font-size:14px;line-height:1.62;color:#534638!important;
+   max-width:365px;margin:16px 0 0!important
+ }
+ body.cham5-home .cham8-hero__actions{gap:12px;margin-top:20px;align-items:center}
+ body.cham5-home .cham8-hero__primary{
+   min-height:48px;padding:12px 15px;gap:16px;font-size:13px;
+   background:#2f2a22!important;color:#fff8ee!important
+ }
+ body.cham5-home .cham8-hero__primary:hover{background:#554233!important}
+ body.cham5-home .cham8-hero__secondary{
+   display:inline-flex;align-items:center;min-height:44px;font-size:13px;
+   padding:9px 0;color:#403529!important;border-color:#877660
+ }
+ body.cham5-home .cham8-hero__foot{
+   left:6.5%;right:6.5%;bottom:14px;gap:16px;
+   color:#fff7ec;font-size:11px;line-height:1.4;text-shadow:0 1px 5px rgba(12,10,9,.8)
+ }
+ body.cham5-home .cham8-hero__foot p{max-width:48%;font-size:11px}
+ body.cham5-home .cham8-hero__foot a{
+   display:inline-flex;align-items:center;min-height:44px;color:#fff7ec!important;
+   text-decoration:underline!important;text-underline-offset:4px
+ }
+ body.cham5-home .cham8-hero--ready .cham8-hero__foot{color:#302820!important;text-shadow:none}
+ body.cham5-home .cham8-hero--ready .cham8-hero__foot a{color:#302820!important}
+ body.cham5-home .cham8-hero__artnote{display:none!important}
+ body.cham5-home .cham5-thesis{padding:68px 7%!important}
+ body.cham5-home .cham5-thesis h2{font-size:clamp(34px,8.4vw,52px)!important;line-height:1.14!important}
+ body.cham5-home .cham5-thesis__inner>p:last-child{font-size:14px!important;line-height:1.75!important}
+ body.cham5-home .cham5-process__heading{padding:66px 7% 32px!important}
+ body.cham5-home .cham5-process__heading h2{font-size:clamp(36px,9vw,57px)!important}
+ body.cham5-home .cham5-process__heading>p:last-child{font-size:14px!important;line-height:1.74}
+ body.cham5-home .cham8-scene{
+   box-sizing:border-box;width:100%!important;height:auto!important;min-height:0!important;
+   overflow:hidden!important;border-bottom:1px solid #e0d3c4
+ }
+ body.cham5-home .cham8-scene h3{
+   font-size:clamp(29px,7.4vw,43px)!important;line-height:1.1!important;
+   letter-spacing:-.04em!important;margin-bottom:13px!important
+ }
+ body.cham5-home .cham8-scene p{font-size:14px!important;line-height:1.68!important}
+ body.cham5-home .cham8-scene__step{
+   font-size:12px!important;letter-spacing:.03em;margin-bottom:11px
+ }
+ /* Attribution stays legible in the existing source disclosure, not on top of imagery. */
+ body.cham5-home .cham8-scene figure figcaption{display:none!important}
+ body.cham5-home .cham8-scene--earth{
+   display:grid!important;grid-template-columns:minmax(0,1fr)!important;
+   grid-template-rows:auto auto!important;height:auto!important;min-height:0!important
+ }
+ body.cham5-home .cham8-earth__essay{
+   display:block;position:relative;z-index:4;min-height:0;
+   padding:28px 7% 23px!important
+ }
+ body.cham5-home .cham8-earth__essay .cham8-scene__copy{max-width:540px}
+ body.cham5-home .cham8-earth__detail{
+   position:absolute!important;top:calc(100% - 16px);right:7%;z-index:5;
+   width:min(40%,185px);height:clamp(111px,34vw,154px);margin:0!important;
+   border:5px solid #f7f1e9;box-shadow:0 8px 24px rgba(43,30,19,.12)
+ }
+ body.cham5-home .cham8-earth__large{height:clamp(370px,114vw,560px);width:100%}
+ body.cham5-home .cham8-earth__large img{object-position:48% 42%}
+ body.cham5-home .cham8-scene--hands{
+   display:flex!important;flex-direction:column!important;height:auto!important;min-height:0!important
+ }
+ body.cham5-home .cham8-hands__image{flex:none;height:clamp(320px,93vw,485px);width:100%}
+ body.cham5-home .cham8-hands__image img{object-position:50% 46%}
+ body.cham5-home .cham8-hands__narrative{
+   position:relative;display:flex!important;flex-direction:column;
+   gap:19px;min-height:0!important;height:auto!important;
+   padding:28px 7% 28px!important
+ }
+ body.cham5-home .cham8-hands__narrative .cham8-scene__copy{width:100%!important}
+ body.cham5-home .cham8-hands__portrait{
+   position:relative!important;right:auto!important;bottom:auto!important;top:auto!important;
+   align-self:flex-end;flex:none;width:49%;height:clamp(136px,41vw,205px);margin:0!important
+ }
+ body.cham5-home .cham8-scene--precision{
+   display:flex!important;flex-direction:column!important;gap:0;height:auto!important;min-height:0!important
+ }
+ body.cham5-home .cham8-precision__text{
+   position:relative!important;left:auto!important;top:auto!important;
+   width:auto!important;padding:28px 7% 21px!important
+ }
+ body.cham5-home .cham8-precision__text p{margin-top:0!important;max-width:490px!important}
+ body.cham5-home .cham8-precision__macro{
+   position:relative!important;top:auto!important;left:auto!important;
+   width:86%!important;height:clamp(305px,91vw,475px)!important;
+   margin:0 7%!important
+ }
+ body.cham5-home .cham8-precision__annotation{
+   position:relative!important;left:auto!important;bottom:auto!important;
+   display:block!important;max-width:400px;width:78%;
+   margin:15px 7% 27px!important;padding-top:11px;
+   font:italic 14px/1.5 Georgia,serif!important;color:#685441
+ }
+ body.cham5-home .cham8-scene--surface{
+   display:flex!important;flex-direction:column!important;height:auto!important;min-height:0!important
+ }
+ body.cham5-home .cham8-surface__one{
+   position:relative!important;top:auto!important;left:auto!important;
+   width:69%!important;height:clamp(235px,69vw,320px)!important;
+   align-self:flex-start;margin:27px 0 0 6%!important
+ }
+ body.cham5-home .cham8-surface__copy{
+   position:relative!important;left:auto!important;top:auto!important;
+   align-self:stretch;width:auto!important;padding:0!important;
+   margin:20px 8% 14px!important;text-align:left!important
+ }
+ body.cham5-home .cham8-surface__copy h3{
+   font-size:clamp(31px,7.7vw,43px)!important;margin-bottom:14px!important
+ }
+ body.cham5-home .cham8-surface__copy p{text-align:left!important;max-width:480px!important;margin:0!important}
+ body.cham5-home .cham8-surface__two{
+   position:relative!important;top:auto!important;left:auto!important;
+   bottom:auto!important;right:auto!important;
+   width:72%!important;height:clamp(180px,58vw,280px)!important;
+   align-self:flex-end;margin:0 6% 29px 0!important
+ }
+ body.cham5-home .cham8-scene--fire{height:clamp(570px,143vw,710px)!important;min-height:570px!important}
+ body.cham5-home .cham8-fire__scene img{object-position:48% center}
+ body.cham5-home .cham8-fire__scene:after{
+   background:linear-gradient(180deg,rgba(16,13,11,.13),rgba(16,13,11,.76) 67%,rgba(16,13,11,.95))
+ }
+ body.cham5-home .cham8-fire__copy{top:auto!important;bottom:11%;left:7%;width:86%}
+ body.cham5-home .cham8-fire__copy h3{font-size:clamp(68px,18vw,115px)!important}
+ body.cham5-home .cham8-fire__copy p{font-size:14px!important}
+ body.cham5-home .cham8-scene--life{
+   display:flex!important;flex-direction:column!important;height:auto!important;min-height:0!important
+ }
+ body.cham5-home .cham8-life__copy{
+   position:relative!important;left:auto!important;top:auto!important;
+   width:auto!important;padding:28px 7% 24px!important
+ }
+ body.cham5-home .cham8-life__copy p{font-size:14px!important;max-width:470px!important}
+ body.cham5-home .cham8-life__action{
+   display:inline-flex;align-items:center;min-height:44px;
+   margin-top:17px;font-size:14px!important
+ }
+ body.cham5-home .cham8-life__living{
+   position:relative!important;inset:auto!important;width:100%;height:clamp(310px,87vw,460px)
+ }
+ body.cham5-home .cham8-life__object{
+   position:absolute!important;left:auto!important;right:7%!important;bottom:4%!important;
+   width:31%!important;height:clamp(145px,46vw,225px)!important;
+   border:4px solid #fbf6ed
+ }
+ body.cham5-home .cham5-bridge{min-height:0!important;padding:76px 7% 66px!important}
+ body.cham5-home .cham5-bridge__text{margin-bottom:29px}
+ body.cham5-home .cham5-bridge__text h2{font-size:clamp(37px,9vw,54px)!important;line-height:1.11!important}
+ body.cham5-home .cham5-bridge__text>p:last-child{font-size:14px!important;line-height:1.72!important}
+ body.cham5-home .cham5-bridge__images figcaption{font-size:12px!important;line-height:1.6}
+ body.cham5-home .cham5-bridge__foot p{font-size:14px!important;line-height:1.66}
+ body.cham5-home .cham5-textlink{
+   display:inline-flex;align-items:center;gap:14px;
+   min-height:44px;padding:9px 0;font-size:14px!important
+ }
+ body.cham5-home .cham5-categories,body.cham5-home .cham5-products{padding:60px 7% 65px!important}
+ body.cham5-home .cham5-market__heading h2{font-size:clamp(33px,8.3vw,49px)!important;line-height:1.15!important}
+ body.cham5-home .cham5-categories__grid{gap:25px 13px}
+ body.cham5-home .cham5-products__grid{gap:26px 13px}
+ body.cham5-home .cham5-product__info h3{font-size:14px!important;line-height:1.5!important}
+ body.cham5-home .cham5-product__info p{font-size:13px!important}
+ body.cham5-home .cham5-products__notice{font-size:12px!important;line-height:1.65}
+ body.cham5-home .cham5-end{
+   min-height:0!important;height:auto!important;padding:29px 7% 35px!important;gap:49px
+ }
+ body.cham5-home .cham5-end__top{gap:14px;font-size:12px;line-height:1.55}
+ body.cham5-home .cham5-end__top p{max-width:60%}
+ body.cham5-home .cham5-end__top a{display:inline-flex;align-items:center;min-height:44px}
+ body.cham5-home .cham5-end__main{padding:8px 0 5px!important}
+ body.cham5-home .cham5-end h2{font-size:clamp(67px,19vw,98px)!important;line-height:1.06!important}
+ body.cham5-home .cham5-end__sub>p{font-size:clamp(19px,5vw,27px)!important;line-height:1.4}
+ body.cham5-home .cham5-end__sub a{display:inline-flex;align-items:center;min-height:48px;font-size:13px}
+ body.cham5-home .cham5-end__legal{font-size:12px!important;line-height:1.65!important}
+ body.cham5-home .cham5-further a{min-height:44px}
+ body.cham5-home .cham5-eyebrow{font-size:12px!important}
+ body.cham5-home :is(#cham5-top,#cham6-watch,#cham5-process,#cham5-categories,#cham5-products){
+   scroll-margin-top:calc(var(--cham5-header,60px) + 20px)
+ }
+ body.cham5-home .cham-mobile-nav summary{
+   min-height:44px;display:flex;align-items:center;justify-content:center
+ }
 }
 @media(max-width:360px){
- body.cham5-home .cham8-scene--earth{height:720px!important}
- body.cham5-home .cham8-earth__essay{padding-left:10px;padding-right:8px}
- body.cham5-home .cham8-earth__essay h3{font-size:23px!important}
- body.cham5-home .cham8-earth__essay p{font-size:10px!important}
- body.cham5-home .cham8-surface__copy{top:45%}
- body.cham5-home .cham8-surface__copy p{font-size:10px!important}
- body.cham5-home .cham8-hands__portrait{height:190px}
+ body.cham5-home .cham8-hero__copy h1{font-size:37px!important}
+ body.cham5-home .cham8-hero__description{font-size:13.5px!important}
+ body.cham5-home .cham8-earth__detail{width:39%;height:118px}
+ body.cham5-home .cham8-hero__actions{gap:10px}
+ body.cham5-home .cham8-hero__secondary{font-size:12px}
+}
+@media(min-width:768px) and (max-width:1023px){
+ body.cham5-home .cham8-hero__description{font-size:14px!important;line-height:1.75}
+ body.cham5-home .cham8-hero__primary{min-height:48px}
+ body.cham5-home .cham8-hero__secondary{display:inline-flex;min-height:44px;align-items:center}
+ body.cham5-home .cham8-scene p{font-size:14px!important;line-height:1.76!important}
+ body.cham5-home .cham8-scene__step{font-size:12px!important}
+ body.cham5-home .cham8-scene figure figcaption{font-size:11px!important}
+ body.cham5-home .cham5-bridge__text>p:last-child{font-size:14px!important}
+ body.cham5-home .cham5-textlink{display:inline-flex;align-items:center;min-height:44px;font-size:14px}
+ body.cham5-home .cham5-product__info h3{font-size:15px!important}
+ body.cham5-home .cham5-product__info p{font-size:13px!important}
 }
 @media(prefers-reduced-motion:reduce){
  #header-group{transition:none!important}
