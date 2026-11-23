@@ -209,3 +209,212 @@ body.cham5-home .cham9-hero__hand{display:none!important}
   margin:0!important;transform:none!important;
  }
 }
+
+
+/* CHẠM 12.1 — Rebalance editorial photo proportions on phone-sized screens.
+   Only the appearance of the six horizontal chapters changes; scrolling stays intact. */
+@media (max-width: 767px) and (min-height: 630px) {
+  body.cham5-home .cham5-process .cham8-scene {
+    --cham-story-inset: clamp(20px, 6.2vw, 30px);
+    background: #f7f1e9!important;
+  }
+  body.cham5-home .cham5-process .cham8-scene figure {
+    box-sizing: border-box!important;
+    overflow: hidden;
+  }
+  body.cham5-home .cham5-process .cham8-scene figure img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+
+  /* 01 / Materials: shorter primary photograph with a restrained secondary detail. */
+  body.cham5-home .cham5-process .cham8-scene--earth {
+    grid-template-rows: 38% 62%!important;
+  }
+  body.cham5-home .cham8-earth__essay {
+    padding: clamp(28px, 4.7svh, 44px) var(--cham-story-inset) 12px!important;
+  }
+  body.cham5-home .cham8-earth__large {
+    width: calc(100% - var(--cham-story-inset) - var(--cham-story-inset))!important;
+    height: 77%!important;
+    min-height: 0!important;
+    justify-self: center!important;
+    align-self: center!important;
+    margin: 0!important;
+  }
+  body.cham5-home .cham8-earth__detail {
+    width: clamp(86px, 25vw, 114px)!important;
+    height: clamp(76px, 12svh, 102px)!important;
+    right: var(--cham-story-inset)!important;
+    bottom: -14%!important;
+    border: 3px solid #f7f1e9!important;
+    box-shadow: 0 4px 12px #33261918!important;
+  }
+
+  /* 02 / Hands: protect a generous copy area beneath the documentary image. */
+  body.cham5-home .cham5-process .cham8-scene--hands {
+    grid-template-rows: 53% 47%!important;
+  }
+  body.cham5-home .cham8-hands__image {
+    height: 77%!important;
+    width: calc(100% - var(--cham-story-inset) - var(--cham-story-inset))!important;
+    min-height: 0!important;
+    margin: auto!important;
+    align-self: center!important;
+    justify-self: center!important;
+  }
+  body.cham5-home .cham8-hands__narrative {
+    height: 100%!important;
+    padding: clamp(17px, 3svh, 28px) var(--cham-story-inset) 14px!important;
+  }
+
+  /* 03 / Precision: one medium photograph, not a nearly full-height crop. */
+  body.cham5-home .cham5-process .cham8-scene--precision {
+    grid-template-rows: 36% 64%!important;
+  }
+  body.cham5-home .cham8-precision__text {
+    padding: clamp(25px, 4svh, 42px) var(--cham-story-inset) 0!important;
+  }
+  body.cham5-home .cham8-precision__macro {
+    width: calc(100% - var(--cham-story-inset) - var(--cham-story-inset))!important;
+    height: 77%!important;
+    min-height: 0!important;
+    margin: auto!important;
+    align-self: center!important;
+    justify-self: center!important;
+    top: auto!important;
+    left: auto!important;
+  }
+
+  /* 04 / Decoration: two smaller photos with readable editorial text between. */
+  body.cham5-home .cham5-process .cham8-scene--surface {
+    grid-template-rows: 31% 35% 34%!important;
+  }
+  body.cham5-home .cham8-surface__one {
+    width: 63%!important;
+    height: 77%!important;
+    min-height: 0!important;
+    margin: auto auto auto var(--cham-story-inset)!important;
+    align-self: center!important;
+    justify-self: start!important;
+  }
+  body.cham5-home .cham8-surface__copy {
+    align-self: center!important;
+    padding: 8px var(--cham-story-inset)!important;
+    margin: 0!important;
+  }
+  body.cham5-home .cham8-surface__two {
+    width: 65%!important;
+    height: 78%!important;
+    min-height: 0!important;
+    margin: auto var(--cham-story-inset) auto auto!important;
+    align-self: center!important;
+    justify-self: end!important;
+  }
+
+  /* 05 / Fire: replace the old full-bleed dark wall with an inset image and light copy. */
+  body.cham5-home .cham5-process .cham8-scene--fire {
+    position: relative!important;
+    background: #f7f1e9!important;
+  }
+  body.cham5-home .cham8-scene--fire .cham8-fire__scene {
+    position: absolute!important;
+    inset: 7% var(--cham-story-inset) 39% var(--cham-story-inset)!important;
+    width: auto!important;
+    height: auto!important;
+    margin: 0!important;
+  }
+  body.cham5-home .cham8-scene--fire .cham8-fire__scene:after {
+    background: linear-gradient(180deg, transparent, #1d140d11)!important;
+  }
+  body.cham5-home .cham8-scene--fire .cham8-fire__copy {
+    position: absolute!important;
+    top: 65%!important;
+    bottom: auto!important;
+    left: var(--cham-story-inset)!important;
+    right: var(--cham-story-inset)!important;
+    width: auto!important;
+    padding: 0!important;
+    color: #29231f!important;
+    text-shadow: none!important;
+  }
+  body.cham5-home .cham8-scene--fire .cham8-fire__copy h3 {
+    font-size: clamp(32px, 8vw, 43px)!important;
+    line-height: 1.15!important;
+    color: #29231f!important;
+    margin-bottom: 12px!important;
+    text-shadow: none!important;
+  }
+  body.cham5-home .cham8-scene--fire .cham8-fire__copy p {
+    color: #53493e!important;
+    font-size: 14px!important;
+    line-height: 1.6!important;
+    text-shadow: none!important;
+  }
+
+  /* 06 / Final object: the daily-life photograph is framed like the other chapters. */
+  body.cham5-home .cham5-process .cham8-scene--life {
+    grid-template-rows: 39% 61%!important;
+  }
+  body.cham5-home .cham8-life__copy {
+    padding: clamp(24px, 3.8svh, 38px) var(--cham-story-inset) 8px!important;
+    width: 100%!important;
+  }
+  body.cham5-home .cham8-life__living {
+    position: relative!important;
+    inset: auto!important;
+    width: calc(100% - var(--cham-story-inset) - var(--cham-story-inset))!important;
+    height: 78%!important;
+    min-height: 0!important;
+    margin: auto!important;
+    align-self: center!important;
+    justify-self: center!important;
+  }
+  body.cham5-home .cham8-life__object {
+    width: clamp(82px, 24vw, 110px)!important;
+    height: clamp(94px, 16svh, 132px)!important;
+    right: calc(var(--cham-story-inset) + 6px)!important;
+    left: auto!important;
+    bottom: 15%!important;
+    border: 3px solid #f7f1e9!important;
+    box-shadow: 0 4px 12px #33261918!important;
+  }
+}
+@media (max-width: 360px) and (min-height: 630px) {
+  body.cham5-home .cham5-process .cham8-scene {
+    --cham-story-inset: 18px;
+  }
+  body.cham5-home .cham8-scene--fire .cham8-fire__copy {
+    top: 64%!important;
+  }
+  body.cham5-home .cham8-surface__copy {
+    padding-top: 2px!important;
+    padding-bottom: 2px!important;
+  }
+}
+
+
+/* Final optical alignment: distribute empty paper space above and below the photos. */
+@media (max-width:767px) and (min-height:630px) {
+  body.cham5-home .cham8-earth__large,
+  body.cham5-home .cham8-precision__macro,
+  body.cham5-home .cham8-life__living{
+    align-self:start!important;
+  }
+  body.cham5-home .cham5-process .cham8-scene--hands {
+    grid-template-rows:60% 40%!important;
+  }
+  body.cham5-home .cham8-hands__image{
+    height:76%!important;
+  }
+  body.cham5-home .cham8-hands__narrative{
+    padding-top:clamp(35px,6.4svh,57px)!important;
+  }
+  body.cham5-home .cham8-scene--fire .cham8-fire__scene{
+    top:10%!important;
+    bottom:36%!important;
+  }
+  body.cham5-home .cham8-scene--fire .cham8-fire__copy{
+    top:69%!important;
+  }
+}
