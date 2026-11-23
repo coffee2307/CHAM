@@ -4,10 +4,12 @@ const read=p=>fs.readFileSync(path.join(ROOT,p),'utf8');
 const json=p=>JSON.parse(read(p));
 const index=json('templates/index.json'),product=json('templates/product.json'),collection=json('templates/collection.json'),search=json('templates/search.json');
 assert.deepEqual(index.order,['story','explore','market']);
-assert.equal((read('sections/cham5-story.liquid').match(/class="cham7-process__left"/g)||[]).length,6,'6 editorial spreads');
-assert.equal((read('sections/cham5-story.liquid').match(/class="cham7-process__detail"/g)||[]).length,12,'2 supporting photos per chapter');
-assert.ok(read('sections/cham5-story.liquid').includes('data-cham7-weave'),'WebGL hero stage');
-for (const asset of ['cham7-home.css','cham7-weave.js','cham7-editorial.js'])
+assert.equal((read('sections/cham5-story.liquid').match(/class="cham8-scene cham8-scene--/g)||[]).length,6,'6 distinct editorial scenes');
+assert.ok(read('sections/cham5-story.liquid').includes('cham8-scene--fire'),'full photographic kiln chapter');
+assert.ok(read('sections/cham5-story.liquid').includes('cham8-scene--precision'),'macro precision chapter');
+assert.ok(read('sections/cham5-story.liquid').includes('cham8-scene--surface'),'asymmetrical surface diptych');
+assert.ok(read('sections/cham5-story.liquid').includes('data-cham8-canvas'),'3D ceramic hero stage');
+for (const asset of ['cham8-home.css','cham8-hero.js','cham8-story.js'])
   assert.ok(read('layout/theme.liquid').includes(asset),'homepage includes '+asset);
 assert.ok(read('assets/cham-theme.js').includes('data-cham-hidden'),'scroll-aware header');
 assert.equal(product.sections.main.type,'cham-product-page');

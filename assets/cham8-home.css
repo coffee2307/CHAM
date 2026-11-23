@@ -1,0 +1,199 @@
+/* CHẠM 8.0 — visual direction: documentary photography / sculptural light / six authored scenes.
+   Only the homepage is restyled. Do not replicate identical grids per craft chapter. */
+:root{--cham8-paper:#f7f0e7;--cham8-cream:#fffaf3;--cham8-ink:#241e19;--cham8-clay:#ad7958;--cham8-ease:cubic-bezier(.19,1,.22,1)}
+#header-group{position:sticky;top:0;z-index:91;transition:transform .35s var(--cham8-ease);will-change:transform}
+#header-group[data-cham-hidden]{transform:translate3d(0,calc(-100% - 20px),0)}
+#header-group:focus-within{transform:none!important}
+#header-group .cham-header{position:relative;top:0;max-width:none;width:100%;margin:0;border-radius:0;box-shadow:none;background:rgba(248,244,237,.92);border-top:0;border-left:0;border-right:0}
+body.cham5-home .cham8-hero{position:relative;isolation:isolate;overflow:hidden;min-height:clamp(670px,calc(100svh - 66px),1060px);width:100%;display:block;color:#f7ede0;background:#242821}
+body.cham5-home .cham8-hero__ambient{position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 65% 82% at 76% 53%,rgba(134,117,80,.27),transparent 72%),radial-gradient(ellipse 42% 50% at 17% 62%,rgba(160,112,70,.17),transparent 78%),linear-gradient(115deg,#20251f 0%,#272a23 47%,#20221d 100%)}
+body.cham5-home .cham8-hero__ambient:after{content:"";position:absolute;inset:0;opacity:.22;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.3'/%3E%3C/svg%3E")}
+body.cham5-home .cham8-hero__canvas{position:absolute;inset:0;z-index:2;display:none;width:100%;height:100%;pointer-events:none}
+body.cham5-home .cham8-hero--ready .cham8-hero__canvas{display:block}
+body.cham5-home .cham8-hero__fallback{position:absolute;z-index:1;inset:0;pointer-events:none;opacity:.77;transition:opacity .5s ease}
+body.cham5-home .cham8-hero__fallback:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#242821 3%,rgba(36,40,33,.95) 24%,rgba(36,40,33,.05) 100%)}
+body.cham5-home .cham8-hero__fallback img{position:absolute;right:0;top:0;width:65%;height:100%;object-fit:cover;object-position:center;filter:brightness(.75) saturate(.76)}
+body.cham5-home .cham8-hero--ready .cham8-hero__fallback{opacity:0}
+body.cham5-home .cham8-hero__copy{position:relative;z-index:4;width:min(47%,610px);margin-left:clamp(26px,7.7vw,148px);padding-top:clamp(110px,16svh,215px);pointer-events:none}
+body.cham5-home .cham8-hero__eyebrow{font:650 clamp(10px,.77vw,13px)/1.5 "Be Vietnam Pro",sans-serif;letter-spacing:.145em;text-transform:uppercase;color:#d6c8b4;margin:0 0 clamp(29px,5vw,77px)!important}
+body.cham5-home .cham8-hero__copy h1{max-width:740px;margin:0!important;color:#fffaf3;font:640 clamp(60px,7vw,132px)/.99 "Be Vietnam Pro",sans-serif!important;letter-spacing:-.071em!important;text-wrap:balance}
+body.cham5-home .cham8-hero__copy h1 span{display:block;margin-left:clamp(13px,1.4vw,27px);font:italic 500 1em/.93 Georgia,"Times New Roman",serif!important;letter-spacing:-.065em!important;color:#e6c5a1;white-space:nowrap}
+body.cham5-home .cham8-hero__description{margin:clamp(30px,4vw,68px) 0 0!important;font:400 clamp(13px,1.12vw,16px)/1.82 "Be Vietnam Pro",sans-serif;max-width:450px;color:#d7d4ca;text-wrap:pretty}
+body.cham5-home .cham8-hero__actions{display:flex;flex-wrap:wrap;gap:24px;align-items:center;margin-top:clamp(29px,3.9vw,59px);pointer-events:auto}
+body.cham5-home .cham8-hero__primary{display:inline-flex;gap:26px;align-items:center;justify-content:space-between;padding:16px 19px;min-height:54px;background:#e8d4b9!important;color:#28251e!important;text-decoration:none!important;font-weight:650;font-size:12px;transition:background .3s ease,transform .3s ease}
+body.cham5-home .cham8-hero__primary:hover{background:#faf4e9!important;transform:translateY(-2px)}
+body.cham5-home .cham8-hero__secondary{border-bottom:1px solid #b5b4a8;color:#e9e5dd!important;font-weight:500;font-size:12px;text-decoration:none!important;padding:8px 0}
+body.cham5-home .cham8-hero__foot{position:absolute;left:clamp(26px,7.7vw,148px);bottom:clamp(24px,4vh,54px);right:clamp(24px,5vw,90px);display:flex;justify-content:space-between;gap:20px;align-items:center;z-index:4;font-size:11px;color:#d8c6ab}
+body.cham5-home .cham8-hero__foot p{margin:0!important;letter-spacing:.06em}
+body.cham5-home .cham8-hero__foot a{color:#f2dfc5!important;text-decoration:none!important}
+body.cham5-home .cham8-hero__artnote{position:absolute;right:6%;top:clamp(40px,7vh,90px);font-size:10px;z-index:4;color:#c3b59f;opacity:.72;max-width:200px;text-align:right;pointer-events:none}
+body.cham5-home .cham5-thesis{background:var(--cham8-cream);padding:clamp(86px,11vw,165px) 7%}
+body.cham5-home .cham5-thesis h2{font-size:clamp(42px,5.2vw,87px)!important;letter-spacing:-.035em!important;max-width:950px}
+body.cham5-home .cham5-process{background:var(--cham8-paper);padding-bottom:55px}
+body.cham5-home .cham5-process__heading{background:var(--cham8-paper);padding:clamp(75px,9vw,130px) 7% clamp(45px,5vw,80px)}
+body.cham5-home .cham5-process__heading h2{font:650 clamp(48px,7vw,108px)/1.05 "Be Vietnam Pro",sans-serif!important;letter-spacing:-.055em!important}
+body.cham5-home .cham5-process__heading>p:last-child{font-size:clamp(13px,1.05vw,16px);line-height:1.9;max-width:650px}
+body.cham5-home .cham5-process__pin{height:clamp(600px,calc(100svh - var(--cham5-header,65px)),950px);background:var(--cham8-paper);grid-template-rows:auto minmax(0,1fr) 2px auto;overflow:hidden}
+body.cham5-home .cham5-process__chrome{padding:13px clamp(24px,5vw,85px);background:var(--cham8-paper);border:0;font-size:11px;font-weight:550;letter-spacing:.04em;color:#675749}
+body.cham5-home .cham5-process__track{display:flex;width:max-content;height:100%;align-items:stretch}
+body.cham5-home .cham8-scene{position:relative;flex:0 0 100vw;width:100vw;height:100%;overflow:hidden;color:var(--cham8-ink);background:var(--cham8-paper)}
+body.cham5-home .cham8-scene figure{margin:0!important;position:relative;overflow:hidden;min-width:0;min-height:0}
+body.cham5-home .cham8-scene figure img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;max-width:none}
+body.cham5-home .cham8-scene figure figcaption{position:absolute;bottom:13px;right:14px;z-index:3;max-width:calc(100% - 28px);font:400 10px/1.5 "Be Vietnam Pro",sans-serif;letter-spacing:0;padding:5px 8px;background:rgba(247,240,231,.90);color:#5d4d43}
+body.cham5-home .cham8-scene__step{display:block;color:#8f664c;font:650 clamp(10px,.83vw,13px)/1.5 "Be Vietnam Pro",sans-serif;letter-spacing:.065em;margin-bottom:clamp(11px,2vw,26px)}
+body.cham5-home .cham8-scene h3{font:660 clamp(43px,4.3vw,83px)/1.08 "Be Vietnam Pro",sans-serif!important;letter-spacing:-.055em!important;margin:0 0 clamp(18px,2.2vw,31px)!important;text-wrap:balance}
+body.cham5-home .cham8-scene p{font:400 clamp(12px,.98vw,16px)/1.83 "Be Vietnam Pro",sans-serif;color:#6a5e50;max-width:480px;margin:0!important;text-wrap:pretty}
+body.cham5-home .cham8-scene__copy{position:relative;z-index:3}
+body.cham5-home .cham8-scene--earth{display:grid;grid-template-columns:42% 58%;background:#f7f1e9}
+body.cham5-home .cham8-earth__essay{display:flex;flex-direction:column;justify-content:space-between;gap:28px;padding:clamp(44px,5vw,100px) 9% clamp(26px,4vw,70px) clamp(32px,7vw,122px)}
+body.cham5-home .cham8-earth__detail{align-self:flex-end;width:min(66%,315px);height:clamp(150px,24vh,245px)}
+body.cham5-home .cham8-earth__large{height:100%}
+body.cham5-home .cham8-earth__large img{object-position:43% center}
+body.cham5-home .cham8-scene--hands{display:grid;grid-template-columns:61% 39%;background:#e9e0d4}
+body.cham5-home .cham8-hands__image{height:100%}
+body.cham5-home .cham8-hands__image img{object-position:50% center}
+body.cham5-home .cham8-hands__narrative{display:flex;flex-direction:column;justify-content:space-between;gap:23px;padding:clamp(35px,5vw,82px) clamp(28px,5vw,87px) clamp(24px,4vw,57px)}
+body.cham5-home .cham8-hands__portrait{width:min(85%,375px);height:clamp(160px,27vh,285px);align-self:flex-end}
+body.cham5-home .cham8-hands__portrait img{object-position:35% 50%}
+body.cham5-home .cham8-scene--precision{background:#f3e9db}
+body.cham5-home .cham8-precision__text{position:absolute;z-index:4;top:9%;left:7%;width:29%}
+body.cham5-home .cham8-precision__text p{margin-top:30px!important;max-width:380px}
+body.cham5-home .cham8-precision__macro{position:absolute!important;top:9%;left:46%;height:79%;width:44%}
+body.cham5-home .cham8-precision__macro img{object-position:52% 40%}
+body.cham5-home .cham8-precision__annotation{position:absolute;z-index:4;left:14%;bottom:10%;width:24%;border-top:1px solid #aa9983;padding-top:18px;font:italic 18px/1.7 Georgia,serif!important;color:#665443!important}
+body.cham5-home .cham8-scene--surface{display:grid;grid-template-columns:35% 30% 35%;background:#fcf7f0}
+body.cham5-home .cham8-surface__one{height:83%;align-self:start;margin-top:6%!important;margin-left:7%!important}
+body.cham5-home .cham8-surface__one img{object-position:45% 50%}
+body.cham5-home .cham8-surface__two{height:79%;align-self:end;margin-right:7%!important;margin-bottom:6%!important}
+body.cham5-home .cham8-surface__copy{align-self:center;padding:0 9%;text-align:center}
+body.cham5-home .cham8-surface__copy p{margin:0 auto!important;text-align:center}
+body.cham5-home .cham8-surface__copy h3{font-size:clamp(36px,3.2vw,64px)!important}
+body.cham5-home .cham8-scene--fire{background:#1b1714;color:#f6ece1}
+body.cham5-home .cham8-fire__scene{position:absolute!important;inset:0}
+body.cham5-home .cham8-fire__scene img{object-position:center 44%;filter:brightness(.59) contrast(1.15) sepia(.18);transform:scale(1.025)}
+body.cham5-home .cham8-fire__scene:after{content:"";position:absolute;z-index:2;inset:0;background:linear-gradient(90deg,rgba(18,15,12,.92) 0%,rgba(18,15,12,.59) 44%,rgba(18,15,12,.05) 100%),radial-gradient(ellipse at 65% 85%,rgba(215,99,31,.25),transparent 66%);pointer-events:none}
+body.cham5-home .cham8-fire__copy{position:absolute;z-index:4;top:24%;left:clamp(40px,8vw,150px);width:min(53%,720px)}
+body.cham5-home .cham8-fire__copy h3{color:#fff7ed!important;font-size:clamp(85px,10vw,180px)!important}
+body.cham5-home .cham8-fire__copy .cham8-scene__step{color:#edb78d}
+body.cham5-home .cham8-fire__copy p{color:#e6d6c8;max-width:500px;font-size:clamp(14px,1.15vw,17px)}
+body.cham5-home .cham8-fire__scene figcaption{background:rgba(18,15,12,.8)!important;color:#f4ede2!important}
+body.cham5-home .cham8-scene--life{background:#f4ebe0}
+body.cham5-home .cham8-life__copy{position:absolute;left:7.5%;top:11%;width:34%;z-index:4}
+body.cham5-home .cham8-life__copy p{max-width:450px}
+body.cham5-home .cham8-life__action{display:inline-flex;align-items:center;gap:25px;margin-top:36px;border-bottom:1px solid #8d7661;padding-bottom:10px;font:650 12px/1.5 "Be Vietnam Pro",sans-serif;color:#45362a!important;text-decoration:none!important}
+body.cham5-home .cham8-life__living{position:absolute!important;inset:0 0 0 47%;height:100%}
+body.cham5-home .cham8-life__living img{object-position:52% center}
+body.cham5-home .cham8-life__object{position:absolute!important;bottom:5%;left:34%;width:22%;height:44%;z-index:4;background:#e8ded2;box-shadow:0 16px 48px rgba(51,27,12,.18);border:7px solid #fbf6ed}
+body.cham5-home .cham8-life__object img{object-position:center}
+body.cham5-home .cham5-process__progress{background:#d8c8b9}
+body.cham5-home .cham5-process__progress span{background:#946649}
+body.cham5-home .cham5-process__hint{background:var(--cham8-paper);display:flex;justify-content:space-between;gap:15px;padding:15px clamp(25px,5vw,85px);font-size:11px;color:#756252}
+body.cham5-home .cham8-motion-enabled [data-cham8-reveal]{clip-path:inset(0 0 0 0);will-change:clip-path}
+body.cham5-home .cham8-motion-enabled [data-cham8-reveal] img{will-change:transform}
+body.cham5-home .cham5-photo-note{background:var(--cham8-paper)}
+body.cham5-home .cham5-bridge__text h2{font-size:clamp(48px,6vw,91px)!important;letter-spacing:-.055em!important}
+body.cham5-home .cham5-market__heading h2{font-size:clamp(42px,5.1vw,82px)!important;letter-spacing:-.044em!important}
+@media(max-width:1199px){
+ body.cham5-home .cham8-hero__copy{width:49%}
+ body.cham5-home .cham8-hero__copy h1{font-size:clamp(56px,6.6vw,98px)!important}
+ body.cham5-home .cham8-earth__essay{padding:45px 7% 28px 9%}
+ body.cham5-home .cham8-scene h3{font-size:clamp(34px,4vw,65px)!important}
+ body.cham5-home .cham8-surface__copy h3{font-size:clamp(29px,3vw,52px)!important}
+ body.cham5-home .cham8-fire__copy h3{font-size:clamp(80px,10vw,145px)!important}
+}
+@media(max-width:1023px){
+ body.cham5-home .cham5-process__pin{height:auto!important;max-height:none!important;display:block!important;overflow:visible!important}
+ body.cham5-home .cham5-process__track{width:100%!important;height:auto!important;display:block!important;transform:none!important;will-change:auto!important}
+ body.cham5-home .cham5-process__viewport{overflow:visible!important}
+ body.cham5-home .cham8-scene{height:auto!important;width:100%!important;min-height:640px!important;flex:none!important}
+ body.cham5-home .cham8-scene h3{font-size:clamp(36px,5.3vw,61px)!important}
+ body.cham5-home .cham8-scene--earth{min-height:730px!important}
+ body.cham5-home .cham8-hands__narrative{padding:32px 9%}
+ body.cham5-home .cham8-scene--hands{height:710px!important}
+ body.cham5-home .cham8-scene--precision{height:730px!important}
+ body.cham5-home .cham8-precision__text{width:37%;left:6%}
+ body.cham5-home .cham8-precision__macro{left:48%;width:44%;height:78%}
+ body.cham5-home .cham8-scene--surface{height:720px!important}
+ body.cham5-home .cham8-scene--fire{height:720px!important}
+ body.cham5-home .cham8-scene--life{height:720px!important}
+ body.cham5-home .cham5-process__hint{display:none!important}
+}
+@media(max-width:767px){
+ body.cham5-home .cham8-hero{height:auto!important;min-height:clamp(730px,100svh,940px)}
+ body.cham5-home .cham8-hero__fallback img{width:100%;height:67%;top:26%;filter:brightness(.6)}
+ body.cham5-home .cham8-hero__fallback:after{background:linear-gradient(180deg,#242821 3%,rgba(36,40,33,.85) 22%,rgba(36,40,33,.10) 69%,#242821 97%)}
+ body.cham5-home .cham8-hero__copy{padding-top:clamp(38px,6svh,75px);margin-left:6.5%;width:87%;max-width:none}
+ body.cham5-home .cham8-hero__eyebrow{font-size:10px;margin-bottom:clamp(18px,2vh,28px)!important}
+ body.cham5-home .cham8-hero__copy h1{font-size:clamp(42px,10.6vw,71px)!important;line-height:1.06!important;max-width:90%}
+ body.cham5-home .cham8-hero__copy h1 span{white-space:normal;margin-left:4%}
+ body.cham5-home .cham8-hero__description{font-size:12px;line-height:1.69;max-width:280px;margin:18px 0 0!important}
+ body.cham5-home .cham8-hero__actions{margin-top:23px;gap:17px}
+ body.cham5-home .cham8-hero__primary{font-size:11px;padding:12px 14px;min-height:46px;gap:15px}
+ body.cham5-home .cham8-hero__secondary{font-size:11px}
+ body.cham5-home .cham8-hero__foot{left:6.5%;right:6.5%;bottom:20px;font-size:10px}
+ body.cham5-home .cham8-hero__artnote{top:auto;right:6.5%;bottom:70px;font-size:9px}
+ body.cham5-home .cham5-thesis{padding:84px 6%}
+ body.cham5-home .cham5-thesis h2{font-size:clamp(36px,9vw,59px)!important}
+ body.cham5-home .cham5-process__heading{padding:70px 6% 40px}
+ body.cham5-home .cham5-process__heading h2{font-size:clamp(43px,10vw,72px)!important}
+ body.cham5-home .cham8-scene{width:100%!important;overflow:hidden!important;border-bottom:1px solid #ddcbb8}
+ body.cham5-home .cham8-scene h3{font-size:clamp(27px,7vw,45px)!important;letter-spacing:-.045em!important;line-height:1.13!important}
+ body.cham5-home .cham8-scene p{font-size:clamp(11px,2.9vw,13px);line-height:1.74}
+ body.cham5-home .cham8-scene__step{font-size:10px;margin-bottom:12px}
+ body.cham5-home .cham8-scene figure figcaption{font-size:9px;bottom:8px;right:7px;padding:4px 6px}
+ body.cham5-home .cham8-scene--earth{height:clamp(710px,183vw,830px)!important;min-height:0!important;grid-template-columns:45% 55%}
+ body.cham5-home .cham8-earth__essay{padding:24px 9px 18px 15px;gap:25px}
+ body.cham5-home .cham8-earth__essay h3{font-size:clamp(23px,5.9vw,33px)!important;margin-bottom:12px!important}
+ body.cham5-home .cham8-earth__essay p{font-size:clamp(10px,2.65vw,12px);line-height:1.65}
+ body.cham5-home .cham8-earth__detail{width:96%;height:clamp(143px,31vw,225px);align-self:center}
+ body.cham5-home .cham8-earth__large img{object-position:48% center}
+ body.cham5-home .cham8-scene--hands{height:auto!important;min-height:745px!important;display:flex;flex-direction:column}
+ body.cham5-home .cham8-hands__image{height:400px;flex:none}
+ body.cham5-home .cham8-hands__narrative{display:block;padding:26px 7% 38px;min-height:350px}
+ body.cham5-home .cham8-hands__narrative .cham8-scene__copy{width:62%}
+ body.cham5-home .cham8-hands__portrait{position:absolute!important;right:5%;bottom:9%;width:31%;height:240px}
+ body.cham5-home .cham8-hands__narrative p{font-size:12px}
+ body.cham5-home .cham8-scene--precision{height:760px!important;min-height:0!important}
+ body.cham5-home .cham8-precision__text{left:7%;top:7%;width:83%}
+ body.cham5-home .cham8-precision__text h3{margin-bottom:11px!important}
+ body.cham5-home .cham8-precision__text p{margin-top:10px!important;max-width:82%}
+ body.cham5-home .cham8-precision__macro{top:37%;left:6%;height:55%;width:88%}
+ body.cham5-home .cham8-precision__annotation{display:none}
+ body.cham5-home .cham8-scene--surface{height:790px!important;min-height:0!important;display:block;position:relative}
+ body.cham5-home .cham8-surface__one{position:absolute!important;top:4%;left:6%;width:62%;height:41%;margin:0!important}
+ body.cham5-home .cham8-surface__two{position:absolute!important;bottom:4%;right:5%;width:70%;height:27%;margin:0!important}
+ body.cham5-home .cham8-surface__copy{position:absolute;z-index:4;left:7%;top:47%;width:76%;padding:0!important;text-align:left}
+ body.cham5-home .cham8-surface__copy h3{font-size:clamp(30px,7vw,40px)!important;margin-bottom:10px!important}
+ body.cham5-home .cham8-surface__copy p{font-size:11px;max-width:100%;text-align:left!important}
+ body.cham5-home .cham8-scene--fire{height:760px!important}
+ body.cham5-home .cham8-fire__scene img{object-position:47% center}
+ body.cham5-home .cham8-fire__scene:after{background:linear-gradient(180deg,rgba(16,13,11,.13),rgba(16,13,11,.78) 67%,rgba(16,13,11,.96))}
+ body.cham5-home .cham8-fire__copy{top:auto;bottom:15%;left:8%;width:83%}
+ body.cham5-home .cham8-fire__copy h3{font-size:clamp(74px,17vw,125px)!important}
+ body.cham5-home .cham8-fire__copy p{font-size:13px}
+ body.cham5-home .cham8-scene--life{height:770px!important}
+ body.cham5-home .cham8-life__copy{left:7%;top:6%;width:86%}
+ body.cham5-home .cham8-life__copy p{max-width:82%;font-size:12px}
+ body.cham5-home .cham8-life__action{margin-top:17px;font-size:11px}
+ body.cham5-home .cham8-life__living{inset:46% 0 0 0}
+ body.cham5-home .cham8-life__object{left:auto;right:6%;bottom:11%;width:30%;height:30%;border-width:4px}
+ body.cham5-home .cham5-bridge__text h2{font-size:clamp(39px,9vw,59px)!important}
+ body.cham5-home .cham5-market__heading h2{font-size:clamp(34px,8vw,56px)!important}
+}
+@media(max-width:360px){
+ body.cham5-home .cham8-scene--earth{height:720px!important}
+ body.cham5-home .cham8-earth__essay{padding-left:10px;padding-right:8px}
+ body.cham5-home .cham8-earth__essay h3{font-size:23px!important}
+ body.cham5-home .cham8-earth__essay p{font-size:10px!important}
+ body.cham5-home .cham8-surface__copy{top:45%}
+ body.cham5-home .cham8-surface__copy p{font-size:10px!important}
+ body.cham5-home .cham8-hands__portrait{height:190px}
+}
+@media(prefers-reduced-motion:reduce){
+ #header-group{transition:none!important}
+ #header-group[data-cham-hidden]{transform:none!important}
+ body.cham5-home .cham8-hero--ready .cham8-hero__canvas{display:none!important}
+ body.cham5-home .cham8-hero__fallback{opacity:1!important}
+ body.cham5-home .cham8-scene [data-cham8-reveal],
+ body.cham5-home .cham8-scene [data-cham8-reveal] img{clip-path:none!important;transform:none!important;will-change:auto!important;transition:none!important}
+}

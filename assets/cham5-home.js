@@ -12,7 +12,7 @@ const viewport=$('[data-cham5-process-viewport]',process||document);
 const track=$('[data-cham5-process-track]',process||document);
 const progress=$('[data-cham5-process-progress]',process||document);
 const counter=$('[data-cham5-step-counter]',process||document);
-const steps=track?$$('.cham5-process__panel',track):[];
+const steps=track?$$('.cham8-scene',track):[];
 const hero=$('.cham6-hero',root);
 const watch=$('.cham6-watch',root);
 const watchStage=$('[data-cham6-watch-stage]',watch||document);
@@ -112,7 +112,7 @@ mm.add('(min-width:1024px) and (pointer:fine) and (prefers-reduced-motion:no-pre
           if(progress)progress.style.transform='scaleX('+Math.max(.005,self.progress).toFixed(4)+')';
           const number=Math.max(1,Math.min(steps.length,Math.floor(self.progress*(steps.length-1)+.48)+1));
           if(counter)counter.textContent=String(number);
-          steps.forEach((panel,index)=>panel.classList.toggle('cham7-process-current',index===number-1));
+          steps.forEach((panel,index)=>panel.classList.toggle('cham8-scene--active',index===number-1));
         }
       }
     });

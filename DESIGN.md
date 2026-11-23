@@ -24,3 +24,6 @@ Motion: lightweight real-time WebGL only when capable, progressive image masks, 
 Navigation: header retracts on downward scroll and returns on upward scroll; menu and keyboard focus override hiding.
 Commerce and demo systems remain functionally unchanged; keep the project a demo storefront and do not turn on real checkout.
 Deployment: one existing repository and main theme only; no automatic storefront publication without visual and accessibility QA.
+
+## CHẠM 8.0 — Active direction
+Current production art direction is defined in CHAM8-ART-DIRECTION.md and supersedes the CHẠM 7.0 hero and repeated-photo composition directions. Distinct chapters, contextual image reveal, an actual 3D ceramic artifact and mobile art-direction are required.
