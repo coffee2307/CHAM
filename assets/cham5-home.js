@@ -121,6 +121,8 @@ const setupScroll=()=>{
       const p=span?distanceTraveled/span:0;
       track.style.transform='translate3d('+(-distanceTraveled).toFixed(2)+'px,0,0)';
       onUpdate({progress:p});
+      // Reuse this exact frame for reversible photo reveals; no second scroll handler.
+      window.__chamCraftFrame?.(p);
     };
     const queueNative=()=>{if(!tick&&!disposed)tick=requestAnimationFrame(renderNative);};
     const onViewportResize=()=>{

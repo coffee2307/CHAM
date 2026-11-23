@@ -16,11 +16,16 @@ assert.ok(read('assets/cham5-home.js').includes("mm.add('(max-width:767px)"),'mo
 assert.ok(read('assets/cham5-home.js').includes("process.classList.add('is-native-sticky')"),'native sticky horizontal story');
 assert.ok(!read('assets/cham5-home.js').includes("id:'cham-horizontal-craft'"),'horizontal story no longer repositions the page using GSAP pin');
 assert.ok(read('assets/cham5-home.js').includes("window.addEventListener('scroll',queueNative"),'scrollY drives the horizontal track without changing layout');
-assert.ok(read('assets/cham8-story.js').includes("matchMedia('(max-width:767px)').matches"),'static mobile images reduce scroll jitter');
+assert.ok(read('assets/cham8-story.js').includes('window.__chamCraftFrame=draw'),'story reveals share the native scroll frame');
+assert.ok(read('assets/cham5-home.js').includes('window.__chamCraftFrame?.(p)'),'scroll-driven images reverse with native track');
+assert.ok(read('assets/cham8-story.js').includes('lastProgress=clamp(progress)'),'reveals driven by absolute progress');
+assert.ok(!read('assets/cham8-story.js').includes('new IntersectionObserver'),'no one-way image reveal observer');
+assert.ok(read('assets/cham13-motion.css').includes('(hover:hover)'),'hover reserved for mouse/pointer devices');
+assert.ok(read('assets/cham13-motion.css').includes('prefers-reduced-motion:reduce'),'reduced motion supported');
 assert.ok(!read('sections/cham5-story.liquid').includes('CHẠM / THỦ CÔNG VIỆT NAM'),'decorative slash label removed');
 assert.ok(!read('sections/cham5-story.liquid').includes('NHỮNG ĐIỀU ĐƯỢC LÀM BẰNG TAY'),'unnecessary label removed');
 assert.ok(!read('layout/theme.liquid').includes("<script src=\"{{ 'cham8-hero.js'"),'retired WebGL runtime not loaded');
-for (const asset of ['cham8-home.css','cham9-home.css','cham11-mobile-clean.css','cham8-story.js'])
+for (const asset of ['cham8-home.css','cham9-home.css','cham11-mobile-clean.css','cham13-motion.css','cham8-story.js'])
   assert.ok(read('layout/theme.liquid').includes(asset),'homepage includes '+asset);
 assert.ok(read('assets/cham-theme.js').includes('data-cham-hidden'),'scroll-aware header');
 assert.equal(product.sections.main.type,'cham-product-page');
