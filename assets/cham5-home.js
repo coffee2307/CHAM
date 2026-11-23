@@ -73,6 +73,7 @@ const setupScroll=()=>{
  if(window.innerWidth<768 && window.innerHeight<630)return ()=>stopLenis();
  const distance=()=>Math.max(0,track.scrollWidth-viewport.clientWidth);
  process.classList.add('is-enhanced');
+ let mobileCleanup=null;
  const context=gsap.context(()=>{
   if(hero){
     gsap.to($('.cham6-hero__title',hero),{y:-66,scale:.96,ease:'none',scrollTrigger:{trigger:hero,start:'top top',end:'bottom top',scrub:.75}});
@@ -102,52 +103,51 @@ const setupScroll=()=>{
       if(counter)counter.textContent=String(number);
       steps.forEach((panel,index)=>panel.classList.toggle('cham8-scene--active',index===number-1));
     };
-    // Mobile uses native CSS sticky, not ScrollTrigger pin reparenting:
-    // no pin-spacer, fixed-position swap or delayed scrub near section boundaries.
-    if(window.innerWidth<768){
-      process.classList.add('is-native-sticky');
-      const updateLength=()=>{
-        const span=Math.max(0,track.scrollWidth-viewport.clientWidth);
-        const panelHeight=pin.offsetHeight;
-        process.style.height=Math.ceil(panelHeight+span)+'px';
-      };
-      updateLength();
-      gsap.to(track,{
-        x:()=>-distance(),ease:'none',overwrite:true,
-        scrollTrigger:{
-          id:'cham-horizontal-craft',
-          trigger:process,
-          start:'top top',
-          end:()=>'+='+distance(),
-          scrub:true,
-          invalidateOnRefresh:true,
-          refreshPriority:2,
-          onRefresh:updateLength,
-          onUpdate
-        }
-      });
-    } else {
-      gsap.to(track,{
-        x:()=>-distance(),ease:'none',
-        scrollTrigger:{
-          id:'cham-horizontal-craft',
-          trigger:pin,
-          start:'top top',
-          end:()=>'+='+distance(),
-          scrub:.88,
-          pin:true,
-          pinSpacing:true,
-          anticipatePin:2,
-          refreshPriority:2,
-          invalidateOnRefresh:true,
-          onUpdate
-        }
-      });
-    }
+    // Entire viewport range: the browser owns the vertical scroll and sticky
+    // placement. No ScrollTrigger.pin, refresh-induced height writes or scrub
+    // easing at the exact boundary between vertical and horizontal movement.
+    process.classList.add('is-native-sticky');
+    let width=window.innerWidth, height=window.innerHeight, span=0, tick=0, disposed=false;
+    const measureNative=()=>{
+      span=Math.max(0,track.scrollWidth-viewport.clientWidth);
+      const fixedHeight=Math.ceil(pin.offsetHeight+span);
+      if(process.style.height!==fixedHeight+'px')
+        process.style.height=fixedHeight+'px';
+    };
+    const renderNative=()=>{
+      tick=0;
+      if(disposed)return;
+      const distanceTraveled=Math.max(0,Math.min(span,-process.getBoundingClientRect().top));
+      const p=span?distanceTraveled/span:0;
+      track.style.transform='translate3d('+(-distanceTraveled).toFixed(2)+'px,0,0)';
+      onUpdate({progress:p});
+    };
+    const queueNative=()=>{if(!tick&&!disposed)tick=requestAnimationFrame(renderNative);};
+    const onViewportResize=()=>{
+      // Ignore mobile URL-bar height changes; a desktop window resize is real.
+      const nextWidth=window.innerWidth,nextHeight=window.innerHeight;
+      if(Math.abs(nextWidth-width)>=3 || (nextWidth>=768&&Math.abs(nextHeight-height)>=3)){
+        width=nextWidth;height=nextHeight;
+        measureNative();
+      }
+      queueNative();
+    };
+    measureNative();
+    queueNative();
+    window.addEventListener('scroll',queueNative,{passive:true});
+    window.addEventListener('resize',onViewportResize,{passive:true});
+    mobileCleanup=()=>{
+      disposed=true;
+      if(tick)cancelAnimationFrame(tick);
+      window.removeEventListener('scroll',queueNative);
+      window.removeEventListener('resize',onViewportResize);
+    };
+
   }
  },root);
- requestAnimationFrame(()=>ScrollTrigger.refresh());
+ if(window.innerWidth>=768)requestAnimationFrame(()=>ScrollTrigger.refresh());
  return()=>{
+  if(mobileCleanup)mobileCleanup();
   context.revert();process.classList.remove('is-enhanced','is-native-sticky');process.style.removeProperty('height');
   track.style.removeProperty('transform');if(progress)progress.style.transform='scaleX(.005)';
   if(counter)counter.textContent='1';stopLenis();
@@ -155,7 +155,7 @@ const setupScroll=()=>{
 };
 mm.add('(max-width:767px) and (prefers-reduced-motion:no-preference)',setupScroll);
 mm.add('(min-width:768px) and (prefers-reduced-motion:no-preference)',setupScroll);
-const refresh=()=>{cancelAnimationFrame(refreshRAF);refreshRAF=requestAnimationFrame(()=>{measure();ScrollTrigger.refresh();});};
+const refresh=()=>{if(window.innerWidth<768)return;cancelAnimationFrame(refreshRAF);refreshRAF=requestAnimationFrame(()=>{measure();ScrollTrigger.refresh();});};
 window.addEventListener('load',refresh,{once:true});
 document.fonts?.ready.then(refresh).catch(()=>{});
 if(window.innerWidth>=768&&header&&'ResizeObserver'in window)new ResizeObserver(refresh).observe(header);

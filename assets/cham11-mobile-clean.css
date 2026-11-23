@@ -198,3 +198,14 @@ body.cham5-home .cham9-hero__hand{display:none!important}
  body.cham5-home .cham8-surface__copy{overflow:hidden!important}
  body.cham5-home .cham8-life__copy{overflow:hidden!important}
 }
+
+/* Desktop/tablet also use native sticky instead of GSAP's pin switch. */
+@media(min-width:768px){
+ body.cham5-home .cham5-process.is-native-sticky{
+  position:relative!important;overflow:visible!important;contain:none!important;
+ }
+ body.cham5-home .cham5-process.is-native-sticky .cham5-process__pin{
+  position:sticky!important;top:0!important;left:0!important;
+  margin:0!important;transform:none!important;
+ }
+}

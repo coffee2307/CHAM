@@ -13,7 +13,9 @@ assert.ok(!read('sections/cham5-story.liquid').includes('cham5-process__heading'
 assert.ok(!read('sections/cham5-story.liquid').includes('Một hành trình nghề truyền thống'),'obsolete copy removed');
 assert.ok(read('sections/cham5-story.liquid').includes('cham10-potter.webp'),'original editorial drawing included');
 assert.ok(read('assets/cham5-home.js').includes("mm.add('(max-width:767px)"),'mobile-specific scroll setup');
-assert.ok(read('assets/cham5-home.js').includes("process.classList.add('is-native-sticky')"),'native sticky horizontal scene on mobile');
+assert.ok(read('assets/cham5-home.js').includes("process.classList.add('is-native-sticky')"),'native sticky horizontal story');
+assert.ok(!read('assets/cham5-home.js').includes("id:'cham-horizontal-craft'"),'horizontal story no longer repositions the page using GSAP pin');
+assert.ok(read('assets/cham5-home.js').includes("window.addEventListener('scroll',queueNative"),'scrollY drives the horizontal track without changing layout');
 assert.ok(read('assets/cham8-story.js').includes("matchMedia('(max-width:767px)').matches"),'static mobile images reduce scroll jitter');
 assert.ok(!read('sections/cham5-story.liquid').includes('CHẠM / THỦ CÔNG VIỆT NAM'),'decorative slash label removed');
 assert.ok(!read('sections/cham5-story.liquid').includes('NHỮNG ĐIỀU ĐƯỢC LÀM BẰNG TAY'),'unnecessary label removed');
