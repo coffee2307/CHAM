@@ -44,6 +44,11 @@
     {% if template.suffix == 'cham-play' %}
       <script src="{{ 'cham-craft-knowledge.js' | asset_url }}" defer></script>
       <script src="{{ 'cham-quest.js' | asset_url }}" defer></script>
+      {{ 'cham-play-v3.css' | asset_url | stylesheet_tag }}
+      <script src="{{ 'cham-play-meta.js' | asset_url }}" defer></script>
+      <script src="{{ 'cham-play-packing.js' | asset_url }}" defer></script>
+      <script src="{{ 'cham-play-wheel.js' | asset_url }}" defer></script>
+      <script src="{{ 'cham-play-expansion.js' | asset_url }}" defer></script>
     {% elsif template.suffix == 'cham-club' %}
       <script src="{{ 'cham-club-v3.js' | asset_url }}" defer></script>
     {% endif %}

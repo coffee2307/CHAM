@@ -3,11 +3,11 @@
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
 const {chromium}=require('F:/Oxyz Edu/node_modules/playwright');
 const root=path.resolve(__dirname,'..'),assets=path.join(root,'assets');
-const cssFiles=['cham-theme.css','cham-refinement.css','cham-demo.css','cham-minimal.css','cham-polish.css','cham-v3.css','cham-quest.css','cham-v4.css','cham-design-system.css'];
-const jsFiles=['cham-demo-core.js','cham-craft-knowledge.js','cham-quest.js','cham-demo-pages.js','cham-theme.js','cham-unified-motion.js'];
+const cssFiles=['cham-theme.css','cham-refinement.css','cham-demo.css','cham-minimal.css','cham-polish.css','cham-v3.css','cham-quest.css','cham-play-v3.css','cham-v4.css','cham-design-system.css'];
+const jsFiles=['cham-demo-core.js','cham-craft-knowledge.js','cham-quest.js','cham-play-meta.js','cham-play-packing.js','cham-play-wheel.js','cham-play-expansion.js','cham-demo-pages.js','cham-theme.js','cham-unified-motion.js'];
 const liquid=fs.readFileSync(path.join(root,'sections/cham-demo-app.liquid'),'utf8');
 const pictures=Object.fromEntries(Array.from(liquid.matchAll(/"([^"]+)":\s*{{\s*'([^']+\.svg)'\s*\|\s*asset_url\s*\|\s*json\s*}}/g),m=>[m[1],'/assets/'+m[2]]));
-assert.equal(Object.keys(pictures).length,22,'all curated assets are declared in Liquid');
+assert.equal(Object.keys(pictures).length,24,'all curated assets are declared in Liquid');
 for(const [name,src] of Object.entries(pictures)){
   assert.ok(fs.existsSync(path.join(assets,path.basename(src))),'missing art: '+name);
 }
@@ -35,16 +35,16 @@ const server=http.createServer((req,res)=>{
 const waitReady=async page=>page.locator('.cp-card').first().waitFor({timeout:15000});
 (async()=>{
  await new Promise(ok=>server.listen(0,'127.0.0.1',ok));
- const browser=await chromium.launch({executablePath:'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',headless:true,args:['--no-sandbox']});
+ console.log('QA_CHROME_LAUNCHING');const browser=await chromium.launch({executablePath:'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',headless:true,args:['--no-sandbox']});
  const url='http://127.0.0.1:'+server.address().port+'/pages/cham-play';
  try {
-  const measurements=[];
+  console.log('QA_BROWSER_READY');const measurements=[];
   for(const width of [320,375,390,430,768,1024,1440,1920]){
    const context=await browser.newContext({viewport:{width,height:width<=430?844:900},deviceScaleFactor:1});
    const page=await context.newPage(),errors=[];
    page.on('pageerror',e=>errors.push(e.message));
-   await page.goto(url,{waitUntil:'load'});
-   await waitReady(page);
+   console.log('QA_GOTO',width);page.setDefaultTimeout(7000);page.setDefaultNavigationTimeout(15000);await page.goto(url,{waitUntil:'domcontentloaded'});console.log('QA_GOTO_DONE',width);
+   await waitReady(page);console.log('QA_HUB_READY',width);
    const result=await page.evaluate(()=>{
     const h=document.documentElement;
     const app=document.querySelector('.cp-app');
@@ -63,18 +63,19 @@ const waitReady=async page=>page.locator('.cp-card').first().waitFor({timeout:15
       maxCardRight:Math.max(...cards.map(c=>c.getBoundingClientRect().right))
     };
    });
-   assert.equal(result.count,5,'exactly five games '+width);
+   assert.equal(result.count,7,'seven game experiences '+width);
    assert.equal(result.oldGame,0,'old mascot components removed '+width);
-   assert.equal(result.imageCount,5,'game preview art '+width);
-   await page.locator('.cp-card__media > img').evaluateAll(imgs=>Promise.all(imgs.map(img=>img.decode())));
-   assert.equal(await page.locator('.cp-card__media > img').evaluateAll(imgs=>imgs.filter(img=>img.getAttribute('src').includes('cham-play-thumb-')&&img.naturalWidth>0).length),5,'five distinct thumbnail SVGs load');
+   assert.equal(result.imageCount,7,'game preview art '+width);
+   await page.locator('.cp-card__media > img').evaluateAll(imgs=>imgs.forEach(img=>img.loading='eager'));
+   await page.waitForFunction(()=>[...document.querySelectorAll('.cp-card__media > img')].every(img=>img.complete&&img.naturalWidth>0),null,{timeout:12000});
+   assert.equal(await page.locator('.cp-card__media > img').evaluateAll(imgs=>imgs.filter(img=>img.getAttribute('src').includes('cham-play-thumb-')&&img.naturalWidth>0).length),7,'seven distinct thumbnail SVGs load');
    assert.ok(result.scrollWidth<=width+1,'horizontal overflow at '+width+': '+JSON.stringify(result));
    assert.ok(result.maxCardRight<=width+1,'card is clipped '+width);
    assert.notEqual(result.bodyOverflow,'hidden','natural page scroll '+width);
    assert.notEqual(result.footer,'none','footer retained '+width);
    assert.ok(result.appHeight>800,'hub has a natural long page '+width);
    assert.ok(result.font.includes('Be Vietnam Pro'),'font consistency '+width);
-   assert.equal(result.availableFilters,6,'filter controls present');
+   assert.equal(result.availableFilters,8,'filter controls present');
    assert.deepEqual(errors,[],'JS errors '+width);
    measurements.push({width,...result});
    if([390,1440].includes(width)){
@@ -88,9 +89,10 @@ const waitReady=async page=>page.locator('.cp-card').first().waitFor({timeout:15
    const ctx=await browser.newContext({viewport:{width,height:844},hasTouch:true,isMobile:true});
    const page=await ctx.newPage(),errors=[];
    page.on('pageerror',e=>errors.push(e.message));
-   await page.goto(url,{waitUntil:'load'});await waitReady(page);
+   console.log('QA_GOTO',width);page.setDefaultTimeout(7000);page.setDefaultNavigationTimeout(15000);await page.goto(url,{waitUntil:'domcontentloaded'});console.log('QA_GOTO_DONE',width);await waitReady(page);
    for(const game of ['memory','quiz','match','word','speed']){
     await page.locator('[data-cp-game="'+game+'"]').click();
+    await page.locator('[data-v3-begin="'+game+'"]').click();
     const board=page.locator('.cp-board');await board.waitFor();
     const m=await board.evaluate(el=>({right:el.getBoundingClientRect().right,overflow:document.documentElement.scrollWidth-innerWidth,board:el.scrollWidth-el.clientWidth}));
     assert.ok(m.right<=width+2&&m.overflow<=2&&m.board<=2,game+' overflow '+width+': '+JSON.stringify(m));
@@ -109,8 +111,10 @@ const waitReady=async page=>page.locator('.cp-card').first().waitFor({timeout:15
   await page.locator('[data-cp-filter="Trí nhớ"]').click();
   assert.equal(await page.locator('.cp-card').count(),1,'filter returns one game');
   await page.locator('[data-cp-filter="Tất cả"]').click();
-  assert.equal(await page.locator('.cp-card').count(),5);
+  assert.equal(await page.locator('.cp-card').count(),7);
   await page.locator('[data-cp-game="memory"]').click();
+  await page.locator('.cp3-mode input[value="easy"]').check();
+  await page.locator('[data-v3-begin="memory"]').click();
   assert.equal(await page.locator('[data-cp-memory]').count(),8);
   assert.equal(await page.locator('[data-cp-memory] .cp-icon').count(),8,'memory cards have vector art');
   await page.screenshot({path:path.join(root,'.qa','cham-play-v21-memory-1440.png'),fullPage:true});
@@ -127,6 +131,7 @@ const waitReady=async page=>page.locator('.cp-card').first().waitFor({timeout:15
   console.log('CHAM_PLAY_MEMORY_PASS');
   await page.locator('[data-cp-back]').first().click();
   await page.locator('[data-cp-game="quiz"]').click();
+  await page.locator('[data-v3-begin="quiz"]').click();
   for(let i=0;i<5;i++){
    const index=await page.evaluate(()=>window.CHAMPlayQA.getState().state.questions[window.CHAMPlayQA.getState().state.index].answerIndex);
    await page.locator('[data-cp-choice="'+index+'"]').click();
@@ -137,6 +142,7 @@ const waitReady=async page=>page.locator('.cp-card').first().waitFor({timeout:15
   console.log('CHAM_PLAY_QUIZ_PASS');
   await page.locator('[data-cp-back]').first().click();
   await page.locator('[data-cp-game="match"]').click();
+  await page.locator('[data-v3-begin="match"]').click();
   const left=await page.evaluate(()=>window.CHAMPlayQA.getState().state.left.map(x=>x.id));
   for(const id of left){
    await page.locator('[data-cp-left="'+id+'"]').click();
@@ -146,6 +152,7 @@ const waitReady=async page=>page.locator('.cp-card').first().waitFor({timeout:15
   console.log('CHAM_PLAY_MATCH_PASS');
   await page.locator('[data-cp-back]').first().click();
   await page.locator('[data-cp-game="word"]').click();
+  await page.locator('[data-v3-begin="word"]').click();
   const wordPaths=await page.evaluate(()=>window.CHAMPlayQA.getState().state.wordPositions);
   assert.equal(Object.keys(wordPaths).length,5);
   for(const cells of Object.values(wordPaths)){
@@ -157,6 +164,7 @@ const waitReady=async page=>page.locator('.cp-card').first().waitFor({timeout:15
   console.log('CHAM_PLAY_WORD_PASS');
   await page.locator('[data-cp-back]').first().click();
   await page.locator('[data-cp-game="speed"]').click();
+  await page.locator('[data-v3-begin="speed"]').click();
   await page.locator('[data-cp-timebar]').waitFor();
   assert.ok(await page.locator('[data-cp-seconds]').count(),'timer and progress available');
   for(let i=0;i<5;i++){
@@ -167,16 +175,37 @@ const waitReady=async page=>page.locator('.cp-card').first().waitFor({timeout:15
   await page.locator('.cp-result').waitFor();
   assert.equal(await page.evaluate(()=>window.CHAMDemo.points()),120,'five completions earn one daily reward');
   await page.locator('[data-cp-back]').first().click();
-  assert.equal(await page.locator('.cp-card').count(),5);
-  assert.equal(await page.evaluate(()=>document.querySelector('.cp-summary').textContent.includes('5 / 5')),true,'all games recorded');
+  await page.locator('[data-cp-game="pack"]').click();
+  await page.locator('[data-v3-begin="pack"]').click();
+  for(let i=0;i<4;i++){
+   const pick=await page.evaluate(()=>{
+     const s=window.CHAMPlayV3QA.getCurrent().activeGame.state;
+     return s.queue[s.index].answer;
+   });
+   await page.locator('[data-v3-pack="'+pick+'"]').click();
+   await page.locator('[data-v3-next-pack]').click();
+  }
+  await page.locator('.cp3-own-result').waitFor();
+  assert.equal(await page.evaluate(()=>window.CHAMDemo.points()),120,'packing cannot double-reward daily points');
+  await page.locator('[data-v3-back]').first().click();
+  await page.locator('[data-cp-game="wheel"]').click();
+  await page.locator('[data-v3-begin="wheel"]').click();
+  await page.locator('[data-v3-spin]').click();
+  await page.locator('.cp3-own-result').waitFor({timeout:5000});
+  assert.equal(await page.evaluate(()=>window.CHAMPlayMeta.summary().giftClaimed),true,'daily cosmetic claimed');
+  assert.equal(await page.evaluate(()=>window.CHAMDemo.points()),120,'daily wheel pays no wallet points');
+  await page.locator('[data-v3-back]').first().click();
+  assert.equal(await page.locator('.cp-card').count(),7);
+  assert.equal(await page.evaluate(()=>document.querySelector('.cp-summary').textContent.includes('7 / 7')),true,'all games recorded');
   console.log('CHAM_PLAY_SPEED_AND_WALLET_PASS');
   await page.reload({waitUntil:'load'});
   await waitReady(page);
   assert.equal(await page.evaluate(()=>window.CHAMDemo.points()),120,'demo wallet survives reload');
-  assert.equal(await page.evaluate(()=>document.querySelector('.cp-summary').textContent.includes('5 / 5')),true,'session completion survives reload');
+  assert.equal(await page.evaluate(()=>document.querySelector('.cp-summary').textContent.includes('7 / 7')),true,'meta completion survives reload');
   assert.deepEqual(errors,[],'no JS runtime exceptions');
   fs.writeFileSync(path.join(root,'.qa','cham-play-v2-report.json'),JSON.stringify({measurements,results:'5 games complete; reward idempotent; filters; persistent session'},null,2),'utf8');
-  console.log('CHAM_PLAY_FULL_REGRESSION_PASS');
+  assert.equal(await page.evaluate(()=>window.CHAMPlayMeta.summary().completed.length),7,'all game modes persisted');
+  console.log('CHAM_PLAY_V3_FULL_REGRESSION_PASS');
   await context.close();
  } finally {
   await browser.close();
