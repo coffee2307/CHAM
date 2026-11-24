@@ -6,7 +6,7 @@ const root=path.resolve(__dirname,'..'),assets=path.join(root,'assets');
 const cssFiles=['cham-theme.css','cham-refinement.css','cham-demo.css','cham-minimal.css','cham-polish.css','cham-v3.css','cham-quest.css','cham-play-v3.css','cham-play-v31.css','cham-v4.css','cham-design-system.css'];
 const jsFiles=['cham-demo-core.js','cham-craft-knowledge.js','cham-quest.js','cham-play-meta.js','cham-play-packing.js','cham-play-wheel.js','cham-play-expansion.js','cham-demo-pages.js','cham-theme.js','cham-unified-motion.js'];
 const liquid=fs.readFileSync(path.join(root,'sections/cham-demo-app.liquid'),'utf8');
-const pictures=Object.fromEntries(Array.from(liquid.matchAll(/"([^"]+)":\s*{{\s*'([^']+\.(?:svg|webp))'\s*\|\s*asset_url\s*\|\s*json\s*}}/g),m=>[m[1],'/assets/'+m[2]]));
+const pictures=Object.fromEntries(Array.from(liquid.matchAll(/"([^"]+)":\s*{{\s*'([^']+\.(?:svg|webp))'\s*\|\s*(?:asset_url|file_url)\s*\|\s*json\s*}}/g),m=>[m[1],'/assets/'+m[2].replace('cham-play-31-','cham-play-')]));
 assert.equal(Object.keys(pictures).length,24,'all curated assets are declared in Liquid');
 for(const [name,src] of Object.entries(pictures)){
   assert.ok(fs.existsSync(path.join(assets,path.basename(src))),'missing art: '+name);
