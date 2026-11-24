@@ -88,6 +88,10 @@ function mount(root,core){
     '<div class="cp3-milestones"><h3>Huy hiệu của bạn</h3><div class="cp3-badge-grid">'+badgesHTML(meta.badges)+'</div></div>';
    summary.insertAdjacentElement('afterend',dashboard);
   }
+  // Game discovery first; quests and badges follow rather than blocking play.
+  const gamesSection=hub.querySelector('.cp-games');
+  const dashboard=hub.querySelector('.cp3-dashboard');
+  if(gamesSection&&dashboard)gamesSection.insertAdjacentElement('afterend',dashboard);
   const grid=hub.querySelector('.cp-grid');
   const allActive=!!hub.querySelector('[data-cp-filter="Tất cả"].is-active');
   if(grid&&allActive&&!grid.querySelector('.cp3-card'))grid.insertAdjacentHTML('beforeend',extraCard('pack')+extraCard('wheel'));
@@ -122,6 +126,9 @@ function mount(root,core){
    '<button type="button" data-v3-begin="'+id+'" class="cp-primary" '+(gift&&!summary.giftReady?'disabled':'')+'>'+(gift?'Mở quà khám phá':'Bắt đầu chơi')+'</button>'+
    '<small>Điểm, sao và huy hiệu chỉ là dữ liệu demo; không đổi thành tiền.</small></div></div>';
   root.append(panel);
+  panel.addEventListener('click',e=>{
+    if(e.target===panel){removePanel();}
+  });
   panel.querySelector('[data-v3-close]').focus();
  }
  function showHUD(){
@@ -149,6 +156,9 @@ function mount(root,core){
   };
   record(data);currentAttempt=null;
   const stars=getStars(data),summary=meta.summary();
+  const cover=document.createElement('div');
+  cover.className='cp4-result-cover';cover.innerHTML=img(gameId);
+  result.insertAdjacentElement('afterbegin',cover);
   const block=document.createElement('div');block.className='cp3-result-summary';
   block.innerHTML='<div class="cp3-stars" aria-label="'+stars+' trên 3 sao">'+
     [0,1,2].map(i=>'<span class="'+(i<stars?'is-full':'')+'">★</span>').join('')+'</div>'+
@@ -163,7 +173,7 @@ function mount(root,core){
     '<button type="button" data-v3-back class="cp-back">Trở về trò chơi</button>'+
     '<div class="cp-session-copy"><span>Thử thách mô phỏng</span><h1>Đóng gói đơn hàng</h1><p>Chọn phương án bảo vệ sản phẩm thích hợp. Đây là tình huống học tập giả lập, không phải quy trình vận chuyển thực tế của CHẠM.</p></div>'+
     '<div class="cp-session-wallet"><strong>'+(s.index+1)+'/4</strong><span>Đơn hàng demo</span></div></header>'+
-    '<div class="cp3-pack-layout"><section class="cp-board cp3-pack-board">'+
+    '<div class="cp4-session-illustration">'+img('pack')+'</div><div class="cp3-pack-layout"><section class="cp-board cp3-pack-board">'+
     '<div class="cp-board__top"><strong>Đơn hàng '+(s.index+1)+'</strong><span>Đúng '+s.correct+' · Sai '+s.mistakes+'</span></div>'+
     '<div class="cp-progress"><div style="width:'+(s.index/4*100)+'%"></div></div>'+
     '<div class="cp3-parcel"><span class="cp3-parcel__icon">'+icon('basket')+'</span>'+
@@ -197,7 +207,7 @@ function mount(root,core){
    '<button type="button" data-v3-back class="cp-back">Trở về trò chơi</button>'+
    '<div class="cp-session-copy"><span>Quà sưu tầm · Demo</span><h1>Vòng khám phá</h1>'+
    '<p>Hoàn thành hai nhiệm vụ hằng ngày để mở một huy hiệu. Không phải vòng quay đổi tiền hoặc voucher.</p></div></header>'+
-   '<div class="cp3-wheel-layout"><section class="cp-board"><div class="cp3-wheel-wrap">'+
+   '<div class="cp4-session-illustration">'+img('wheel')+'</div><div class="cp3-wheel-layout"><section class="cp-board"><div class="cp3-wheel-wrap">'+
    '<span class="cp3-wheel-pointer" aria-hidden="true">▼</span>'+
    '<div class="cp3-wheel-disc '+(spinning?'is-spinning':'')+'" style="--cp3-rotation:'+angle+'deg" aria-label="Sáu biểu tượng nghề thủ công">'+
    secs.map((x,i)=>'<span style="--n:'+i+'">'+escape(x.label)+'</span>').join('')+'</div></div>'+
@@ -222,7 +232,7 @@ function mount(root,core){
  function showOwnResult(game,won,message,stars){
   root.innerHTML='<div class="cp-app cp-session cp3-session"><header class="cp-session-header"><button type="button" data-v3-back class="cp-back">Trò chơi</button></header>'+
     '<section class="cp-result cp3-own-result">'+
-    '<div class="cp-result__symbol">'+icon(won?'award':'retry')+'</div><h1>'+(won?'Hoàn thành ':'Thử lại ')+escape(names[game])+'</h1>'+
+    '<div class="cp4-result-cover">'+img(game)+'</div><div class="cp-result__symbol">'+icon(won?'award':'retry')+'</div><h1>'+(won?'Hoàn thành ':'Thử lại ')+escape(names[game])+'</h1>'+
     '<div class="cp3-stars" aria-label="'+stars+' sao">'+[0,1,2].map(i=>'<span class="'+(i<stars?'is-full':'')+'">★</span>').join('')+'</div>'+
     '<p>'+escape(message)+'</p>'+
     '<p class="cp-result__award">Sao và huy hiệu chỉ dùng để theo dõi trải nghiệm. '+(game==='wheel'?'Không có điểm CHẠM được cộng từ vòng quay.':'Nếu đủ điều kiện, ví CHẠM chỉ được cộng thưởng game một lần/ngày.')+'</p>'+

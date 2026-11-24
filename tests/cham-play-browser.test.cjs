@@ -3,10 +3,10 @@
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
 const {chromium}=require('F:/Oxyz Edu/node_modules/playwright');
 const root=path.resolve(__dirname,'..'),assets=path.join(root,'assets');
-const cssFiles=['cham-theme.css','cham-refinement.css','cham-demo.css','cham-minimal.css','cham-polish.css','cham-v3.css','cham-quest.css','cham-play-v3.css','cham-v4.css','cham-design-system.css'];
+const cssFiles=['cham-theme.css','cham-refinement.css','cham-demo.css','cham-minimal.css','cham-polish.css','cham-v3.css','cham-quest.css','cham-play-v3.css','cham-play-v31.css','cham-v4.css','cham-design-system.css'];
 const jsFiles=['cham-demo-core.js','cham-craft-knowledge.js','cham-quest.js','cham-play-meta.js','cham-play-packing.js','cham-play-wheel.js','cham-play-expansion.js','cham-demo-pages.js','cham-theme.js','cham-unified-motion.js'];
 const liquid=fs.readFileSync(path.join(root,'sections/cham-demo-app.liquid'),'utf8');
-const pictures=Object.fromEntries(Array.from(liquid.matchAll(/"([^"]+)":\s*{{\s*'([^']+\.svg)'\s*\|\s*asset_url\s*\|\s*json\s*}}/g),m=>[m[1],'/assets/'+m[2]]));
+const pictures=Object.fromEntries(Array.from(liquid.matchAll(/"([^"]+)":\s*{{\s*'([^']+\.(?:svg|webp))'\s*\|\s*asset_url\s*\|\s*json\s*}}/g),m=>[m[1],'/assets/'+m[2]]));
 assert.equal(Object.keys(pictures).length,24,'all curated assets are declared in Liquid');
 for(const [name,src] of Object.entries(pictures)){
   assert.ok(fs.existsSync(path.join(assets,path.basename(src))),'missing art: '+name);
@@ -68,7 +68,7 @@ const waitReady=async page=>page.locator('.cp-card').first().waitFor({timeout:15
    assert.equal(result.imageCount,7,'game preview art '+width);
    await page.locator('.cp-card__media > img').evaluateAll(imgs=>imgs.forEach(img=>img.loading='eager'));
    await page.waitForFunction(()=>[...document.querySelectorAll('.cp-card__media > img')].every(img=>img.complete&&img.naturalWidth>0),null,{timeout:12000});
-   assert.equal(await page.locator('.cp-card__media > img').evaluateAll(imgs=>imgs.filter(img=>img.getAttribute('src').includes('cham-play-thumb-')&&img.naturalWidth>0).length),7,'seven distinct thumbnail SVGs load');
+   assert.equal(await page.locator('.cp-card__media > img').evaluateAll(imgs=>imgs.filter(img=>img.getAttribute('src').includes('cham-play-')&&img.getAttribute('src').endsWith('.webp')&&img.naturalWidth>0).length),7,'seven illustrated WebP thumbnails load');
    assert.ok(result.scrollWidth<=width+1,'horizontal overflow at '+width+': '+JSON.stringify(result));
    assert.ok(result.maxCardRight<=width+1,'card is clipped '+width);
    assert.notEqual(result.bodyOverflow,'hidden','natural page scroll '+width);
@@ -76,9 +76,23 @@ const waitReady=async page=>page.locator('.cp-card').first().waitFor({timeout:15
    assert.ok(result.appHeight>800,'hub has a natural long page '+width);
    assert.ok(result.font.includes('Be Vietnam Pro'),'font consistency '+width);
    assert.equal(result.availableFilters,8,'filter controls present');
+   assert.equal(await page.locator('.cp4-hero-gallery img').count(),3,'hero uses a three-image editorial collage');
+   assert.equal(await page.locator('.cp3-dashboard').count(),1,'missions and badges are present');
+   assert.ok(await page.locator('.cp-games').evaluate(el=>el.getBoundingClientRect().top)<await page.locator('.cp3-dashboard').evaluate(el=>el.getBoundingClientRect().top),'games must appear before secondary meta dashboard');
+   assert.equal(await page.locator('.cp-card__level:visible').count(),0,'illustrated thumbnails have no obstructing corner labels');
+   assert.equal(await page.locator('.cp-card:first-child').evaluate(el=>getComputedStyle(el).gridColumnStart),'span 2','featured game spans two grid columns');
    assert.deepEqual(errors,[],'JS errors '+width);
    measurements.push({width,...result});
    if([390,1440].includes(width)){
+    // Chromium full-page capture can leave below-fold lazy images unpainted.
+    // Walk the card grid exactly as a visitor would, then capture all art.
+    for(const card of await page.locator('.cp-card').all()){
+      await card.scrollIntoViewIfNeeded();
+      await card.locator('.cp-card__media>img').evaluate(async image=>{try{await image.decode()}catch(_){}});
+      await page.waitForTimeout(65);
+    }
+    await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
+    await page.waitForTimeout(180);
     await page.screenshot({path:path.join(root,'.qa','cham-play-v2-'+width+'.png'),fullPage:true});
    }
    console.log('CHAM_PLAY_LAYOUT_PASS',width,'height',Math.round(result.appHeight));
@@ -93,6 +107,9 @@ const waitReady=async page=>page.locator('.cp-card').first().waitFor({timeout:15
    for(const game of ['memory','quiz','match','word','speed']){
     await page.locator('[data-cp-game="'+game+'"]').click();
     await page.locator('[data-v3-begin="'+game+'"]').click();
+    const banner=page.locator('.cp4-game-banner img');
+    await banner.waitFor();
+    assert.ok((await banner.getAttribute('src')).endsWith('.webp'),'in-game artwork must use WebP '+game);
     const board=page.locator('.cp-board');await board.waitFor();
     const m=await board.evaluate(el=>({right:el.getBoundingClientRect().right,overflow:document.documentElement.scrollWidth-innerWidth,board:el.scrollWidth-el.clientWidth}));
     assert.ok(m.right<=width+2&&m.overflow<=2&&m.board<=2,game+' overflow '+width+': '+JSON.stringify(m));
@@ -114,9 +131,11 @@ const waitReady=async page=>page.locator('.cp-card').first().waitFor({timeout:15
   assert.equal(await page.locator('.cp-card').count(),7);
   await page.locator('[data-cp-game="memory"]').click();
   await page.locator('.cp3-mode input[value="easy"]').check();
+  assert.ok((await page.locator('.cp3-dialog__art img').getAttribute('src')).endsWith('.webp'),'intro artwork is WebP');
   await page.locator('[data-v3-begin="memory"]').click();
   assert.equal(await page.locator('[data-cp-memory]').count(),8);
-  assert.equal(await page.locator('[data-cp-memory] .cp-icon').count(),8,'memory cards have vector art');
+  assert.equal(await page.locator('[data-cp-memory] .cp-icon').count(),0,'memory faces no longer use giant stock icons');
+  assert.equal(await page.locator('[data-cp-memory] .cp4-memory-face-back').count(),8,'memory faces have custom card backs');
   await page.screenshot({path:path.join(root,'.qa','cham-play-v21-memory-1440.png'),fullPage:true});
   const deck=await page.evaluate(()=>window.CHAMPlayQA.getState().state.deck);
   const ids=[...new Set(deck.map(c=>c.id))];
@@ -127,6 +146,7 @@ const waitReady=async page=>page.locator('.cp-card').first().waitFor({timeout:15
    await page.locator('[data-cp-memory="'+pair[1]+'"]').click();
   }
   await page.locator('.cp-result').waitFor();
+  assert.ok((await page.locator('.cp4-result-cover img').first().getAttribute('src')).endsWith('.webp'),'game result has artwork');
   assert.equal(await page.evaluate(()=>window.CHAMDemo.points()),120,'first game earns 20 demo points');
   console.log('CHAM_PLAY_MEMORY_PASS');
   await page.locator('[data-cp-back]').first().click();
