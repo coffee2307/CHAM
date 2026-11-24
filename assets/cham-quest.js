@@ -23,15 +23,34 @@
   ];
   const size=8;
   function wordGrid(){
-    const cells=Array(size*size).fill(null);
-    WORDS.forEach(({word,row,col,axis})=>[...word].forEach((c,i)=>{
-      const pos=(row+(axis==='v'?i:0))*size+col+(axis==='h'?i:0);
-      if(cells[pos]&&cells[pos]!==c)throw Error('Ô chữ chồng sai ký tự');
-      cells[pos]=c;
-    }));
-    const filler='ANHTRELOIAVUONGDCMYSB';
-    for(let i=0;i<cells.length;i++)if(!cells[i])cells[i]=filler[(i*13+7)%filler.length];
-    return cells;
+    const cells=Array(size*size).fill(null),wordPositions={};
+    // Choose non-overlapping randomized paths; preserve a guaranteed fallback.
+    let success=true;
+    for(const w of shuffle(WORDS)){
+      const options=[];
+      for(let row=0;row<size;row++)for(let col=0;col<size;col++){
+        for(const [dr,dc] of [[0,1],[1,0],[0,-1],[-1,0]]){
+          const path=[...w.word].map((_,i)=>[row+dr*i,col+dc*i]);
+          if(path.every(([r,c])=>r>=0&&r<size&&c>=0&&c<size&&cells[r*size+c]===null))
+            options.push(path.map(([r,c])=>r*size+c));
+        }
+      }
+      if(!options.length){success=false;break;}
+      const selected=shuffle(options)[0];
+      wordPositions[w.word]=selected;
+      selected.forEach((pos,i)=>{cells[pos]=w.word[i];});
+    }
+    if(!success){
+      cells.fill(null);
+      WORDS.forEach(({word,row,col,axis})=>{
+        const positions=[...word].map((_,i)=>(row+(axis==='v'?i:0))*size+col+(axis==='h'?i:0));
+        wordPositions[word]=positions;
+        positions.forEach((pos,i)=>{cells[pos]=word[i];});
+      });
+    }
+    const filler='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    for(let i=0;i<cells.length;i++)if(!cells[i])cells[i]=filler[Math.floor(Math.random()*filler.length)];
+    return {letters:cells,wordPositions};
   }
   function mount(root,core){
     if(!root||!core)return;
@@ -52,25 +71,30 @@
     }
     const stopUI=()=>{stopTimers();state={};};
     const progress=(done,total)=>'<div class="cp-progress" aria-label="Tiến trình: '+done+'/'+total+'"><div style="width:'+((done/total)*100).toFixed(2)+'%"></div></div>';
-    const gameHeading=(game)=>'<header class="cp-session-header"><button type="button" class="cp-back" data-cp-back>Trở về trò chơi</button><div class="cp-session-copy"><span>'+esc(game.type)+'</span><h1>'+esc(game.name)+'</h1><p>'+esc(game.description)+'</p></div><div class="cp-session-wallet"><strong>'+core.points()+'</strong><span>Điểm demo</span></div></header>';
-    const avatar=(id)=>assets[id]?'<img src="'+esc(assets[id])+'" loading="lazy" decoding="async" alt="">':'';
+    const gameHeading=(game)=>'<header class="cp-session-header"><button type="button" class="cp-back" data-cp-back>'+icon('back')+' Trở về trò chơi</button><div class="cp-session-copy"><span>'+esc(game.type)+'</span><h1>'+esc(game.name)+'</h1><p>'+esc(game.description)+'</p></div><div class="cp-session-wallet"><strong>'+core.points()+'</strong><span>Điểm demo</span></div></header>';
+    const avatar=(id)=>assets[id]?'<img src="'+esc(assets[id])+'" '+(id==='hero'?'fetchpriority="high"':'loading="lazy"')+' decoding="async" alt="">':'';
+    const icon=(id,cls='')=>assets['icon-'+id]?'<img class="cp-icon '+cls+'" src="'+esc(assets['icon-'+id])+'" alt="" aria-hidden="true">':'';
+    const craftIcon=id=>({'bat-trang':'pot','van-phuc':'silk','phu-vinh':'basket','dong-ho':'print','chuong':'hat','quat-dong':'sew'}[id]||'layers');
+    const jumpToApp=()=>{root.scrollIntoView({block:'start',behavior:'instant'});};
+    const gameRules={memory:'Lật hai thẻ. Cặp giống nhau được giữ lại; cặp sai sẽ úp lại.',quiz:'Chọn đáp án, đọc giải thích rồi tiếp tục. Đúng ít nhất 3/5 câu.',match:'Chọn nghề ở cột trái rồi chọn chất liệu tương ứng ở cột phải.',word:'Chọn chữ đầu và chữ cuối của từ theo hàng ngang hoặc dọc.',speed:'Đúng ít nhất 3/5 câu trong 45 giây trả lời. Đồng hồ dừng khi đọc giải thích.'};
+    const difficulty={memory:'Dễ',quiz:'Vừa',match:'Dễ',word:'Vừa',speed:'Nhanh'};
     function hub(filter='Tất cả'){
       kind='hub';stopUI();
       const categories=['Tất cả','Trí nhớ','Kiến thức','Ghép nối','Giải đố','Thời gian'];
       const cards=games.filter(g=>filter==='Tất cả'||g.type===filter).map(g=>
         '<article class="cp-card"><button type="button" class="cp-card__open" data-cp-game="'+g.id+'" aria-label="Chơi '+esc(g.name)+'">'+
-          '<span class="cp-card__media cp-card__media--'+g.art+'">'+avatar(g.art)+'</span>'+
+          '<span class="cp-card__media cp-card__media--'+g.art+'">'+avatar(g.art)+'<span class="cp-card__level">'+difficulty[g.id]+'</span>'+(completed.has(g.id)?'<span class="cp-card__done">'+icon('check')+' Đã chơi</span>':'')+'</span>'+
           '<span class="cp-card__content"><span class="cp-card__category">'+esc(g.type)+' · '+esc(g.time)+'</span>'+
           '<strong>'+esc(g.name)+'</strong><span class="cp-card__description">'+esc(g.description)+'</span>'+
           '<span class="cp-card__bottom"><span>'+esc(g.detail)+'</span><span class="cp-card__action">'+(completed.has(g.id)?'Chơi lại':'Chơi ngay')+'</span></span></span>'+
         '</button></article>').join('');
       const tabs=categories.map(c=>'<button type="button" class="cp-filter'+(filter===c?' is-active':'')+'" data-cp-filter="'+c+'" aria-pressed="'+(filter===c)+'">'+c+'</button>').join('');
       root.innerHTML='<div class="cp-app cp-hub">'+
-        '<section class="cp-hero"><div class="cp-hero__copy"><p class="cp-eyebrow">CHẠM Play</p><h1>Chơi một chút,<br>hiểu nghề thêm một chút.</h1>'+
-        '<p>Khám phá vật liệu, sản phẩm và những nghề thủ công Việt Nam qua năm trò chơi ngắn, mỗi trò một cách trải nghiệm.</p>'+
-        '<div class="cp-hero__links"><a href="#cp-games" class="cp-primary cp-hero__cta">Khám phá trò chơi</a><a href="/pages/cham-club?tab=rewards" class="cp-quiet-link">Xem điểm và phần thưởng</a></div></div>'+
-        '<div class="cp-hero__photo">'+avatar('hero')+'<div class="cp-hero__caption">Chất liệu và bàn tay người thợ</div></div></section>'+
-        '<section class="cp-summary" aria-label="Tổng quan điểm thưởng"><div><span>Điểm của bạn</span><strong data-cp-wallet>'+core.points()+'</strong></div>'+
+        '<section class="cp-hero"><div class="cp-hero__copy"><p class="cp-eyebrow">CHẠM Play</p><h1>Khám phá trò chơi</h1>'+
+        '<p>Năm trò chơi, năm cách tìm hiểu nghề thủ công Việt Nam.</p>'+
+        '<div class="cp-hero__links"><a href="/pages/cham-club?tab=rewards" class="cp-quiet-link">Xem điểm và phần thưởng</a></div></div>'+
+        '<div class="cp-hero__photo">'+avatar('hero')+'</div></section>'+
+        '<section class="cp-summary" aria-label="Tổng quan điểm thưởng"><div><span>'+icon('coin')+' Điểm của bạn</span><strong data-cp-wallet>'+core.points()+'</strong></div>'+
         '<div><span>Trò đã hoàn thành trong phiên</span><strong>'+completed.size+' / 5</strong></div>'+
         '<div><span>Thưởng trò chơi hôm nay</span><strong>'+(claimed()?'Đã nhận':'Chưa nhận')+'</strong></div>'+
         '<p>Chỉ là điểm và voucher mô phỏng lưu trên trình duyệt. Hoàn thành trò chơi đủ điều kiện để nhận tối đa 20 điểm demo mỗi ngày.</p></section>'+
@@ -93,9 +117,9 @@
         const pairs=shuffle(craftRecords).slice(0,5);
         state={left:pairs,right:shuffle(pairs),selected:null,found:new Set(),misses:0};
       }else if(id==='word'){
-        state={letters:wordGrid(),selected:null,found:new Set(),foundPositions:new Set(),attempts:0};
+        state={...wordGrid(),selected:null,found:new Set(),foundPositions:new Set(),attempts:0};
       }
-      render();
+      render();jumpToApp();
       if(id==='speed')startClock();
     }
     function outcome(won,message){
@@ -109,14 +133,17 @@
         reward=core.gameAward(type==='memory'?Math.max(1,state.turns):Math.max(1,state.correct||state.attempts||5));
       }
       kind='result';
-      root.innerHTML='<div class="cp-app cp-session"><header class="cp-session-header"><button type="button" data-cp-back class="cp-back">Tất cả trò chơi</button></header>'+
-        '<section class="cp-result"><div class="cp-result__symbol" aria-hidden="true">'+(won?'✓':'↺')+'</div><h1>'+(won?'Hoàn thành '+esc(game.name):'Thử lại '+esc(game.name))+'</h1>'+
+      root.innerHTML='<div class="cp-app cp-session"><header class="cp-session-header"><button type="button" data-cp-back class="cp-back">'+icon('back')+' Tất cả trò chơi</button></header>'+
+        '<section class="cp-result"><div class="cp-result__symbol" aria-hidden="true">'+icon(won?'award':'retry')+'</div><h1>'+(won?'Hoàn thành '+esc(game.name):'Thử lại '+esc(game.name))+'</h1>'+
         '<p>'+esc(message)+'</p>'+
         '<p class="cp-result__award">'+(won?(reward?'Bạn vừa nhận 20 điểm CHẠM demo.':'Đã hoàn thành. Phần thưởng demo hôm nay chỉ được nhận một lần.'):'Chơi lại để hoàn thành thử thách. Không có điểm bị trừ.')+'</p>'+
         '<div class="cp-result__actions"><button type="button" class="cp-primary" data-cp-game="'+type+'">Chơi lại</button><button type="button" class="cp-secondary" data-cp-back>Chọn trò khác</button><a class="cp-quiet-link" href="/pages/cham-club?tab=rewards">Ví điểm demo</a></div></section></div>';
+      jumpToApp();
     }
     function render(){
       const game=games.find(g=>g.id===kind);if(!game)return;
+      const active=document.activeElement;
+      const activeAttr=active&&root.contains(active)?[...active.attributes].find(a=>/^data-cp-(memory|choice|left|right|cell|next|word-clear)$/.test(a.name)):null;
       let body='';
       if(kind==='memory'){
         const s=state;
@@ -124,14 +151,14 @@
           progress(s.found.size,4)+
           '<div class="cp-memory-grid">'+s.deck.map((card,i)=>{
             const shown=s.open.includes(i)||s.found.has(card.id);
-            return '<button class="cp-memory-cell'+(shown?' is-revealed':'')+(s.found.has(card.id)?' is-matched':'')+'" data-cp-memory="'+i+'" type="button" '+(s.found.has(card.id)?'disabled':'')+' aria-label="Thẻ '+(i+1)+(shown?': '+esc(card.label):': đang úp')+'"><span>'+ (shown?esc(card.label):'CHẠM')+'</span></button>';
+            return '<button class="cp-memory-cell'+(shown?' is-revealed':'')+(s.found.has(card.id)?' is-matched':'')+'" data-cp-memory="'+i+'" type="button" '+(s.found.has(card.id)?'disabled':'')+' aria-label="Thẻ '+(i+1)+(shown?': '+esc(card.label):': đang úp')+'"><span>'+ (shown?icon(craftIcon(card.id))+esc(card.label):icon('layers')+'<small>CHẠM</small>')+'</span></button>';
           }).join('')+'</div><p class="cp-help" role="status">Lật từng cặp thẻ. Trò chơi hoàn thành khi bạn tìm đủ bốn cặp.</p></div>';
       }
       if(kind==='quiz'||kind==='speed'){
         const s=state,q=s.questions[s.index];
         body='<div class="cp-board cp-quiz"><div class="cp-board__top"><strong>Câu hỏi '+(s.index+1)+'/5</strong>'+
-          '<span>'+(kind==='speed'?'<span class="cp-clock" data-cp-clock aria-live="off">'+Math.ceil(s.remaining)+' giây</span>':'Đúng '+s.correct+' câu')+'</span></div>'+
-          progress(s.index,5)+'<p class="cp-question-type">'+esc(q.kind)+'</p><h2>'+esc(q.question)+'</h2>'+
+          '<span>'+(kind==='speed'?'<span class="cp-clock" data-cp-clock aria-live="off">'+icon('timer')+' <b data-cp-seconds>'+Math.ceil(s.remaining)+'</b> giây</span>':'Đúng '+s.correct+' câu')+'</span></div>'+
+          progress(s.index,5)+(kind==='speed'?'<div class="cp-timebar" aria-hidden="true"><span data-cp-timebar style="width:'+(s.remaining/45*100)+'%"></span></div>':'')+'<p class="cp-question-type">'+esc(q.kind)+'</p><h2>'+esc(q.question)+'</h2>'+
           '<div class="cp-options">'+q.options.map((o,i)=>{
             const selected=s.answer===i,answered=s.answer!==null,correct=i===q.answerIndex;
             return '<button type="button" data-cp-choice="'+i+'" '+(answered?'disabled':'')+' class="cp-option'+(answered&&correct?' is-correct':'')+(answered&&selected&&!correct?' is-wrong':'')+'"><span>'+String.fromCharCode(65+i)+'</span>'+esc(o)+'</button>';
@@ -143,28 +170,32 @@
       }
       if(kind==='match'){
         const s=state;
-        const left=s.left.map(p=>'<button type="button" data-cp-left="'+esc(p.id)+'" '+(s.found.has(p.id)?'disabled':'')+' class="cp-match-option'+(s.selected===p.id?' is-selected':'')+(s.found.has(p.id)?' is-found':'')+'">'+esc(p.craft)+'</button>').join('');
-        const right=s.right.map(p=>'<button type="button" data-cp-right="'+esc(p.id)+'" '+(s.found.has(p.id)?'disabled':'')+' class="cp-match-option'+(s.found.has(p.id)?' is-found':'')+'">'+esc(p.material)+'</button>').join('');
-        body='<div class="cp-board"><div class="cp-board__top"><strong>Nghề và chất liệu</strong><span>'+s.found.size+'/5 cặp</span></div>'+progress(s.found.size,5)+
+        const left=s.left.map(p=>'<button type="button" data-cp-left="'+esc(p.id)+'" '+(s.found.has(p.id)?'disabled':'')+' class="cp-match-option'+(s.selected===p.id?' is-selected':'')+(s.found.has(p.id)?' is-found':'')+'">'+icon(craftIcon(p.id))+esc(p.craft)+(s.found.has(p.id)?'<span class="cp-pair-id">'+([...s.found].indexOf(p.id)+1)+'</span>':'')+'</button>').join('');
+        const right=s.right.map(p=>'<button type="button" data-cp-right="'+esc(p.id)+'" '+(s.found.has(p.id)?'disabled':'')+' class="cp-match-option'+(s.found.has(p.id)?' is-found':'')+'">'+esc(p.material)+(s.found.has(p.id)?'<span class="cp-pair-id">'+([...s.found].indexOf(p.id)+1)+'</span>':'')+'</button>').join('');
+        body='<div class="cp-board"><div class="cp-board__top"><strong>'+icon('link')+' Nghề và chất liệu</strong><span>'+s.found.size+'/5 cặp</span></div>'+progress(s.found.size,5)+
           '<p class="cp-help">Chọn một nghề bên trái, sau đó chọn nguyên liệu tương ứng bên phải.</p>'+
           '<div class="cp-match-grid"><div><h2>Nghề thủ công</h2>'+left+'</div><div><h2>Chất liệu</h2>'+right+'</div></div>'+
           '<p class="cp-help" role="status">'+(s.selected?'Đã chọn nghề. Hãy chọn chất liệu.':'Các cặp đúng sẽ được giữ lại.')+'</p></div>';
       }
       if(kind==='word'){
         const s=state;
-        body='<div class="cp-board"><div class="cp-board__top"><strong>Tìm các từ trong bảng chữ</strong><span>'+s.found.size+'/5 từ</span></div>'+progress(s.found.size,5)+
+        body='<div class="cp-board"><div class="cp-board__top"><strong>'+icon('grid')+' Tìm các từ trong bảng chữ</strong><span>'+s.found.size+'/5 từ</span></div>'+progress(s.found.size,5)+
           '<p class="cp-help">Chạm chữ đầu và chữ cuối của một từ theo hàng ngang hoặc cột dọc. Có thể chọn theo chiều ngược lại.</p>'+
           '<div class="cp-word-layout"><div class="cp-word-grid" role="group" aria-label="Bảng ô chữ">'+s.letters.map((c,i)=>
             '<button type="button" data-cp-cell="'+i+'" class="cp-word-cell'+(s.foundPositions.has(i)?' is-found':'')+(s.selected===i?' is-selected':'')+'" aria-label="Hàng '+(Math.floor(i/size)+1)+', cột '+(i%size+1)+', chữ '+c+'">'+c+'</button>').join('')+'</div>'+
           '<div class="cp-word-clues"><h2>Từ cần tìm</h2>'+WORDS.map(w=>'<p class="'+(s.found.has(w.word)?'is-found':'')+'"><strong>'+esc(w.label)+'</strong><span>'+esc(w.hint)+'</span></p>').join('')+
-          '<button type="button" data-cp-word-clear class="cp-secondary">Bỏ chọn</button></div></div></div>';
+          '<button type="button" data-cp-word-clear class="cp-secondary">Bỏ chọn</button></div></div><p class="cp-help cp-word-status" role="status">Chọn chữ đầu tiên để tìm từ.</p></div>';
       }
       root.innerHTML='<div class="cp-app cp-session">'+gameHeading(game)+
         '<div class="cp-session-layout"><main class="cp-session-main">'+body+'</main>'+
-        '<aside class="cp-aside"><p class="cp-eyebrow">CHẠM Play</p><h2>Khám phá qua từng thao tác.</h2>'+
-        '<p>Trò chơi sử dụng dữ liệu kiến thức làng nghề và kết quả chỉ được ghi trong trình duyệt này.</p>'+
+        '<aside class="cp-aside"><div class="cp-aside__art">'+avatar(game.art)+'</div><h2>'+icon('help')+' Cách chơi</h2><p>'+esc(gameRules[kind])+'</p>'+
+        '<p>Tiến trình được ghi trên trình duyệt này.</p>'+
         '<p>Hoàn thành thử thách để được nhận điểm demo; một ngày chỉ có một phần thưởng trò chơi.</p>'+
         '<a class="cp-quiet-link" href="/pages/cham-club?tab=rewards">Xem ví CHẠM</a></aside></div></div>';
+      if(activeAttr){
+        const next=[...root.querySelectorAll('['+activeAttr.name+']')].find(el=>el.getAttribute(activeAttr.name)===activeAttr.value&&!el.disabled);
+        (next||root.querySelector('[data-cp-next]'))?.focus({preventScroll:true});
+      }
     }
     function selectMemory(i){
       const s=state;if(s.locked||s.found.has(s.deck[i]?.id)||s.open.includes(i))return;
@@ -203,8 +234,9 @@
         if(state.answer!==null){previous=now;return;} // time to read explanation
         state.remaining=Math.max(0,state.remaining-(now-previous)/1000);
         previous=now;
-        const node=$('[data-cp-clock]',root);
-        if(node)node.textContent=Math.ceil(state.remaining)+' giây';
+        const node=$('[data-cp-seconds]',root),bar=$('[data-cp-timebar]',root);
+        if(node)node.textContent=Math.ceil(state.remaining);
+        if(bar)bar.style.width=(state.remaining/45*100).toFixed(2)+'%';
         if(state.remaining<=0){outcome(false,'Hết thời gian. Bạn có thể thử lại với bộ câu hỏi mới.');}
       },100);
     }
@@ -226,6 +258,7 @@
     function chooseWord(i){
       const s=state;
       if(s.selected===null){s.selected=i;render();return;}
+      s.attempts++;
       const indices=indicesBetween(s.selected,i);
       const str=indices.map(j=>s.letters[j]).join('');
       const target=WORDS.find(w=>(w.word===str||w.word===[...str].reverse().join(''))&&!s.found.has(w.word));
@@ -233,11 +266,12 @@
         if(s.found.size===5)outcome(true,'Bạn đã tìm được năm từ khóa về thủ công.');
       }else{
         s.selected=i;render();
+        const status=$('.cp-word-status',root);if(status)status.textContent='Chưa khớp từ cần tìm. Chữ vừa chọn là điểm bắt đầu mới.';
       }
     }
     root.addEventListener('click',event=>{
       const el=event.target.closest('button,a');if(!el||!root.contains(el))return;
-      if(el.hasAttribute('data-cp-back')){hub();return;}
+      if(el.hasAttribute('data-cp-back')){hub();jumpToApp();return;}
       if(el.hasAttribute('data-cp-filter')){hub(el.dataset.cpFilter);return;}
       if(el.hasAttribute('data-cp-game')){start(el.dataset.cpGame);return;}
       if(kind==='memory'&&el.hasAttribute('data-cp-memory')){selectMemory(Number(el.dataset.cpMemory));return;}

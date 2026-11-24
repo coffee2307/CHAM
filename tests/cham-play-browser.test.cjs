@@ -5,11 +5,12 @@ const {chromium}=require('F:/Oxyz Edu/node_modules/playwright');
 const root=path.resolve(__dirname,'..'),assets=path.join(root,'assets');
 const cssFiles=['cham-theme.css','cham-refinement.css','cham-demo.css','cham-minimal.css','cham-polish.css','cham-v3.css','cham-quest.css','cham-v4.css','cham-design-system.css'];
 const jsFiles=['cham-demo-core.js','cham-craft-knowledge.js','cham-quest.js','cham-demo-pages.js','cham-theme.js','cham-unified-motion.js'];
-const pictures=Object.fromEntries(Object.entries({
-  hero:'cham6-craft-shape-640.webp',memory:'cham6-craft-clay-640.webp',
-  quiz:'cham6-craft-decoration-640.webp',match:'cham5-detail-weave.webp',
-  word:'cham6-craft-trim-640.webp',speed:'cham6-craft-kiln-640.webp'
-}).map(([name,src])=>[name,'/assets/'+src]));
+const liquid=fs.readFileSync(path.join(root,'sections/cham-demo-app.liquid'),'utf8');
+const pictures=Object.fromEntries(Array.from(liquid.matchAll(/"([^"]+)":\s*{{\s*'([^']+\.svg)'\s*\|\s*asset_url\s*\|\s*json\s*}}/g),m=>[m[1],'/assets/'+m[2]]));
+assert.equal(Object.keys(pictures).length,22,'all curated assets are declared in Liquid');
+for(const [name,src] of Object.entries(pictures)){
+  assert.ok(fs.existsSync(path.join(assets,path.basename(src))),'missing art: '+name);
+}
 function pageHTML(){
  const styles=cssFiles.map(f=>'<link rel="stylesheet" href="/assets/'+f+'">').join('');
  const scripts=jsFiles.map(f=>'<script defer src="/assets/'+f+'"></script>').join('');
@@ -49,7 +50,7 @@ const waitReady=async page=>page.locator('.cp-card').first().waitFor({timeout:15
     const app=document.querySelector('.cp-app');
     const footer=document.querySelector('footer');
     const cards=[...document.querySelectorAll('.cp-card')];
-    const images=[...document.querySelectorAll('.cp-card__media img')];
+    const images=[...document.querySelectorAll('.cp-card__media > img')];
     return {
       scrollWidth:h.scrollWidth,viewport:innerWidth,bodyOverflow:getComputedStyle(document.body).overflowY,
       appHeight:app.getBoundingClientRect().height,footer:getComputedStyle(footer).display,
@@ -65,6 +66,8 @@ const waitReady=async page=>page.locator('.cp-card').first().waitFor({timeout:15
    assert.equal(result.count,5,'exactly five games '+width);
    assert.equal(result.oldGame,0,'old mascot components removed '+width);
    assert.equal(result.imageCount,5,'game preview art '+width);
+   await page.locator('.cp-card__media > img').evaluateAll(imgs=>Promise.all(imgs.map(img=>img.decode())));
+   assert.equal(await page.locator('.cp-card__media > img').evaluateAll(imgs=>imgs.filter(img=>img.getAttribute('src').includes('cham-play-thumb-')&&img.naturalWidth>0).length),5,'five distinct thumbnail SVGs load');
    assert.ok(result.scrollWidth<=width+1,'horizontal overflow at '+width+': '+JSON.stringify(result));
    assert.ok(result.maxCardRight<=width+1,'card is clipped '+width);
    assert.notEqual(result.bodyOverflow,'hidden','natural page scroll '+width);
@@ -80,6 +83,23 @@ const waitReady=async page=>page.locator('.cp-card').first().waitFor({timeout:15
    console.log('CHAM_PLAY_LAYOUT_PASS',width,'height',Math.round(result.appHeight));
    await context.close();
   }
+  // Check each gameplay screen at the narrowest and common mobile widths.
+  for(const width of [320,390]){
+   const ctx=await browser.newContext({viewport:{width,height:844},hasTouch:true,isMobile:true});
+   const page=await ctx.newPage(),errors=[];
+   page.on('pageerror',e=>errors.push(e.message));
+   await page.goto(url,{waitUntil:'load'});await waitReady(page);
+   for(const game of ['memory','quiz','match','word','speed']){
+    await page.locator('[data-cp-game="'+game+'"]').click();
+    const board=page.locator('.cp-board');await board.waitFor();
+    const m=await board.evaluate(el=>({right:el.getBoundingClientRect().right,overflow:document.documentElement.scrollWidth-innerWidth,board:el.scrollWidth-el.clientWidth}));
+    assert.ok(m.right<=width+2&&m.overflow<=2&&m.board<=2,game+' overflow '+width+': '+JSON.stringify(m));
+    if(width===390)await page.screenshot({path:path.join(root,'.qa','cham-play-v21-'+game+'-390.png'),fullPage:true});
+    await page.locator('[data-cp-back]').first().click();
+   }
+   assert.deepEqual(errors,[],'mobile game runtime');
+   await ctx.close();
+  }
   // Functional QA uses a single browser-local wallet so repeated rewards are verified.
   const context=await browser.newContext({viewport:{width:1440,height:900}});
   const page=await context.newPage(),errors=[];
@@ -92,6 +112,8 @@ const waitReady=async page=>page.locator('.cp-card').first().waitFor({timeout:15
   assert.equal(await page.locator('.cp-card').count(),5);
   await page.locator('[data-cp-game="memory"]').click();
   assert.equal(await page.locator('[data-cp-memory]').count(),8);
+  assert.equal(await page.locator('[data-cp-memory] .cp-icon').count(),8,'memory cards have vector art');
+  await page.screenshot({path:path.join(root,'.qa','cham-play-v21-memory-1440.png'),fullPage:true});
   const deck=await page.evaluate(()=>window.CHAMPlayQA.getState().state.deck);
   const ids=[...new Set(deck.map(c=>c.id))];
   for(const id of ids){
@@ -124,7 +146,10 @@ const waitReady=async page=>page.locator('.cp-card').first().waitFor({timeout:15
   console.log('CHAM_PLAY_MATCH_PASS');
   await page.locator('[data-cp-back]').first().click();
   await page.locator('[data-cp-game="word"]').click();
-  for(const [first,last] of [[1,3],[12,28],[33,35],[44,46],[56,58]]){
+  const wordPaths=await page.evaluate(()=>window.CHAMPlayQA.getState().state.wordPositions);
+  assert.equal(Object.keys(wordPaths).length,5);
+  for(const cells of Object.values(wordPaths)){
+   const first=cells[0],last=cells[cells.length-1];
    await page.locator('[data-cp-cell="'+first+'"]').click();
    await page.locator('[data-cp-cell="'+last+'"]').click();
   }
@@ -132,6 +157,8 @@ const waitReady=async page=>page.locator('.cp-card').first().waitFor({timeout:15
   console.log('CHAM_PLAY_WORD_PASS');
   await page.locator('[data-cp-back]').first().click();
   await page.locator('[data-cp-game="speed"]').click();
+  await page.locator('[data-cp-timebar]').waitFor();
+  assert.ok(await page.locator('[data-cp-seconds]').count(),'timer and progress available');
   for(let i=0;i<5;i++){
    const index=await page.evaluate(()=>window.CHAMPlayQA.getState().state.questions[window.CHAMPlayQA.getState().state.index].answerIndex);
    await page.locator('[data-cp-choice="'+index+'"]').click();

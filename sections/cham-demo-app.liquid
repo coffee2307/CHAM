@@ -5,12 +5,28 @@
   {% if section.settings.mode == 'play' %}
     <script type="application/json" id="cham-play-assets">
       {
-        "hero": {{ 'cham6-craft-shape-640.webp' | asset_url | json }},
-        "memory": {{ 'cham6-craft-clay-640.webp' | asset_url | json }},
-        "quiz": {{ 'cham6-craft-decoration-640.webp' | asset_url | json }},
-        "match": {{ 'cham5-detail-weave.webp' | asset_url | json }},
-        "word": {{ 'cham6-craft-trim-640.webp' | asset_url | json }},
-        "speed": {{ 'cham6-craft-kiln-640.webp' | asset_url | json }}
+        "hero": {{ 'cham-play-hero.svg' | asset_url | json }},
+        "memory": {{ 'cham-play-thumb-memory.svg' | asset_url | json }},
+        "quiz": {{ 'cham-play-thumb-quiz.svg' | asset_url | json }},
+        "match": {{ 'cham-play-thumb-match.svg' | asset_url | json }},
+        "word": {{ 'cham-play-thumb-word.svg' | asset_url | json }},
+        "speed": {{ 'cham-play-thumb-speed.svg' | asset_url | json }},
+        "icon-pot": {{ 'cham-play-icon-pot.svg' | asset_url | json }},
+        "icon-silk": {{ 'cham-play-icon-silk.svg' | asset_url | json }},
+        "icon-basket": {{ 'cham-play-icon-basket.svg' | asset_url | json }},
+        "icon-print": {{ 'cham-play-icon-print.svg' | asset_url | json }},
+        "icon-hat": {{ 'cham-play-icon-hat.svg' | asset_url | json }},
+        "icon-sew": {{ 'cham-play-icon-sew.svg' | asset_url | json }},
+        "icon-back": {{ 'cham-play-icon-back.svg' | asset_url | json }},
+        "icon-award": {{ 'cham-play-icon-award.svg' | asset_url | json }},
+        "icon-retry": {{ 'cham-play-icon-retry.svg' | asset_url | json }},
+        "icon-coin": {{ 'cham-play-icon-coin.svg' | asset_url | json }},
+        "icon-check": {{ 'cham-play-icon-check.svg' | asset_url | json }},
+        "icon-timer": {{ 'cham-play-icon-timer.svg' | asset_url | json }},
+        "icon-help": {{ 'cham-play-icon-help.svg' | asset_url | json }},
+        "icon-layers": {{ 'cham-play-icon-layers.svg' | asset_url | json }},
+        "icon-link": {{ 'cham-play-icon-link.svg' | asset_url | json }},
+        "icon-grid": {{ 'cham-play-icon-grid.svg' | asset_url | json }}
       }
     </script>
   {% endif %}
