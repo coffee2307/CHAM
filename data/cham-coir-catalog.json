@@ -1,0 +1,373 @@
+{
+  "schema_version": 1,
+  "project": "CHẠM",
+  "material_focus": "Xơ dừa",
+  "purpose": "Danh mục prototype phục vụ trình diễn; không phải xác nhận sản phẩm đã sản xuất.",
+  "publication": "pending_shopify_access",
+  "currency": "VND",
+  "price_policy": "Chưa định giá. Giữ giá cũ chỉ sau khi xác nhận phù hợp; không tự gán giá 0 hoặc bật thanh toán.",
+  "inventory_policy": "Không tự tạo tồn kho thực, không xóa lịch sử đơn hàng.",
+  "art_direction": "Ảnh sản phẩm concept chân thực, nền kem nhạt, sợi xơ dừa nâu tự nhiên, ánh sáng studio mềm, không logo giả, không chữ trên ảnh; ghi rõ ảnh minh họa trước khi có ảnh mẫu thật.",
+  "collections": [
+    {
+      "handle": "cham-ve-sinh-ca-nhan",
+      "title": "Chăm sóc cá nhân",
+      "products": [
+        {
+          "handle": "mieng-cha-got-chan",
+          "title": "Miếng chà gót chân xơ dừa",
+          "description": "Miếng chà dáng oval, bề mặt xơ dừa; mẫu thiết kế cần thử độ nhám trước khi sử dụng.",
+          "status": "DRAFT",
+          "material": "Xơ dừa (định hướng)",
+          "price": null,
+          "inventory": null,
+          "image": {
+            "filename": "cham-coir-mieng-cha-got-chan.webp",
+            "brief": "Oval coconut coir heel scrub pad, close-up visible coarse brown fibers",
+            "status": "not_generated",
+            "label": "Ảnh minh họa concept"
+          }
+        },
+        {
+          "handle": "mieng-cha-dang-tay",
+          "title": "Miếng chà tay xơ dừa",
+          "description": "Miếng chà có quai cầm, thiết kế dự kiến cho vệ sinh cá nhân; cần kiểm tra độ dịu của vật liệu.",
+          "status": "DRAFT",
+          "material": "Xơ dừa (định hướng)",
+          "price": null,
+          "inventory": null,
+          "image": {
+            "filename": "cham-coir-mieng-cha-dang-tay.webp",
+            "brief": "Handheld rectangular coconut coir scrub pad with simple cloth loop",
+            "status": "not_generated",
+            "label": "Ảnh minh họa concept"
+          }
+        },
+        {
+          "handle": "ban-chai-xo-dua",
+          "title": "Bàn chải xơ dừa cán gỗ",
+          "description": "Bàn chải với phần sợi xơ dừa và cán gỗ dự kiến; vật liệu phụ cần xác nhận.",
+          "status": "DRAFT",
+          "material": "Xơ dừa (định hướng)",
+          "price": null,
+          "inventory": null,
+          "image": {
+            "filename": "cham-coir-ban-chai-xo-dua.webp",
+            "brief": "Short wooden handled coconut coir bristle brush",
+            "status": "not_generated",
+            "label": "Ảnh minh họa concept"
+          }
+        },
+        {
+          "handle": "mieng-cha-tron",
+          "title": "Miếng chà tròn xơ dừa",
+          "description": "Miếng chà tròn nhỏ, bề mặt xơ dừa; công năng và độ nhám cần thử nghiệm.",
+          "status": "DRAFT",
+          "material": "Xơ dừa (định hướng)",
+          "price": null,
+          "inventory": null,
+          "image": {
+            "filename": "cham-coir-mieng-cha-tron.webp",
+            "brief": "Round flat coconut coir scrub disc with bound edge",
+            "status": "not_generated",
+            "label": "Ảnh minh họa concept"
+          }
+        }
+      ]
+    },
+    {
+      "handle": "nha-bep",
+      "title": "Nhà bếp",
+      "products": [
+        {
+          "handle": "mieng-rua-bat",
+          "title": "Miếng rửa bát xơ dừa",
+          "description": "Miếng chà rửa dụng cụ bếp; cần thử tương thích với bề mặt cần làm sạch.",
+          "status": "DRAFT",
+          "material": "Xơ dừa (định hướng)",
+          "price": null,
+          "inventory": null,
+          "image": {
+            "filename": "cham-coir-mieng-rua-bat.webp",
+            "brief": "Rectangular coconut coir dish scrub pad, dense natural fibers",
+            "status": "not_generated",
+            "label": "Ảnh minh họa concept"
+          }
+        },
+        {
+          "handle": "choi-rua-ly",
+          "title": "Chổi rửa ly xơ dừa",
+          "description": "Dáng chổi dài để tiếp cận lòng ly; kết cấu cán và sợi cần xác nhận.",
+          "status": "DRAFT",
+          "material": "Xơ dừa (định hướng)",
+          "price": null,
+          "inventory": null,
+          "image": {
+            "filename": "cham-coir-choi-rua-ly.webp",
+            "brief": "Long coconut coir bottle and cup brush",
+            "status": "not_generated",
+            "label": "Ảnh minh họa concept"
+          }
+        },
+        {
+          "handle": "mieng-cha-noi",
+          "title": "Miếng chà nồi xơ dừa",
+          "description": "Miếng chà dạng búi cho dụng cụ bếp phù hợp; không mặc định an toàn cho lớp chống dính.",
+          "status": "DRAFT",
+          "material": "Xơ dừa (định hướng)",
+          "price": null,
+          "inventory": null,
+          "image": {
+            "filename": "cham-coir-mieng-cha-noi.webp",
+            "brief": "Rounded dense coconut coir pot scrubber",
+            "status": "not_generated",
+            "label": "Ảnh minh họa concept"
+          }
+        },
+        {
+          "handle": "de-lot-noi",
+          "title": "Đế lót nồi xơ dừa",
+          "description": "Đế lót dự kiến dày và dạng tròn; chưa xác minh khả năng chịu nhiệt.",
+          "status": "DRAFT",
+          "material": "Xơ dừa (định hướng)",
+          "price": null,
+          "inventory": null,
+          "image": {
+            "filename": "cham-coir-de-lot-noi.webp",
+            "brief": "Round thick woven coconut coir trivet",
+            "status": "not_generated",
+            "label": "Ảnh minh họa concept"
+          }
+        }
+      ]
+    },
+    {
+      "handle": "khong-gian-song",
+      "title": "Không gian sống",
+      "products": [
+        {
+          "handle": "de-lot-ly-tron",
+          "title": "Đế lót ly xơ dừa tròn",
+          "description": "Đế lót tròn bằng xơ dừa, dùng làm vật dụng để bàn.",
+          "status": "DRAFT",
+          "material": "Xơ dừa (định hướng)",
+          "price": null,
+          "inventory": null,
+          "image": {
+            "filename": "cham-coir-de-lot-ly-tron.webp",
+            "brief": "Circular coconut coir drink coaster",
+            "status": "not_generated",
+            "label": "Ảnh minh họa concept"
+          }
+        },
+        {
+          "handle": "de-lot-ly-vuong",
+          "title": "Đế lót ly xơ dừa vuông",
+          "description": "Đế lót vuông bằng xơ dừa, kiểu dáng tối giản.",
+          "status": "DRAFT",
+          "material": "Xơ dừa (định hướng)",
+          "price": null,
+          "inventory": null,
+          "image": {
+            "filename": "cham-coir-de-lot-ly-vuong.webp",
+            "brief": "Square coconut coir coaster with neat edges",
+            "status": "not_generated",
+            "label": "Ảnh minh họa concept"
+          }
+        },
+        {
+          "handle": "tham-chui-chan",
+          "title": "Thảm chùi chân xơ dừa",
+          "description": "Thảm dạng chữ nhật; đế và khả năng chống trượt cần xác nhận.",
+          "status": "DRAFT",
+          "material": "Xơ dừa (định hướng)",
+          "price": null,
+          "inventory": null,
+          "image": {
+            "filename": "cham-coir-tham-chui-chan.webp",
+            "brief": "Rectangular thick coconut coir doormat, natural brown",
+            "status": "not_generated",
+            "label": "Ảnh minh họa concept"
+          }
+        },
+        {
+          "handle": "tham-trang-tri",
+          "title": "Thảm trang trí xơ dừa",
+          "description": "Thảm nhỏ dệt xơ dừa dùng trong không gian sống; mẫu thử chưa xác nhận.",
+          "status": "DRAFT",
+          "material": "Xơ dừa (định hướng)",
+          "price": null,
+          "inventory": null,
+          "image": {
+            "filename": "cham-coir-tham-trang-tri.webp",
+            "brief": "Small textured woven coconut coir area mat",
+            "status": "not_generated",
+            "label": "Ảnh minh họa concept"
+          }
+        }
+      ]
+    },
+    {
+      "handle": "thu-cung",
+      "title": "Thú cưng",
+      "products": [
+        {
+          "handle": "bong-meo",
+          "title": "Bóng xơ dừa cho mèo",
+          "description": "Mẫu đồ chơi hình bóng; cần đánh giá rụng sợi, nuốt dị vật và độ bền trước khi bán. Không phải đồ ăn.",
+          "status": "DRAFT",
+          "material": "Xơ dừa (định hướng)",
+          "price": null,
+          "inventory": null,
+          "image": {
+            "filename": "cham-coir-bong-meo.webp",
+            "brief": "Compact spherical coconut coir cat play ball, no loose dangling fibers",
+            "status": "not_generated",
+            "label": "Ảnh minh họa concept"
+          }
+        },
+        {
+          "handle": "xuong-cho",
+          "title": "Đồ chơi hình xương xơ dừa cho chó",
+          "description": "Mẫu đồ chơi hình xương, không phải xương ăn được; chưa xác minh an toàn khi nhai. Chỉ dùng dưới giám sát nếu mẫu đạt kiểm tra.",
+          "status": "DRAFT",
+          "material": "Xơ dừa (định hướng)",
+          "price": null,
+          "inventory": null,
+          "image": {
+            "filename": "cham-coir-xuong-cho.webp",
+            "brief": "Bone-shaped tightly bound coconut coir dog toy prototype, not edible",
+            "status": "not_generated",
+            "label": "Ảnh minh họa concept"
+          }
+        },
+        {
+          "handle": "vong-do-choi",
+          "title": "Vòng đồ chơi xơ dừa",
+          "description": "Mẫu vòng đồ chơi cần kiểm tra kết cấu và nguy cơ nuốt sợi trước khi sử dụng.",
+          "status": "DRAFT",
+          "material": "Xơ dừa (định hướng)",
+          "price": null,
+          "inventory": null,
+          "image": {
+            "filename": "cham-coir-vong-do-choi.webp",
+            "brief": "Compact ring-shaped tightly woven coconut coir pet toy prototype",
+            "status": "not_generated",
+            "label": "Ảnh minh họa concept"
+          }
+        },
+        {
+          "handle": "tam-cao-meo",
+          "title": "Tấm cào xơ dừa cho mèo",
+          "description": "Mẫu tấm cào dự kiến; độ bền, phần đế và khả năng rụng sợi cần kiểm tra.",
+          "status": "DRAFT",
+          "material": "Xơ dừa (định hướng)",
+          "price": null,
+          "inventory": null,
+          "image": {
+            "filename": "cham-coir-tam-cao-meo.webp",
+            "brief": "Rectangular coconut coir cat scratch mat with finished edges",
+            "status": "not_generated",
+            "label": "Ảnh minh họa concept"
+          }
+        }
+      ]
+    },
+    {
+      "handle": "vuon-va-chim",
+      "title": "Vườn và chim",
+      "products": [
+        {
+          "handle": "to-chim",
+          "title": "Tổ chim xơ dừa",
+          "description": "Mẫu tổ chim trang trí dạng chén; không xác nhận phù hợp cho chim sống khi chưa đánh giá nguy cơ mắc sợi.",
+          "status": "DRAFT",
+          "material": "Xơ dừa (định hướng)",
+          "price": null,
+          "inventory": null,
+          "image": {
+            "filename": "cham-coir-to-chim.webp",
+            "brief": "Bowl-shaped coconut coir decorative bird nest prototype",
+            "status": "not_generated",
+            "label": "Ảnh minh họa concept"
+          }
+        },
+        {
+          "handle": "chau-uom",
+          "title": "Chậu ươm xơ dừa",
+          "description": "Mẫu chậu ươm từ xơ dừa ép; thành phần chất kết dính và thông số cần xác nhận.",
+          "status": "DRAFT",
+          "material": "Xơ dừa (định hướng)",
+          "price": null,
+          "inventory": null,
+          "image": {
+            "filename": "cham-coir-chau-uom.webp",
+            "brief": "Small molded coconut coir seedling pots",
+            "status": "not_generated",
+            "label": "Ảnh minh họa concept"
+          }
+        },
+        {
+          "handle": "tam-lot-chau",
+          "title": "Tấm lót chậu xơ dừa",
+          "description": "Tấm lót dự kiến dùng cho chậu trồng; cần kiểm tra kích thước và khả năng giữ ẩm.",
+          "status": "DRAFT",
+          "material": "Xơ dừa (định hướng)",
+          "price": null,
+          "inventory": null,
+          "image": {
+            "filename": "cham-coir-tam-lot-chau.webp",
+            "brief": "Round molded coconut coir planter liner",
+            "status": "not_generated",
+            "label": "Ảnh minh họa concept"
+          }
+        },
+        {
+          "handle": "tam-phu-goc",
+          "title": "Tấm phủ gốc cây xơ dừa",
+          "description": "Tấm dạng đĩa có khe đặt quanh gốc; đặc tính sử dụng cần thử nghiệm.",
+          "status": "DRAFT",
+          "material": "Xơ dừa (định hướng)",
+          "price": null,
+          "inventory": null,
+          "image": {
+            "filename": "cham-coir-tam-phu-goc.webp",
+            "brief": "Flat coconut coir mulch mat disc with central opening",
+            "status": "not_generated",
+            "label": "Ảnh minh họa concept"
+          }
+        }
+      ]
+    }
+  ],
+  "migration": {
+    "replace_catalog": true,
+    "archive_previous_catalog_after_backup": true,
+    "theme_targets": [
+      "sections/cham5-story.liquid",
+      "sections/cham5-explore.liquid",
+      "sections/cham5-market.liquid",
+      "snippets/cham-about-content.liquid",
+      "assets/cham-craft-knowledge.js",
+      "assets/cham-quest.js",
+      "assets/cham-play-packing.js",
+      "assets/cham-play-wheel.js",
+      "assets/cham-play-expansion.js",
+      "sections/cham-demo-app.liquid"
+    ],
+    "preserve": [
+      "Existing horizontal scroll and header behavior",
+      "CHẠM Play mechanics and demo point rules",
+      "Shopify checkout and payment settings",
+      "Existing historical orders"
+    ],
+    "verify": [
+      "Inventory actual catalog before changes",
+      "Generate distinct product images and replace old thumbnails including CHẠM Play art",
+      "Update all collections and navigation; check homepage and product routes",
+      "Remove old material-specific claims and village claims; preserve About report as historical record only, distinguish new concept",
+      "Verify all 20 proposed items have images and no old product photos remain",
+      "Check responsive and game logic; publish existing main theme only after validation"
+    ]
+  }
+}
