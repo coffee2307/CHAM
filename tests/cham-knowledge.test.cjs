@@ -16,4 +16,4 @@ for(let i=0;i<400;i++){
 assert.ok(collected.size>=22,'Question stems sufficiently varied');
 assert.equal(kinds.size,5);
 for(let i=0;i<40;i++){const run=data.generateRun(5);assert.equal(run.length,5);assert.equal(new Set(run.map(x=>x.id)).size,5);}
-console.log('PASS: 400 generated questions, 5 templates, 6 verified craft records, randomized 5-stage runs');
+console.log('PASS: 400 generated questions, 5 templates, 6 catalog concept records, randomized 5-stage runs');

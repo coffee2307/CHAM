@@ -1,16 +1,7 @@
-/* Craft knowledge data used to generate varied questions at runtime.
-   Sources: official Vietnam National Authority of Tourism and vietnam.travel.
-   Static verified facts; prompts, distractors and order are procedurally generated. */
+/* CHẠM catalog concept questions; not verified manufacturing claims. */
 (function(){
 'use strict';
-const records=[
-{id:'bat-trang',village:'Bát Tràng',region:'Hà Nội',craft:'Gốm sứ',material:'Đất sét',product:'Bình gốm',method:'Nung trong lò',tip:'Nghề gốm Bát Tràng kết hợp tạo hình, trang trí và nung sản phẩm trong lò.',source:'https://vietnam.travel/things-to-do/full-day-trip-bat-trang-pottery-village/'},
-{id:'van-phuc',village:'Vạn Phúc',region:'Hà Nội',craft:'Dệt lụa',material:'Sợi tơ tằm',product:'Khăn lụa',method:'Dệt sợi trên khung',tip:'Vạn Phúc được biết đến với nghề dệt lụa truyền thống và các sản phẩm từ tơ tằm.',source:'https://vietnam.travel/things-to-do/wander-ancient-traditional-silk-villages-vietnam/'},
-{id:'phu-vinh',village:'Phú Vinh',region:'Hà Nội',craft:'Mây tre đan',material:'Mây và tre',product:'Giỏ đan',method:'Đan nan bằng tay',tip:'Phú Vinh nổi tiếng về các sản phẩm mây tre đan tinh xảo.',source:'https://vietnamtourism.gov.vn/en/printer/20688?type=1'},
-{id:'dong-ho',village:'Đông Hồ',region:'Bắc Ninh',craft:'Tranh dân gian',material:'Bản khắc gỗ',product:'Tranh in dân gian',method:'In từ bản khắc gỗ',tip:'Tranh Đông Hồ gắn với kỹ thuật in tranh dân gian từ ván khắc gỗ ở Bắc Ninh.',source:'https://vietnamtourism.gov.vn/en/post/5644'},
-{id:'chuong',village:'Chuông',region:'Hà Nội',craft:'Làm nón lá',material:'Lá nón',product:'Nón lá',method:'Khâu lá lên khung nón',tip:'Làng Chuông ở Hà Nội được biết đến với nghề làm nón lá truyền thống.',source:'https://vietnam.travel/node/1452'},
-{id:'quat-dong',village:'Quất Động',region:'Hà Nội',craft:'Thêu tay',material:'Chỉ thêu',product:'Đồ vải thêu',method:'Thêu bằng kim và chỉ',tip:'Quất Động là một trong những làng nghề thêu tay truyền thống tại Hà Nội.',source:'https://vietnamtourism.gov.vn/en/printer/20688?type=1'}
-];
+const records=[{"id": "heel", "village": "Miếng chà gót chân", "region": "Danh mục CHẠM", "craft": "Chăm sóc gót chân", "material": "Miếng chà oval", "product": "Miếng chà gót chân", "method": "Kiểm tra độ nhám", "tip": "Mẫu miếng chà gót chân dạng oval; cần thử độ nhám trước khi sử dụng.", "source": "https://5yvv8u-44.myshopify.com/products/mieng-cha-got-chan"}, {"id": "dish", "village": "Miếng rửa bát", "region": "Danh mục CHẠM", "craft": "Làm sạch bát", "material": "Miếng chà chữ nhật", "product": "Miếng rửa bát", "method": "Thử tương thích bề mặt", "tip": "Miếng rửa bát dạng chữ nhật là mẫu cho nhà bếp; cần thử tương thích bề mặt.", "source": "https://5yvv8u-44.myshopify.com/products/mieng-rua-bat"}, {"id": "cup", "village": "Đế lót ly tròn", "region": "Danh mục CHẠM", "craft": "Lót ly", "material": "Đế lót tròn", "product": "Đế lót ly tròn", "method": "Chọn kích thước để bàn", "tip": "Đế lót ly tròn là mẫu vật dụng cho mặt bàn, với kích thước cần xác nhận.", "source": "https://5yvv8u-44.myshopify.com/products/de-lot-ly-tron"}, {"id": "mat", "village": "Thảm chùi chân", "region": "Danh mục CHẠM", "craft": "Chùi chân", "material": "Thảm chữ nhật", "product": "Thảm chùi chân", "method": "Kiểm tra khả năng chống trượt", "tip": "Thảm chùi chân dạng chữ nhật cần đánh giá đế và khả năng chống trượt.", "source": "https://5yvv8u-44.myshopify.com/products/tham-chui-chan"}, {"id": "cat", "village": "Bóng cho mèo", "region": "Danh mục CHẠM", "craft": "Đồ chơi cho mèo", "material": "Quả bóng sợi", "product": "Bóng cho mèo", "method": "Đánh giá rụng sợi", "tip": "Bóng xơ dừa cho mèo chỉ là mẫu concept, cần đánh giá rụng sợi và nguy cơ nuốt dị vật.", "source": "https://5yvv8u-44.myshopify.com/products/bong-meo"}, {"id": "plant", "village": "Chậu ươm", "region": "Danh mục CHẠM", "craft": "Ươm cây", "material": "Chậu ép dạng cốc", "product": "Chậu ươm", "method": "Xác minh chất kết dính", "tip": "Chậu ươm xơ dừa là mẫu thiết kế; thành phần chất kết dính và thông số cần xác nhận.", "source": "https://5yvv8u-44.myshopify.com/products/chau-uom"}];
 function shuffle(input,random=Math.random){
  const arr=[...input];
  for(let i=arr.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
@@ -18,11 +9,11 @@ function shuffle(input,random=Math.random){
 }
 function buildQuestion(fact,random=Math.random){
  const forms=[
-  {key:'craft',name:'Nghề truyền thống gắn với làng',prompt:r=>['Làng '+r.village+' được biết đến với nghề nào?', 'Khi nhắc đến làng '+r.village+', nghề nào phù hợp nhất?'][Math.floor(random()*2)]},
-  {key:'village',name:'Làng nghề',prompt:r=>['Nghề '+r.craft.toLowerCase()+' gắn với làng nào trong số này?', 'Đâu là làng nghề nổi tiếng với '+r.craft.toLowerCase()+'?'][Math.floor(random()*2)]},
-  {key:'material',name:'Chất liệu',prompt:r=>'Trong các lựa chọn, chất liệu nào gắn với nghề '+r.craft.toLowerCase()+'?'},
-  {key:'product',name:'Sản phẩm',prompt:r=>'Sản phẩm nào thường gắn với nghề '+r.craft.toLowerCase()+'?'},
-  {key:'method',name:'Kỹ thuật',prompt:r=>'Hoạt động nào đặc trưng cho nghề '+r.craft.toLowerCase()+'?'}
+  {key:'craft',name:'Ứng dụng',prompt:r=>['Mẫu '+r.product.toLowerCase()+' được thiết kế cho nhu cầu nào?', 'Ứng dụng dự kiến của '+r.product.toLowerCase()+' là gì?'][Math.floor(random()*2)]},
+  {key:'village',name:'Nhận diện sản phẩm',prompt:r=>['Mẫu nào có hình dáng '+r.material.toLowerCase()+'?', 'Nhận diện mẫu có dạng '+r.material.toLowerCase()+'?'][Math.floor(random()*2)]},
+  {key:'material',name:'Hình dáng',prompt:r=>'Mẫu '+r.product.toLowerCase()+' có dạng nào trong catalog?'},
+  {key:'product',name:'Sản phẩm',prompt:r=>'Mẫu nào thuộc ứng dụng '+r.craft.toLowerCase()+'?'},
+  {key:'method',name:'Kiểm chứng',prompt:r=>'Điều nào cần chú ý với mẫu '+r.product.toLowerCase()+' theo mô tả catalog?'}
  ];
  const form=forms[Math.floor(random()*forms.length)];
  const key=form.key;

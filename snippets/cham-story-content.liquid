@@ -6,8 +6,8 @@
   <div class="cham-shell cham-story-v4__hero">
     <div class="cham-story-v4__opening" data-cham-scroll>
       <p class="cham-story-v4__kicker">CÂU CHUYỆN CHẠM</p>
-      <h1>Chuyện của những món đồ làm bằng tay.</h1>
-      <p>Một chiếc bình gốm, một tấm vải dệt hay chiếc giỏ mây có thể rất quen thuộc. Nhưng phía sau mỗi món đồ là một cách làm, một chất liệu và những điều đáng tìm hiểu.</p>
+      <h1>Chuyện của những sợi xơ dừa.</h1>
+      <p>Miếng chà, đế lót, thảm và các mẫu sản phẩm xơ dừa mở ra nhiều hướng ứng dụng trong đời sống.</p>
       <a href="{{ routes.all_products_collection_url }}" class="cham-story-v4__text-link">Khám phá sản phẩm <span aria-hidden="true">→</span></a>
     </div>
     <div class="cham-story-v4__photo-composition" data-cham-scroll>
@@ -17,7 +17,7 @@
       {% if weaving.featured_image %}
         {{ weaving.featured_image | image_url: width: 760 | image_tag: loading: 'lazy', widths: '250, 450, 760', sizes: '(max-width: 800px) 45vw, 20vw', alt: weaving.title, class: 'cham-story-v4__secondary-photo' }}
       {% endif %}
-      <span class="cham-story-v4__photo-caption">Gốm. Mây tre. Vải dệt. Quà tặng.</span>
+      <span class="cham-story-v4__photo-caption">Xơ dừa trong đời sống.</span>
     </div>
   </div>
   <div class="cham-story-v4__belief">
@@ -30,29 +30,29 @@
   <div class="cham-shell cham-story-v4__stories">
     <header class="cham-story-v4__section-head" data-cham-scroll>
       <p class="cham-story-v4__kicker">TỪ CHẤT LIỆU ĐẾN ĐỜI SỐNG</p>
-      <h2>Ba góc nhìn về đồ thủ công.</h2>
+      <h2>Ba góc nhìn về xơ dừa.</h2>
     </header>
     <div class="cham-story-v4__story-grid" data-cham-scroll>
       <article class="cham-story-v4__story-card">
         <a href="{{ pottery.url | default: routes.all_products_collection_url }}" class="cham-story-v4__card-photo">
           {% if pottery.featured_image %}{{ pottery.featured_image | image_url: width: 850 | image_tag: loading: 'lazy', widths: '300, 550, 850', sizes: '(max-width: 720px) 90vw, 30vw', alt: pottery.title }}{% endif %}
         </a>
-        <h3>Từ đất và lửa.</h3>
-        <p>Đồ gốm đi qua nhiều công đoạn trước khi đến tay người dùng. Đó cũng là lý do một chiếc ly không chỉ có hình dáng hay màu men.</p>
+        <h3>Chăm sóc cá nhân.</h3>
+        <p>Miếng chà và bàn chải là mẫu thiết kế cần kiểm tra độ nhám và công năng.</p>
       </article>
       <article class="cham-story-v4__story-card">
         <a href="{{ weaving.url | default: routes.all_products_collection_url }}" class="cham-story-v4__card-photo">
           {% if weaving.featured_image %}{{ weaving.featured_image | image_url: width: 850 | image_tag: loading: 'lazy', widths: '300, 550, 850', sizes: '(max-width: 720px) 90vw, 30vw', alt: weaving.title }}{% endif %}
         </a>
-        <h3>Từ những sợi đan.</h3>
-        <p>Mây và tre có thể trở thành vật dụng gần gũi trong nhà. Cấu trúc đan và cách xử lý vật liệu ảnh hưởng đến độ bền và công năng.</p>
+        <h3>Nhà bếp.</h3>
+        <p>Miếng rửa bát và đế lót là các hướng ứng dụng xơ dừa; khả năng sử dụng cần được kiểm chứng.</p>
       </article>
       <article class="cham-story-v4__story-card">
         <a href="{{ textile.url | default: routes.all_products_collection_url }}" class="cham-story-v4__card-photo">
           {% if textile.featured_image %}{{ textile.featured_image | image_url: width: 850 | image_tag: loading: 'lazy', widths: '300, 550, 850', sizes: '(max-width: 720px) 90vw, 30vw', alt: textile.title }}{% endif %}
         </a>
-        <h3>Từ đôi tay người làm.</h3>
-        <p>Dệt, thêu và hoàn thiện sản phẩm là những kỹ năng cần thời gian rèn luyện. CHẠM muốn người mua có cơ hội tìm hiểu điều đó.</p>
+        <h3>Không gian sống.</h3>
+        <p>Thảm và đế lót cho thấy các dạng kết cấu khác nhau của mẫu sản phẩm.</p>
       </article>
     </div>
   </div>
@@ -61,8 +61,8 @@
       <div class="cham-story-v4__play-copy">
         <p class="cham-story-v4__kicker">KHÁM PHÁ BẰNG CÁCH CHƠI</p>
         <h2>Thử một hành trình khác cùng CHẠM.</h2>
-        <p>Trong CHẠM Play, mỗi vật phẩm thu thập được sẽ mở ra một câu hỏi ngắn về nghề truyền thống. Chơi để hiểu thêm về điều mình đang khám phá.</p>
-        <a class="cham-story-v4__cta" href="/pages/cham-play">Chơi CHẠM Quest</a>
+        <p>CHẠM Play giúp khám phá danh mục xơ dừa thông qua câu hỏi, ghép cặp và các thử thách.</p>
+        <a class="cham-story-v4__cta" href="/pages/cham-play">Chơi CHẠM Play</a>
       </div>
       <div class="cham-story-v4__play-photo">
         {% if gift.featured_image %}

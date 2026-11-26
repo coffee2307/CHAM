@@ -9,13 +9,13 @@ const wheel=window.CHAMPlayWheel;
 if(typeof legacy!=='function'||!meta||!pack||!wheel)return;
 const escape=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const names={
- memory:'Ghép cặp thủ công',quiz:'Đoán nghề Việt',match:'Nối chất liệu',
- word:'Ô chữ thủ công',speed:'Thử thách nhanh',pack:'Đóng gói đơn hàng',wheel:'Vòng khám phá'
+ memory:'Ghép cặp xơ dừa',quiz:'Đoán sản phẩm',match:'Nối công dụng',
+ word:'Ô chữ xơ dừa',speed:'Thử thách nhanh',pack:'Đóng gói đơn hàng',wheel:'Vòng khám phá'
 };
 const detail={
  memory:{tag:'Trí nhớ',time:'2–5 phút',description:'Lật các thẻ, tìm cặp tương ứng và giữ nhịp ghép liên tiếp.',mode:['Dễ · 4 cặp','Vừa · 5 cặp','Khó · 6 cặp']},
  quiz:{tag:'Kiến thức',time:'2–4 phút',description:'Đọc tư liệu, chọn đáp án và học điều mới từ lời giải thích.',mode:['Ngắn · 3 câu','Thường · 5 câu','Chuỗi · 5 câu']},
- match:{tag:'Ghép nối',time:'3 phút',description:'Chọn nghề và nguyên liệu tương ứng. Hai đầu ghép đúng được đánh dấu chung.',mode:['Cơ bản','Nâng cao','Thử thách']},
+ match:{tag:'Ghép nối',time:'3 phút',description:'Chọn ứng dụng và hình dáng tương ứng. Hai đầu ghép đúng được đánh dấu chung.',mode:['Cơ bản','Nâng cao','Thử thách']},
  word:{tag:'Giải đố',time:'3–5 phút',description:'Tìm các từ khóa theo hàng ngang, cột dọc, cả hai chiều.',mode:['Gợi ý','Thường','Không gợi ý']},
  speed:{tag:'Phản xạ',time:'30–60 giây',description:'Trả lời nhanh năm câu hỏi, cân bằng tốc độ và độ chính xác.',mode:['60 giây','45 giây','30 giây']},
  pack:{tag:'Mô phỏng',time:'2–3 phút',description:'Chọn cách bảo vệ phù hợp cho sản phẩm trong đơn hàng giả lập.',mode:['Tập làm quen','Đóng gói','Thử thách']},
@@ -176,7 +176,7 @@ function mount(root,core){
     '<div class="cp4-session-illustration">'+img('pack')+'</div><div class="cp3-pack-layout"><section class="cp-board cp3-pack-board">'+
     '<div class="cp-board__top"><strong>Đơn hàng '+(s.index+1)+'</strong><span>Đúng '+s.correct+' · Sai '+s.mistakes+'</span></div>'+
     '<div class="cp-progress"><div style="width:'+(s.index/4*100)+'%"></div></div>'+
-    '<div class="cp3-parcel"><span class="cp3-parcel__icon">'+icon('basket')+'</span>'+
+    '<div class="cp3-parcel"><span class="cp3-parcel__icon">'+icon('layers')+'</span>'+
     '<p>Chuẩn bị gửi sản phẩm</p><h2>'+escape(p.product)+'</h2>'+
     '<span>'+escape(p.craft)+' · '+escape(p.village)+'</span></div>'+
     '<h3>Chọn vật liệu bảo vệ phù hợp</h3><div class="cp3-pack-options">'+
@@ -209,10 +209,10 @@ function mount(root,core){
    '<p>Hoàn thành hai nhiệm vụ hằng ngày để mở một huy hiệu. Không phải vòng quay đổi tiền hoặc voucher.</p></div></header>'+
    '<div class="cp4-session-illustration">'+img('wheel')+'</div><div class="cp3-wheel-layout"><section class="cp-board"><div class="cp3-wheel-wrap">'+
    '<span class="cp3-wheel-pointer" aria-hidden="true">▼</span>'+
-   '<div class="cp3-wheel-disc '+(spinning?'is-spinning':'')+'" style="--cp3-rotation:'+angle+'deg" aria-label="Sáu biểu tượng nghề thủ công">'+
+   '<div class="cp3-wheel-disc '+(spinning?'is-spinning':'')+'" style="--cp3-rotation:'+angle+'deg" aria-label="Sáu biểu tượng sản phẩm xơ dừa">'+
    secs.map((x,i)=>'<span style="--n:'+i+'">'+escape(x.label)+'</span>').join('')+'</div></div>'+
    '<p class="cp3-wheel-note">'+(s.finished?'Đã mở được huy hiệu khám phá hôm nay.':
-     summary.giftReady?'Quà đã sẵn sàng. Hãy mở để xem biểu tượng nghề hôm nay.':
+     summary.giftReady?'Quà đã sẵn sàng. Hãy mở để xem biểu tượng sản phẩm hôm nay.':
      summary.giftClaimed?'Bạn đã nhận quà hôm nay.':'Hoàn thành thêm nhiệm vụ để mở quà.')+'</p>'+
    '<button type="button" class="cp-primary" data-v3-spin '+(!s.ready||s.claimed||spinning?'disabled':'')+'>'+
    (s.finished?'Đã nhận quà':'Mở quà hôm nay')+'</button></section>'+
