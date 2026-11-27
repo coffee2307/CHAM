@@ -1,5 +1,5 @@
 {%- assign cham_variant = product.selected_or_first_available_variant -%}
-<article class="cham-shop-card" data-cham-item data-cham-handle="{{ product.handle }}" data-cham-title="{{ product.title | escape }}" data-cham-price="{{ product.price | divided_by: 100.0 }}" data-cham-type="{{ product.type | escape }}">
+<article class="cham-shop-card" data-cham-item data-cham-tags="{{ product.tags | join: ',' | escape }}" data-cham-handle="{{ product.handle }}" data-cham-title="{{ product.title | escape }}" data-cham-price="{{ product.price | divided_by: 100.0 }}" data-cham-type="{{ product.type | escape }}">
   <div class="cham-shop-card__visual">
     <a href="{{ product.url }}" aria-label="Xem {{ product.title | escape }}">
       {% if product.featured_image != blank %}

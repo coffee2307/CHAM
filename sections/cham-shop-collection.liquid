@@ -34,13 +34,14 @@
     </label>
   </div>
   {% paginate collection.products by 50 %}
-    <div class="cham-shop-grid cham-shop-grid--collection" data-cham-shop-grid>
+    <div class="cham-shop-grid cham-shop-grid--collection" data-cham-shop-grid data-cham-pages="{{ paginate.pages }}" data-cham-page="{{ paginate.current_page }}" data-cham-page-param="{{ paginate.page_param }}" data-cham-section-id="{{ section.id }}" data-cham-total="{{ collection.products_count }}">
       {% for item in collection.products %}
         {% render 'cham-shop-card', product: item %}
       {% else %}
         <p class="cham-shop-page__empty">Chưa có sản phẩm trong danh mục này.</p>
       {% endfor %}
     </div>
+    <p class="cham-shop-page__load-state" data-cham-load-state role="status" hidden></p>
     <div class="cham-shop-page__empty" data-cham-no-matches hidden>Không tìm thấy sản phẩm phù hợp. <button type="button" data-cham-reset-filters>Xóa bộ lọc</button></div>
     {% if paginate.pages > 1 %}
       <nav class="cham-shop-page__pagination" aria-label="Trang kết quả">{{ paginate | default_pagination }}</nav>
