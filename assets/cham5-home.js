@@ -45,24 +45,29 @@ function revealImages(){
 }
 revealImages();
 /* Native video: lazy start, pause offscreen, no per-frame JS. */
-const workshop=$('[data-cham-workshop-video]',root);
-const workshopToggle=$('[data-cham-workshop-toggle]',root);
-if(workshop){
+const filmMobile=window.matchMedia('(max-width: 767px)');
+$$('[data-cham-workshop-video]',root).forEach(workshop=>{
+ const mobile=Boolean(workshop.closest('[data-cham-mobile-film]'));
+ const button=workshop.parentElement.querySelector('[data-cham-workshop-toggle]');
  let visible=false,userPaused=reduced.matches;
- const ensure=()=>{if(!workshop.getAttribute('src')){workshop.src=workshop.dataset.src;workshop.load();}};
- const sync=()=>{if(visible&&!document.hidden&&!userPaused){ensure();workshop.muted=true;workshop.play().catch(()=>{});}else workshop.pause();};
- const updateButton=()=>{if(!workshopToggle)return;workshopToggle.textContent=userPaused?'\u25B6':'\u275A\u275A';workshopToggle.setAttribute('aria-pressed',String(userPaused));workshopToggle.setAttribute('aria-label',userPaused?'Phat video':'Tam dung video');};
+ const eligible=()=>filmMobile.matches===mobile;
+ const ensure=()=>{if(!workshop.getAttribute('src')&&workshop.dataset.src){workshop.src=workshop.dataset.src;workshop.load();}};
+ const sync=()=>{
+  if(eligible()&&visible&&!document.hidden&&!userPaused){ensure();workshop.muted=true;workshop.play().catch(()=>{});}
+  else workshop.pause();
+ };
+ const updateButton=()=>{if(!button)return;button.textContent=userPaused?'\u25B6':'\u275A\u275A';button.setAttribute('aria-pressed',String(userPaused));button.setAttribute('aria-label',userPaused?'Phát video':'Tạm dừng video');};
  if('IntersectionObserver' in window){
-  const warm=new IntersectionObserver(e=>{if(e.some(x=>x.isIntersecting)){ensure();warm.disconnect();}},{rootMargin:'320px 0px'});
-  if(!userPaused)warm.observe(workshop);
-  new IntersectionObserver(e=>{visible=e[0].isIntersecting;sync();},{threshold:.05}).observe(workshop);
+  const warm=new IntersectionObserver(entries=>{if(eligible()&&!userPaused&&entries.some(e=>e.isIntersecting)){ensure();warm.disconnect();}},{rootMargin:'240px 0px'});
+  warm.observe(workshop);
+  new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync();},{threshold:.03}).observe(workshop);
  }else{visible=true;sync();}
- workshopToggle?.addEventListener('click',()=>{userPaused=!userPaused;updateButton();sync();});
+ button?.addEventListener('click',()=>{userPaused=!userPaused;updateButton();sync();});
  document.addEventListener('visibilitychange',sync);
+ filmMobile.addEventListener?.('change',sync);
  reduced.addEventListener?.('change',()=>{userPaused=reduced.matches;updateButton();sync();});
  updateButton();
-}
-
+});
 if(!window.gsap||!window.ScrollTrigger)return;
 const gsap=window.gsap,ScrollTrigger=window.ScrollTrigger;
 gsap.registerPlugin(ScrollTrigger);

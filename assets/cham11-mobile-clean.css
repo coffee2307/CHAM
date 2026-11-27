@@ -418,3 +418,13 @@ body.cham5-home .cham9-hero__hand{display:none!important}
     top:69%!important;
   }
 }
+
+/* Mobile hero: edge-to-edge native film, preserve source aspect ratio. */
+body.cham5-home .cham9-hero__film{display:none!important}
+@media(max-width:767px){
+ body.cham5-home .cham9-hero__art--potter{display:none!important}
+ body.cham5-home .cham9-hero__film{display:block!important;position:relative;grid-column:1;grid-row:1;justify-self:center;width:calc(100% / .86);max-width:none!important;aspect-ratio:1272/720;margin:0!important;padding:0!important;overflow:hidden;background:#e6ddd0;isolation:isolate}
+ body.cham5-home .cham9-hero__film video{display:block;width:100%;height:100%;max-width:none;object-fit:contain;object-position:center;background:#e6ddd0}
+ body.cham5-home .cham9-hero__spread{min-width:0!important;width:100%!important;overflow:visible!important}
+ body.cham5-home .cham9-hero__film .cham-workshop-toggle{right:12px;bottom:12px}
+}
