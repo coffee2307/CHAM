@@ -576,3 +576,6 @@ body.cham-site.cham-play-mode .cp3-dialog{flex:none}
  body.cham-site.cham-play-mode .cp-session .cp-match-option{min-height:31px;margin-bottom:3px}
  body.cham-site.cham-play-mode .cp-session .cp-board{padding:9px!important}
 }
+
+/* Dialog must also sit above the result screen during replay. */
+body.cham-site.cham-play-mode .cp3-dialog-backdrop{z-index:10003!important}
