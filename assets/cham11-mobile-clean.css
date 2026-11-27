@@ -428,3 +428,49 @@ body.cham5-home .cham9-hero__film{display:none!important}
  body.cham5-home .cham9-hero__spread{min-width:0!important;width:100%!important;overflow:visible!important}
  body.cham5-home .cham9-hero__film .cham-workshop-toggle{right:12px;bottom:12px}
 }
+
+/* Mobile hero film: flush with header, readable overlaid title. */
+@media(max-width:767px){
+ body.cham5-home .cham9-hero{
+   position:relative!important;display:block!important;
+   width:100%!important;min-height:0!important;
+   margin:0!important;padding:0 0 30px!important;
+   overflow:hidden!important;isolation:isolate;
+ }
+ body.cham5-home .cham9-hero .cham9-hero__masthead{
+   position:absolute!important;top:clamp(16px,4.4vw,30px)!important;
+   left:7%!important;right:7%!important;width:auto!important;
+   margin:0!important;padding:0!important;z-index:4!important;
+   pointer-events:none;
+ }
+ body.cham5-home .cham9-hero .cham9-hero__masthead h1{
+   color:#fff!important;text-shadow:0 2px 12px rgba(0,0,0,.5);
+   font-size:clamp(40px,12vw,68px)!important;line-height:1.08!important;
+   margin:0!important;
+ }
+ body.cham5-home .cham9-hero .cham9-hero__word{color:#fff!important}
+ body.cham5-home .cham9-hero .cham9-hero__subword{
+   color:#fff!important;font-weight:450!important;
+   font-size:clamp(22px,6vw,34px)!important;
+   line-height:1.25!important;margin-top:4px!important;
+   text-shadow:0 2px 8px rgba(0,0,0,.6);
+ }
+ body.cham5-home .cham9-hero .cham9-hero__spread{
+   display:grid!important;grid-template-columns:minmax(0,1fr)!important;
+   grid-template-rows:auto auto!important;width:100%!important;
+   margin:0!important;padding:0!important;gap:0!important;
+ }
+ body.cham5-home .cham9-hero .cham9-hero__film{
+   width:100%!important;max-width:none!important;margin:0!important;
+   align-self:start!important;aspect-ratio:1272/720;
+ }
+ body.cham5-home .cham9-hero .cham9-hero__film:after{
+   content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+   background:linear-gradient(180deg,rgba(16,12,8,.66) 0%,rgba(16,12,8,.42) 32%,rgba(16,12,8,.10) 62%,transparent 88%);
+ }
+ body.cham5-home .cham9-hero .cham9-hero__film .cham-workshop-toggle{z-index:3!important}
+ body.cham5-home .cham9-hero .cham9-hero__essay{
+   width:86%!important;max-width:none!important;justify-self:center!important;
+   margin:16px auto 0!important;padding:0!important;
+ }
+}
