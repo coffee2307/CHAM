@@ -579,3 +579,90 @@ body.cham-site.cham-play-mode .cp3-dialog{flex:none}
 
 /* Dialog must also sit above the result screen during replay. */
 body.cham-site.cham-play-mode .cp3-dialog-backdrop{z-index:10003!important}
+
+/* Play 3.2: intentional full-screen composition, real card proportions. */
+body.cham-site.cham-play-mode .cp-session[data-cp-game-id="memory"] .cp-fit-stage{
+ max-width:1240px;
+}
+body.cham-site.cham-play-mode .cp-session[data-cp-game-id="memory"] .cp-session-layout{
+ grid-template-columns:minmax(0,1fr) minmax(180px,225px);gap:clamp(14px,2vw,26px);
+}
+body.cham-site.cham-play-mode .cp-session[data-cp-game-id="memory"] .cp-board{
+ display:flex;flex-direction:column;align-items:stretch;
+ padding:clamp(14px,2.2vw,30px)!important;
+}
+body.cham-site.cham-play-mode .cp-session .cp-memory-grid{
+ --card-width:clamp(72px, min(12vw,17dvh),146px);
+ --card-gap:clamp(7px,1.25vw,17px);
+ display:grid!important;width:max-content!important;max-width:100%!important;
+ grid-template-columns:repeat(4,minmax(0,var(--card-width)))!important;
+ justify-content:center;justify-items:stretch;align-items:stretch;
+ gap:var(--card-gap)!important;margin:clamp(12px,2.5dvh,26px) auto!important;
+}
+body.cham-site.cham-play-mode .cp-session .cp-memory-grid--5{grid-template-columns:repeat(5,minmax(0,var(--card-width)))!important}
+body.cham-site.cham-play-mode .cp-session .cp-memory-grid--6{grid-template-columns:repeat(6,minmax(0,var(--card-width)))!important;--card-width:clamp(68px,min(10vw,16dvh),128px)}
+body.cham-site.cham-play-mode .cp-session .cp-memory-grid--5 .cp-memory-cell:nth-last-child(2){grid-column:auto!important}
+body.cham-site.cham-play-mode .cp-session .cp-memory-cell{
+ box-sizing:border-box!important;display:grid!important;place-items:center!important;
+ width:100%!important;height:auto!important;aspect-ratio:4/5!important;
+ min-width:0!important;min-height:0!important;max-width:none!important;
+ padding:6px!important;outline:none!important;border:1.5px solid #c49c75;
+ border-radius:clamp(8px,1.2vw,15px);
+ background:repeating-linear-gradient(135deg,transparent 0 13px,#8b533009 13px 14px),#e9cfad;
+ box-shadow:0 3px 0 #ba9979;
+ transition:background-color .16s,border-color .16s,box-shadow .16s;
+}
+body.cham-site.cham-play-mode .cp-session .cp-memory-cell>span{width:100%;height:100%;padding:0!important;min-width:0;display:grid!important;place-items:center}
+body.cham-site.cham-play-mode .cp-session .cp4-memory-face-back{
+ width:100%;min-width:0;display:grid;place-items:center;transform:none;
+}
+body.cham-site.cham-play-mode .cp-session .cp4-memory-face-back b{
+ font-size:clamp(12px,2.1vw,28px)!important;letter-spacing:-.045em;
+ line-height:1.2;white-space:nowrap!important;overflow-wrap:normal!important;word-break:normal!important;
+}
+body.cham-site.cham-play-mode .cp-session .cp4-memory-face-title{
+ font-size:clamp(11px,1.3vw,17px)!important;line-height:1.25;
+ overflow-wrap:break-word;word-break:normal;text-align:center;padding:0 3px;
+}
+body.cham-site.cham-play-mode .cp-session .cp-memory-cell.is-revealed{background:#fff7e8;border-color:#99704e}
+body.cham-site.cham-play-mode .cp-session .cp-memory-cell.is-matched{background:#e3eddf;border-color:#83a280;box-shadow:0 3px 0 #8ca584}
+body.cham-site.cham-play-mode .cp-session .cp-memory-cell:focus-visible{outline:2px solid #80573e!important;outline-offset:3px}
+body.cham-site.cham-play-mode .cp-session .cp-memory-cell:disabled{opacity:1}
+body.cham-site.cham-play-mode .cp-session .cp-memory-cell:hover:not(:disabled){box-shadow:0 3px 0 #ad8a68;transform:none!important}
+@media(min-width:900px) and (min-height:600px){
+ body.cham-site.cham-play-mode .cp-fit-stage{padding-top:clamp(24px,5dvh,58px);gap:18px}
+ body.cham-site.cham-play-mode .cp-session .cp-session-header{padding-bottom:18px!important}
+ body.cham-site.cham-play-mode .cp-session .cp-board{padding:clamp(22px,2.8vw,38px)!important}
+ body.cham-site.cham-play-mode .cp-session .cp-session-copy h1{font-size:clamp(28px,3vw,42px)}
+ body.cham-site.cham-play-mode .cp-session .cp-board__top strong{font-size:17px}
+ body.cham-site.cham-play-mode .cp-session .cp-board__top span{font-size:13px}
+ body.cham-site.cham-play-mode .cp-session .cp-help{font-size:13px}
+ body.cham-site.cham-play-mode .cp-session .cp-memory-grid{--card-width:clamp(90px,min(10vw,19dvh),154px)}
+ body.cham-site.cham-play-mode .cp-session .cp-memory-grid--6{--card-width:clamp(80px,min(8.5vw,17dvh),132px)}
+}
+@media(max-width:899px){
+ body.cham-site.cham-play-mode .cp-session[data-cp-game-id="memory"] .cp-session-layout{grid-template-columns:minmax(0,1fr)}
+ body.cham-site.cham-play-mode .cp-session .cp-memory-grid{
+  --card-width:min(calc((100vw - 63px)/4),13.8dvh,114px);--card-gap:7px;
+ }
+ body.cham-site.cham-play-mode .cp-session .cp-memory-grid--5{
+  grid-template-columns:repeat(8,minmax(0,calc((var(--card-width) - var(--card-gap))/2)))!important;
+ }
+ body.cham-site.cham-play-mode .cp-session .cp-memory-grid--5 .cp-memory-cell{grid-column:span 2!important}
+ body.cham-site.cham-play-mode .cp-session .cp-memory-grid--5 .cp-memory-cell:nth-last-child(2){grid-column:3/span 2!important}
+ body.cham-site.cham-play-mode .cp-session .cp-memory-grid--6{
+  --card-width:min(calc((100vw - 63px)/4),13.8dvh,114px);
+  grid-template-columns:repeat(4,minmax(0,var(--card-width)))!important;
+ }
+ body.cham-site.cham-play-mode .cp-session .cp4-memory-face-back b{font-size:clamp(12px,4.5vw,23px)!important}
+}
+@media(max-height:500px) and (orientation:landscape){
+ body.cham-site.cham-play-mode .cp-session .cp-memory-grid{
+  --card-width:clamp(48px,15dvh,84px);--card-gap:7px;
+ }
+ body.cham-site.cham-play-mode .cp-session .cp-memory-grid--5{grid-template-columns:repeat(5,minmax(0,var(--card-width)))!important}
+ body.cham-site.cham-play-mode .cp-session .cp-memory-grid--5 .cp-memory-cell{grid-column:auto!important}
+ body.cham-site.cham-play-mode .cp-session .cp-memory-grid--5 .cp-memory-cell:nth-last-child(2){grid-column:auto!important}
+ body.cham-site.cham-play-mode .cp-session .cp-memory-grid--6{grid-template-columns:repeat(6,minmax(0,var(--card-width)))!important;--card-width:clamp(44px,15dvh,84px)}
+ body.cham-site.cham-play-mode .cp-session .cp4-memory-face-back b{font-size:clamp(11px,3.3dvh,17px)!important}
+}

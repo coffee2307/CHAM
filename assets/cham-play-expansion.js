@@ -285,6 +285,9 @@ function mount(root,core){
    const naturalH=fitStage.offsetHeight,naturalW=fitStage.offsetWidth;
    const scale=Math.min(1,Math.max(0.01,(h-2)/Math.max(1,naturalH)),Math.max(0.01,w/Math.max(1,naturalW)));
    fitStage.style.setProperty('--cp-fit-scale',String(scale));
+   const isMemory=session.dataset.cpGameId==='memory';
+   const offset=isMemory?Math.max(0,Math.min((h-naturalH*scale)*.40,h*.12)):0;
+   fitStage.style.marginTop=offset+'px';
   }else{fitSession=null;fitStage=null;}
   if(dialog){const parent=dialog.parentElement;const scale=Math.min(1,(parent.clientHeight-20)/Math.max(1,dialog.offsetHeight),(parent.clientWidth-20)/Math.max(1,dialog.offsetWidth));dialog.style.setProperty('--cp-dialog-scale',String(Math.max(.01,scale)));}
  }
