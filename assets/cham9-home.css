@@ -313,3 +313,6 @@ body.cham5-home #cham5-process{scroll-margin-top:0!important}
  body.cham5-home .cham9-hero__art img{transform:none!important;transition:none!important}
  body.cham5-home .cham8-scene [data-cham8-reveal]{clip-path:none!important}
 }
+
+/* Desktop hero sketch assets: retain transparent edges and original proportions. */
+@media(min-width:768px){body.cham5-home .cham9-hero__art img{background:transparent!important;object-fit:contain!important;object-position:center bottom!important;mix-blend-mode:multiply!important;filter:none!important}body.cham5-home .cham9-hero__art--potter img{height:clamp(180px,27vw,370px);width:100%}body.cham5-home .cham9-hero__art--vendor img{height:clamp(180px,25vw,340px);width:100%}}
