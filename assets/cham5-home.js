@@ -44,6 +44,25 @@ function revealImages(){
  images.forEach(img=>{if(img.complete&&img.naturalWidth>0)visible(img);else io.observe(img);});
 }
 revealImages();
+/* Native video: lazy start, pause offscreen, no per-frame JS. */
+const workshop=$('[data-cham-workshop-video]',root);
+const workshopToggle=$('[data-cham-workshop-toggle]',root);
+if(workshop){
+ let visible=false,userPaused=reduced.matches;
+ const ensure=()=>{if(!workshop.getAttribute('src')){workshop.src=workshop.dataset.src;workshop.load();}};
+ const sync=()=>{if(visible&&!document.hidden&&!userPaused){ensure();workshop.muted=true;workshop.play().catch(()=>{});}else workshop.pause();};
+ const updateButton=()=>{if(!workshopToggle)return;workshopToggle.textContent=userPaused?'\u25B6':'\u275A\u275A';workshopToggle.setAttribute('aria-pressed',String(userPaused));workshopToggle.setAttribute('aria-label',userPaused?'Phat video':'Tam dung video');};
+ if('IntersectionObserver' in window){
+  const warm=new IntersectionObserver(e=>{if(e.some(x=>x.isIntersecting)){ensure();warm.disconnect();}},{rootMargin:'320px 0px'});
+  if(!userPaused)warm.observe(workshop);
+  new IntersectionObserver(e=>{visible=e[0].isIntersecting;sync();},{threshold:.05}).observe(workshop);
+ }else{visible=true;sync();}
+ workshopToggle?.addEventListener('click',()=>{userPaused=!userPaused;updateButton();sync();});
+ document.addEventListener('visibilitychange',sync);
+ reduced.addEventListener?.('change',()=>{userPaused=reduced.matches;updateButton();sync();});
+ updateButton();
+}
+
 if(!window.gsap||!window.ScrollTrigger)return;
 const gsap=window.gsap,ScrollTrigger=window.ScrollTrigger;
 gsap.registerPlugin(ScrollTrigger);
