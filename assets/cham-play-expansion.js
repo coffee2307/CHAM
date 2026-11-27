@@ -32,7 +32,7 @@ function mount(root,core){
  let pendingTimer=null,observer;
  const startMs=()=>Date.now();
  const attemptId=()=>String(Date.now())+'-'+Math.random().toString(36).slice(2);
- const scrollToTop=()=>root.scrollIntoView({block:'start',behavior:'instant'});
+ const scrollToTop=()=>{};
  const getStars=(data)=>{
   if(!data.won)return 0;
   if(data.gameId==='memory')return data.moves<=data.pairs+1?3:data.moves<=data.pairs+3?2:1;
@@ -129,7 +129,7 @@ function mount(root,core){
   panel.addEventListener('click',e=>{
     if(e.target===panel){removePanel();}
   });
-  panel.querySelector('[data-v3-close]').focus();
+  panel.querySelector('[data-v3-close]').focus({preventScroll:true});scheduleFit();
  }
  function showHUD(){
   const session=root.querySelector('.cp-session');if(!session||session.querySelector('.cp3-hud')||session.querySelector('.cp-result'))return;
@@ -156,9 +156,7 @@ function mount(root,core){
   };
   record(data);currentAttempt=null;
   const stars=getStars(data),summary=meta.summary();
-  const cover=document.createElement('div');
-  cover.className='cp4-result-cover';cover.innerHTML=img(gameId);
-  result.insertAdjacentElement('afterbegin',cover);
+  // Legacy result already renders its cover.
   const block=document.createElement('div');block.className='cp3-result-summary';
   block.innerHTML='<div class="cp3-stars" aria-label="'+stars+' trên 3 sao">'+
     [0,1,2].map(i=>'<span class="'+(i<stars?'is-full':'')+'">★</span>').join('')+'</div>'+
@@ -169,7 +167,7 @@ function mount(root,core){
   if(!activeGame||activeGame.gameId!=='pack')return;
   const s=activeGame.state,p=s.queue[s.index],last=s.selected!==null;
   if(!p){finishPack();return;}
-  root.innerHTML='<div class="cp-app cp-session cp3-session"><header class="cp-session-header">'+
+  const sessionHTML='<div class="cp-app cp-session cp3-session"><header class="cp-session-header">'+
     '<button type="button" data-v3-back class="cp-back">Trở về trò chơi</button>'+
     '<div class="cp-session-copy"><span>Thử thách mô phỏng</span><h1>Đóng gói đơn hàng</h1><p>Chọn phương án bảo vệ sản phẩm thích hợp. Đây là tình huống học tập giả lập, không phải quy trình vận chuyển thực tế của CHẠM.</p></div>'+
     '<div class="cp-session-wallet"><strong>'+(s.index+1)+'/4</strong><span>Đơn hàng demo</span></div></header>'+
@@ -188,6 +186,7 @@ function mount(root,core){
       '<button type="button" class="cp-primary" data-v3-next-pack>'+(s.index===3?'Xem kết quả':'Đơn tiếp theo')+'</button></div>':'')+
     '</section><aside class="cp3-side"><p class="cp-eyebrow">Mẹo đóng gói</p><h2>Bảo vệ trước khi vận chuyển.</h2>'+
     '<p>Các lựa chọn nhằm thực hành tư duy về kích thước, chất liệu và mức độ dễ vỡ. Không đại diện tiêu chuẩn kỹ thuật hay dịch vụ giao hàng CHẠM.</p></aside></div></div>';
+  root.__cpRenderSession(sessionHTML,'pack');
  }
  function finishPack(){
   const s=activeGame.state;
@@ -202,8 +201,8 @@ function mount(root,core){
   if(!activeGame||activeGame.gameId!=='wheel')return;
   const s=activeGame.state,summary=meta.summary(),spinning=s.spinning;
   const secs=wheel.segments;
-  const angle=s.finished?360*4-360*(s.index/secs.length):0;
-  root.innerHTML='<div class="cp-app cp-session cp3-session"><header class="cp-session-header">'+
+  const angle=(spinning||s.finished)?360*4-360*(s.index/secs.length)-30:0;
+  const sessionHTML='<div class="cp-app cp-session cp3-session"><header class="cp-session-header">'+
    '<button type="button" data-v3-back class="cp-back">Trở về trò chơi</button>'+
    '<div class="cp-session-copy"><span>Quà sưu tầm · Demo</span><h1>Vòng khám phá</h1>'+
    '<p>Hoàn thành hai nhiệm vụ hằng ngày để mở một huy hiệu. Không phải vòng quay đổi tiền hoặc voucher.</p></div></header>'+
@@ -219,6 +218,7 @@ function mount(root,core){
    '<aside class="cp3-side"><h2>Không có phần thưởng ngẫu nhiên mang giá trị thật.</h2>'+
    '<p>Vòng khám phá giới thiệu một biểu tượng văn hóa theo ngày. Dữ liệu sưu tầm được lưu trên thiết bị này.</p>'+
    '<p>Nhiệm vụ đã xong: '+summary.missions.filter(x=>x.done).length+' / '+summary.missions.length+'</p></aside></div></div>';
+  root.__cpRenderSession(sessionHTML,'wheel');
  }
  function finishWheel(){
   const s=activeGame.state;
@@ -247,10 +247,54 @@ function mount(root,core){
   if(root.querySelector('.cp-result')){onLegacyResult();return;}
   showHUD();
  }
+ // Session viewport controller. The lobby stays scrollable; games occupy the viewport.
+ let fitFrame=0,fitSession=null,fitStage=null,locked=false,returnY=0;
+ const patchNode=(old,next)=>{
+  if(old.nodeType!==next.nodeType||old.nodeName!==next.nodeName){old.replaceWith(next.cloneNode(true));return;}
+  if(old.nodeType===3){if(old.nodeValue!==next.nodeValue)old.nodeValue=next.nodeValue;return;}
+  if(old.nodeType!==1)return;
+  for(const a of [...old.attributes])if(!next.hasAttribute(a.name))old.removeAttribute(a.name);
+  for(const a of [...next.attributes])if(old.getAttribute(a.name)!==a.value)old.setAttribute(a.name,a.value);
+  const before=[...old.childNodes],after=[...next.childNodes];
+  after.forEach((n,i)=>{if(before[i])patchNode(before[i],n);else old.append(n.cloneNode(true));});
+  before.slice(after.length).forEach(n=>n.remove());
+ };
+ root.__cpRenderSession=(html,id)=>{
+  const current=root.querySelector('.cp-session');
+  if(current?.dataset.cpGameId===id&&!current.querySelector('.cp-result')){
+   const template=document.createElement('template');template.innerHTML=html;
+   const next=template.content.querySelector('.cp-session');
+   const oldBoard=current.querySelector('.cp-board'),newBoard=next?.querySelector('.cp-board');
+   if(oldBoard&&newBoard){patchNode(oldBoard,newBoard);
+    const oldWallet=current.querySelector('.cp-session-wallet'),newWallet=next.querySelector('.cp-session-wallet');
+    if(oldWallet&&newWallet)patchNode(oldWallet,newWallet);
+    scheduleFit();return;}
+  }
+  root.innerHTML=html;const session=root.querySelector('.cp-session');if(session)session.dataset.cpGameId=id;
+  scheduleFit();
+ };
+ function scheduleFit(){if(!fitFrame)fitFrame=requestAnimationFrame(()=>{fitFrame=0;fitViewport();});}
+ function fitViewport(){
+  const session=root.querySelector('.cp-session'),dialog=root.querySelector('.cp3-dialog');
+  const shouldLock=Boolean(session||dialog);
+  if(shouldLock&&!locked){returnY=window.scrollY;locked=true;document.documentElement.classList.add('cp-viewport-lock');document.body.classList.add('cp-viewport-lock');}
+  if(!shouldLock&&locked){locked=false;document.documentElement.classList.remove('cp-viewport-lock');document.body.classList.remove('cp-viewport-lock');window.scrollTo(0,returnY);}
+  if(session){
+   if(session!==fitSession){fitSession=session;fitStage=document.createElement('div');fitStage.className='cp-fit-stage';while(session.firstChild)fitStage.append(session.firstChild);session.append(fitStage);}
+   const h=session.clientHeight,w=session.clientWidth;
+   const naturalH=fitStage.offsetHeight,naturalW=fitStage.offsetWidth;
+   const scale=Math.min(1,Math.max(0.01,(h-2)/Math.max(1,naturalH)),Math.max(0.01,w/Math.max(1,naturalW)));
+   fitStage.style.setProperty('--cp-fit-scale',String(scale));
+  }else{fitSession=null;fitStage=null;}
+  if(dialog){const parent=dialog.parentElement;const scale=Math.min(1,(parent.clientHeight-20)/Math.max(1,dialog.offsetHeight),(parent.clientWidth-20)/Math.max(1,dialog.offsetWidth));dialog.style.setProperty('--cp-dialog-scale',String(Math.max(.01,scale)));}
+ }
+ window.addEventListener('resize',scheduleFit,{passive:true});
+ window.visualViewport?.addEventListener('resize',scheduleFit,{passive:true});
+ document.fonts?.ready.then(scheduleFit);
  let queued=false;
  function queue(){
   if(queued)return;queued=true;
-  Promise.resolve().then(()=>{queued=false;refresh();});
+  Promise.resolve().then(()=>{queued=false;refresh();scheduleFit();});
  }
  observer=new MutationObserver(queue);
  observer.observe(root,{childList:true,subtree:true});
@@ -266,16 +310,7 @@ function mount(root,core){
    });
    grid.innerHTML=extraCard(type);return;
   }
-  if(t.hasAttribute('data-v3-filter')){
-   event.preventDefault();event.stopImmediatePropagation();
-   const type=t.dataset.v3Filter,hub=root.querySelector('.cp-hub'),grid=hub?.querySelector('.cp-grid');
-   if(!grid)return;
-   hub.querySelectorAll('.cp-filter').forEach(el=>{
-    el.classList.toggle('is-active',el===t);el.setAttribute('aria-pressed',el===t?'true':'false');
-   });
-   grid.innerHTML=extraCard(type);return;
-  }
-  if(t.hasAttribute('data-cp-game')&&!t.hasAttribute('data-v3-bypass')&&root.querySelector('.cp-hub')){
+  if(t.hasAttribute('data-cp-game')&&!t.hasAttribute('data-v3-bypass')&&(root.querySelector('.cp-hub')||root.querySelector('.cp-result'))){
    event.preventDefault();event.stopImmediatePropagation();intro(t.dataset.cpGame);return;
   }
   if(t.hasAttribute('data-v3-close')){event.preventDefault();event.stopImmediatePropagation();removePanel();return;}

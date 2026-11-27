@@ -449,3 +449,130 @@ body.cham-site.cham-play-mode .cp3-stars span.is-full{color:#c48b32}
     transform:none!important;transition:none!important;
   }
 }
+
+/* CHAM Play viewport: compact gameplay only, no page or inner scrolling. */
+html.cp-viewport-lock,body.cp-viewport-lock{overflow:hidden!important;overscroll-behavior:none!important}
+body.cham-site.cham-play-mode .cp-app.cp-session{
+ position:fixed!important;inset:0!important;z-index:10001!important;
+ width:100%!important;max-width:none!important;height:100vh!important;height:100dvh!important;
+ min-height:0!important;max-height:none!important;overflow:hidden!important;margin:0!important;
+ padding:0!important;background:#f8f3e9!important;box-sizing:border-box;overscroll-behavior:none;
+}
+body.cham-site.cham-play-mode .cp-fit-stage{
+ --cp-fit-scale:1;box-sizing:border-box;width:100%;max-width:1180px;margin:0 auto;
+ padding: max(12px,env(safe-area-inset-top)) max(14px,env(safe-area-inset-right)) max(14px,env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left));
+ transform:scale(var(--cp-fit-scale));transform-origin:top center;
+ display:flex;flex-direction:column;gap:10px;overflow:visible;
+}
+body.cham-site.cham-play-mode .cp-session .cp-session-header{grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px;margin:0!important;padding:0 0 10px!important;min-height:0}
+body.cham-site.cham-play-mode .cp-session .cp-session-copy{grid-row:auto;grid-column:auto;min-width:0}
+body.cham-site.cham-play-mode .cp-session .cp-session-copy h1{font-size:clamp(19px,3vw,31px);line-height:1.2;margin:2px 0!important}
+body.cham-site.cham-play-mode .cp-session .cp-session-copy p{font-size:12px;line-height:1.4;margin:0}
+body.cham-site.cham-play-mode .cp-session .cp-session-copy>span{display:none}
+body.cham-site.cham-play-mode .cp-session .cp-session-wallet{grid-column:auto;grid-row:auto}
+body.cham-site.cham-play-mode .cp-session .cp-session-wallet strong{font-size:18px}
+body.cham-site.cham-play-mode .cp-session .cp-back{display:inline-flex;align-items:center;gap:5px;min-height:40px;padding:5px 8px!important;white-space:normal;font-size:12px}
+body.cham-site.cham-play-mode .cp-session :is(.cp4-game-banner,.cp4-session-illustration,.cp-aside__art,.cp3-hud,.cp4-result-cover){display:none!important}
+body.cham-site.cham-play-mode .cp-session :is(.cp-session-layout,.cp3-pack-layout,.cp3-wheel-layout){display:grid;grid-template-columns:minmax(0,1fr) minmax(180px,235px);gap:14px;align-items:start;min-width:0;margin:0!important}
+body.cham-site.cham-play-mode .cp-session .cp-board{padding:clamp(12px,2vw,23px)!important;min-height:0!important;max-width:none!important;margin:0!important}
+body.cham-site.cham-play-mode .cp-session .cp-board__top{gap:6px;margin-bottom:7px}
+body.cham-site.cham-play-mode .cp-session .cp-progress{margin-bottom:9px}
+body.cham-site.cham-play-mode .cp-session .cp-help{margin:7px 0;line-height:1.4}
+body.cham-site.cham-play-mode .cp-session :is(.cp-aside,.cp3-side){padding:13px;margin:0;box-shadow:none}
+body.cham-site.cham-play-mode .cp-session :is(.cp-aside h2,.cp3-side h2){font-size:17px;margin:0 0 8px}
+body.cham-site.cham-play-mode .cp-session .cp-aside>p{margin:0 0 8px}
+body.cham-site.cham-play-mode .cp-session .cp-memory-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:10px 0}
+body.cham-site.cham-play-mode .cp-session .cp-memory-cell{min-height:0!important;height:clamp(62px,12dvh,103px);padding:5px;box-shadow:0 2px 0 #b79a79}
+body.cham-site.cham-play-mode .cp-session .cp-memory-cell:hover{transform:none!important}
+body.cham-site.cham-play-mode .cp-session .cp-quiz h2{font-size:clamp(17px,2.4vw,26px);line-height:1.3;margin:5px 0 12px}
+body.cham-site.cham-play-mode .cp-session .cp-question-type{margin:4px 0!important}
+body.cham-site.cham-play-mode .cp-session .cp-options{gap:7px;margin:0 0 8px;grid-template-columns:repeat(2,minmax(0,1fr))}
+body.cham-site.cham-play-mode .cp-session .cp-option{min-height:48px;padding:8px;gap:7px;line-height:1.35}
+body.cham-site.cham-play-mode .cp-session .cp-option>span{flex-basis:22px;height:22px}
+body.cham-site.cham-play-mode .cp-session .cp-feedback{gap:5px;margin-top:10px;padding-top:10px}
+body.cham-site.cham-play-mode .cp-session .cp-feedback>p{line-height:1.4;margin:0}
+body.cham-site.cham-play-mode .cp-session .cp-match-grid{gap:9px;margin-top:8px}
+body.cham-site.cham-play-mode .cp-session .cp-match-grid h2{margin-bottom:5px}
+body.cham-site.cham-play-mode .cp-session .cp-match-option{min-height:44px;margin-bottom:5px;padding:5px 7px;line-height:1.25}
+body.cham-site.cham-play-mode .cp-session .cp-word-layout{grid-template-columns:minmax(0,1fr) minmax(130px,.7fr);gap:12px}
+body.cham-site.cham-play-mode .cp-session .cp-word-grid{width:min(100%,46dvh,420px);margin:auto;gap:3px;padding:5px}
+body.cham-site.cham-play-mode .cp-session .cp-word-clues h2{font-size:14px;margin-bottom:5px}
+body.cham-site.cham-play-mode .cp-session .cp-word-clues p{margin:0 0 4px;padding:0 0 4px}
+body.cham-site.cham-play-mode .cp-session .cp-word-clues p span{line-height:1.3}
+body.cham-site.cham-play-mode .cp-session .cp-word-tools{display:flex;gap:6px;flex-wrap:wrap}
+body.cham-site.cham-play-mode .cp-session .cp3-parcel{padding:10px}
+body.cham-site.cham-play-mode .cp-session .cp3-parcel__icon{width:34px;height:34px;margin:0 auto 3px}
+body.cham-site.cham-play-mode .cp-session .cp3-parcel__icon .cp-icon{width:23px;height:23px}
+body.cham-site.cham-play-mode .cp-session .cp3-parcel h2{font-size:clamp(17px,2.6vw,25px);margin:3px 0}
+body.cham-site.cham-play-mode .cp-session .cp3-pack-board h3{font-size:14px;margin:10px 0 6px}
+body.cham-site.cham-play-mode .cp-session .cp3-pack-options{gap:7px}
+body.cham-site.cham-play-mode .cp-session .cp3-package{min-height:64px;padding:8px;gap:4px;box-shadow:0 2px 0 #d1bfab}
+body.cham-site.cham-play-mode .cp-session .cp3-package small{line-height:1.35}
+body.cham-site.cham-play-mode .cp-session .cp3-pack-feedback{margin-top:8px;padding:8px}
+body.cham-site.cham-play-mode .cp-session .cp3-pack-feedback p{margin:4px 0;line-height:1.4}
+body.cham-site.cham-play-mode .cp-session .cp3-wheel-wrap{width:min(100%,48dvh,350px);margin:5px auto 12px;container-type:inline-size}
+body.cham-site.cham-play-mode .cp-session .cp3-wheel-disc>span{top:50%;left:50%;transform-origin:center;transform:translate(-50%,-50%) rotate(calc(var(--n)*60deg + 30deg)) translateY(-31cqw) rotate(calc(var(--n)*-60deg - 30deg));font-size:clamp(10px,4cqw,14px);white-space:nowrap}
+body.cham-site.cham-play-mode .cp-session .cp3-wheel-disc{transform:rotate(var(--cp3-rotation))}
+body.cham-site.cham-play-mode .cp-session .cp-result{width:100%;max-width:680px;padding:clamp(16px,4vw,32px)!important;margin:0 auto!important}
+body.cham-site.cham-play-mode .cp-session .cp-result__symbol{margin:0 auto 8px!important;width:54px;height:54px}
+body.cham-site.cham-play-mode .cp-session .cp-result h1{font-size:clamp(24px,4vw,38px);line-height:1.2;margin:6px 0 10px}
+body.cham-site.cham-play-mode .cp-session .cp-result p{line-height:1.5;margin:7px 0}
+body.cham-site.cham-play-mode .cp-session .cp-result__award{margin:8px 0 14px!important}
+body.cham-site.cham-play-mode .cp-session :is(.cp-primary,.cp-secondary){min-height:40px;padding:8px 13px}
+body.cham-site.cham-play-mode .cp-session :is(button,a){touch-action:manipulation}
+body.cham-site.cham-play-mode .cp3-dialog-backdrop{overflow:hidden!important;backdrop-filter:none}
+body.cham-site.cham-play-mode .cp3-dialog{max-height:none!important;overflow:hidden!important;transform:scale(var(--cp-dialog-scale,1));transform-origin:center}
+body.cham-site.cham-play-mode .cp3-dialog__close{display:grid;place-items:center;padding:0;line-height:1;font-size:25px}
+@media(max-width:899px){
+ body.cham-site.cham-play-mode .cp-session :is(.cp-session-layout,.cp3-pack-layout,.cp3-wheel-layout){grid-template-columns:minmax(0,1fr)}
+ body.cham-site.cham-play-mode .cp-session :is(.cp-aside,.cp3-side){display:none!important}
+}
+@media(max-width:767px){
+ body.cham-site.cham-play-mode .cp-fit-stage{gap:7px;padding: max(8px,env(safe-area-inset-top)) 10px max(10px,env(safe-area-inset-bottom))}
+ body.cham-site.cham-play-mode .cp-session .cp-session-header{grid-template-columns:auto minmax(0,1fr) auto;gap:6px;padding-bottom:6px!important}
+ body.cham-site.cham-play-mode .cp-session .cp-session-copy h1{font-size:18px}
+ body.cham-site.cham-play-mode .cp-session .cp-session-copy p{display:none}
+ body.cham-site.cham-play-mode .cp-session .cp-back{font-size:10px;max-width:78px;min-height:36px}
+ body.cham-site.cham-play-mode .cp-session .cp-session-wallet span{font-size:9px}
+ body.cham-site.cham-play-mode .cp-session .cp-board{padding:11px!important}
+ body.cham-site.cham-play-mode .cp-session .cp-board__top strong{font-size:13px}
+ body.cham-site.cham-play-mode .cp-session .cp-board__top span{font-size:10px}
+ body.cham-site.cham-play-mode .cp-session .cp-memory-cell{height:clamp(56px,12dvh,86px)}
+ body.cham-site.cham-play-mode .cp-session .cp-options{grid-template-columns:minmax(0,1fr)}
+ body.cham-site.cham-play-mode .cp-session .cp-option{min-height:43px;font-size:12px}
+ body.cham-site.cham-play-mode .cp-session .cp-word-layout{grid-template-columns:minmax(0,1fr);gap:6px}
+ body.cham-site.cham-play-mode .cp-session .cp-word-grid{width:min(100%,40dvh,345px)}
+ body.cham-site.cham-play-mode .cp-session .cp-word-clues{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center}
+ body.cham-site.cham-play-mode .cp-session .cp-word-clues h2{width:100%;margin:0}
+ body.cham-site.cham-play-mode .cp-session .cp-word-clues p{border:0;margin:0;padding:2px 4px;background:#f3e9d9;border-radius:5px}
+ body.cham-site.cham-play-mode .cp-session .cp-word-clues p span{display:none}
+ body.cham-site.cham-play-mode .cp-session .cp-word-tools{width:100%;margin-top:2px}
+ body.cham-site.cham-play-mode .cp-session .cp-word-tools button{min-height:34px;margin:0}
+ body.cham-site.cham-play-mode .cp3-dialog__art{height:clamp(90px,20dvh,160px)!important;min-height:0!important}
+ body.cham-site.cham-play-mode .cp3-dialog__text{padding:16px!important}
+ body.cham-site.cham-play-mode .cp3-dialog__text h2{font-size:23px;margin:6px 0}
+ body.cham-site.cham-play-mode .cp3-mode label span{min-height:42px}
+ body.cham-site.cham-play-mode .cp3-dialog__text small{margin-top:9px}
+}
+@media(max-height:500px) and (orientation:landscape){
+ body.cham-site.cham-play-mode .cp-session .cp-word-layout{grid-template-columns:minmax(0,1fr) minmax(130px,.7fr)}
+ body.cham-site.cham-play-mode .cp-session .cp-options{grid-template-columns:repeat(2,minmax(0,1fr))}
+ body.cham-site.cham-play-mode .cp-session .cp-word-grid{width:min(100%,58dvh,340px)}
+ body.cham-site.cham-play-mode .cp-session .cp3-wheel-wrap{width:min(100%,50dvh,260px)}
+}
+
+/* Short landscape screens: keep the dialog and choices inside the usable viewport. */
+body.cham-site.cham-play-mode .cp3-dialog-backdrop{display:flex!important;align-items:center;justify-content:center}
+body.cham-site.cham-play-mode .cp3-dialog{flex:none}
+@media(max-height:500px) and (orientation:landscape){
+ body.cham-site.cham-play-mode .cp3-dialog{grid-template-columns:minmax(0,.7fr) minmax(0,1fr);max-width:720px}
+ body.cham-site.cham-play-mode .cp3-dialog__art{min-height:0!important;height:auto!important;max-height:none!important}
+ body.cham-site.cham-play-mode .cp3-dialog__text{padding:15px!important}
+ body.cham-site.cham-play-mode .cp3-dialog__text h2{font-size:22px;margin:4px 0 6px}
+ body.cham-site.cham-play-mode .cp3-mode label span{min-height:36px}
+ body.cham-site.cham-play-mode .cp3-dialog__text small{margin-top:5px}
+ body.cham-site.cham-play-mode .cp-session .cp-memory-cell{height:clamp(40px,12dvh,60px)}
+ body.cham-site.cham-play-mode .cp-session .cp-session-copy p{display:none}
+ body.cham-site.cham-play-mode .cp-session .cp-match-option{min-height:31px;margin-bottom:3px}
+ body.cham-site.cham-play-mode .cp-session .cp-board{padding:9px!important}
+}

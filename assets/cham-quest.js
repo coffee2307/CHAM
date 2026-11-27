@@ -7,9 +7,9 @@
   const shuffle=(arr)=>{const out=[...arr];for(let i=out.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[out[i],out[j]]=[out[j],out[i]];}return out;};
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const games=[
-    {id:'memory',name:'Ghép cặp thủ công',type:'Trí nhớ',time:'2–3 phút',description:'Lật các thẻ và tìm đúng cặp sản phẩm thủ công.',art:'memory',detail:'3 độ khó · 4–8 cặp'},
+    {id:'memory',name:'Ghép cặp thủ công',type:'Trí nhớ',time:'2–3 phút',description:'Lật các thẻ và tìm đúng cặp sản phẩm thủ công.',art:'memory',detail:'3 độ khó · 4–6 cặp'},
     {id:'quiz',name:'Đoán sản phẩm',type:'Kiến thức',time:'2–3 phút',description:'Chọn câu trả lời đúng từ danh mục CHẠM.',art:'quiz',detail:'5 câu hỏi'},
-    {id:'match',name:'Nối chất liệu',type:'Ghép nối',time:'3 phút',description:'Ghép ứng dụng với hình dáng sản phẩm.',art:'match',detail:'5 cặp tương ứng'},
+    {id:'match',name:'Nối chất liệu',type:'Ghép nối',time:'3 phút',description:'Ghép ứng dụng với chất liệu tương ứng.',art:'match',detail:'5 cặp tương ứng'},
     {id:'word',name:'Ô chữ chất liệu',type:'Giải đố',time:'3–5 phút',description:'Tìm tên chất liệu và sản phẩm trong bảng chữ.',art:'word',detail:'5 từ cần tìm'},
     {id:'speed',name:'Thử thách nhanh',type:'Thời gian',time:'45 giây',description:'Trả lời năm câu hỏi trước khi hết thời gian.',art:'speed',detail:'5 câu · 45 giây'}
   ];
@@ -76,7 +76,7 @@
     const avatar=(id,priority=false)=>assets[id]?'<img src="'+esc(assets[id])+'" '+(priority?'loading="eager" fetchpriority="high"':'loading="lazy"')+' decoding="async" alt="">':'';
     const icon=(id,cls='')=>assets['icon-'+id]?'<img class="cp-icon '+cls+'" src="'+esc(assets['icon-'+id])+'" alt="" aria-hidden="true">':'';
     const craftIcon=id=>'layers';
-    const jumpToApp=()=>{root.scrollIntoView({block:'start',behavior:'instant'});};
+    const jumpToApp=()=>{};
     const gameRules={memory:'Lật hai thẻ. Cặp giống nhau được giữ lại; cặp sai sẽ úp lại.',quiz:'Chọn đáp án, đọc giải thích rồi tiếp tục. Đúng ít nhất 3/5 câu.',match:'Chọn ứng dụng ở cột trái rồi chọn chất liệu tương ứng.',word:'Chọn chữ đầu và chữ cuối của từ theo hàng ngang hoặc dọc.',speed:'Đúng ít nhất 3/5 câu trong 45 giây trả lời. Đồng hồ dừng khi đọc giải thích.'};
     const difficulty={memory:'Dễ',quiz:'Vừa',match:'Dễ',word:'Vừa',speed:'Nhanh'};
     function hub(filter='Tất cả'){
@@ -115,7 +115,7 @@
       kind=id;stopUI();
       if(id==='memory'){
         const difficulty=window.CHAMPlayDifficulty||'easy';
-        const target=difficulty==='hard'?8:difficulty==='normal'?5:4;
+        const target=difficulty==='hard'?6:difficulty==='normal'?5:4;
         const verified=shuffle(craftRecords).map(r=>({id:r.id,label:r.craft}));
         const more=shuffle(craftRecords).slice(0,2).map(r=>({id:'material-'+r.id,label:r.material}));
         const pairs=[...verified,...more].slice(0,target);
@@ -179,7 +179,7 @@
           }).join('')+'</div>'+
           (s.answer!==null?'<div class="cp-feedback" role="status"><strong>'+(s.answer===q.answerIndex?'Chính xác':'Chưa đúng')+'</strong><p>'+esc(q.explanation)+'</p>'+
           (q.source?'<a href="'+esc(q.source)+'" target="_blank" rel="noopener noreferrer">Nguồn tham khảo</a>':'')+
-          '<button type="button" data-cp-next class="cp-primary">'+(s.index===4?'Xem kết quả':'Câu tiếp theo')+'</button></div>':'<p class="cp-help">Chọn một đáp án để tiếp tục.</p>')+
+          '<button type="button" data-cp-next class="cp-primary">'+(s.index===s.questions.length-1?'Xem kết quả':'Câu tiếp theo')+'</button></div>':'<p class="cp-help">Chọn một đáp án để tiếp tục.</p>')+
           '</div>';
       }
       if(kind==='match'){
@@ -189,7 +189,7 @@
         body='<div class="cp-board"><div class="cp-board__top"><strong>'+icon('link')+' Ứng dụng và chất liệu</strong><span>'+s.found.size+'/5 cặp</span></div>'+progress(s.found.size,5)+
           '<p class="cp-help">Chọn ứng dụng bên trái, sau đó chọn chất liệu tương ứng bên phải.</p>'+
           '<div class="cp-match-grid"><div><h2>Ứng dụng</h2>'+left+'</div><div><h2>Chất liệu</h2>'+right+'</div></div>'+
-          '<p class="cp-help" role="status">'+(s.selected?'Đã chọn ứng dụng. Hãy chọn hình dáng.':'Các cặp đúng sẽ được giữ lại.')+'</p></div>';
+          '<p class="cp-help" role="status">'+(s.selected?'Đã chọn ứng dụng. Hãy chọn chất liệu.':'Các cặp đúng sẽ được giữ lại.')+'</p></div>';
       }
       if(kind==='word'){
         const s=state;
@@ -200,12 +200,13 @@
           '<div class="cp-word-clues"><h2>Từ cần tìm</h2>'+WORDS.map(w=>'<p class="'+(s.found.has(w.word)?'is-found':'')+'"><strong>'+esc(w.label)+'</strong><span>'+esc(w.hint)+'</span></p>').join('')+
           '<div class="cp-word-tools"><button type="button" data-cp-word-clear class="cp-secondary">Bỏ chọn</button><button type="button" data-cp-word-hint class="cp-secondary" '+(s.hints<=0?'disabled':'')+'>Gợi ý ('+s.hints+')</button></div></div></div><p class="cp-help cp-word-status" role="status">Chọn chữ đầu tiên để tìm từ.</p></div>';
       }
-      root.innerHTML='<div class="cp-app cp-session">'+gameHeading(game)+
+      const sessionHTML='<div class="cp-app cp-session">'+gameHeading(game)+
         '<div class="cp-session-layout"><main class="cp-session-main"><div class="cp4-game-banner">'+avatar(game.art)+'</div>'+body+'</main>'+
         '<aside class="cp-aside"><div class="cp-aside__art">'+avatar(game.art)+'</div><h2>'+icon('help')+' Cách chơi</h2><p>'+esc(gameRules[kind])+'</p>'+
         '<p>Tiến trình được ghi trên trình duyệt này.</p>'+
         '<p>Hoàn thành thử thách để được nhận điểm demo; một ngày chỉ có một phần thưởng trò chơi.</p>'+
         '<a class="cp-quiet-link" href="/pages/cham-club?tab=rewards">Xem ví CHẠM</a></aside></div></div>';
+      if(root.__cpRenderSession)root.__cpRenderSession(sessionHTML,kind);else root.innerHTML=sessionHTML;
       if(activeAttr){
         const next=[...root.querySelectorAll('['+activeAttr.name+']')].find(el=>el.getAttribute(activeAttr.name)===activeAttr.value&&!el.disabled);
         (next||root.querySelector('[data-cp-next]'))?.focus({preventScroll:true});
@@ -252,7 +253,7 @@
         state.remaining=Math.max(0,state.remaining-(now-previous)/1000);
         previous=now;
         const node=$('[data-cp-seconds]',root),bar=$('[data-cp-timebar]',root);
-        if(node)node.textContent=Math.ceil(state.remaining);
+        if(node&&node.textContent!==String(Math.ceil(state.remaining)))node.textContent=Math.ceil(state.remaining);
         if(bar)bar.style.width=(state.remaining/state.limit*100).toFixed(2)+'%';
         if(state.remaining<=0){outcome(false,'Hết thời gian. Bạn có thể thử lại với bộ câu hỏi mới.');}
       },100);
