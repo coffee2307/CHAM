@@ -3,7 +3,7 @@
   "project": "CHẠM",
   "material_focus": "Xơ dừa",
   "purpose": "Danh mục prototype phục vụ trình diễn; không phải xác nhận sản phẩm đã sản xuất.",
-  "publication": "catalog_active_theme_migration",
+  "publication": "superseded_by_cham_natural_catalog",
   "currency": "VND",
   "price_policy": "Chưa định giá. Giữ giá cũ chỉ sau khi xác nhận phù hợp; không tự gán giá 0 hoặc bật thanh toán.",
   "inventory_policy": "Không tự tạo tồn kho thực, không xóa lịch sử đơn hàng.",

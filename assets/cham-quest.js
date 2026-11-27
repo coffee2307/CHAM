@@ -7,19 +7,19 @@
   const shuffle=(arr)=>{const out=[...arr];for(let i=out.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[out[i],out[j]]=[out[j],out[i]];}return out;};
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const games=[
-    {id:'memory',name:'Ghép cặp xơ dừa',type:'Trí nhớ',time:'2–3 phút',description:'Lật các thẻ và tìm đúng cặp sản phẩm xơ dừa.',art:'memory',detail:'3 độ khó · 4–8 cặp'},
-    {id:'quiz',name:'Đoán sản phẩm',type:'Kiến thức',time:'2–3 phút',description:'Chọn câu trả lời đúng từ danh mục xơ dừa.',art:'quiz',detail:'5 câu hỏi'},
-    {id:'match',name:'Nối công dụng',type:'Ghép nối',time:'3 phút',description:'Ghép ứng dụng với hình dáng sản phẩm.',art:'match',detail:'5 cặp tương ứng'},
-    {id:'word',name:'Ô chữ xơ dừa',type:'Giải đố',time:'3–5 phút',description:'Tìm tên chất liệu và sản phẩm trong bảng chữ.',art:'word',detail:'5 từ cần tìm'},
+    {id:'memory',name:'Ghép cặp thủ công',type:'Trí nhớ',time:'2–3 phút',description:'Lật các thẻ và tìm đúng cặp sản phẩm thủ công.',art:'memory',detail:'3 độ khó · 4–8 cặp'},
+    {id:'quiz',name:'Đoán sản phẩm',type:'Kiến thức',time:'2–3 phút',description:'Chọn câu trả lời đúng từ danh mục CHẠM.',art:'quiz',detail:'5 câu hỏi'},
+    {id:'match',name:'Nối chất liệu',type:'Ghép nối',time:'3 phút',description:'Ghép ứng dụng với hình dáng sản phẩm.',art:'match',detail:'5 cặp tương ứng'},
+    {id:'word',name:'Ô chữ chất liệu',type:'Giải đố',time:'3–5 phút',description:'Tìm tên chất liệu và sản phẩm trong bảng chữ.',art:'word',detail:'5 từ cần tìm'},
     {id:'speed',name:'Thử thách nhanh',type:'Thời gian',time:'45 giây',description:'Trả lời năm câu hỏi trước khi hết thời gian.',art:'speed',detail:'5 câu · 45 giây'}
   ];
   const normalize=v=>String(v).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/Đ/g,'D').toUpperCase();
   const WORDS=[
-    {word:'DUA',label:'Dừa',hint:'Quả cung cấp lớp xơ',row:0,col:1,axis:'h'},
-    {word:'SOI',label:'Sợi',hint:'Dạng kết cấu của xơ',row:1,col:4,axis:'v'},
-    {word:'LOT',label:'Lót',hint:'Đế dùng trên mặt bàn',row:4,col:1,axis:'h'},
-    {word:'CHA',label:'Chà',hint:'Tên nhóm miếng làm sạch',row:5,col:4,axis:'h'},
-    {word:'BONG',label:'Bóng',hint:'Mẫu đồ chơi hình cầu',row:7,col:0,axis:'h'}
+    {word:'DUA',label:'Dừa',hint:'Nguồn xơ dừa',row:0,col:1,axis:'h'},
+    {word:'GOM',label:'Gốm',hint:'Nhóm vật dụng từ đất tạo hình',row:1,col:4,axis:'v'},
+    {word:'TRE',label:'Tre',hint:'Vật liệu dạng nan đan',row:4,col:1,axis:'h'},
+    {word:'COI',label:'Cói',hint:'Sợi thực vật dùng đan chiếu',row:5,col:4,axis:'h'},
+    {word:'MAY',label:'Mây',hint:'Vật liệu đan giỏ và ghế',row:7,col:0,axis:'h'}
   ];
   const size=8;
   function wordGrid(){
@@ -77,7 +77,7 @@
     const icon=(id,cls='')=>assets['icon-'+id]?'<img class="cp-icon '+cls+'" src="'+esc(assets['icon-'+id])+'" alt="" aria-hidden="true">':'';
     const craftIcon=id=>'layers';
     const jumpToApp=()=>{root.scrollIntoView({block:'start',behavior:'instant'});};
-    const gameRules={memory:'Lật hai thẻ. Cặp giống nhau được giữ lại; cặp sai sẽ úp lại.',quiz:'Chọn đáp án, đọc giải thích rồi tiếp tục. Đúng ít nhất 3/5 câu.',match:'Chọn ứng dụng ở cột trái rồi chọn hình dáng tương ứng.',word:'Chọn chữ đầu và chữ cuối của từ theo hàng ngang hoặc dọc.',speed:'Đúng ít nhất 3/5 câu trong 45 giây trả lời. Đồng hồ dừng khi đọc giải thích.'};
+    const gameRules={memory:'Lật hai thẻ. Cặp giống nhau được giữ lại; cặp sai sẽ úp lại.',quiz:'Chọn đáp án, đọc giải thích rồi tiếp tục. Đúng ít nhất 3/5 câu.',match:'Chọn ứng dụng ở cột trái rồi chọn chất liệu tương ứng.',word:'Chọn chữ đầu và chữ cuối của từ theo hàng ngang hoặc dọc.',speed:'Đúng ít nhất 3/5 câu trong 45 giây trả lời. Đồng hồ dừng khi đọc giải thích.'};
     const difficulty={memory:'Dễ',quiz:'Vừa',match:'Dễ',word:'Vừa',speed:'Nhanh'};
     function hub(filter='Tất cả'){
       kind='hub';stopUI();
@@ -92,7 +92,7 @@
       const tabs=categories.map(c=>'<button type="button" class="cp-filter'+(filter===c?' is-active':'')+'" data-cp-filter="'+c+'" aria-pressed="'+(filter===c)+'">'+c+'</button>').join('');
       root.innerHTML='<div class="cp-app cp-hub">'+
         '<section class="cp-hero"><div class="cp-hero__copy"><p class="cp-eyebrow">CHẠM Play</p><h1>Khám phá trò chơi</h1>'+
-        '<p>Bảy trải nghiệm, nhiều cách tìm hiểu sản phẩm xơ dừa.</p>'+
+        '<p>Bảy trải nghiệm, nhiều cách tìm hiểu sản phẩm thủ công.</p>'+
         '<div class="cp-hero__links"><a href="/pages/cham-club?tab=rewards" class="cp-quiet-link">Xem điểm và phần thưởng</a></div></div>'+
         '<div class="cp-hero__photo cp4-hero-gallery" aria-label="Tuyển tập trò chơi CHẠM Play">'+
          '<span class="cp4-hero-gallery__back">'+avatar('quiz')+'</span>'+
@@ -165,7 +165,7 @@
           progress(s.found.size,s.target)+
           '<p class="cp-help cp-combo">Liên tiếp '+s.combo+' cặp · Kỷ lục '+s.bestCombo+' · Sai '+s.errors+'</p><div class="cp-memory-grid cp-memory-grid--'+s.target+'">'+s.deck.map((card,i)=>{
             const shown=s.open.includes(i)||s.found.has(card.id);
-            return '<button class="cp-memory-cell'+(shown?' is-revealed':'')+(s.found.has(card.id)?' is-matched':'')+'" data-cp-memory="'+i+'" type="button" '+(s.found.has(card.id)?'disabled':'')+' aria-label="Thẻ '+(i+1)+(shown?': '+esc(card.label):': đang úp')+'"><span>'+ (shown?'<span class="cp4-memory-face-title">'+esc(card.label)+'</span>':'<span class="cp4-memory-face-back"><b>CHẠM</b><small>XƠ DỪA</small></span>')+'</span></button>';
+            return '<button class="cp-memory-cell'+(shown?' is-revealed':'')+(s.found.has(card.id)?' is-matched':'')+'" data-cp-memory="'+i+'" type="button" '+(s.found.has(card.id)?'disabled':'')+' aria-label="Thẻ '+(i+1)+(shown?': '+esc(card.label):': đang úp')+'"><span>'+ (shown?'<span class="cp4-memory-face-title">'+esc(card.label)+'</span>':'<span class="cp4-memory-face-back"><b>CHẠM</b><small>CHẠM</small></span>')+'</span></button>';
           }).join('')+'</div><p class="cp-help" role="status">Lật từng cặp thẻ. Hoàn thành khi tìm đủ '+s.target+' cặp.</p></div>';
       }
       if(kind==='quiz'||kind==='speed'){
@@ -186,9 +186,9 @@
         const s=state;
         const left=s.left.map(p=>'<button type="button" data-cp-left="'+esc(p.id)+'" '+(s.found.has(p.id)?'disabled':'')+' class="cp-match-option'+(s.selected===p.id?' is-selected':'')+(s.found.has(p.id)?' is-found':'')+'">'+icon(craftIcon(p.id))+esc(p.craft)+(s.found.has(p.id)?'<span class="cp-pair-id">'+([...s.found].indexOf(p.id)+1)+'</span>':'')+'</button>').join('');
         const right=s.right.map(p=>'<button type="button" data-cp-right="'+esc(p.id)+'" '+(s.found.has(p.id)?'disabled':'')+' class="cp-match-option'+(s.found.has(p.id)?' is-found':'')+'">'+esc(p.material)+(s.found.has(p.id)?'<span class="cp-pair-id">'+([...s.found].indexOf(p.id)+1)+'</span>':'')+'</button>').join('');
-        body='<div class="cp-board"><div class="cp-board__top"><strong>'+icon('link')+' Ứng dụng và hình dáng</strong><span>'+s.found.size+'/5 cặp</span></div>'+progress(s.found.size,5)+
-          '<p class="cp-help">Chọn ứng dụng bên trái, sau đó chọn hình dáng tương ứng bên phải.</p>'+
-          '<div class="cp-match-grid"><div><h2>Ứng dụng</h2>'+left+'</div><div><h2>Hình dáng</h2>'+right+'</div></div>'+
+        body='<div class="cp-board"><div class="cp-board__top"><strong>'+icon('link')+' Ứng dụng và chất liệu</strong><span>'+s.found.size+'/5 cặp</span></div>'+progress(s.found.size,5)+
+          '<p class="cp-help">Chọn ứng dụng bên trái, sau đó chọn chất liệu tương ứng bên phải.</p>'+
+          '<div class="cp-match-grid"><div><h2>Ứng dụng</h2>'+left+'</div><div><h2>Chất liệu</h2>'+right+'</div></div>'+
           '<p class="cp-help" role="status">'+(s.selected?'Đã chọn ứng dụng. Hãy chọn hình dáng.':'Các cặp đúng sẽ được giữ lại.')+'</p></div>';
       }
       if(kind==='word'){
@@ -263,7 +263,7 @@
       if(side==='left'){s.selected=id;render();return;}
       if(!s.selected)return;
       if(s.selected===id){s.found.add(id);s.selected=null;render();
-        if(s.found.size===5)outcome(true,'Bạn đã ghép đúng cả năm cặp ứng dụng và hình dáng.');
+        if(s.found.size===5)outcome(true,'Bạn đã ghép đúng cả năm cặp ứng dụng và chất liệu.');
       }else{s.misses++;s.selected=null;render();const help=$('.cp-match-grid + .cp-help',root);if(help)help.textContent='Chưa đúng. Hãy thử chọn cặp khác.';}
     }
     const indicesBetween=(a,b)=>{
@@ -280,7 +280,7 @@
       const str=indices.map(j=>s.letters[j]).join('');
       const target=WORDS.find(w=>(w.word===str||w.word===[...str].reverse().join(''))&&!s.found.has(w.word));
       if(target){s.found.add(target.word);indices.forEach(x=>s.foundPositions.add(x));s.hintPositions.clear();s.selected=null;render();
-        if(s.found.size===5)outcome(true,'Bạn đã tìm được năm từ khóa về xơ dừa.');
+        if(s.found.size===5)outcome(true,'Bạn đã tìm được năm từ khóa về vật liệu.');
       }else{
         s.selected=i;render();
         const status=$('.cp-word-status',root);if(status)status.textContent='Chưa khớp từ cần tìm. Chữ vừa chọn là điểm bắt đầu mới.';

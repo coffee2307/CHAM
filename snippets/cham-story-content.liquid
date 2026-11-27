@@ -1,13 +1,13 @@
-{% assign pottery = collections.all.products[0] %}
-{% assign weaving = collections.all.products[7] %}
-{% assign textile = collections.all.products[10] %}
-{% assign gift = collections.all.products[17] %}
+{% assign pottery = all_products['ly-gom-thu-cong'] %}
+{% assign weaving = all_products['gio-may'] %}
+{% assign textile = all_products['chieu-luc-binh'] %}
+{% assign gift = all_products['tui-soi-day'] %}
 <section class="cham-story-v4">
   <div class="cham-shell cham-story-v4__hero">
     <div class="cham-story-v4__opening" data-cham-scroll>
       <p class="cham-story-v4__kicker">CÂU CHUYỆN CHẠM</p>
-      <h1>Chuyện của những sợi xơ dừa.</h1>
-      <p>Miếng chà, đế lót, thảm và các mẫu sản phẩm xơ dừa mở ra nhiều hướng ứng dụng trong đời sống.</p>
+      <h1>Chuyện của chất liệu tự nhiên.</h1>
+      <p>Từ gốm, tre, mây đến lục bình, cỏ, gỗ và xơ dừa, mỗi chất liệu mở ra một hướng ứng dụng khác nhau.</p>
       <a href="{{ routes.all_products_collection_url }}" class="cham-story-v4__text-link">Khám phá sản phẩm <span aria-hidden="true">→</span></a>
     </div>
     <div class="cham-story-v4__photo-composition" data-cham-scroll>
@@ -17,7 +17,7 @@
       {% if weaving.featured_image %}
         {{ weaving.featured_image | image_url: width: 760 | image_tag: loading: 'lazy', widths: '250, 450, 760', sizes: '(max-width: 800px) 45vw, 20vw', alt: weaving.title, class: 'cham-story-v4__secondary-photo' }}
       {% endif %}
-      <span class="cham-story-v4__photo-caption">Xơ dừa trong đời sống.</span>
+      <span class="cham-story-v4__photo-caption">Thiên nhiên trong đời sống.</span>
     </div>
   </div>
   <div class="cham-story-v4__belief">
@@ -30,29 +30,29 @@
   <div class="cham-shell cham-story-v4__stories">
     <header class="cham-story-v4__section-head" data-cham-scroll>
       <p class="cham-story-v4__kicker">TỪ CHẤT LIỆU ĐẾN ĐỜI SỐNG</p>
-      <h2>Ba góc nhìn về xơ dừa.</h2>
+      <h2>Ba góc nhìn về chất liệu.</h2>
     </header>
     <div class="cham-story-v4__story-grid" data-cham-scroll>
       <article class="cham-story-v4__story-card">
         <a href="{{ pottery.url | default: routes.all_products_collection_url }}" class="cham-story-v4__card-photo">
           {% if pottery.featured_image %}{{ pottery.featured_image | image_url: width: 850 | image_tag: loading: 'lazy', widths: '300, 550, 850', sizes: '(max-width: 720px) 90vw, 30vw', alt: pottery.title }}{% endif %}
         </a>
-        <h3>Chăm sóc cá nhân.</h3>
-        <p>Miếng chà và bàn chải là mẫu thiết kế cần kiểm tra độ nhám và công năng.</p>
+        <h3>Gốm.</h3>
+        <p>Ly, bát và ấm trà là những mẫu tham khảo về công năng và tạo hình.</p>
       </article>
       <article class="cham-story-v4__story-card">
         <a href="{{ weaving.url | default: routes.all_products_collection_url }}" class="cham-story-v4__card-photo">
           {% if weaving.featured_image %}{{ weaving.featured_image | image_url: width: 850 | image_tag: loading: 'lazy', widths: '300, 550, 850', sizes: '(max-width: 720px) 90vw, 30vw', alt: weaving.title }}{% endif %}
         </a>
-        <h3>Nhà bếp.</h3>
-        <p>Miếng rửa bát và đế lót là các hướng ứng dụng xơ dừa; khả năng sử dụng cần được kiểm chứng.</p>
+        <h3>Tre và mây.</h3>
+        <p>Giỏ, khay và đồ đan là các mẫu tham khảo cho sinh hoạt.</p>
       </article>
       <article class="cham-story-v4__story-card">
         <a href="{{ textile.url | default: routes.all_products_collection_url }}" class="cham-story-v4__card-photo">
           {% if textile.featured_image %}{{ textile.featured_image | image_url: width: 850 | image_tag: loading: 'lazy', widths: '300, 550, 850', sizes: '(max-width: 720px) 90vw, 30vw', alt: textile.title }}{% endif %}
         </a>
         <h3>Không gian sống.</h3>
-        <p>Thảm và đế lót cho thấy các dạng kết cấu khác nhau của mẫu sản phẩm.</p>
+        <p>Sợi lục bình, cỏ và gỗ cho thấy nhiều kết cấu tự nhiên khác nhau.</p>
       </article>
     </div>
   </div>
@@ -61,7 +61,7 @@
       <div class="cham-story-v4__play-copy">
         <p class="cham-story-v4__kicker">KHÁM PHÁ BẰNG CÁCH CHƠI</p>
         <h2>Thử một hành trình khác cùng CHẠM.</h2>
-        <p>CHẠM Play giúp khám phá danh mục xơ dừa thông qua câu hỏi, ghép cặp và các thử thách.</p>
+        <p>CHẠM Play giúp khám phá danh mục vật liệu tự nhiên thông qua câu hỏi, ghép cặp và các thử thách.</p>
         <a class="cham-story-v4__cta" href="/pages/cham-play">Chơi CHẠM Play</a>
       </div>
       <div class="cham-story-v4__play-photo">

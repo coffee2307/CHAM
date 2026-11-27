@@ -3,12 +3,12 @@
 (()=>{
 'use strict';
 const segments=[
- {label:'Miếng chà',color:'#d5ad8c',id:'pot'},
- {label:'Bàn chải',color:'#b5c6ac',id:'silk'},
- {label:'Đế lót',color:'#e8d2a1',id:'basket'},
- {label:'Thảm',color:'#d9bdb5',id:'hat'},
- {label:'Bóng',color:'#bec8d7',id:'print'},
- {label:'Chậu ươm',color:'#e4cdba',id:'sew'}
+ {label:'Xơ dừa',color:'#d5ad8c',id:'pot'},
+ {label:'Gốm',color:'#b5c6ac',id:'silk'},
+ {label:'Tre',color:'#e8d2a1',id:'basket'},
+ {label:'Mây',color:'#d9bdb5',id:'hat'},
+ {label:'Lục bình',color:'#bec8d7',id:'print'},
+ {label:'Gỗ',color:'#e4cdba',id:'sew'}
 ];
 function dateIndex(day){
  return [...day].reduce((a,c)=>a+(c.charCodeAt(0)||0),0)%segments.length;

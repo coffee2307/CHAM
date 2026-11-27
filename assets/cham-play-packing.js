@@ -8,7 +8,7 @@ const PACKAGES=[
 {id:'frame',name:'Hộp giữ dáng',hint:'Hạn chế sản phẩm bị méo khi vận chuyển',symbol:'▥'},
 {id:'flat',name:'Bìa bảo vệ phẳng',hint:'Giữ sản phẩm dạng tờ không bị gấp',symbol:'▱'}
 ];
-const byCraft={heel:'wrap',dish:'wrap',cup:'flat',mat:'flat',cat:'frame',plant:'protect'};
+const byCraft={mat:'flat',cup:'protect',basket:'frame',chair:'frame',weave:'flat',spoon:'wrap'};
 function shuffle(a){
  const b=[...a];for(let i=b.length-1;i>0;i--){const k=Math.floor(Math.random()*(i+1));[b[i],b[k]]=[b[k],b[i]];}return b;
 }

@@ -11,7 +11,15 @@
     <div class="cham5-categories__grid">
       {% for group in collections %}
         {% unless group.handle == 'frontpage' or group.handle == 'all' %}
-          {%- assign photo = group.image | default: group.products.first.featured_image -%}
+          {%- liquid
+            assign photo = nil
+            for p in group.products
+              if p.featured_image != blank
+                assign photo = p.featured_image
+                break
+              endif
+            endfor
+          -%}
           <a class="cham5-category" href="{{ group.url }}" aria-label="Xem danh mục {{ group.title }}">
             <div class="cham5-category__image">
               {% if photo %}

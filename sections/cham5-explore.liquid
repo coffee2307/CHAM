@@ -1,29 +1,29 @@
 {%- liquid
-  assign woven = collections['nha-bep'].products.first
-  assign textile = collections['khong-gian-song'].products.first
+  assign woven = all_products['gio-may']
+  assign textile = all_products['chieu-luc-binh']
 -%}
 <div class="cham5 cham5-explore">
   <section class="cham5-bridge" aria-labelledby="cham5-bridge-title">
     <div class="cham5-bridge__text">
       <p class="cham5-eyebrow">Từ câu chuyện nghề đến không gian sống</p>
-      <h2 id="cham5-bridge-title">Từ xơ dừa đến đời sống.</h2>
-      <p>Cùng một chất liệu xơ dừa, CHẠM giới thiệu nhiều mẫu thiết kế cho các nhu cầu khác nhau trong sinh hoạt hằng ngày.</p>
+      <h2 id="cham5-bridge-title">Từ thiên nhiên đến đời sống.</h2>
+      <p>Gốm, tre, mây và sợi thực vật mở ra nhiều ứng dụng trong sinh hoạt hằng ngày.</p>
     </div>
     <div class="cham5-bridge__images">
       <figure class="cham5-bridge__large">
         {% if woven.featured_image %}
           {{ woven.featured_image | image_url: width: 1300 | image_tag: loading: 'lazy', decoding: 'async', widths: '500, 750, 1000, 1300', sizes: '(max-width: 767px) 92vw, 56vw', alt: woven.title }}
         {% endif %}
-        <figcaption>Xơ dừa trong nhà bếp</figcaption>
+        <figcaption>Mây đan</figcaption>
       </figure>
       <figure class="cham5-bridge__small">
         {% if textile.featured_image %}
           {{ textile.featured_image | image_url: width: 850 | image_tag: loading: 'lazy', decoding: 'async', widths: '350, 550, 850', sizes: '(max-width: 767px) 44vw, 28vw', alt: textile.title }}
         {% endif %}
-        <figcaption>Xơ dừa trong không gian sống</figcaption>
+        <figcaption>Sợi lục bình</figcaption>
       </figure>
     </div>
-    <div class="cham5-bridge__foot"><p>Khám phá các mẫu sản phẩm xơ dừa.</p><a class="cham5-textlink" href="#cham5-categories">Xem các danh mục</a></div>
+    <div class="cham5-bridge__foot"><p>Khám phá 50 mẫu sản phẩm từ các vật liệu tự nhiên.</p><a class="cham5-textlink" href="#cham5-categories">Xem các danh mục</a></div>
   </section>
 </div>
 {% schema %}

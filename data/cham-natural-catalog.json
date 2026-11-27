@@ -1,0 +1,802 @@
+[
+  {
+    "title": "Bóng xơ dừa cho mèo",
+    "handle": "bong-meo",
+    "price": 89000,
+    "group": "Xơ dừa",
+    "tag": "xo-dua",
+    "legacy": "gom-trang-tri",
+    "image": {
+      "url": null,
+      "source": "https://vietpaw.com/collections/coconut-fiber/",
+      "title": "Bóng xơ dừa cho mèo",
+      "author": null,
+      "license": null
+    },
+    "photo_status": "source_link_only_pending_permission"
+  },
+  {
+    "title": "Đồ chơi hình xương xơ dừa cho chó",
+    "handle": "xuong-cho",
+    "price": 69000,
+    "group": "Xơ dừa",
+    "tag": "xo-dua",
+    "legacy": "gom-trang-tri",
+    "image": {
+      "url": null,
+      "source": "https://coffeewooddogchew.com/coconut-coir-dog-toy/",
+      "title": "Coconut coir bone",
+      "author": null,
+      "license": null
+    },
+    "photo_status": "source_link_only_pending_permission"
+  },
+  {
+    "title": "Miếng chà gót chân xơ dừa",
+    "handle": "mieng-cha-got-chan",
+    "price": 79000,
+    "group": "Xơ dừa",
+    "tag": "xo-dua",
+    "legacy": "gom-trang-tri",
+    "image": {
+      "url": null,
+      "source": "https://www.pipponinternational.com/foot-scrubbers-1",
+      "title": "Foot scrubbers",
+      "author": null,
+      "license": null
+    },
+    "photo_status": "source_link_only_pending_permission"
+  },
+  {
+    "title": "Thảm chùi chân xơ dừa",
+    "handle": "tham-chui-chan",
+    "price": 149000,
+    "group": "Xơ dừa",
+    "tag": "xo-dua",
+    "legacy": "gom-trang-tri",
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Coir_doormat.jpg",
+      "source": "https://commons.wikimedia.org/w/index.php?curid=137696561",
+      "author": "Vis M",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "title": "Coir doormat"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Đế lót ly xơ dừa",
+    "handle": "de-lot-ly-tron",
+    "price": 49000,
+    "group": "Xơ dừa",
+    "tag": "xo-dua",
+    "legacy": "gom-trang-tri",
+    "image": {
+      "url": null,
+      "source": "https://www.adhiannamcoir.com/coir-coaster",
+      "title": "Coir coaster",
+      "author": null,
+      "license": null
+    },
+    "photo_status": "source_link_only_pending_permission"
+  },
+  {
+    "title": "Ly gốm thủ công",
+    "handle": "ly-gom-thu-cong",
+    "price": 119000,
+    "group": "Gốm",
+    "tag": "gom",
+    "legacy": "may-tre-dan",
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Handmade_Ceramic_Mugs_%28made_and_photographed_by_Liina_Potter%29.jpg",
+      "source": "https://commons.wikimedia.org/w/index.php?curid=200509963",
+      "author": "Liinbean",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "title": "Handmade Ceramic Mugs (made and photographed by Liina Potter)"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Ly gốm men xanh",
+    "handle": "ly-gom-men-xanh",
+    "price": 129000,
+    "group": "Gốm",
+    "tag": "gom",
+    "legacy": "may-tre-dan",
+    "image": {
+      "url": "https://live.staticflickr.com/13/18961785_8bfda9bc18_b.jpg",
+      "source": "https://www.flickr.com/photos/49503029034@N01/18961785",
+      "author": "moria",
+      "license": "https://creativecommons.org/licenses/by/2.0/",
+      "title": "Blue Mug"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Bát gốm đựng cơm",
+    "handle": "bat-gom-com",
+    "price": 89000,
+    "group": "Gốm",
+    "tag": "gom",
+    "legacy": "may-tre-dan",
+    "image": {
+      "url": "https://live.staticflickr.com/7231/7206713736_6354fec037_b.jpg",
+      "source": "https://www.flickr.com/photos/78428166@N00/7206713736",
+      "author": "Tobyotter",
+      "license": "https://creativecommons.org/licenses/by/2.0/",
+      "title": "Rice Bowl"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Bộ bát gốm",
+    "handle": "bo-bat-gom",
+    "price": 249000,
+    "group": "Gốm",
+    "tag": "gom",
+    "legacy": "may-tre-dan",
+    "image": {
+      "url": "https://live.staticflickr.com/3012/2817587609_5a56ef1a10_b.jpg",
+      "source": "https://www.flickr.com/photos/34067077@N00/2817587609",
+      "author": "Martin Cathrae",
+      "license": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "title": "Bowls"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Đĩa gốm bàn ăn",
+    "handle": "dia-gom-ban-an",
+    "price": 129000,
+    "group": "Gốm",
+    "tag": "gom",
+    "legacy": "may-tre-dan",
+    "image": {
+      "url": "https://live.staticflickr.com/5524/10461525044_fe0c99cb9d_b.jpg",
+      "source": "https://www.flickr.com/photos/49889671@N03/10461525044",
+      "author": "Didriks",
+      "license": "https://creativecommons.org/licenses/by/2.0/",
+      "title": "Heath Ceramics Dinner Plate"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Bộ đồ ăn gốm",
+    "handle": "bo-do-an-gom",
+    "price": 489000,
+    "group": "Gốm",
+    "tag": "gom",
+    "legacy": "may-tre-dan",
+    "image": {
+      "url": "https://live.staticflickr.com/4036/4220043807_07e959b3c5_b.jpg",
+      "source": "https://www.flickr.com/photos/91555706@N00/4220043807",
+      "author": "orcmid",
+      "license": "https://creativecommons.org/licenses/by/2.0/",
+      "title": "Pottery: Custom Dinnerware"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Bình hoa gốm",
+    "handle": "binh-hoa-gom",
+    "price": 249000,
+    "group": "Gốm",
+    "tag": "gom",
+    "legacy": "may-tre-dan",
+    "image": {
+      "url": "https://live.staticflickr.com/3815/8939461033_2f3d77e97c_b.jpg",
+      "source": "https://www.flickr.com/photos/49889671@N03/8939461033",
+      "author": "Didriks",
+      "license": "https://creativecommons.org/licenses/by/2.0/",
+      "title": "Ceramic Vase by Heath Ceramics"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Lọ gốm trang trí",
+    "handle": "lo-gom-trang-tri",
+    "price": 279000,
+    "group": "Gốm",
+    "tag": "gom",
+    "legacy": "may-tre-dan",
+    "image": {
+      "url": "https://live.staticflickr.com/7313/10560019834_26dbb31b23_b.jpg",
+      "source": "https://www.flickr.com/photos/49889671@N03/10560019834",
+      "author": "Didriks",
+      "license": "https://creativecommons.org/licenses/by/2.0/",
+      "title": "Jars Ceramics Vases"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Ấm trà gốm đen",
+    "handle": "am-tra-gom-den",
+    "price": 259000,
+    "group": "Gốm",
+    "tag": "gom",
+    "legacy": "may-tre-dan",
+    "image": {
+      "url": "https://live.staticflickr.com/8773/17106495329_73fc76c54c_b.jpg",
+      "source": "https://www.flickr.com/photos/132795455@N08/17106495329",
+      "author": "Image Catalog",
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "title": "Black Ceramic Teapot"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Ấm trà gốm tạo hình",
+    "handle": "am-tra-gom-tao-hinh",
+    "price": 329000,
+    "group": "Gốm",
+    "tag": "gom",
+    "legacy": "may-tre-dan",
+    "image": {
+      "url": "https://live.staticflickr.com/3213/3050613747_0e688cae92_b.jpg",
+      "source": "https://www.flickr.com/photos/29348839@N05/3050613747",
+      "author": "Patricia Lazar : Ceramic Art : Teapots : Pet Paint",
+      "license": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "title": "Handbuilt Ceramic Teapot 'See Shells'"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Bình rót gốm",
+    "handle": "binh-rot-gom",
+    "price": 229000,
+    "group": "Gốm",
+    "tag": "gom",
+    "legacy": "may-tre-dan",
+    "image": {
+      "url": "https://live.staticflickr.com/7378/8892879169_66413df8ff_b.jpg",
+      "source": "https://www.flickr.com/photos/49889671@N03/8892879169",
+      "author": "Didriks",
+      "license": "https://creativecommons.org/licenses/by/2.0/",
+      "title": "Heath Ceramics Pitcher"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Chậu cây đất nung",
+    "handle": "chau-cay-dat-nung",
+    "price": 99000,
+    "group": "Gốm",
+    "tag": "gom",
+    "legacy": "may-tre-dan",
+    "image": {
+      "url": "https://live.staticflickr.com/65535/52480852945_83d360e05a_b.jpg",
+      "source": "https://www.flickr.com/photos/73438105@N00/52480852945",
+      "author": "jetaime",
+      "license": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "title": "Terracotta flower pots and green watering can"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Tách và đĩa gốm",
+    "handle": "tach-dia-gom",
+    "price": 149000,
+    "group": "Gốm",
+    "tag": "gom",
+    "legacy": "may-tre-dan",
+    "image": {
+      "url": "https://live.staticflickr.com/7920/46684379435_4df411e92c_b.jpg",
+      "source": "https://www.flickr.com/photos/147592390@N06/46684379435",
+      "author": "John Beans",
+      "license": "https://creativecommons.org/licenses/by/2.0/",
+      "title": "white ceramic cup on ceramic saucer - Credit to https://myfriendscoffee.com/"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Giỏ tre đan",
+    "handle": "gio-tre-dan",
+    "price": 169000,
+    "group": "Tre và mây",
+    "tag": "tre-may",
+    "legacy": "vai-det-thu-cong",
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f8/A_bamboo_basket_big_in_size.JPG",
+      "source": "https://commons.wikimedia.org/w/index.php?curid=18132283",
+      "author": "Thamizhpparithi Maari",
+      "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "title": "A bamboo basket big in size"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Khay tre đan",
+    "handle": "khay-tre-dan",
+    "price": 129000,
+    "group": "Tre và mây",
+    "tag": "tre-may",
+    "legacy": "vai-det-thu-cong",
+    "image": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Light_bamboo_tray.jpg/960px-Light_bamboo_tray.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "source": "https://commons.wikimedia.org/wiki/File:Light_bamboo_tray.jpg",
+      "author": "Jyoti Chiring",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "File:Light bamboo tray.jpg"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Xửng hấp tre",
+    "handle": "xung-hap-tre",
+    "price": 189000,
+    "group": "Tre và mây",
+    "tag": "tre-may",
+    "legacy": "vai-det-thu-cong",
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Bamboo_steamer-top_oblique-fs_PNr%C2%B00727.jpg",
+      "source": "https://commons.wikimedia.org/w/index.php?curid=91234281",
+      "author": "D-Kuru",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "title": "Bamboo steamer-top oblique-fs PNr°0727"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Muỗng tre",
+    "handle": "muong-tre",
+    "price": 49000,
+    "group": "Tre và mây",
+    "tag": "tre-may",
+    "legacy": "vai-det-thu-cong",
+    "image": {
+      "url": "https://live.staticflickr.com/8423/7500659064_d7eea033a4_b.jpg",
+      "source": "https://www.flickr.com/photos/23056915@N08/7500659064",
+      "author": "ignat.gorazd",
+      "license": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "title": "Bamboo spoon"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Quạt tay tre",
+    "handle": "quat-tay-tre",
+    "price": 69000,
+    "group": "Tre và mây",
+    "tag": "tre-may",
+    "legacy": "vai-det-thu-cong",
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c0/A_hand_fan_made_of_bamboo.jpg",
+      "source": "https://commons.wikimedia.org/w/index.php?curid=146875647",
+      "author": "GTSPACE",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "title": "A hand fan made of bamboo"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Chiếu tre",
+    "handle": "chieu-tre",
+    "price": 249000,
+    "group": "Tre và mây",
+    "tag": "tre-may",
+    "legacy": "vai-det-thu-cong",
+    "image": {
+      "url": "https://live.staticflickr.com/2940/14222953450_5a63b591ee_b.jpg",
+      "source": "https://www.flickr.com/photos/115108406@N06/14222953450",
+      "author": "auhnix",
+      "license": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "title": "bamboo mat"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Nón đan tre",
+    "handle": "non-dan-tre",
+    "price": 159000,
+    "group": "Tre và mây",
+    "tag": "tre-may",
+    "legacy": "vai-det-thu-cong",
+    "image": {
+      "url": "https://pd.w.org/2026/05/2776a0eac9631b7c8.44527724-1536x2048.jpeg",
+      "source": "https://wordpress.org/photos/photo/2776a0eac9/",
+      "author": "Tilak Bahadur Karki",
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "title": "A front-facing close-up of a traditional, circular woven bamboo hat with a raised center crown, hanging on a wall made of horizontal bamboo stalks."
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Giỏ mây",
+    "handle": "gio-may",
+    "price": 189000,
+    "group": "Tre và mây",
+    "tag": "tre-may",
+    "legacy": "vai-det-thu-cong",
+    "image": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2c/Rattan_Basket.jpg/960px-Rattan_Basket.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "source": "https://commons.wikimedia.org/wiki/File:Rattan_Basket.jpg",
+      "author": "Dama Adhikara",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "File:Rattan Basket.jpg"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Ghế mây",
+    "handle": "ghe-may",
+    "price": 890000,
+    "group": "Tre và mây",
+    "tag": "tre-may",
+    "legacy": "vai-det-thu-cong",
+    "image": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/09/Ratan_chair.jpg/960px-Ratan_chair.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "source": "https://commons.wikimedia.org/wiki/File:Ratan_chair.jpg",
+      "author": "MaxixKatana",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "File:Ratan chair.jpg"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Chụp đèn mây",
+    "handle": "chup-den-may",
+    "price": 349000,
+    "group": "Tre và mây",
+    "tag": "tre-may",
+    "legacy": "vai-det-thu-cong",
+    "image": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Woven_rattan_lamp_bases_and_lampshades.jpg/960px-Woven_rattan_lamp_bases_and_lampshades.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "source": "https://commons.wikimedia.org/wiki/File:Woven_rattan_lamp_bases_and_lampshades.jpg",
+      "author": "MaxixKatana",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "File:Woven rattan lamp bases and lampshades.jpg"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Rổ tre đan",
+    "handle": "ro-tre-dan",
+    "price": 119000,
+    "group": "Tre và mây",
+    "tag": "tre-may",
+    "legacy": "vai-det-thu-cong",
+    "image": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3d/Woven_bamboo.jpg/960px-Woven_bamboo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "source": "https://commons.wikimedia.org/wiki/File:Woven_bamboo.jpg",
+      "author": "Rajesh dangi at English Wikipedia",
+      "license": "https://creativecommons.org/licenses/by/2.5",
+      "title": "File:Woven bamboo.jpg"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Chiếu lục bình",
+    "handle": "chieu-luc-binh",
+    "price": 229000,
+    "group": "Lục bình và cỏ",
+    "tag": "luc-binh-co",
+    "legacy": "phu-kien",
+    "image": {
+      "url": "https://live.staticflickr.com/65535/55144780493_d8c4829dd7_b.jpg",
+      "source": "https://www.flickr.com/photos/25802865@N08/55144780493",
+      "author": "chooyutshing",
+      "license": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "title": "Water Hyacinth Mats"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Giỏ lục bình",
+    "handle": "gio-luc-binh",
+    "price": 189000,
+    "group": "Lục bình và cỏ",
+    "tag": "luc-binh-co",
+    "legacy": "phu-kien",
+    "image": {
+      "url": null,
+      "source": "https://handicraft.com.vn/#products",
+      "title": "Water Hyacinth baskets",
+      "author": null,
+      "license": null
+    },
+    "photo_status": "source_link_only_pending_permission"
+  },
+  {
+    "title": "Túi xách lục bình",
+    "handle": "tui-luc-binh",
+    "price": 249000,
+    "group": "Lục bình và cỏ",
+    "tag": "luc-binh-co",
+    "legacy": "phu-kien",
+    "image": {
+      "url": null,
+      "source": "https://handicraft.com.vn/#products",
+      "title": "Water Hyacinth carry bags",
+      "author": null,
+      "license": null
+    },
+    "photo_status": "source_link_only_pending_permission"
+  },
+  {
+    "title": "Giỏ đựng đồ lục bình",
+    "handle": "gio-dung-do-luc-binh",
+    "price": 289000,
+    "group": "Lục bình và cỏ",
+    "tag": "luc-binh-co",
+    "legacy": "phu-kien",
+    "image": {
+      "url": null,
+      "source": "https://handicraft.com.vn/#products",
+      "title": "Water Hyacinth hampers",
+      "author": null,
+      "license": null
+    },
+    "photo_status": "source_link_only_pending_permission"
+  },
+  {
+    "title": "Hộp có nắp lục bình",
+    "handle": "hop-luc-binh",
+    "price": 179000,
+    "group": "Lục bình và cỏ",
+    "tag": "luc-binh-co",
+    "legacy": "phu-kien",
+    "image": {
+      "url": null,
+      "source": "https://handicraft.com.vn/#products",
+      "title": "Water Hyacinth lidded boxes",
+      "author": null,
+      "license": null
+    },
+    "photo_status": "source_link_only_pending_permission"
+  },
+  {
+    "title": "Giỏ cỏ đan",
+    "handle": "gio-co-dan",
+    "price": 159000,
+    "group": "Lục bình và cỏ",
+    "tag": "luc-binh-co",
+    "legacy": "phu-kien",
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Brown_Seagrass_Basket.jpg",
+      "source": "https://commons.wikimedia.org/w/index.php?curid=23912505",
+      "author": "AmerMansour87",
+      "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "title": "Brown Seagrass Basket"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Túi rơm đan",
+    "handle": "tui-rom-dan",
+    "price": 189000,
+    "group": "Lục bình và cỏ",
+    "tag": "luc-binh-co",
+    "legacy": "phu-kien",
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Straw_bag.jpg",
+      "source": "https://commons.wikimedia.org/w/index.php?curid=145194232",
+      "author": "Ebiojo",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "title": "Straw bag"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Chiếu cói",
+    "handle": "chieu-coi",
+    "price": 199000,
+    "group": "Lục bình và cỏ",
+    "tag": "luc-binh-co",
+    "legacy": "phu-kien",
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Reed_mat.jpg",
+      "source": "https://commons.wikimedia.org/w/index.php?curid=17403868",
+      "author": "Srithern",
+      "license": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "title": "Reed mat"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Khay cỏ đan",
+    "handle": "khay-co-dan",
+    "price": 119000,
+    "group": "Lục bình và cỏ",
+    "tag": "luc-binh-co",
+    "legacy": "phu-kien",
+    "image": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a1/A_basket_tray.jpg/960px-A_basket_tray.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "source": "https://commons.wikimedia.org/wiki/File:A_basket_tray.jpg",
+      "author": "MUCUNGUZI Jr ANOLD",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "File:A basket tray.jpg"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Mũ cỏ đan",
+    "handle": "mu-co-dan",
+    "price": 129000,
+    "group": "Lục bình và cỏ",
+    "tag": "luc-binh-co",
+    "legacy": "phu-kien",
+    "image": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c4/Handwoven_straw_hat_with_purple_patterns_-_Northern_Ghana.jpg/960px-Handwoven_straw_hat_with_purple_patterns_-_Northern_Ghana.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "source": "https://commons.wikimedia.org/wiki/File:Handwoven_straw_hat_with_purple_patterns_-_Northern_Ghana.jpg",
+      "author": "Achiri Bitamsimli",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "File:Handwoven straw hat with purple patterns - Northern Ghana.jpg"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Tấm đan lá dứa",
+    "handle": "tam-dan-la-dua",
+    "price": 189000,
+    "group": "Lục bình và cỏ",
+    "tag": "luc-binh-co",
+    "legacy": "phu-kien",
+    "image": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/58/H000098-_Woven_mat.jpg/960px-H000098-_Woven_mat.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "source": "https://commons.wikimedia.org/wiki/File:H000098-_Woven_mat.jpg",
+      "author": "Australian Museum",
+      "license": "https://creativecommons.org/licenses/by-sa/3.0",
+      "title": "File:H000098- Woven mat.jpg"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Muỗng gỗ",
+    "handle": "muong-go",
+    "price": 59000,
+    "group": "Gỗ và sợi tự nhiên",
+    "tag": "go-soi-tu-nhien",
+    "legacy": "qua-tang",
+    "image": {
+      "url": "https://live.staticflickr.com/6040/6279381589_ab9481bea9.jpg",
+      "source": "https://www.flickr.com/photos/65219016@N04/6279381589",
+      "author": "Rubber Dragon",
+      "license": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "title": "Wooden Spoons"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Bát gỗ",
+    "handle": "bat-go",
+    "price": 159000,
+    "group": "Gỗ và sợi tự nhiên",
+    "tag": "go-soi-tu-nhien",
+    "legacy": "qua-tang",
+    "image": {
+      "url": "https://live.staticflickr.com/3098/2842922838_65e889a06c_b.jpg",
+      "source": "https://www.flickr.com/photos/79749576@N00/2842922838",
+      "author": "oledoe",
+      "license": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "title": "Wooden bowl"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Hộp gỗ tròn có nắp",
+    "handle": "hop-go-tron",
+    "price": 189000,
+    "group": "Gỗ và sợi tự nhiên",
+    "tag": "go-soi-tu-nhien",
+    "legacy": "qua-tang",
+    "image": {
+      "url": "https://live.staticflickr.com/5750/30646940752_3c5d1b167e.jpg",
+      "source": "https://www.flickr.com/photos/35759981@N08/30646940752",
+      "author": "Archives New Zealand",
+      "license": "https://creativecommons.org/licenses/by/2.0/",
+      "title": "Carved Wooden Bowl With Lid"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Thớt gỗ",
+    "handle": "thot-go",
+    "price": 189000,
+    "group": "Gỗ và sợi tự nhiên",
+    "tag": "go-soi-tu-nhien",
+    "legacy": "qua-tang",
+    "image": {
+      "url": "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcHgxMTYxMzgyLWltYWdlLWt3dnc4bWFsLmpwZw.jpg",
+      "source": "https://www.rawpixel.com/image/5913099/image-public-domain-wood-kitchen",
+      "author": "Tác giả tại nguồn",
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "title": "Free wood cutting board photo"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Khay gỗ",
+    "handle": "khay-go",
+    "price": 239000,
+    "group": "Gỗ và sợi tự nhiên",
+    "tag": "go-soi-tu-nhien",
+    "legacy": "qua-tang",
+    "image": {
+      "url": "https://live.staticflickr.com/3690/19940847152_1bab054297_b.jpg",
+      "source": "https://www.flickr.com/photos/49889671@N03/19940847152",
+      "author": "Didriks",
+      "license": "https://creativecommons.org/licenses/by/2.0/",
+      "title": "Wooden Tray by Spencer Peterman"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Lược gỗ",
+    "handle": "luoc-go",
+    "price": 69000,
+    "group": "Gỗ và sợi tự nhiên",
+    "tag": "go-soi-tu-nhien",
+    "legacy": "qua-tang",
+    "image": {
+      "url": "https://live.staticflickr.com/48/134160548_cc435d7121_b.jpg",
+      "source": "https://www.flickr.com/photos/62502073@N00/134160548",
+      "author": "Tom Maisey",
+      "license": "https://creativecommons.org/licenses/by/2.0/",
+      "title": "Wooden Comb, Elandapudur"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Cối chày gỗ",
+    "handle": "coi-chay-go",
+    "price": 199000,
+    "group": "Gỗ và sợi tự nhiên",
+    "tag": "go-soi-tu-nhien",
+    "legacy": "qua-tang",
+    "image": {
+      "url": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9zdGF0aWMvaW1hZ2Uvd2Vic2l0ZS8yMDIyLTA0L2xyL3B4MTA0ODYxMi1pbWFnZS1rd3Z3aGRsOC5qcGc.jpg",
+      "source": "https://www.rawpixel.com/image/5915012/image-public-domain-free-cc0",
+      "author": "Tác giả tại nguồn",
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "title": "Free wooden mortar pestle photo"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Túi sợi đay",
+    "handle": "tui-soi-day",
+    "price": 139000,
+    "group": "Gỗ và sợi tự nhiên",
+    "tag": "go-soi-tu-nhien",
+    "legacy": "qua-tang",
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/af/Baghashtag-Jute-bag.jpg",
+      "source": "https://commons.wikimedia.org/w/index.php?curid=155561775",
+      "author": "Efkanakbiyik",
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/deed.en/",
+      "title": "Baghashtag-Jute-bag"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Túi đay mini",
+    "handle": "tui-day-mini",
+    "price": 99000,
+    "group": "Gỗ và sợi tự nhiên",
+    "tag": "go-soi-tu-nhien",
+    "legacy": "qua-tang",
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Baghashtag-mini-jute-bag.jpg",
+      "source": "https://commons.wikimedia.org/w/index.php?curid=155561780",
+      "author": "Efkanakbiyik",
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/deed.en/",
+      "title": "Baghashtag-mini-jute-bag"
+    },
+    "photo_status": "open_license_imported"
+  },
+  {
+    "title": "Miếng xơ mướp",
+    "handle": "mieng-xo-muop",
+    "price": 39000,
+    "group": "Gỗ và sợi tự nhiên",
+    "tag": "go-soi-tu-nhien",
+    "legacy": "qua-tang",
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Natural_Loofah_Sponge.jpg",
+      "source": "https://commons.wikimedia.org/w/index.php?curid=183235753",
+      "author": "Nabunje Leticia",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "title": "Natural Loofah Sponge"
+    },
+    "photo_status": "open_license_imported"
+  }
+]
