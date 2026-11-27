@@ -181,3 +181,29 @@
 
 .cham-site .cham-contact .cham-form select{width:100%;min-height:46px;border:1px solid #d7cbbb;background:#fffdf8;border-radius:5px;padding:10px 12px;color:#26251f;font:14px 'Be Vietnam Pro',sans-serif}
 .cham-site .cham-contact .cham-form [data-cham-contact-result]:not([hidden]){display:block;background:#e9efe6;color:#34563b;padding:14px;border-radius:5px;font-size:13px;line-height:1.7;margin-top:14px}
+
+/* CHAM catalog refinement */
+.cham-site .cham-shop-page__filter-label{display:block;font-size:12px;font-weight:600;color:#75695c;margin:0 0 10px}
+.cham-site .cham-shop-page__tabs{flex-wrap:wrap;overflow:visible;gap:8px;margin-bottom:20px;padding-bottom:20px}
+.cham-site .cham-shop-page__tabs a,.cham-site .cham-shop-page__use-items button{font:500 13px/1.3 'Be Vietnam Pro',sans-serif;border:1px solid #d9cfc1;border-radius:24px;padding:10px 15px;min-height:40px;background:transparent;color:#53483d;transition:background .18s,color .18s,border-color .18s;white-space:nowrap;cursor:pointer}
+.cham-site .cham-shop-page__tabs a[aria-current="page"],.cham-site .cham-shop-page__use-items button[aria-pressed="true"]{background:#3f352a;border-color:#3f352a;color:#fff}
+.cham-site .cham-shop-page__use-items button:hover,.cham-site .cham-shop-page__tabs a:not([aria-current]):hover{border-color:#9a7558;background:#eee5d9}
+.cham-site .cham-shop-page__use-items button[aria-pressed="true"]:hover{background:#3f352a;color:#fff}
+.cham-site .cham-shop-page__uses{margin-bottom:22px}
+.cham-site .cham-shop-page__use-items{display:flex;flex-wrap:wrap;gap:8px}
+.cham-site .cham-shop-page__toolbar{position:relative;z-index:5;align-items:stretch}
+.cham-site .cham-shop-page__select{display:block;min-width:180px;position:relative}
+.cham-site .cham-shop-page__select select[hidden]{display:none!important}
+.cham-filter-menu{position:relative;width:100%;font:500 13px/1.4 'Be Vietnam Pro',sans-serif;color:#3f352a}
+.cham-filter-menu summary{display:flex;align-items:center;justify-content:space-between;gap:16px;list-style:none;min-height:46px;padding:10px 15px;border:1px solid #d7cbbb;border-radius:8px;background:#fffdf8;cursor:pointer}
+.cham-filter-menu summary::-webkit-details-marker{display:none}
+.cham-filter-menu summary:after{content:'';width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin-bottom:4px;transition:transform .18s}
+.cham-filter-menu[open] summary:after{transform:rotate(225deg)}
+.cham-filter-menu__list{position:absolute;top:calc(100% + 7px);left:0;right:0;min-width:100%;width:max-content;max-width:min(280px,90vw);padding:5px;border:1px solid #e0d7ca;background:#fffdf8;border-radius:10px;box-shadow:0 12px 30px #3c2e211a;z-index:20}
+.cham-filter-menu__list button{display:block;width:100%;border:0;border-radius:6px;background:none;color:inherit;padding:11px 12px;text-align:left;font:inherit;cursor:pointer}
+.cham-filter-menu__list button:hover,.cham-filter-menu__list button[aria-pressed="true"]{background:#e9dfd1;color:#513a29}
+.cham-filter-menu summary:focus-visible,.cham-filter-menu__list button:focus-visible,.cham-shop-page__use-items button:focus-visible{outline:2px solid #a85239;outline-offset:2px}
+.cham-site .cham-shop-card__visual{aspect-ratio:1;background:#f1ece4;border-radius:5px}
+.cham-site .cham-shop-card__visual>a>img{object-fit:contain!important;object-position:center;padding:clamp(8px,1.3vw,20px);mix-blend-mode:multiply}
+.cham-site .cham-shop-card__quickadd span{display:grid;place-items:center;width:100%;height:100%;line-height:1;transform:translateY(-1px)}
+@media(max-width:767px){.cham-site .cham-shop-page__select{min-width:0}.cham-site .cham-shop-page__toolbar{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.cham-site .cham-shop-page__search{grid-column:1/-1}.cham-filter-menu{font-size:12px}.cham-filter-menu summary{padding:10px;gap:5px}.cham-filter-menu__list{width:100%;min-width:0}.cham-site .cham-shop-page__use-items button,.cham-site .cham-shop-page__tabs a{font-size:12px;padding:8px 11px;min-height:36px}}

@@ -76,6 +76,8 @@
       if(!section)return;
       const search=$('[data-cham-filter-search]',section),price=$('[data-cham-filter-price]',section),sort=$('[data-cham-filter-sort]',section);
       if(search)search.value='';if(price)price.value='all';if(sort)sort.value='featured';
+      section.dataset.chamActiveUse='all'; $$('[data-cham-use]',section).forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.chamUse==='all')));
+      $$('select[data-cham-filter-price],select[data-cham-filter-sort]',section).forEach(el=>el.dispatchEvent(new Event('change',{bubbles:true})));
       updateFilters(section);
     }
   });
@@ -88,17 +90,20 @@
     }
   });
   const originalOrder=new WeakMap();
+  const useGroups={"tableware":["ly-gom-thu-cong","ly-gom-men-xanh","bat-gom-com","bo-bat-gom","dia-gom-ban-an","bo-do-an-gom","bat-go","muong-go","muong-tre","de-lot-ly-tron","khay-go"],"tea":["am-tra-gom-den","am-tra-gom-tao-hinh","binh-rot-gom","tach-dia-gom"],"kitchen":["xung-hap-tre","thot-go","coi-chay-go","ro-tre-dan","khay-tre-dan","khay-co-dan"],"decor":["binh-hoa-gom","lo-gom-trang-tri","chau-cay-dat-nung","chup-den-may","ghe-may","chieu-tre","chieu-luc-binh","chieu-coi","tam-dan-la-dua","tham-chui-chan"],"storage":["gio-tre-dan","gio-may","gio-luc-binh","gio-dung-do-luc-binh","hop-luc-binh","gio-co-dan","hop-go-tron"],"fashion":["tui-luc-binh","tui-rom-dan","mu-co-dan","non-dan-tre","quat-tay-tre","tui-soi-day","tui-day-mini"],"care":["luoc-go","mieng-cha-got-chan","mieng-xo-muop"],"pets":["bong-meo","xuong-cho"]};
   function updateFilters(section){
     const grid=$('[data-cham-shop-grid]',section);if(!grid)return;
     let items=$$('[data-cham-item]',grid);
     if(!originalOrder.has(grid))originalOrder.set(grid,new Map(items.map((item,index)=>[item,index])));
-    const lookup=String($('[data-cham-filter-search]',section)?.value||'').trim().toLocaleLowerCase('vi');
+    const norm=v=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/gi,'d').toLowerCase();
+    const lookup=norm($('[data-cham-filter-search]',section)?.value).trim();
+    const use=section.dataset.chamActiveUse||'all';
     const range=String($('[data-cham-filter-price]',section)?.value||'all');
     const sort=String($('[data-cham-filter-sort]',section)?.value||'featured');
     const [min,max]=range==='all'?[0,Number.POSITIVE_INFINITY]:range.split('-').map(Number);
     const visible=items.filter(item=>{
       const price=Number(item.dataset.chamPrice)||0;
-      const matched=String(item.dataset.chamTitle||'').toLocaleLowerCase('vi').includes(lookup) && price>=min && price<=max;
+      const matched=norm(item.dataset.chamTitle).includes(lookup) && price>=min && price<=max && (use==='all'||useGroups[use]?.includes(item.dataset.chamHandle));
       item.hidden=!matched;
       return matched;
     });
@@ -109,7 +114,7 @@
       if(sort==='name')return String(a.dataset.chamTitle).localeCompare(String(b.dataset.chamTitle),'vi');
       return original.get(a)-original.get(b);
     });
-    items.forEach(item=>grid.append(item));
+    if(grid.dataset.chamSort!==sort){items.forEach(item=>grid.append(item));grid.dataset.chamSort=sort;}
     const no=$('[data-cham-no-matches]',section);
     if(no)no.hidden=visible.length>0;
     const count=$('[data-cham-live-count]',section);
@@ -117,6 +122,18 @@
   }
   const shop=$('[data-cham-shop]');
   if(shop){
+    shop.addEventListener('click',e=>{const b=e.target.closest('[data-cham-use]');if(!b)return;shop.dataset.chamActiveUse=b.dataset.chamUse;$$('[data-cham-use]',shop).forEach(x=>x.setAttribute('aria-pressed',String(x===b)));updateFilters(shop);});
+    $$('select[data-cham-filter-price],select[data-cham-filter-sort]',shop).forEach(select=>{
+      const menu=document.createElement('details');menu.className='cham-filter-menu';
+      const summary=document.createElement('summary');const value=document.createElement('span');summary.append(value);menu.append(summary);
+      const list=document.createElement('div');list.className='cham-filter-menu__list';menu.append(list);
+      const sync=()=>{value.textContent=select.selectedOptions[0]?.textContent||'';$$('button',list).forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.value===select.value)));};
+      [...select.options].forEach(opt=>{const b=document.createElement('button');b.type='button';b.dataset.value=opt.value;b.textContent=opt.textContent;b.addEventListener('click',()=>{select.value=opt.value;select.dispatchEvent(new Event('change',{bubbles:true}));menu.open=false;summary.focus();});list.append(b);});
+      select.after(menu);select.hidden=true;select.addEventListener('change',sync);sync();
+      menu.addEventListener('toggle',()=>{if(menu.open)$$('.cham-filter-menu[open]',shop).forEach(other=>{if(other!==menu)other.open=false;});});
+      menu.addEventListener('keydown',e=>{if(e.key==='Escape'){menu.open=false;summary.focus();}});
+      document.addEventListener('click',e=>{if(!menu.contains(e.target))menu.open=false;});
+    });
     shop.addEventListener('input',e=>{if(e.target.matches('[data-cham-filter-search]'))updateFilters(shop);});
     shop.addEventListener('change',e=>{if(e.target.matches('[data-cham-filter-price],[data-cham-filter-sort]'))updateFilters(shop);});
     updateFilters(shop);

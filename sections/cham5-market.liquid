@@ -12,13 +12,21 @@
       {% for group in collections %}
         {% unless group.handle == 'frontpage' or group.handle == 'all' %}
           {%- liquid
-            assign photo = nil
-            for p in group.products
-              if p.featured_image != blank
-                assign photo = p.featured_image
-                break
-              endif
-            endfor
+            assign cover_handle = blank
+            case group.handle
+              when 'gom'
+                assign cover_handle = 'am-tra-gom-tao-hinh'
+              when 'go-soi-tu-nhien'
+                assign cover_handle = 'bat-go'
+              when 'luc-binh-co'
+                assign cover_handle = 'tui-luc-binh'
+              when 'tre-may'
+                assign cover_handle = 'gio-may'
+              when 'xo-dua'
+                assign cover_handle = 'tham-chui-chan'
+            endcase
+            assign cover_product = all_products[cover_handle]
+            assign photo = cover_product.featured_image | default: group.image | default: group.products.first.featured_image
           -%}
           <a class="cham5-category" href="{{ group.url }}" aria-label="Xem danh mục {{ group.title }}">
             <div class="cham5-category__image">
@@ -39,7 +47,9 @@
       <a href="{{ routes.all_products_collection_url }}" class="cham5-textlink">Khám phá thêm</a>
     </div>
     <div class="cham5-products__grid">
-      {% for product in products_source.products limit: card_limit %}
+      {% assign featured_handles = 'am-tra-gom-tao-hinh,gio-may,bat-go,tui-luc-binh,bong-meo,binh-rot-gom,khay-tre-dan,ly-gom-men-xanh,chieu-coi,tui-soi-day,tham-chui-chan,lo-gom-trang-tri' | split: ',' %}
+      {% for handle in featured_handles limit: card_limit %}
+        {% assign product = all_products[handle] %}
         <article class="cham5-product">
           <a href="{{ product.url }}" class="cham5-product__image" aria-label="Xem {{ product.title }}">
             {% if product.featured_image %}
