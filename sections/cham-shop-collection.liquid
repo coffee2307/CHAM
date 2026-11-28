@@ -5,6 +5,7 @@
     <h1 class="visually-hidden">Tất cả sản phẩm</h1>
   {% endunless %}
   <span class="visually-hidden" data-cham-live-count aria-live="polite">{{ collection.products_count }} sản phẩm</span>
+  {% if collection.handle == 'all' %}{% render 'cham-collection-banner', variant: 'compact' %}{% endif %}
   <span class="cham-shop-page__filter-label">Theo danh mục</span><nav class="cham-shop-page__tabs" aria-label="Danh mục sản phẩm">
     <a href="{{ routes.all_products_collection_url }}" {% if collection.handle == 'all' %}aria-current="page"{% endif %}>Tất cả</a>
     {% assign material_handles = 'xo-dua,gom,tre-may,luc-binh-co,go-soi-tu-nhien,học-sinh-sinh-vien,dồ-dung-một-lần' | split: ',' %}

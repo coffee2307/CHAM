@@ -1,0 +1,55 @@
+.cham-banner{--banner-ink:#26251f;--banner-paper:#f3e8d7;width:100%;min-width:0;color:var(--banner-ink);font-family:"Be Vietnam Pro",sans-serif}
+.cham-banner--home{max-width:1440px;margin:clamp(20px,4vw,56px) auto;padding-inline:clamp(16px,4vw,56px)}
+.cham-banner--compact{margin:0 0 24px}
+.cham-banner__viewport{overflow:hidden;border-radius:12px;position:relative;background:var(--banner-paper)}
+.cham-banner__track{display:flex;align-items:stretch;transition:transform .62s cubic-bezier(.22,.75,.2,1);will-change:transform}
+.cham-banner__slide{flex:0 0 100%;min-width:0;margin:0;padding:0;--tone:#e8ddc7}
+.cham-banner__slide[data-tone="disposable"]{--tone:#d8e0c5}.cham-banner__slide[data-tone="coir"]{--tone:#e6d3b8}.cham-banner__slide[data-tone="ceramic"]{--tone:#e4c5b5}.cham-banner__slide[data-tone="bamboo"]{--tone:#e9dbbd}.cham-banner__slide[data-tone="grass"]{--tone:#e0e2c7}.cham-banner__slide[data-tone="wood"]{--tone:#dfcab0}.cham-banner__slide[data-tone="gifts"]{--tone:#ecd5d1}.cham-banner__slide[data-tone="vietnam"]{--tone:#eadcc8}.cham-banner__slide[data-tone="yearend"]{--tone:#d9e0d8}
+.cham-banner__link{display:grid;grid-template-columns:minmax(0,43%) minmax(0,57%);height:100%;min-height:clamp(300px,30vw,465px);align-items:stretch;text-decoration:none!important;color:var(--banner-ink)!important;background:var(--tone);overflow:hidden}
+.cham-banner--compact .cham-banner__link{height:clamp(195px,19vw,290px);min-height:195px;grid-template-columns:minmax(0,46%) minmax(0,54%)}
+.cham-banner__copy{padding:clamp(22px,4.5vw,64px);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:12px;min-width:0;position:relative}
+.cham-banner--compact .cham-banner__copy{padding:clamp(18px,3vw,36px);gap:8px}
+.cham-banner__category{font-size:12px;font-weight:600;line-height:1.45;letter-spacing:0;color:#514438}
+.cham-banner__copy h2{font-family:"Phudu","Be Vietnam Pro",sans-serif;font-size:clamp(30px,4.3vw,65px);font-weight:600;line-height:1.06;letter-spacing:-.025em;margin:0!important;text-transform:none!important;color:inherit}
+.cham-banner--compact .cham-banner__copy h2{font-size:clamp(26px,3vw,43px)}
+.cham-banner__copy p{font-size:clamp(13px,1.25vw,17px);line-height:1.55;margin:0!important;max-width:34ch;color:#423a2e}
+.cham-banner--compact .cham-banner__copy p{font-size:13px}
+.cham-banner__cta{display:inline-flex;align-items:center;justify-content:center;min-height:44px;border:1px solid var(--banner-ink);border-radius:6px;background:var(--banner-ink);color:#fff;padding:10px 19px;margin-top:5px;font-size:13px;font-weight:600;transition:background .2s,color .2s}
+.cham-banner__link:hover .cham-banner__cta,.cham-banner__link:focus-visible .cham-banner__cta{background:transparent;color:var(--banner-ink)}
+.cham-banner__link:focus-visible{outline:2px solid var(--banner-ink);outline-offset:-4px}
+.cham-banner__image{min-width:0;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--tone)}
+.cham-banner__image img{width:100%;height:100%;max-width:none;display:block;object-fit:contain;object-position:center;aspect-ratio:1200/680;opacity:1!important;transform:none!important;filter:none!important}
+.cham-banner__controls{display:flex;align-items:center;justify-content:center;gap:4px;padding-top:5px}
+.cham-banner__controls[hidden]{display:none}
+.cham-banner__arrow,.cham-banner__pause,.cham-banner__dot{display:inline-flex;justify-content:center;align-items:center;min-height:44px;min-width:44px;color:#302a23;background:transparent;border:0;border-radius:50%;cursor:pointer;padding:0;transition:background .2s}
+.cham-banner__arrow svg,.cham-banner__pause svg{width:20px;height:20px}
+.cham-banner__arrow:hover,.cham-banner__pause:hover{background:#e8ded0}
+.cham-banner__dots{display:flex;align-items:center;justify-content:center;flex-wrap:wrap}
+.cham-banner__dot{min-width:24px;width:24px;position:relative}
+.cham-banner__dot::before{content:"";width:7px;height:7px;border-radius:10px;background:#a49585;transition:width .3s,background .3s}
+.cham-banner__dot[aria-current="true"]::before{width:17px;background:#4b3020}
+.cham-banner__controls button:focus-visible{outline:2px solid #4b3020;outline-offset:1px}
+@media(max-width:767px){
+ .cham-banner--home{margin:20px auto;padding-inline:16px}
+ .cham-banner--compact{margin-bottom:12px}
+ .cham-banner__viewport{border-radius:9px}
+ .cham-banner__link,.cham-banner--compact .cham-banner__link{display:grid;grid-template-columns:1fr;grid-template-rows:auto 1fr;min-height:0}
+ .cham-banner__image{grid-row:1;aspect-ratio:1200/680}
+ .cham-banner__image img{width:100%;height:100%}
+ .cham-banner__copy,.cham-banner--compact .cham-banner__copy{padding:15px 18px 18px;gap:6px;justify-content:flex-start}
+ .cham-banner__copy h2,.cham-banner--compact .cham-banner__copy h2{font-size:clamp(24px,6.6vw,34px)}
+ .cham-banner__category{font-size:11px}
+ .cham-banner__copy p,.cham-banner--compact .cham-banner__copy p{font-size:12px}
+ .cham-banner__cta{margin-top:2px;min-height:44px;padding:7px 13px;font-size:12px}
+ .cham-banner--compact .cham-banner__link{grid-template-columns:minmax(0,51%) minmax(0,49%);grid-template-rows:1fr;height:auto;min-height:168px}
+ .cham-banner--compact .cham-banner__image{grid-row:auto;aspect-ratio:auto}
+ .cham-banner--compact .cham-banner__copy{padding:13px;justify-content:center;gap:5px}
+ .cham-banner--compact .cham-banner__copy h2{font-size:clamp(19px,5.1vw,25px)}
+ .cham-banner--compact .cham-banner__copy p{display:none}
+ .cham-banner--compact .cham-banner__cta{font-size:11px;padding:7px 10px;min-height:44px}
+ .cham-banner__controls{gap:0}
+ .cham-banner__arrow,.cham-banner__pause{min-width:36px}
+ .cham-banner__dot{min-width:24px;width:24px}
+ .cham-banner__dots{min-width:0;flex:0 1 auto}
+}
+@media(prefers-reduced-motion:reduce){.cham-banner__track,.cham-banner__cta,.cham-banner__dot::before{transition:none!important}}

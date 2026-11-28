@@ -1,0 +1,212 @@
+[
+  {
+    "key": "study",
+    "handle": "học-sinh-sinh-vien",
+    "title": "Học tập mỗi ngày",
+    "desc": "Đồ dùng học tập từ chất liệu gần gũi.",
+    "color": "#e8ddc7",
+    "photos": [
+      {
+        "title": "Balo vải gai dầu dệt tay",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/backpack_1.jpg?v=1795878587"
+      },
+      {
+        "title": "Sổ tay giấy không dùng gỗ",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/Journals-1whitebg_ff2d7133-bf51-448b-a204-ef9f599a0f44.jpg?v=1795878590"
+      },
+      {
+        "title": "Bút chì giấy báo tái chế – bộ 10",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/Recycled-pencils-1-sq.jpg?v=1795878584"
+      }
+    ]
+  },
+  {
+    "key": "disposable",
+    "handle": "dồ-dung-một-lần",
+    "title": "Tiện dụng mỗi ngày",
+    "desc": "Ống hút, đĩa và vật dụng từ thiên nhiên.",
+    "color": "#d8e0c5",
+    "photos": [
+      {
+        "title": "Đĩa mo cau tròn – 10 chiếc",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/dia-mo-cau-tron-20cm.png?v=1795878263"
+      },
+      {
+        "title": "Ống hút gạo – 50 ống",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/rice_straws_1.png?v=1795878257"
+      },
+      {
+        "title": "Hộp bã mía 3 ngăn – 10 hộp",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/3232-202407081657314570.jpg?v=1795878269"
+      }
+    ]
+  },
+  {
+    "key": "coir",
+    "handle": "xo-dua",
+    "title": "Từ sợi xơ dừa",
+    "desc": "Những món đồ nhỏ cho nhà cửa và sinh hoạt.",
+    "color": "#e6d3b8",
+    "photos": [
+      {
+        "title": "Thảm chùi chân xơ dừa",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/612187304912_image_20261127-142249.png?v=1795789577"
+      },
+      {
+        "title": "Đế lót ly xơ dừa",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/il_300x300.7962882167_5ga4.jpg?v=1795790985"
+      },
+      {
+        "title": "Bóng xơ dừa cho mèo",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/e9d0c983e73b_image_20261127-142304.png?v=1795789602"
+      }
+    ]
+  },
+  {
+    "key": "ceramic",
+    "handle": "gom",
+    "title": "Vẻ đẹp của gốm",
+    "desc": "Một góc nhà ấm áp với đồ gốm.",
+    "color": "#e4c5b5",
+    "photos": [
+      {
+        "title": "Ly gốm MT2008",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/DSC00492-e1677603351251.jpg?v=1795792175"
+      },
+      {
+        "title": "Bát gốm 10.5 cm MT6459",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/DSC00597-2526533503-e1677611438567.jpg?v=1795792176"
+      },
+      {
+        "title": "Ly sứ in cảnh làng quê",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/ly-su-luu-niem-10.jpg?v=1795838486"
+      }
+    ]
+  },
+  {
+    "key": "bamboo",
+    "handle": "tre-may",
+    "title": "Tre và mây",
+    "desc": "Đan lát mộc mạc cho không gian sống.",
+    "color": "#e9dbbd",
+    "photos": [
+      {
+        "title": "Khay tre M0937",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/Viettimecraft-Wicker-Rattan-with-Bamboo-Tray-Wholesale-Vietnam-handicraft-supplier-3.jpg?v=1795792211"
+      },
+      {
+        "title": "Giỏ tre đan TD0424",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/bamboo-weaving-food-basket-2.jpg?v=1795792207"
+      },
+      {
+        "title": "Nón lá vẽ phong cảnh Việt Nam mẫu 08",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/non-la-phong-canh-Viet-Nam-17.jpg?v=1795838491"
+      }
+    ]
+  },
+  {
+    "key": "grass",
+    "handle": "luc-binh-co",
+    "title": "Lục bình và cỏ",
+    "desc": "Sợi đan tự nhiên trong từng vật dụng.",
+    "color": "#e0e2c7",
+    "photos": [
+      {
+        "title": "Túi cỏ bàng vẽ mai đào",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/tui-co-bang-quai-go-hoa-mai-dao-3.jpg?v=1795838480"
+      },
+      {
+        "title": "Giỏ lục bình đan B00517",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/water-hyacinth-picnic-basket-4.jpg?v=1795792246"
+      },
+      {
+        "title": "Túi cỏ bàng vẽ áo dài Việt Nam",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/tui-co-bang-ao-dai-hoa-sen-2.jpg?v=1795838479"
+      }
+    ]
+  },
+  {
+    "key": "wood",
+    "handle": "go-soi-tu-nhien",
+    "title": "Gỗ và sợi tự nhiên",
+    "desc": "Chạm vào vẻ đẹp của những đường vân.",
+    "color": "#dfcab0",
+    "photos": [
+      {
+        "title": "Khay gỗ VT19942",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/35-3.jpg?v=1795792265"
+      },
+      {
+        "title": "Bát gỗ gỗ keo GK001",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/acacia-bowl-4.jpg?v=1795792262"
+      },
+      {
+        "title": "Muỗng gỗ VT29052",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/MG_6792.jpg?v=1795792264"
+      }
+    ]
+  },
+  {
+    "key": "gifts",
+    "handle": "qua-tặng-dưới-100-000d",
+    "title": "Quà nhỏ dưới 100.000đ",
+    "desc": "Những lựa chọn giản dị để dành tặng.",
+    "color": "#ecd5d1",
+    "photos": [
+      {
+        "title": "Đế lót ly xơ dừa",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/il_300x300.7962882167_5ga4.jpg?v=1795790985"
+      },
+      {
+        "title": "Lược gỗ",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/95_1024x1024_4a1b28f9-052e-43d1-8944-6703052a2a50.png?v=1795791823"
+      },
+      {
+        "title": "Muỗng tre",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/7500659064_d7eea033a4_b.jpg?v=1795787649"
+      }
+    ]
+  },
+  {
+    "key": "vietnam",
+    "handle": "bản-sắc-việt-nam",
+    "title": "Một nét Việt Nam",
+    "desc": "Nón lá và những họa tiết thân quen.",
+    "color": "#eadcc8",
+    "photos": [
+      {
+        "title": "Nón lá sen vẽ hoa sen",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/z5995538623013_e473c0bce941fc68927de72f2df5949d.jpg?v=1795838470"
+      },
+      {
+        "title": "Mẹt tre vẽ tranh Đông Hồ",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/met-tre-ve-tranh-dong-ho-2.jpg?v=1795838473"
+      },
+      {
+        "title": "Túi canvas vẽ Hồ Gươm",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/tui-canvas-ve-16.jpg?v=1795838480"
+      }
+    ]
+  },
+  {
+    "key": "yearend",
+    "handle": "qua-tặng-cuối-nam",
+    "title": "Quà tặng cuối năm",
+    "desc": "Gửi lời cảm ơn qua những món quà nhỏ.",
+    "color": "#d9e0d8",
+    "photos": [
+      {
+        "title": "Ly gốm men xanh",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/18961785_8bfda9bc18_b.jpg?v=1795787649"
+      },
+      {
+        "title": "Bình hoa gốm",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/8939461033_2f3d77e97c_b.jpg?v=1795787649"
+      },
+      {
+        "title": "Hộp gỗ tròn có nắp",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/30646940752_3c5d1b167e.jpg?v=1795787649"
+      }
+    ]
+  }
+]

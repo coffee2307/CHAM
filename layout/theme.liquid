@@ -39,6 +39,10 @@
       <script src="{{ 'cham8-story.js' | asset_url }}" defer></script>
     {% endif %}
     {{ 'cham-design-system.css' | asset_url | stylesheet_tag }}
+    {% if template.name == 'index' or template.name == 'collection' %}
+      {{ 'cham-collection-banner.css' | asset_url | stylesheet_tag }}
+      <script src="{{ 'cham-collection-banner.js' | asset_url }}" defer></script>
+    {% endif %}
     <script src="{{ 'cham-unified-motion.js' | asset_url }}" defer></script>
     <script src="{{ 'cham-demo-core.js' | asset_url }}" defer></script>
     {% if template.suffix == 'cham-play' %}
