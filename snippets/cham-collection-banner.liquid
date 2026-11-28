@@ -1,21 +1,23 @@
 {%- liquid
-  assign banner_handles = 'học-sinh-sinh-vien,dồ-dung-một-lần,xo-dua,gom,tre-may,luc-binh-co,go-soi-tu-nhien,qua-tặng-dưới-100-000d,bản-sắc-việt-nam,qua-tặng-cuối-nam' | split: ','
-  assign banner_keys = 'study,disposable,coir,ceramic,bamboo,grass,wood,gifts,vietnam,yearend' | split: ','
-  assign banner_titles = 'Học tập mỗi ngày|Tiện dụng mỗi ngày|Từ sợi xơ dừa|Vẻ đẹp của gốm|Tre và mây|Lục bình và cỏ|Gỗ và sợi tự nhiên|Quà nhỏ dưới 100.000đ|Một nét Việt Nam|Quà tặng cuối năm' | split: '|'
-  assign banner_descriptions = 'Đồ dùng học tập từ chất liệu gần gũi.|Ống hút, đĩa và vật dụng từ thiên nhiên.|Những món đồ nhỏ cho nhà cửa và sinh hoạt.|Một góc nhà ấm áp với đồ gốm.|Đan lát mộc mạc cho không gian sống.|Sợi đan tự nhiên trong từng vật dụng.|Chạm vào vẻ đẹp của những đường vân.|Những lựa chọn giản dị để dành tặng.|Nón lá và những họa tiết thân quen.|Gửi lời cảm ơn qua những món quà nhỏ.' | split: '|'
+  assign banner_handles = 'giang-sinh-an-lanh,tết-sum-vầy,qua-tặng-8-thang-3,qua-tặng-20-thang-10,tri-an-thầy-co,trung-thu-doan-vien,valentine-yeu-thương,học-sinh-sinh-vien,mua-he-xanh,mua-tốt-nghiệp' | split: ','
+  assign banner_keys = 'christmas,tet,women-march,women-october,teachers,midautumn,valentine,school,summer,graduation' | split: ','
+  assign banner_dates = '25.12|Tết|08.03|20.10|20.11|Trung thu|14.02|Tựu trường|Mùa hè|Tốt nghiệp' | split: '|'
+  assign banner_titles = 'Giáng sinh an lành|Tết về nhà|Dành tặng nàng|Thương gửi người phụ nữ Việt|Gửi lời tri ân|Trăng rằm đoàn viên|Thương từ điều nhỏ|Sẵn sàng đến lớp|Mang hè đi khắp nơi|Mở trang mới' | split: '|'
+  assign banner_descriptions = 'Quà trao tay, ấm áp mùa lễ hội|Quà sum vầy, đón năm mới|Một món quà, một lời yêu thương|Gửi yêu thương bằng món quà nhỏ|Những món quà ý nghĩa dành tặng thầy cô|Gom niềm vui về bên gia đình|Gửi một món quà thay lời muốn nói|Balo, sổ tay và đồ dùng học tập|Túi đan, mũ và quạt cho ngày nắng|Quà kỷ niệm cho hành trình phía trước' | split: '|'
 -%}
-<div class="cham-banner cham-banner--{{ variant | default: 'compact' }}" data-cham-banner data-interval="{% if variant == 'home' %}6500{% else %}5000{% endif %}" role="region" aria-roledescription="băng chuyền" aria-label="Bộ sưu tập nổi bật">
+<div class="cham-banner cham-banner--festival cham-banner--{{ variant | default: 'compact' }}" data-cham-banner data-interval="{% if variant == 'home' %}6500{% else %}5000{% endif %}" role="region" aria-roledescription="băng chuyền" aria-label="Bộ sưu tập theo mùa">
   <div class="cham-banner__viewport" data-banner-viewport>
     <div class="cham-banner__track" data-banner-track>
       {% for handle in banner_handles %}
         {% assign group = collections[handle] %}
         {% if group != blank %}
           {% assign idx = forloop.index0 %}
-          {% assign banner_file = 'cham-banner-' | append: banner_keys[idx] | append: '.webp' %}
+          {% assign banner_file = 'cham-festival-' | append: banner_keys[idx] | append: '.webp' %}
           <article class="cham-banner__slide" data-banner-slide data-tone="{{ banner_keys[idx] }}" aria-roledescription="slide" aria-label="{{ group.title | escape }}" {% unless forloop.first %}inert aria-hidden="true"{% endunless %}>
             <a class="cham-banner__link" href="{{ group.url }}" aria-label="Xem bộ sưu tập {{ group.title | escape }}">
               <div class="cham-banner__copy">
-                <span class="cham-banner__category">{{ group.title | escape }}</span>
+                <span class="cham-banner__category">CHẠM</span>
+                <span class="cham-banner__occasion">{{ banner_dates[idx] | escape }}</span>
                 <h2>{{ banner_titles[idx] | escape }}</h2>
                 <p>{{ banner_descriptions[idx] | escape }}</p>
                 <span class="cham-banner__cta">Xem bộ sưu tập</span>

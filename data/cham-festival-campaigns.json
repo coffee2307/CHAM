@@ -1,0 +1,222 @@
+[
+  {
+    "key": "christmas",
+    "handle": "giang-sinh-an-lanh",
+    "date": "25.12",
+    "title": "Giáng sinh an lành",
+    "desc": "Quà trao tay, ấm áp mùa lễ hội",
+    "theme": "red",
+    "photos": [
+      {
+        "title": "Bình hoa gốm",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/8939461033_2f3d77e97c_b.jpg?v=1795787649"
+      },
+      {
+        "title": "Hộp gỗ tròn có nắp",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/30646940752_3c5d1b167e.jpg?v=1795787649"
+      },
+      {
+        "title": "Ly gốm men xanh",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/18961785_8bfda9bc18_b.jpg?v=1795787649"
+      }
+    ]
+  },
+  {
+    "key": "tet",
+    "handle": "tết-sum-vầy",
+    "date": "Tết",
+    "title": "Tết về nhà",
+    "desc": "Quà sum vầy, đón năm mới",
+    "theme": "tet",
+    "photos": [
+      {
+        "title": "Ấm trà gốm đen",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/17106495329_73fc76c54c_b.jpg?v=1795787649"
+      },
+      {
+        "title": "Tách và đĩa gốm",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/46684379435_4df411e92c_b.jpg?v=1795787649"
+      },
+      {
+        "title": "Khay tre đan",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/960px-Light_bamboo_tray.jpg?v=1795787649"
+      }
+    ]
+  },
+  {
+    "key": "women-march",
+    "handle": "qua-tặng-8-thang-3",
+    "date": "08.03",
+    "title": "Dành tặng nàng",
+    "desc": "Một món quà, một lời yêu thương",
+    "theme": "pink",
+    "photos": [
+      {
+        "title": "Bình hoa gốm hình trái tim MT14428",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/DSC04927.jpg?v=1795792157"
+      },
+      {
+        "title": "Túi cỏ bàng vẽ mai đào",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/tui-co-bang-quai-go-hoa-mai-dao-3.jpg?v=1795838480"
+      },
+      {
+        "title": "Túi canvas vẽ hoa sen",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/tui-canvas-ve-28.jpg?v=1795838481"
+      }
+    ]
+  },
+  {
+    "key": "women-october",
+    "handle": "qua-tặng-20-thang-10",
+    "date": "20.10",
+    "title": "Thương gửi người phụ nữ Việt",
+    "desc": "Gửi yêu thương bằng món quà nhỏ",
+    "theme": "purple",
+    "photos": [
+      {
+        "title": "Túi cỏ bàng vẽ sen vàng",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/tui-co-bang-xach-tay-ve-sen-vang-2.jpg?v=1795838478"
+      },
+      {
+        "title": "Bình hoa gốm họa tiết hoa MT14449",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/DSC08970-1.jpg?v=1795792175"
+      },
+      {
+        "title": "Quạt lụa cảnh làng quê",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/quat-vai-my-nghe-10.jpg?v=1795838471"
+      }
+    ]
+  },
+  {
+    "key": "teachers",
+    "handle": "tri-an-thầy-co",
+    "date": "20.11",
+    "title": "Gửi lời tri ân",
+    "desc": "Những món quà ý nghĩa dành tặng thầy cô",
+    "theme": "blue",
+    "photos": [
+      {
+        "title": "Ly gốm thủ công",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/960px-Handmade_Ceramic_Mugs__28made_and_photographed_by_Liina_Potter_29.jpg?v=1795787649"
+      },
+      {
+        "title": "Tách và đĩa gốm",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/46684379435_4df411e92c_b.jpg?v=1795787649"
+      },
+      {
+        "title": "Hộp gỗ tròn có nắp",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/30646940752_3c5d1b167e.jpg?v=1795787649"
+      }
+    ]
+  },
+  {
+    "key": "midautumn",
+    "handle": "trung-thu-doan-vien",
+    "date": "Trung thu",
+    "title": "Trăng rằm đoàn viên",
+    "desc": "Gom niềm vui về bên gia đình",
+    "theme": "moon",
+    "photos": [
+      {
+        "title": "Giỏ tre đan",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/960px-A_bamboo_basket_big_in_size.jpg?v=1795787649"
+      },
+      {
+        "title": "Chụp đèn mây",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/960px-Woven_rattan_lamp_bases_and_lampshades.jpg?v=1795787648"
+      },
+      {
+        "title": "Hộp có nắp lục bình",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/water-hyacinth-basket-3-2-300x300.jpg?v=1795790995"
+      }
+    ]
+  },
+  {
+    "key": "valentine",
+    "handle": "valentine-yeu-thương",
+    "date": "14.02",
+    "title": "Thương từ điều nhỏ",
+    "desc": "Gửi một món quà thay lời muốn nói",
+    "theme": "rose",
+    "photos": [
+      {
+        "title": "Bình hoa gốm hình trái tim MT14428",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/DSC04927.jpg?v=1795792157"
+      },
+      {
+        "title": "Tấm lót bàn lục bình hình trái tim B00496",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/Water-Hyacinth-Placemat-Heart-Shape-1.jpg?v=1795792226"
+      },
+      {
+        "title": "Giấy viết thư A5 – 10 tờ",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/giay-viet-thu-01.jpg?v=1795878725"
+      }
+    ]
+  },
+  {
+    "key": "school",
+    "handle": "học-sinh-sinh-vien",
+    "date": "Tựu trường",
+    "title": "Sẵn sàng đến lớp",
+    "desc": "Balo, sổ tay và đồ dùng học tập",
+    "theme": "school",
+    "photos": [
+      {
+        "title": "Balo vải gai dầu dệt tay",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/backpack_1.jpg?v=1795878587"
+      },
+      {
+        "title": "Sổ tay giấy không dùng gỗ",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/Journals-1whitebg_ff2d7133-bf51-448b-a204-ef9f599a0f44.jpg?v=1795878590"
+      },
+      {
+        "title": "Túi bút canvas hai ngăn thêu cún",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/33_6df796cafc0442a8a7636c7183da7d52_medium_60229e59-5ac2-42a3-9bcc-238cbda684d3.png?v=1795878738"
+      }
+    ]
+  },
+  {
+    "key": "summer",
+    "handle": "mua-he-xanh",
+    "date": "Mùa hè",
+    "title": "Mang hè đi khắp nơi",
+    "desc": "Túi đan, mũ và quạt cho ngày nắng",
+    "theme": "summer",
+    "photos": [
+      {
+        "title": "Túi xách lục bình",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/water-hyacinth-bag-3-300x300.jpg?v=1795790990"
+      },
+      {
+        "title": "Mũ lá cọ LB0006",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/palm-leaf-hat-for-summer-8.jpg?v=1795792229"
+      },
+      {
+        "title": "Quạt tre đan gấp TD00450",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/bamboo-fan.jpg?v=1795792176"
+      }
+    ]
+  },
+  {
+    "key": "graduation",
+    "handle": "mua-tốt-nghiệp",
+    "date": "Tốt nghiệp",
+    "title": "Mở trang mới",
+    "desc": "Quà kỷ niệm cho hành trình phía trước",
+    "theme": "grad",
+    "photos": [
+      {
+        "title": "Sổ tay bìa thổ cẩm H'Mông",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/DSCF9236_bxxb-lh_JPG.webp?v=1795878618"
+      },
+      {
+        "title": "Hộp bút và bút tre in cảnh Việt Nam",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/hop-but-luu-niem-2.jpg?v=1795838487"
+      },
+      {
+        "title": "Sổ tay bìa vải thủ công",
+        "url": "https://cdn.shopify.com/s/files/1/0870/8685/8482/files/signal-2025-09-04-132416_006_l2ex-ee_jpeg.webp?v=1795878645"
+      }
+    ]
+  }
+]
