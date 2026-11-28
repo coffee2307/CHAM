@@ -2,10 +2,22 @@
  const endpoint=root.dataset.endpoint||'';const aiConfigured=endpoint.startsWith('https://')&&!endpoint.includes('__CHAM');
  const launch=root.querySelector('.cham-ai-launch'),panel=root.querySelector('.cham-ai-window'),log=root.querySelector('.cham-ai-log'),form=root.querySelector('form'),input=form.querySelector('textarea'),send=form.querySelector('button'),share=root.querySelector('[data-chat-orders]');
  const rules=window.CHAMAI_RULES;const status=root.querySelector('.cham-ai-window header small');if(!aiConfigured&&status)status.textContent='Hỗ trợ cơ bản · AI chưa kết nối';const note=root.querySelector('.cham-ai-note');if(!aiConfigured&&note)note.textContent='Chế độ FAQ và tra cứu demo. AI tạo sinh chưa được kích hoạt. Không nhập dữ liệu nhạy cảm.';const greeting=log.firstElementChild.textContent;let history=[],busy=false,shareOrders=false;
+ const unreadBadge=launch.querySelector('[data-chammy-unread]');
+ let unread=0,greetingUnread=false;
+ try{greetingUnread=sessionStorage.getItem('chammy.greeting-unread.v1')==='1';}catch{}
+ function updateUnread(){
+  const count=unread+(greetingUnread?1:0);
+  if(unreadBadge){unreadBadge.hidden=count===0;unreadBadge.textContent=count>99?'99+':String(count);}
+  launch.setAttribute('aria-label',count?'Mở Chammy, '+count+' tin nhắn chưa đọc':'Mở Chammy');
+  launch.classList.toggle('chammy-has-unread',count>0);
+ }
+ function markGreeting(value){greetingUnread=value;try{sessionStorage.setItem('chammy.greeting-unread.v1',value?'1':'0');}catch{}updateUnread();}
+ function markReply(){if(!desiredOpen){unread++;updateUnread();if(unreadBadge&&!matchMedia('(prefers-reduced-motion: reduce)').matches)unreadBadge.animate?.([{transform:'scale(.75)'},{transform:'scale(1.13)'},{transform:'scale(1)'}],{duration:240,easing:'ease-out'});}}
+ function readAll(){unread=0;markGreeting(false);}
  const make=(tag,cls,text)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=String(text);return el;};
  const money=v=>new Intl.NumberFormat('vi-VN',{style:'currency',currency:'VND',maximumFractionDigits:0}).format(Number(v)||0);
  const end=()=>{if(log.scrollHeight-log.scrollTop-log.clientHeight<180)log.scrollTop=log.scrollHeight;};
- const add=(text,kind='')=>{const n=make('div','cham-ai-message '+kind,kind==='user'?text:rules?.voice(text)??text);log.append(n);log.scrollTop=log.scrollHeight;return n;};
+ const add=(text,kind='')=>{const n=make('div','cham-ai-message '+kind,kind==='user'?text:rules?.voice(text)??text);log.append(n);log.scrollTop=log.scrollHeight;if(text&&kind!=='user'&&kind!=='chammy-thinking')markReply();return n;};
  const productPath=/https:\/\/chamstore\.site\/(products\/[a-z0-9-]{1,120})/gi;
  const format=(node,text)=>{
   node.replaceChildren();const parts=String(text).split(/(\*\*[^*\n]+\*\*|\*[^*\n]+\*|https:\/\/chamstore\.site\/[A-Za-z0-9%_\-/]+)/g);
@@ -30,7 +42,7 @@
    body.setAttribute('aria-hidden','true');const chars=Array.from(plain);const duration=Math.min(1800,Math.max(220,chars.length*8));const start=performance.now();
    await new Promise(resolve=>{const tick=now=>{const count=Math.min(chars.length,Math.ceil((now-start)/duration*chars.length));body.textContent=chars.slice(0,count).join('');end();if(count<chars.length&&desiredOpen&&!document.hidden)requestAnimationFrame(tick);else resolve();};requestAnimationFrame(tick);});body.removeAttribute('aria-hidden');
   }
-  format(body,cleaned||'Chammy gửi bạn sản phẩm phù hợp:');
+  format(body,cleaned||'Chammy gửi bạn sản phẩm phù hợp:');markReply();
   if(unique.length){const cards=await Promise.all(unique.map(productCard));for(let i=0;i<cards.length;i++){if(cards[i])n.append(cards[i]);else{const a=make('a','chammy-link','Xem chi tiết sản phẩm');a.href='/'+unique[i];n.append(a);}}}end();return n;
  }
  const thinking=()=>{const n=add('','chammy-thinking');n.setAttribute('role','status');n.setAttribute('aria-label','Chammy đang xem thông tin');n.append(make('span','chammy-thinking-text','Chammy đang xem thông tin'),make('span','chammy-dots',''));n.lastChild.append(make('i'),make('i'),make('i'));return n;};
@@ -70,7 +82,7 @@
   const from=previous?{opacity:previous.opacity,transform:previous.transform}:null;
   transition?.cancel();transition=null;
   launch.setAttribute('aria-expanded',String(open));
-  if(open){panel.hidden=false;panel.inert=false;sync();panel.setAttribute('aria-modal',String(mobile.matches));scrollBottom();}
+  if(open){readAll();panel.hidden=false;panel.inert=false;sync();panel.setAttribute('aria-modal',String(mobile.matches));scrollBottom();}
   else{if(document.activeElement===input)input.blur();panel.inert=true;}
   const finish=()=>{if(epoch!==version)return;transition=null;if(!open){panel.hidden=true;panel.inert=false;panel.removeAttribute('aria-modal');sync();launch.focus({preventScroll:true});}else if(!panel.contains(document.activeElement)){(mobile.matches?close:input).focus({preventScroll:true});}};
   if(reducedMotion.matches||typeof panel.animate!=='function'){finish();return;}
@@ -90,7 +102,7 @@
  await reply(data.answer,Array.isArray(data.products)?data.products:[]);if(data.ai||data.source==='faq'){history.push({role:'user',content:message},{role:'assistant',content:data.answer});history=history.slice(-6);}
  }catch(err){pending.remove();await reply(rules?.fallback(message,history.filter(x=>x.role==='user'))||'AI hiện không khả dụng. Vui lòng thử lại.');}finally{clearTimeout(timer);busy=false;send.disabled=false;}
  };
- root.hidden=false;
+ root.hidden=false;updateUnread();
  const welcome=root.querySelector('[data-chammy-welcome]');
  if(welcome){
   let seen=false;try{seen=sessionStorage.getItem('chammy.welcome.v1')==='1';}catch{}
@@ -102,7 +114,7 @@
   launch.addEventListener('click',dismiss);
   if(!seen&&!document.body.classList.contains('cham-play-mode')&&!location.pathname.includes('checkout'))showTimer=setTimeout(()=>{
    if(desiredOpen||document.hidden||document.documentElement.classList.contains('cp-viewport-lock'))return;
-   welcome.hidden=false;remember();hideTimer=setTimeout(()=>{welcome.hidden=true;},14000);
+   welcome.hidden=false;markGreeting(true);remember();hideTimer=setTimeout(()=>{welcome.hidden=true;},14000);
   },1300);
  }
 })();

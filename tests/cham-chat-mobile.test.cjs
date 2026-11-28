@@ -9,7 +9,7 @@ const server=http.createServer((req,res)=>{if(req.url==='/'){res.setHeader('Cont
 for(const [width,height] of [[320,568],[390,844],[430,932],[844,390],[1440,900]]){
  const context=await browser.newContext({viewport:{width,height},hasTouch:width<1000,isMobile:width<1000,deviceScaleFactor:1});
  const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('http://127.0.0.1:'+server.address().port,{waitUntil:'domcontentloaded'});
- const launch=page.locator('.cham-ai-launch');const welcome=page.locator('[data-chammy-welcome]');await welcome.waitFor({state:'visible',timeout:5000});assert.match(await welcome.textContent(),/Chammy/);assert.equal(await launch.locator('img').evaluate(e=>e.complete&&e.naturalWidth>0),true);await welcome.locator('[data-chammy-start]').click();await welcome.waitFor({state:'hidden'});await page.waitForTimeout(300);
+ const launch=page.locator('.cham-ai-launch');const welcome=page.locator('[data-chammy-welcome]');await welcome.waitFor({state:'visible',timeout:5000});const badge=page.locator('[data-chammy-unread]');assert.equal(await badge.textContent(),'1');assert.equal(await badge.isVisible(),true);assert.match(await welcome.textContent(),/Chammy/);assert.equal(await launch.locator('img').evaluate(e=>e.complete&&e.naturalWidth>0),true);await welcome.locator('[data-chammy-start]').click();await welcome.waitFor({state:'hidden'});assert.equal(await badge.isVisible(),false);await page.waitForTimeout(300);
  assert.equal(await page.locator('.cham-ai-window').evaluate(e=>e.getAnimations().length),0);
  const isMobile=width<=700||(height<=500&&width<1000);
  if(isMobile){assert.equal(await page.locator('#ChamAIInput').evaluate(e=>e===document.activeElement),false);assert.equal(await page.locator('#MainContent').evaluate(e=>e.inert),true);}
@@ -28,6 +28,15 @@ for(const [width,height] of [[320,568],[390,844],[430,932],[844,390],[1440,900]]
   assert(m.send<=m.bottom+1&&m.input<=m.bottom+1&&m.log>0,JSON.stringify(m));
   await page.locator('[data-chat-close]').click();await page.locator('.cham-ai-window').waitFor({state:'hidden'});assert.equal(await page.locator('#MainContent').evaluate(e=>e.inert),false);assert.equal(await page.evaluate(()=>document.body.classList.contains('cham-chat-lock')),false);
  }else {await page.locator('[data-chat-close]').click();await page.locator('.cham-ai-window').waitFor({state:'hidden'});}
+ if(width===390){
+ await page.evaluate(()=>{delete visualViewport.height;delete visualViewport.offsetTop;visualViewport.dispatchEvent(new Event('resize'));});
+ await page.locator('.cham-ai-launch').click();await page.waitForTimeout(300);
+ await page.route('https://cham-support-ai.coffee2307-pham.workers.dev/chat',async route=>{await new Promise(r=>setTimeout(r,1200));await route.fulfill({status:200,contentType:'application/json',headers:{'Access-Control-Allow-Origin':'*'},body:JSON.stringify({answer:'Chammy co mau phu hop nha.',ai:true})});});
+ await page.locator('#ChamAIInput').fill('Tu van san pham xo dua');await page.locator('.cham-ai-form button').click();await page.locator('.chammy-thinking').waitFor();
+ await page.locator('[data-chat-close]').click();await page.locator('.cham-ai-window').waitFor({state:'hidden'});assert.equal(await badge.isVisible(),false);
+ await badge.waitFor({state:'visible',timeout:5000});assert.equal(await badge.textContent(),'1');
+ await page.locator('.cham-ai-launch').click();assert.equal(await badge.isVisible(),false);await page.waitForTimeout(300);await page.locator('[data-chat-close]').click();await page.locator('.cham-ai-window').waitFor({state:'hidden'});
+ }
  await page.locator('.cham-photo-ready').waitFor({state:'attached',timeout:6000});
  assert.equal(await page.locator('.cham-vietnam-photo img').evaluate(e=>e.complete&&e.naturalWidth>0&&!e.classList.contains('cham-photo-wait')),true);
  assert.deepEqual(errors,[]);console.log('PASS',width,height,isMobile?'keyboard simulation':'desktop','photo decode');await context.close();

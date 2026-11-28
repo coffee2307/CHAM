@@ -100,3 +100,15 @@ body.cham-site .cham-ai-message{position:relative;overflow:visible}
 body.cham-site .cham-ai-message:not(.user):not(.chammy-thinking)::after{content:"";position:absolute;left:-5px;bottom:7px;width:10px;height:10px;background:inherit;transform:rotate(45deg);border-radius:2px;pointer-events:none}
 body.cham-site .cham-ai-message.user::after{content:"";position:absolute;right:-5px;bottom:7px;width:10px;height:10px;background:inherit;transform:rotate(45deg);border-radius:2px;pointer-events:none}
 @media(max-width:700px){body.cham-site .chammy-welcome::before{right:18px}body.cham-site .cham-ai-log{padding-inline:19px}body.cham-site .cham-ai-mobile-open.cham-ai-keyboard .cham-ai-log{padding-inline:17px}}
+
+
+/* High-contrast launcher: warm dark rim, cream portrait, true unread counter. */
+body.cham-site .cham-ai-launch{position:relative;width:72px;height:72px;box-sizing:border-box;display:grid;place-items:center;padding:0;background:#704a34;border:2px solid #593b2a;border-radius:50%;box-shadow:0 0 0 3px #fffaf1,0 5px 16px #3d241e46;isolation:isolate;transition:transform .2s ease;overflow:visible}
+body.cham-site .cham-ai-launch .chammy-mascot{width:61px;height:61px;box-sizing:border-box;padding:4px;border-radius:50%;background:#f5e3c9;object-fit:contain}
+body.cham-site .cham-ai-launch:focus-visible{outline:3px solid #b77c58;outline-offset:6px}
+body.cham-site .cham-ai-launch .chammy-unread{position:absolute;top:-5px;right:-5px;min-width:24px;height:24px;padding:0 5px;display:grid;place-items:center;box-sizing:border-box;border:2px solid #fffaf1;border-radius:999px;background:#d52236;color:#fff;font:700 11px/1 system-ui,sans-serif;box-shadow:0 2px 4px #5d252530;pointer-events:none;z-index:2;font-variant-numeric:tabular-nums}
+body.cham-site .cham-ai-launch .chammy-unread[hidden]{display:none!important}
+@media(hover:hover) and (pointer:fine){body.cham-site .cham-ai-launch:hover{transform:translateY(-2px) scale(1.035)}}
+@media(hover:none),(pointer:coarse){body.cham-site .cham-ai-launch:hover{transform:none}}
+@media(max-width:700px){body.cham-site .cham-ai-launch{width:66px;height:66px}.cham-ai-launch .chammy-mascot,body.cham-site .cham-ai-launch .chammy-mascot{width:55px;height:55px}body.cham-site .cham-ai-launch .chammy-unread{top:-4px;right:-4px}}
+@media(prefers-reduced-motion:reduce){body.cham-site .cham-ai-launch{transition:none!important;transform:none!important}}
