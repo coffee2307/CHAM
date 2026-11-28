@@ -1,1 +1,1 @@
-Chammy mascot: Buffalo SVG, SVG Repo, CC0. Source: https://www.svgrepo.com/svg/321918/buffalo-head . Local copy with adjusted warm palette. Not AI-generated.
+Chammy mascot: custom chibi water buffalo vector for CHAM. Original SVG geometry (no external assets, raster images, scripts, or fonts). Warm terracotta, beige and brown palette. Replaces the earlier SVG Repo buffalo-head icon.
