@@ -10,9 +10,9 @@
   {% if collection.handle == 'all' %}
     <details class="cham-curated-disclosure" open><summary>Bộ sưu tập và dịch vụ</summary>{% render 'cham-curated-catalog' %}{% render 'cham-gift-bundles' %}</details>
   {% else %}<div class="cham-collection-description">{{ collection.description }}</div><a class="cham-collection-back" href="{{ routes.all_products_collection_url }}">Tất cả bộ sưu tập và sản phẩm</a>{% endif %}
-  <span class="cham-shop-page__filter-label">Theo chất liệu</span><nav class="cham-shop-page__tabs" aria-label="Danh mục sản phẩm">
+  <span class="cham-shop-page__filter-label">Theo danh mục</span><nav class="cham-shop-page__tabs" aria-label="Danh mục sản phẩm">
     <a href="{{ routes.all_products_collection_url }}" {% if collection.handle == 'all' %}aria-current="page"{% endif %}>Tất cả</a>
-    {% assign material_handles = 'xo-dua,gom,tre-may,luc-binh-co,go-soi-tu-nhien' | split: ',' %}
+    {% assign material_handles = 'xo-dua,gom,tre-may,luc-binh-co,go-soi-tu-nhien,học-sinh-sinh-vien,dồ-dung-một-lần' | split: ',' %}
     {% for handle in material_handles %}{% assign group = collections[handle] %}{% if group != blank %}
       <a href="{{ group.url }}" {% if group.handle == collection.handle %}aria-current="page"{% endif %}>{{ group.title }}</a>
     {% endif %}{% endfor %}
