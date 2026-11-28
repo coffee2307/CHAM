@@ -1,0 +1,15 @@
+<section class="cham-vietnam-culture" aria-label="Bản sắc Việt Nam">
+  {% assign culture = collections['bản-sắc-việt-nam'] %}
+  <div class="cham-curated-head"><div><p class="cham-curated-kicker">Bộ sưu tập mới</p><h2>Một chút Việt Nam.</h2><p>Nón lá, hoa sen, áo dài, tranh dân gian và những địa danh quen thuộc trong các món quà hằng ngày.</p></div><a href="{{ culture.url }}">Xem {{ culture.products_count }} sản phẩm</a></div>
+  <div class="cham-vietnam-grid">
+    {% assign featured = 'cham-vn-s4381,cham-vn-q142,cham-vn-q88,cham-vn-q64,cham-vn-q108,cham-vn-q0' | split: ',' %}
+    {% for key in featured %}{% assign item = culture.products | where: 'handle', key | first %}{% if item != blank %}
+    <a class="cham-vietnam-item" href="{{ item.url }}"><div class="cham-vietnam-photo">{% if item.featured_image %}{{ item.featured_image | image_url: width: 720 | image_tag: loading: 'lazy', widths: '300,480,720', sizes: '(max-width: 700px) 45vw, 23vw', alt: item.title }}{% endif %}</div><div><h3>{{ item.title }}</h3><span>{{ item.price | money }}</span></div></a>
+    {% endif %}{% endfor %}
+  </div>
+  <nav class="cham-vietnam-links" aria-label="Chủ đề văn hóa">
+    {% assign culture_handles = 'non-la-va-hoa-sen,lang-que-va-nghệ-thuật-dan-gian,dấu-ấn-dịa-danh-việt-nam' | split: ',' %}
+    {% for handle in culture_handles %}{% assign group = collections[handle] %}{% if group != blank %}<a href="{{ group.url }}">{{ group.title }} <small>{{ group.products_count }} mẫu</small></a>{% endif %}{% endfor %}
+  </nav>
+  <p class="cham-curated-note">Ảnh tham khảo từ The Sun Art và Quà Lưu Niệm Việt Nam; chưa xác minh quyền sử dụng thương mại.</p>
+</section>

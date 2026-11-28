@@ -3198,5 +3198,515 @@
       "license": null
     },
     "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Nón lá sen vẽ hoa sen",
+    "handle": "cham-vn-q48",
+    "price": 129000,
+    "group": "Lục bình và cỏ",
+    "tag": "luc-binh-co",
+    "use": "fashion",
+    "theme": "non-la",
+    "image": {
+      "url": "https://qualuuniemvn.com:443/uploads/shops/files/z5995538623013_e473c0bce941fc68927de72f2df5949d.jpg",
+      "source": "https://qualuuniemvn.com/vi/shops/non-la-ve-my-nghe/non-la-sen-ve-hoa-sen-cao-cap-527.html",
+      "title": "Nón lá sen vẽ hoa sen cao cấp",
+      "author": "Quà Lưu Niệm Việt Nam",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Chùm nón lá mini trang trí",
+    "handle": "cham-vn-q52",
+    "price": 69000,
+    "group": "Tre và mây",
+    "tag": "tre-may",
+    "use": "decor",
+    "theme": "non-la",
+    "image": {
+      "url": "https://qualuuniemvn.com:443/uploads/shops/files/chum-non-la.jpg",
+      "source": "https://qualuuniemvn.com/vi/shops/non-la-ve-my-nghe/non-la-trang-tri-chum-5-non-la-nho-d-4cm-d-12cm.html",
+      "title": "Nón lá trang trí - Chùm 5 nón lá nhỏ (D=4cm - D=12cm)",
+      "author": "Quà Lưu Niệm Việt Nam",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Quạt lá đề vẽ áo dài Việt Nam",
+    "handle": "cham-vn-q120",
+    "price": 79000,
+    "group": "Lục bình và cỏ",
+    "tag": "luc-binh-co",
+    "use": "fashion",
+    "theme": "non-la",
+    "image": {
+      "url": "https://qualuuniemvn.com:443/uploads/shops/files/quat-la-de.jpg",
+      "source": "https://qualuuniemvn.com/vi/shops/quat-my-nghe/quat-la-de-ve-ao-dai-va-dia-danh-viet-nam-25cmx40cm.html",
+      "title": "Quạt lá đề vẽ - Áo dài và địa danh Việt Nam (25cmx40cm)",
+      "author": "Quà Lưu Niệm Việt Nam",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Quạt lụa cảnh làng quê",
+    "handle": "cham-vn-q123",
+    "price": 89000,
+    "group": "Gỗ và sợi tự nhiên",
+    "tag": "go-soi-tu-nhien",
+    "use": "fashion",
+    "theme": "lang-que",
+    "image": {
+      "url": "https://qualuuniemvn.com:443/uploads/shops/files/quat-vai-my-nghe-10.jpg",
+      "source": "https://qualuuniemvn.com/vi/shops/quat-my-nghe/quat-lua-canh-lang-que-viet-nam-dai-27-cm.html",
+      "title": "Quạt lụa cảnh làng quê Việt Nam (Dài 27 cm)",
+      "author": "Quà Lưu Niệm Việt Nam",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Quạt gỗ tranh cổ trang trí",
+    "handle": "cham-vn-q117",
+    "price": 129000,
+    "group": "Gỗ và sợi tự nhiên",
+    "tag": "go-soi-tu-nhien",
+    "use": "decor",
+    "theme": "lang-que",
+    "image": {
+      "url": "https://qualuuniemvn.com:443/uploads/shops/files/quat-xua-2.jpg",
+      "source": "https://qualuuniemvn.com/vi/shops/quat-my-nghe/quat-go-tranh-co-xua-trang-tri-loai-lon-33cm.html",
+      "title": "Quạt gỗ tranh cổ xưa trang trí loại lớn (33cm)",
+      "author": "Quà Lưu Niệm Việt Nam",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Mẹt tre vẽ tranh Đông Hồ",
+    "handle": "cham-vn-q142",
+    "price": 119000,
+    "group": "Tre và mây",
+    "tag": "tre-may",
+    "use": "decor",
+    "theme": "lang-que",
+    "image": {
+      "url": "https://qualuuniemvn.com:443/uploads/shops/files/met-tre-ve-tranh-dong-ho-2.jpg",
+      "source": "https://qualuuniemvn.com/vi/shops/nia-ve-my-nghe/met-tre-ve-tranh-dong-ho-dan-gian-loai-trung-d-35-cm.html",
+      "title": "Mẹt tre vẽ tranh Đông Hồ - dân gian - Loại trung (D=35 cm)",
+      "author": "Quà Lưu Niệm Việt Nam",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Mẹt tre vẽ cô gái áo dài",
+    "handle": "cham-vn-q145",
+    "price": 99000,
+    "group": "Tre và mây",
+    "tag": "tre-may",
+    "use": "decor",
+    "theme": "lang-que",
+    "image": {
+      "url": "https://qualuuniemvn.com:443/uploads/shops/files/nia-ve-co-gai-va-ao-dai.jpg",
+      "source": "https://qualuuniemvn.com/vi/shops/nia-ve-my-nghe/nia-ve-co-gai-va-ta-ao-dai-viet-nam.html",
+      "title": "Nia vẽ cô gái và tà áo dài Việt Nam",
+      "author": "Quà Lưu Niệm Việt Nam",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Mẹt tre vẽ địa danh Việt Nam",
+    "handle": "cham-vn-q146",
+    "price": 99000,
+    "group": "Tre và mây",
+    "tag": "tre-may",
+    "use": "decor",
+    "theme": "dia-danh",
+    "image": {
+      "url": "https://qualuuniemvn.com:443/uploads/shops/files/qua-luu-niem-viet-nam-nong-nia-4.jpg",
+      "source": "https://qualuuniemvn.com/vi/shops/nia-ve-my-nghe/nia-ve-cac-dia-danh-viet-nam.html",
+      "title": "Nia vẽ các địa danh Việt Nam (D= 30 cm)",
+      "author": "Quà Lưu Niệm Việt Nam",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Chuồn chuồn tre vẽ 18 cm",
+    "handle": "cham-vn-q135",
+    "price": 29000,
+    "group": "Tre và mây",
+    "tag": "tre-may",
+    "use": "decor",
+    "theme": "lang-que",
+    "image": {
+      "url": "https://qualuuniemvn.com:443/uploads/shops/temp_pic/chuon-chuon-tre-3_1.jpg",
+      "source": "https://qualuuniemvn.com/vi/shops/chuon-chuon-tre/chuon-chuon-tre-ve-18cm-266.html",
+      "title": "Chuồn chuồn tre vẽ (18cm)",
+      "author": "Quà Lưu Niệm Việt Nam",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Chuồn chuồn tre vẽ 7 cm",
+    "handle": "cham-vn-q139",
+    "price": 19000,
+    "group": "Tre và mây",
+    "tag": "tre-may",
+    "use": "decor",
+    "theme": "lang-que",
+    "image": {
+      "url": "https://qualuuniemvn.com:443/uploads/shops/temp_pic/chuon-chuon-tre-12.jpg",
+      "source": "https://qualuuniemvn.com/vi/shops/chuon-chuon-tre/chuon-chuon-tre-ve-7cm.html",
+      "title": "Chuồn chuồn tre vẽ (7cm)",
+      "author": "Quà Lưu Niệm Việt Nam",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Mô hình thuyền rồng",
+    "handle": "cham-vn-q130",
+    "price": 149000,
+    "group": "Gỗ và sợi tự nhiên",
+    "tag": "go-soi-tu-nhien",
+    "use": "decor",
+    "theme": "dia-danh",
+    "image": {
+      "url": "https://qualuuniemvn.com:443/uploads/shops/files/thuyen-rong-mini-1.jpg",
+      "source": "https://qualuuniemvn.com/vi/shops/ghe-xuong-tre-go/thuyen-rong-mo-hinh-loai-nho-22-x7-x6.html",
+      "title": "Thuyền rồng mô hình (Loại nhỏ 22 x7 x6)",
+      "author": "Quà Lưu Niệm Việt Nam",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Mô hình ghe xuồng gỗ Nam Bộ",
+    "handle": "cham-vn-q133",
+    "price": 109000,
+    "group": "Gỗ và sợi tự nhiên",
+    "tag": "go-soi-tu-nhien",
+    "use": "decor",
+    "theme": "lang-que",
+    "image": {
+      "url": "https://qualuuniemvn.com:443/uploads/shops/files/ghe-xuong-my-nghe.jpg",
+      "source": "https://qualuuniemvn.com/vi/shops/ghe-xuong-tre-go/ghe-xuong-go-loai-nho-1.html",
+      "title": "Ghe Xuồng Gỗ (Loại siêu nhỏ 35x10x6)",
+      "author": "Quà Lưu Niệm Việt Nam",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Túi cỏ bàng vẽ sen vàng",
+    "handle": "cham-vn-q86",
+    "price": 179000,
+    "group": "Lục bình và cỏ",
+    "tag": "luc-binh-co",
+    "use": "fashion",
+    "theme": "non-la",
+    "image": {
+      "url": "https://qualuuniemvn.com:443/uploads/shops/files/tui-co-bang-xach-tay-ve-sen-vang-2.jpg",
+      "source": "https://qualuuniemvn.com/vi/shops/gio-co-bang-ve-my-nghe/tui-xach-co-bang-xach-tay-ve-sen-vang-dai-45cm-cao-26cm-rong-12cm-quai-26cm.html",
+      "title": "Túi xách cỏ bàng xách tay vẽ sen vàng (dài 45cm, cao 26cm, rộng 12cm, quai 26cm)",
+      "author": "Quà Lưu Niệm Việt Nam",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Túi cỏ bàng vẽ áo dài Việt Nam",
+    "handle": "cham-vn-q88",
+    "price": 179000,
+    "group": "Lục bình và cỏ",
+    "tag": "luc-binh-co",
+    "use": "fashion",
+    "theme": "lang-que",
+    "image": {
+      "url": "https://qualuuniemvn.com:443/uploads/shops/files/tui-co-bang-ao-dai-hoa-sen-2.jpg",
+      "source": "https://qualuuniemvn.com/vi/shops/gio-co-bang-ve-my-nghe/tui-xach-co-bang-ao-dai-viet-nam-dai-45cm-cao-26cm-rong-12cm-quai-26cm.html",
+      "title": "Túi xách cỏ bàng - áo dài Việt Nam (dài 45cm, cao 26cm, rộng 12cm, quai 26cm)",
+      "author": "Quà Lưu Niệm Việt Nam",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Túi cỏ bàng vẽ mai đào",
+    "handle": "cham-vn-q90",
+    "price": 169000,
+    "group": "Lục bình và cỏ",
+    "tag": "luc-binh-co",
+    "use": "fashion",
+    "theme": "non-la",
+    "image": {
+      "url": "https://qualuuniemvn.com:443/uploads/shops/files/tui-co-bang-quai-go-hoa-mai-dao-3.jpg",
+      "source": "https://qualuuniemvn.com/vi/shops/gio-co-bang-ve-my-nghe/tui-xach-co-bang-ve-hoa-quay-go-25cm-x-30cm.html",
+      "title": "Túi xách cỏ bàng vẽ hoa quay gỗ hoa mai đào (25cm x 30cm)",
+      "author": "Quà Lưu Niệm Việt Nam",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Túi canvas vẽ Hồ Gươm",
+    "handle": "cham-vn-q108",
+    "price": 99000,
+    "group": "Gỗ và sợi tự nhiên",
+    "tag": "go-soi-tu-nhien",
+    "use": "fashion",
+    "theme": "dia-danh",
+    "image": {
+      "url": "https://qualuuniemvn.com:443/uploads/shops/files/tui-canvas-ve-16.jpg",
+      "source": "https://qualuuniemvn.com/vi/shops/tui-canvas-ve-luu-niem/tui-canvas-ve-ho-guom-34cm-x-36cm-quai-26cm.html",
+      "title": "Túi Canvas vẽ - Hồ Gươm (34cm x 36cm + quai 26cm)",
+      "author": "Quà Lưu Niệm Việt Nam",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Túi canvas vẽ hoa sen",
+    "handle": "cham-vn-q112",
+    "price": 99000,
+    "group": "Gỗ và sợi tự nhiên",
+    "tag": "go-soi-tu-nhien",
+    "use": "fashion",
+    "theme": "non-la",
+    "image": {
+      "url": "https://qualuuniemvn.com:443/uploads/shops/files/tui-canvas-ve-28.jpg",
+      "source": "https://qualuuniemvn.com/vi/shops/tui-canvas-ve-luu-niem/tui-canvas-ve-hoa-sen-34cm-x-36cm-quai-26cm.html",
+      "title": "Túi Canvas vẽ - Hoa sen (34cm x 36cm + quai 26cm)",
+      "author": "Quà Lưu Niệm Việt Nam",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Túi canvas áo dài cầu Tràng Tiền",
+    "handle": "cham-vn-q113",
+    "price": 119000,
+    "group": "Gỗ và sợi tự nhiên",
+    "tag": "go-soi-tu-nhien",
+    "use": "fashion",
+    "theme": "dia-danh",
+    "image": {
+      "url": "https://qualuuniemvn.com:443/uploads/shops/files/tui-canvas-ve-7.jpg",
+      "source": "https://qualuuniemvn.com/vi/shops/tui-canvas-ve-luu-niem/tui-canvas-ve-ao-dai-cau-trang-tien-34cm-x-36cm-quai-26cm.html",
+      "title": "Túi Canvas vẽ - Áo dài cầu Tràng Tiền (34cm x 36cm + quai 26cm)",
+      "author": "Quà Lưu Niệm Việt Nam",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Túi canvas áo dài chợ Bến Thành",
+    "handle": "cham-vn-q114",
+    "price": 119000,
+    "group": "Gỗ và sợi tự nhiên",
+    "tag": "go-soi-tu-nhien",
+    "use": "fashion",
+    "theme": "dia-danh",
+    "image": {
+      "url": "https://qualuuniemvn.com:443/uploads/shops/files/tui-canvas-ve-13.jpg",
+      "source": "https://qualuuniemvn.com/vi/shops/tui-canvas-ve-luu-niem/tui-canvas-ve-ao-dai-cho-ben-thanh-34cm-x-36cm-quai-26cm.html",
+      "title": "Túi Canvas vẽ - Áo dài chợ Bến Thành (34cm x 36cm + quai 26cm)",
+      "author": "Quà Lưu Niệm Việt Nam",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Đĩa sứ in cảnh làng quê Việt Nam",
+    "handle": "cham-vn-q64",
+    "price": 119000,
+    "group": "Gốm",
+    "tag": "gom",
+    "use": "decor",
+    "theme": "lang-que",
+    "image": {
+      "url": "https://qualuuniemvn.com:443/uploads/shops/files/dia-su-luu-niem-22.jpg",
+      "source": "https://qualuuniemvn.com/vi/shops/ly-dia-luu-niem/dia-su-luu-niem-in-lang-que-viet-nam-20cm.html",
+      "title": "Đĩa Sứ Lưu Niệm In Làng Quê Việt Nam (20cm)",
+      "author": "Quà Lưu Niệm Việt Nam",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Ly tre vẽ hình ảnh Việt Nam",
+    "handle": "cham-vn-q66",
+    "price": 59000,
+    "group": "Tre và mây",
+    "tag": "tre-may",
+    "use": "tea",
+    "theme": "lang-que",
+    "image": {
+      "url": "https://qualuuniemvn.com:443/uploads/shops/files/ly-tre-in-canh-viet-nam-8.jpg",
+      "source": "https://qualuuniemvn.com/vi/shops/ly-dia-luu-niem/ly-tre-ve-viet-nam-cao-12cm.html",
+      "title": "Ly tre vẽ Việt Nam (cao 12cm)",
+      "author": "Quà Lưu Niệm Việt Nam",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Ly sứ in cô gái áo dài",
+    "handle": "cham-vn-q70",
+    "price": 69000,
+    "group": "Gốm",
+    "tag": "gom",
+    "use": "tea",
+    "theme": "lang-que",
+    "image": {
+      "url": "https://qualuuniemvn.com:443/uploads/shops/files/01.jpg",
+      "source": "https://qualuuniemvn.com/vi/shops/ly-dia-luu-niem/ly-su-in-co-gai-va-ao-dai.html",
+      "title": "Ly Sứ Lưu Niệm In Cô Gái và Áo Dài",
+      "author": "Quà Lưu Niệm Việt Nam",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Ly sứ in cảnh làng quê",
+    "handle": "cham-vn-q71",
+    "price": 69000,
+    "group": "Gốm",
+    "tag": "gom",
+    "use": "tea",
+    "theme": "lang-que",
+    "image": {
+      "url": "https://qualuuniemvn.com:443/uploads/shops/files/ly-su-luu-niem-10.jpg",
+      "source": "https://qualuuniemvn.com/vi/shops/ly-dia-luu-niem/ly-su-luu-niem-in-canh-lang-que-viet-nam.html",
+      "title": "Ly Sứ Lưu Niệm In Cảnh Làng Quê Việt Nam",
+      "author": "Quà Lưu Niệm Việt Nam",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Hộp bút và bút tre in cảnh Việt Nam",
+    "handle": "cham-vn-q38",
+    "price": 79000,
+    "group": "Tre và mây",
+    "tag": "tre-may",
+    "use": "storage",
+    "theme": "lang-que",
+    "image": {
+      "url": "https://qualuuniemvn.com:443/uploads/shops/files/hop-but-luu-niem-2.jpg",
+      "source": "https://qualuuniemvn.com/vi/shops/so-tay-but-luu-niem/hop-but-va-but-tre-in-canh-viet-nam-6x16cm.html",
+      "title": "Hộp bút và bút tre in cảnh Việt Nam 6x16cm",
+      "author": "Quà Lưu Niệm Việt Nam",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Giá đỡ điện thoại gỗ in cảnh áo dài",
+    "handle": "cham-vn-q39",
+    "price": 69000,
+    "group": "Gỗ và sợi tự nhiên",
+    "tag": "go-soi-tu-nhien",
+    "use": "decor",
+    "theme": "lang-que",
+    "image": {
+      "url": "https://qualuuniemvn.com:443/uploads/shops/files/gac-dien-thoai-go-3.jpg",
+      "source": "https://qualuuniemvn.com/vi/shops/so-tay-but-luu-niem/gac-dien-thoai-go-in-canh-ao-dai-va-lang-que-vn-6x12cm.html",
+      "title": "Gác điện thoại gỗ in cảnh áo dài và làng quê VN 6x12cm",
+      "author": "Quà Lưu Niệm Việt Nam",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Thiệp giấy 3D Chùa Một Cột",
+    "handle": "cham-vn-q0",
+    "price": 39000,
+    "group": "Gỗ và sợi tự nhiên",
+    "tag": "go-soi-tu-nhien",
+    "use": "decor",
+    "theme": "dia-danh",
+    "image": {
+      "url": "https://qualuuniemvn.com:443/uploads/shops/files/z5946149846084_e71b67a4b16f6b808aacfb125936246c.jpg",
+      "source": "https://qualuuniemvn.com/vi/shops/cac-loai-thiep/thiep-3d-viet-nam-mau-do-chua-mot-cot.html",
+      "title": "Thiệp 3D Việt Nam màu đỏ Chùa Một Cột",
+      "author": "Quà Lưu Niệm Việt Nam",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Thiệp giấy 3D Tháp Rùa Hà Nội",
+    "handle": "cham-vn-q12",
+    "price": 49000,
+    "group": "Gỗ và sợi tự nhiên",
+    "tag": "go-soi-tu-nhien",
+    "use": "decor",
+    "theme": "dia-danh",
+    "image": {
+      "url": "https://qualuuniemvn.com:443/uploads/shops/files/thiep-3d-vietnam-8.jpg",
+      "source": "https://qualuuniemvn.com/vi/shops/cac-loai-thiep/thiep-3d-viet-nam-3d-thap-rua-ha-noi-18cm-x-18cm.html",
+      "title": "Thiệp 3D Việt Nam - 3D Tháp Rùa Hà Nội 18cm x 18cm",
+      "author": "Quà Lưu Niệm Việt Nam",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Nón lá vẽ phong cảnh Việt Nam mẫu 01",
+    "handle": "cham-vn-s4381",
+    "price": 99000,
+    "group": "Tre và mây",
+    "tag": "tre-may",
+    "use": "fashion",
+    "theme": "non-la",
+    "image": {
+      "url": "https://thesunart.vn/wp-content/uploads/2025/08/non-la-phong-canh-Viet-Nam-23.jpg",
+      "source": "https://thesunart.vn/san-pham/non-la-ve-phong-canh-viet-nam-01/",
+      "title": "Nón lá vẽ phong cảnh Việt Nam – 01",
+      "author": "The Sun Art",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Nón lá vẽ phong cảnh Việt Nam mẫu 05",
+    "handle": "cham-vn-s4385",
+    "price": 99000,
+    "group": "Tre và mây",
+    "tag": "tre-may",
+    "use": "fashion",
+    "theme": "non-la",
+    "image": {
+      "url": "https://thesunart.vn/wp-content/uploads/2025/08/non-la-phong-canh-Viet-Nam-18.jpg",
+      "source": "https://thesunart.vn/san-pham/non-la-ve-phong-canh-viet-nam-05/",
+      "title": "Nón lá vẽ phong cảnh Việt Nam – 05",
+      "author": "The Sun Art",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
+  },
+  {
+    "title": "Nón lá vẽ phong cảnh Việt Nam mẫu 08",
+    "handle": "cham-vn-s4389",
+    "price": 99000,
+    "group": "Tre và mây",
+    "tag": "tre-may",
+    "use": "fashion",
+    "theme": "non-la",
+    "image": {
+      "url": "https://thesunart.vn/wp-content/uploads/2025/08/non-la-phong-canh-Viet-Nam-17.jpg",
+      "source": "https://thesunart.vn/san-pham/non-la-ve-phong-canh-viet-nam-08/",
+      "title": "Nón lá vẽ phong cảnh Việt Nam – 08",
+      "author": "The Sun Art",
+      "license": null
+    },
+    "photo_status": "temporary_reference_pending_permission"
   }
 ]

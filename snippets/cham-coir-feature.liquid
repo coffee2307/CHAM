@@ -1,11 +1,15 @@
-<section class="cham-coir-feature" aria-labelledby="cham-coir-title">
-  <div class="cham-curated-head"><div><p class="cham-curated-kicker">Dòng sản phẩm chủ lực</p><h2 id="cham-coir-title">Xơ dừa trong đời sống.</h2><p>Tận dụng phần xơ từ quả dừa để tạo nên những vật dụng gần gũi: chăm sóc cá nhân, nhà cửa và thú cưng.</p></div><a href="{{ collections['xo-dua'].url }}">Khám phá xơ dừa</a></div>
+<section class="cham-coir-feature cham-coir-editorial" aria-labelledby="cham-coir-title">
+  <div class="cham-curated-head"><div><p class="cham-curated-kicker">Dòng sản phẩm chủ lực</p><h2 id="cham-coir-title">Xơ dừa trong đời sống.</h2><p>Những món đồ nhỏ, làm từ xơ dừa, dành cho nhà cửa và sinh hoạt mỗi ngày.</p></div><a href="{{ collections['xo-dua'].url }}">Xem tất cả 5 sản phẩm</a></div>
   <div class="cham-coir-grid">
-  {% assign coir_order = 'de-lot-ly-tron,mieng-cha-got-chan,bong-meo,xuong-cho,tham-chui-chan' | split: ',' %}
-  {% for key in coir_order %}
-    {% assign coir = collections['xo-dua'].products | where: 'handle', key | first %}
-    {% if coir %}<a class="cham-coir-card" href="{{ coir.url }}">{% if coir.featured_image %}{{ coir.featured_image | image_url: width: 500 | image_tag: loading: 'lazy', widths: '240,360,500', sizes: '(max-width: 700px) 46vw, 20vw', alt: coir.title }}{% endif %}<h3>{{ coir.title }}</h3><strong>{{ coir.price | money }}</strong></a>{% endif %}
-  {% endfor %}
+    {% assign coir_order = 'tham-chui-chan,de-lot-ly-tron,mieng-cha-got-chan,bong-meo,xuong-cho' | split: ',' %}
+    {% for key in coir_order %}
+      {% assign coir = collections['xo-dua'].products | where: 'handle', key | first %}
+      {% if coir %}<a class="cham-coir-card{% if forloop.first %} cham-coir-card--lead{% endif %}" href="{{ coir.url }}">
+        <div class="cham-coir-card__image">{% if coir.featured_image %}{{ coir.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '240,360,540,720,900', sizes: '(max-width: 700px) 90vw, 36vw', alt: coir.title }}{% endif %}</div>
+        <div class="cham-coir-card__text"><h3>{{ coir.title }}</h3><strong>{{ coir.price | money }}</strong></div>
+      </a>{% endif %}
+    {% endfor %}
   </div>
-  <p class="cham-curated-note">Ảnh mẫu xơ dừa từ đối tác Coconut Art Bowl (trừ đế lót ly: ảnh tham khảo). Giá và thông tin phục vụ trình diễn.</p>
+  <div class="cham-coir-footer"><span>Nhà cửa</span><span>Chăm sóc cá nhân</span><span>Thú cưng</span></div>
+  <p class="cham-curated-note">Ảnh mẫu từ Coconut Art Bowl, riêng đế lót ly là ảnh tham khảo. Giá minh họa.</p>
 </section>

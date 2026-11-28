@@ -269,3 +269,53 @@ body.cham-site .cham-order-property{display:block;font-size:11px;line-height:1.4
 @media(max-width:700px){body.cham-site .cham-home-curated{padding:25px 16px}body.cham-site .cham-curated-head{align-items:flex-start;flex-direction:column;gap:7px;margin-bottom:15px}body.cham-site .cham-coir-grid,body.cham-site .cham-curated-grid,body.cham-site .cham-curated-tiers{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}body.cham-site .cham-service-band{align-items:flex-start;flex-direction:column;padding:15px}body.cham-site .cham-bundle-grid{grid-template-columns:1fr}body.cham-site .cham-coir-card h3{font-size:12px}}
 
 body.cham-site .cham-home-coir{max-width:1440px;margin:0 auto;padding:clamp(24px,4vw,56px) clamp(18px,5vw,65px)}body.cham-site .cham-home-coir .cham-coir-feature{margin:0}
+
+
+/* Coir editorial: no thick frames, one lead product and four supporting cards. */
+body.cham-site .cham-coir-editorial{background:transparent;border:0;border-radius:0;padding:0}
+body.cham-site .cham-coir-editorial .cham-curated-head{padding-bottom:17px;border-bottom:1px solid #ded2c1;margin-bottom:20px}
+body.cham-site .cham-coir-editorial .cham-coir-grid{display:grid;grid-template-columns:minmax(0,1.65fr) repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:22px 18px;align-items:stretch}
+body.cham-site .cham-coir-editorial .cham-coir-card{display:grid;grid-template-rows:minmax(0,1fr) auto;gap:9px;min-width:0}
+body.cham-site .cham-coir-editorial .cham-coir-card--lead{grid-row:span 2}
+body.cham-site .cham-coir-editorial .cham-coir-card__image{position:relative;width:100%;min-width:0;aspect-ratio:1.22;overflow:hidden;background:#eee6db;border-radius:3px}
+body.cham-site .cham-coir-editorial .cham-coir-card--lead .cham-coir-card__image{aspect-ratio:auto;height:100%;min-height:260px}
+body.cham-site .cham-coir-editorial .cham-coir-card__image img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+body.cham-site .cham-coir-editorial .cham-coir-card:hover img{transform:scale(1.035)}
+body.cham-site .cham-coir-editorial .cham-coir-card__text{display:flex;flex-direction:column;gap:4px;align-items:flex-start;min-height:52px}
+body.cham-site .cham-coir-editorial .cham-coir-card h3{font-size:14px;font-weight:550;line-height:1.4;margin:0;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+body.cham-site .cham-coir-editorial .cham-coir-card strong{font-size:13px;font-weight:600;color:#80533b;margin-top:auto}
+body.cham-site .cham-coir-editorial .cham-coir-card--lead h3{font-size:clamp(17px,2vw,25px)}
+body.cham-site .cham-coir-editorial .cham-coir-card--lead strong{font-size:16px}
+body.cham-site .cham-coir-footer{display:flex;gap:8px;flex-wrap:wrap;padding-top:16px;border-top:1px solid #ded2c1;margin-top:20px}
+body.cham-site .cham-coir-footer span{font-size:11px;line-height:1.4;padding:5px 10px;border:1px solid #d8cab9;border-radius:20px;color:#756451}
+body.cham-site .cham-vietnam-culture{margin:0 0 clamp(32px,6vw,70px)}
+body.cham-site .cham-vietnam-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px 16px}
+body.cham-site .cham-vietnam-item{display:flex;flex-direction:column;gap:8px;text-decoration:none;color:#30281e;min-width:0}
+body.cham-site .cham-vietnam-photo{aspect-ratio:1.18;background:#f0e9de;overflow:hidden;border-radius:3px}
+body.cham-site .cham-vietnam-photo img{display:block;width:100%;height:100%;object-fit:contain;transition:transform .35s}
+body.cham-site .cham-vietnam-item:hover img{transform:scale(1.035)}
+body.cham-site .cham-vietnam-item h3{font-size:14px;font-weight:550;line-height:1.4;margin:0 0 4px}
+body.cham-site .cham-vietnam-item span{font-size:13px;color:#80533b;font-weight:600}
+body.cham-site .cham-vietnam-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:20px}
+body.cham-site .cham-vietnam-links a{display:flex;flex-direction:column;gap:5px;border-top:1px solid #d9ccbb;padding:12px 0;text-decoration:none;color:#493a2e;font-weight:600;font-size:14px}
+body.cham-site .cham-vietnam-links small{font-size:11px;font-weight:400;color:#776958}
+@media(max-width:700px){
+ body.cham-site .cham-coir-editorial .cham-curated-head{gap:8px;margin-bottom:16px;padding-bottom:12px}
+ body.cham-site .cham-coir-editorial .cham-curated-head h2{font-size:clamp(24px,6.4vw,32px);line-height:1.15}
+ body.cham-site .cham-coir-editorial .cham-curated-head p:not(.cham-curated-kicker){font-size:13px;line-height:1.5;max-width:32em}
+ body.cham-site .cham-coir-editorial .cham-curated-head>a{font-size:12px;padding:6px 0}
+ body.cham-site .cham-coir-editorial .cham-coir-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto;gap:18px 12px}
+ body.cham-site .cham-coir-editorial .cham-coir-card--lead{grid-column:1/-1;grid-row:auto}
+ body.cham-site .cham-coir-editorial .cham-coir-card--lead .cham-coir-card__image{height:auto;min-height:0;aspect-ratio:1.65}
+ body.cham-site .cham-coir-editorial .cham-coir-card__image{aspect-ratio:1.1}
+ body.cham-site .cham-coir-editorial .cham-coir-card__text{min-height:46px}
+ body.cham-site .cham-coir-editorial .cham-coir-card--lead .cham-coir-card__text{min-height:0;flex-direction:row;justify-content:space-between;align-items:baseline}
+ body.cham-site .cham-coir-editorial .cham-coir-card--lead h3{font-size:15px}
+ body.cham-site .cham-coir-editorial .cham-coir-card--lead strong{font-size:14px}
+ body.cham-site .cham-coir-editorial .cham-coir-card h3{font-size:12px}
+ body.cham-site .cham-coir-editorial .cham-coir-card strong{font-size:12px}
+ body.cham-site .cham-vietnam-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:17px 12px}
+ body.cham-site .cham-vietnam-item h3{font-size:12px}
+ body.cham-site .cham-vietnam-links{grid-template-columns:1fr;gap:0}
+}
+@media(prefers-reduced-motion:reduce){body.cham-site .cham-coir-card__image img,body.cham-site .cham-vietnam-photo img{transition:none}}
