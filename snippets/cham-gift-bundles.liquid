@@ -1,7 +1,7 @@
 <section class="cham-gift-bundles" id="cham-gift-bundles" aria-labelledby="cham-bundle-title">
   <div class="cham-curated-head"><div><p class="cham-curated-kicker">Bộ quà gợi ý</p><h2 id="cham-bundle-title">Kết hợp thành một bộ.</h2><p>Thêm các món trong một bộ vào giỏ cùng lúc, giá được tính theo từng sản phẩm. Không áp dụng chiết khấu giả.</p></div></div>
   <div class="cham-bundle-grid">
-  {% assign bundle_defs = 'Bộ xơ dừa hằng ngày|xo-dua|de-lot-ly-tron,mieng-cha-got-chan,tham-chui-chan;Bộ chăm sóc thú cưng|xo-dua|bong-meo,xuong-cho;Bộ trà ngày Tết|tết-sum-vầy|am-tra-gom-den,tach-dia-gom,khay-tre-dan;Bộ quà Trung thu|trung-thu-doan-vien|hop-luc-binh,khay-tre-dan,de-lot-ly-tron;Bộ tri ân thầy cô|tri-an-thầy-co|ly-gom-thu-cong,tui-day-mini,de-lot-ly-tron;Bộ quà mùa hè|mua-he-xanh|tui-luc-binh,mu-co-dan,quat-tay-tre' | split: ';' %}
+  {% assign bundle_defs = 'Bộ xơ dừa hằng ngày|xo-dua|de-lot-ly-tron,mieng-cha-got-chan,tham-chui-chan;Bộ chăm sóc thú cưng|xo-dua|bong-meo,xuong-cho;Bộ trà ngày Tết|tết-sum-vầy|am-tra-gom-den,tach-dia-gom,khay-tre-dan;Bộ quà Trung thu|trung-thu-doan-vien|cham-v-53436,khay-tre-dan,de-lot-ly-tron;Bộ tri ân thầy cô|tri-an-thầy-co|ly-gom-thu-cong,cham-v-53135,de-lot-ly-tron;Bộ quà mùa hè|mua-he-xanh|cham-v-51890,cham-v-51517,cham-v-53448' | split: ';' %}
   {% for def in bundle_defs %}
     {% assign parts = def | split: '|' %}{% assign keys = parts[2] | split: ',' %}{% assign source = collections[parts[1]] %}
     {% assign total = 0 %}{% assign valid = 0 %}{% assign available = true %}

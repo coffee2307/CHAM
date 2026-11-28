@@ -46,7 +46,7 @@
           {% endif %}
           <div class="cham-personalize" data-cham-personalize>
             <h3>Dịch vụ theo yêu cầu</h3>
-            {% assign engraved = 'thot-go,khay-go,muong-go,luoc-go,hop-go-tron,muong-tre,khay-tre-dan,ly-gom-thu-cong,tach-dia-gom' | split: ',' %}
+            {% assign engraved = 'thot-go,khay-go,muong-go,luoc-go,hop-go-tron,muong-tre,khay-tre-dan,ly-gom-thu-cong,tach-dia-gom,cham-v-55216,cham-v-55230,cham-v-53135,cham-v-55334,cham-v-29052,cham-v-19942' | split: ',' %}
             {% if engraved contains product.handle %}
               <label class="cham-service-check"><input type="checkbox" data-cham-personal-toggle> {% if product.type == 'Gốm' %}Trang trí chữ theo yêu cầu{% else %}Khắc tên theo yêu cầu{% endif %} <small>Demo</small></label>
               <fieldset data-cham-personal-fields disabled hidden>
