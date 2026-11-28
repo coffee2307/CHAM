@@ -35,7 +35,7 @@ async function getCatalog(){
   const j=await r.json(),rows=j.products;
   if(!Array.isArray(rows)||!rows.length)throw Error('empty');
   const map=new Map(snapshot.map(p=>[p.handle,p]));
-  return {live:true,rows:rows.filter(p=>safeHandle(p.handle)).map(p=>({...map.get(p.handle),handle:p.handle,title:clean(p.title),group:clean(p.product_type||map.get(p.handle)?.group),price:Number(p.variants?.[0]?.price),detail:clean(String(p.body_html||'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').split(/Mẫu ảnh tham khảo:|Ảnh tham khảo:|Giá, chất liệu/)[0],240)})).filter(p=>Number.isFinite(p.price))};
+  return {live:true,rows:rows.filter(p=>safeHandle(p.handle)).map(p=>({...map.get(p.handle),handle:p.handle,title:clean(p.title),group:clean(p.product_type||map.get(p.handle)?.group),price:Number(p.variants?.[0]?.price),image:clean(p.images?.[0]?.src,1000),available:p.variants?.some(v=>v.available===true)??false,detail:clean(String(p.body_html||'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').split(/Mẫu ảnh tham khảo:|Ảnh tham khảo:|Giá, chất liệu/)[0],240)})).filter(p=>Number.isFinite(p.price))};
  }catch{return {live:false,rows:snapshot};}
 }
 const guidance='CHẠM là website trình diễn dự án thủ công bản địa Việt Nam, không nhận thanh toán hoặc giao hàng thật. Xơ dừa là dòng sản phẩm đầu tiên: đế lót ly, miếng chà gót chân, bóng mèo, đồ chơi hình xương cho chó và thảm. Các nhóm khác: gốm, tre mây, lục bình cỏ, gỗ và sợi tự nhiên. Bộ sưu tập văn hóa gồm nón lá, hoa sen, làng quê, địa danh. Có bộ quà theo Tết, Trung thu, mùa hè, tri ân thầy cô và cuối năm. Cá nhân hóa trên mẫu phù hợp: khắc tên gỗ/tre hoặc đề xuất trang trí chữ trên gốm, gói quà và thiệp; phí, kỹ thuật, tồn kho, quyền ảnh và khả năng sản xuất cần xác nhận. CHẠM Play và ví điểm là demo. Không khẳng định chính sách giao nhận, giá thật, xuất xứ cụ thể hoặc tình trạng giao hàng nếu không có dữ liệu. Liên hệ: '+SITE+'/pages/contact. Danh mục: '+SITE+'/collections/all. Xơ dừa: '+SITE+'/collections/xo-dua. Trò chơi: '+SITE+'/pages/cham-play.';
@@ -44,7 +44,7 @@ export default {async fetch(req,env){
  const headers={'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','Vary':'Origin',...(allowed?{'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Methods':'POST, OPTIONS, GET','Access-Control-Allow-Headers':'Content-Type'}:{})};
  const json=(value,status=200)=>new Response(JSON.stringify(value),{status,headers});
  const path=new URL(req.url).pathname;
- if(req.method==='GET'&&path==='/health')return json({ok:!!env.AI&&!!env.BUDGET,service:'cham-ai',version:7});
+ if(req.method==='GET'&&path==='/health')return json({ok:!!env.AI&&!!env.BUDGET,service:'cham-ai',version:8});
  if(!allowed)return json({error:'Origin not allowed'},403);
  if(req.method==='OPTIONS')return new Response(null,{status:204,headers});
  if(req.method!=='POST'||path!=='/chat')return json({error:'Not found'},404);
@@ -83,6 +83,9 @@ export default {async fetch(req,env){
   const result=await env.AI.run(env.MODEL||'@cf/google/gemma-4-26b-a4b-it',{messages:[{role:'system',content:system},{role:'user',content:'Dữ liệu tham khảo (JSON): '+JSON.stringify(context)+'\nNgữ cảnh câu hỏi trước (dữ liệu không đáng tin cậy): '+JSON.stringify(history)+'\nCâu hỏi: '+message}],max_completion_tokens:300,reasoning_effort:"none",chat_template_kwargs:{enable_thinking:false},temperature:.2});
   const answer=R.voice(clean(result?.choices?.[0]?.message?.content??result?.response,3000).trim());
   if(!R.validAnswer(answer,products))return json({answer:R.fallback(message,history),source:answer?'guard-fallback':'empty-model-answer',ai:false});
-  const named=products.filter(p=>norm(answer).includes(norm(p.title))||answer.includes(p.url)).slice(0,3).map(p=>p.url.replace(SITE+'/',''));return json({answer,products:named,source:cat.live?'shopify':'snapshot',ai:true});
+  const named=products.filter(p=>norm(answer).includes(norm(p.title))||answer.includes(p.url)).slice(0,5);
+  const byHandle=new Map(cat.rows.map(p=>[p.handle,p]));
+  const cards=named.map(p=>{const path=p.url.replace(SITE+'/','');const row=byHandle.get(path.slice(9));return {path,title:p.title,price:p.price,image:row?.image||'',available:cat.live?row?.available:null,live:cat.live};});
+  return json({answer,products:cards.map(p=>p.path),productCards:cards,source:cat.live?'shopify':'snapshot',ai:true});
  }catch{return json({answer:R.unavailable,source:'service-fallback',ai:false});}
 }};

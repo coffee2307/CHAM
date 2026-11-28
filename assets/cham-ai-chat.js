@@ -29,33 +29,42 @@
  const money=v=>new Intl.NumberFormat('vi-VN',{style:'currency',currency:'VND',maximumFractionDigits:0}).format(Number(v)||0);
  const end=()=>{if(log.scrollHeight-log.scrollTop-log.clientHeight<180)log.scrollTop=log.scrollHeight;};
  const add=(text,kind='')=>{const n=make('div','cham-ai-message '+kind,kind==='user'?text:rules?.voice(text)??text);log.append(n);log.scrollTop=log.scrollHeight;if(text&&kind!=='user'&&kind!=='chammy-thinking')markReply(n.textContent);return n;};
- const productPath=/https:\/\/chamstore\.site\/(products\/[a-z0-9-]{1,120})/gi;
+ const productPath=/(?:https:\/\/(?:www\.)?chamstore\.site\/|https:\/\/5yvv8u-44\.myshopify\.com\/|(?<![\w/])\/)(products\/[a-z0-9-]{1,120})(?:\/)?(?:\?[^\s<>()\]]*)?/gi;
  const format=(node,text)=>{
   node.replaceChildren();const parts=String(text).split(/(\*\*[^*\n]+\*\*|\*[^*\n]+\*|https:\/\/chamstore\.site\/[A-Za-z0-9%_\-/]+)/g);
   for(const part of parts){if(/^https:\/\/chamstore\.site\//.test(part)){const a=make('a','chammy-link',part.includes('/products/')?'Xem sản phẩm':part.includes('/collections/')?'Xem bộ sưu tập':part.includes('cham-play')?'Mở CHẠM Play':'Xem tại CHẠM');a.href=part;node.append(a);}else if(part.startsWith('**')&&part.endsWith('**'))node.append(make('strong','',part.slice(2,-2)));else if(part.startsWith('*')&&part.endsWith('*'))node.append(make('em','',part.slice(1,-1)));else node.append(document.createTextNode(part));}
  };
  const imageURL=raw=>{try{const u=new URL(raw,location.origin);return u.protocol==='https:'&&(u.hostname==='cdn.shopify.com'||u.hostname.endsWith('.myshopify.com')||u.hostname===location.hostname)?u.href:'';}catch{return '';}};
  const cardCache=new Map();
- async function productCard(path){
+ const safeProductPath=value=>{try{const u=new URL(String(value),location.origin);if(![location.hostname,'chamstore.site','www.chamstore.site','5yvv8u-44.myshopify.com'].includes(u.hostname))return '';const match=u.pathname.match(/^\/(products\/[a-z0-9-]{1,120})\/?$/i);return match?match[1].toLowerCase():'';}catch{return '';}};
+ async function productCard(path,meta){
   if(!/^products\/[a-z0-9-]{1,120}$/.test(path))return null;
-  try{let p=cardCache.get(path);if(!p){const r=await fetch('/'+path+'.js',{credentials:'same-origin',signal:AbortSignal.timeout(5000)});if(!r.ok)return null;p=await r.json();if(!p.title||!Number.isFinite(p.price))return null;cardCache.set(path,p);}
-   const card=make('a','chammy-product');card.href='/'+path;
-   const pic=imageURL(p.featured_image||p.images?.[0]);if(pic){const im=make('img');im.src=pic;im.alt='';im.width=88;im.height=88;im.loading='lazy';card.append(im);}
-   const body=make('span','chammy-product-copy');body.append(make('strong','',p.title),make('span','chammy-price',money(p.price/100)),make('small','',p.available?'Có thể thêm vào giỏ demo':'Hiện không khả dụng'),make('span','chammy-product-action','Xem chi tiết'));card.append(body);return card;
-  }catch{return null;}
+  let p=cardCache.get(path),source='live';
+  if(!p){
+   try{const r=await fetch('/'+path+'.js',{credentials:'same-origin',signal:AbortSignal.timeout(5000)});if(!r.ok)throw Error('product');const j=await r.json();if(!j.title||!Number.isFinite(j.price))throw Error('product data');p={title:j.title,price:j.price/100,image:j.featured_image||j.images?.[0],available:j.available};cardCache.set(path,p);}catch{
+    if(meta&&typeof meta.title==='string'&&Number.isFinite(Number(meta.price))&&Number(meta.price)>=0){p={title:meta.title,price:Number(meta.price),image:meta.image,available:meta.live?meta.available:null};source=meta.live?'live':'snapshot';}
+    else{p={title:'Sản phẩm CHẠM',price:null,available:null};source='unknown';}
+   }
+  }
+  const card=make('a','chammy-product');card.href='/'+path;
+  const pic=imageURL(p.image||meta?.image||'');if(pic){const im=make('img');im.src=pic;im.alt='';im.width=88;im.height=88;im.loading='lazy';im.addEventListener('error',()=>im.remove(),{once:true});card.append(im);}
+  const body=make('span','chammy-product-copy');body.append(make('strong','',p.title));if(p.price!==null)body.append(make('span','chammy-price',money(p.price)+(source==='snapshot'?' · tham khảo':'')));
+  body.append(make('small','',p.available===true?'Có thể thêm vào giỏ demo':p.available===false?'Hiện không khả dụng':'Xem thông tin mới nhất tại trang sản phẩm'),make('span','chammy-product-action','Xem chi tiết'));card.append(body);return card;
  }
- async function reply(text,paths=[]){
-  const raw=rules?.voice(text)??String(text);const matches=[...raw.matchAll(productPath)].map(x=>x[1]);const unique=[...new Set([...paths,...matches])].filter(x=>/^products\/[a-z0-9-]{1,120}$/.test(x)).slice(0,3);
+ async function reply(text,paths=[],metadata=[]){
+  const raw=rules?.voice(text)??String(text);const matches=[...raw.matchAll(productPath)].map(x=>x[1]);
+  const metaMap=new Map((Array.isArray(metadata)?metadata:[]).filter(x=>x&&typeof x.path==='string').map(x=>[safeProductPath(x.path),x]));
+  const unique=[...new Set([...paths,...matches,...metaMap.keys()].map(safeProductPath).filter(Boolean))].slice(0,5);
   const n=add('');const body=make('div','chammy-reply');n.append(body);
   // Compact reply text after stripping product URLs, including standalone URL lines.
-  const cleaned=raw.replace(/(?:tại đường dẫn này|tại đây|đường dẫn)\s*:\s*(?=https:\/\/chamstore\.site\/products\/)/gi,'').replace(productPath,'').replace(/\r\n?/g,'\n').split('\n').map(line=>line.trim()).filter(line=>line&&!/^[.,:;–—-]+$/.test(line)).join('\n').trim();
+  const cleaned=raw.replace(/\[([^\]\n]+)\]\((?:https:\/\/(?:www\.)?chamstore\.site\/|\/)(products\/[a-z0-9-]+)(?:\?[^\s)]*)?\)/gi,'$1').replace(/(?:tại đường dẫn này|tại đây|đường dẫn)\s*:\s*(?=https:\/\/chamstore\.site\/products\/)/gi,'').replace(productPath,'').replace(/\r\n?/g,'\n').split('\n').map(line=>line.trim()).filter(line=>line&&!/^[.,:;–—-]+$/.test(line)).join('\n').trim();
   const plain=cleaned.replace(/\*\*([^*\n]+)\*\*/g,'$1').replace(/\*([^*\n]+)\*/g,'$1');
   if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&desiredOpen&&plain.length){
    body.setAttribute('aria-hidden','true');const chars=Array.from(plain);const duration=Math.min(1800,Math.max(220,chars.length*8));const start=performance.now();
    await new Promise(resolve=>{const tick=now=>{const count=Math.min(chars.length,Math.ceil((now-start)/duration*chars.length));body.textContent=chars.slice(0,count).join('');end();if(count<chars.length&&desiredOpen&&!document.hidden)requestAnimationFrame(tick);else resolve();};requestAnimationFrame(tick);});body.removeAttribute('aria-hidden');
   }
   format(body,cleaned||'Chammy gửi bạn sản phẩm phù hợp:');markReply(body.textContent);
-  if(unique.length){const cards=await Promise.all(unique.map(productCard));for(let i=0;i<cards.length;i++){if(cards[i])n.append(cards[i]);else{const a=make('a','chammy-link','Xem chi tiết sản phẩm');a.href='/'+unique[i];n.append(a);}}}end();return n;
+  if(unique.length){const cards=await Promise.all(unique.map(path=>productCard(path,metaMap.get(path))));for(let i=0;i<cards.length;i++){if(cards[i])n.append(cards[i]);}}end();return n;
  }
  const thinking=()=>{const n=add('','chammy-thinking');n.setAttribute('role','status');n.setAttribute('aria-label','Chammy đang xem thông tin');n.append(make('span','chammy-thinking-text','Chammy đang xem thông tin'),make('span','chammy-dots',''));n.lastChild.append(make('i'),make('i'),make('i'));return n;};
  function orderReply(message){
@@ -84,6 +93,7 @@
  };
  const schedule=()=>{if(!frame)frame=requestAnimationFrame(sync);};
  viewport?.addEventListener('resize',schedule,{passive:true});viewport?.addEventListener('scroll',schedule,{passive:true});window.addEventListener('resize',schedule,{passive:true});mobile.addEventListener?.('change',schedule);
+ input.addEventListener('keydown',e=>{if(e.key!=='Enter'||e.shiftKey||e.isComposing||e.keyCode===229)return;e.preventDefault();if(!busy&&input.value.trim())form.requestSubmit();});
  input.addEventListener('focus',schedule);input.addEventListener('blur',schedule);
  const close=root.querySelector('[data-chat-close]');
  const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
@@ -111,7 +121,7 @@
  form.onsubmit=async e=>{e.preventDefault();const message=input.value.trim();if(!message||busy)return;busy=true;send.disabled=true;input.value='';add(message,'user');const route=rules?.classify(message,history.filter(x=>x.role==='user'));if(route?.answer){await reply(route.answer);if(route.kind==='faq'){history.push({role:'user',content:message},{role:'assistant',content:route.answer});history=history.slice(-6);}busy=false;send.disabled=false;return;}if(route?.kind==='order'){orderReply(message);busy=false;send.disabled=false;return;}if(!aiConfigured){await reply(rules?.fallback(message,history.filter(x=>x.role==='user'))||'AI chưa kết nối. Vui lòng xem danh mục CHẠM.');busy=false;send.disabled=false;return;}const pending=thinking();let timer,controller=new AbortController();
  try{timer=setTimeout(()=>controller.abort(),30000);
  const res=await fetch(endpoint+'/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message,history:history.slice(-6),demoOrders:[]}),signal:controller.signal});const data=await res.json();pending.remove();if(!res.ok||!data.answer)throw Error(data.error||'AI chưa trả lời.');
- await reply(data.answer,Array.isArray(data.products)?data.products:[]);if(data.ai||data.source==='faq'){history.push({role:'user',content:message},{role:'assistant',content:data.answer});history=history.slice(-6);}
+ await reply(data.answer,Array.isArray(data.products)?data.products:[],data.productCards);if(data.ai||data.source==='faq'){history.push({role:'user',content:message},{role:'assistant',content:data.answer});history=history.slice(-6);}
  }catch(err){pending.remove();await reply(rules?.fallback(message,history.filter(x=>x.role==='user'))||'AI hiện không khả dụng. Vui lòng thử lại.');}finally{clearTimeout(timer);busy=false;send.disabled=false;}
  };
  root.hidden=false;updateUnread();
