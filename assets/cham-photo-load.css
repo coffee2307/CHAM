@@ -1,0 +1,7 @@
+
+/* Reserve existing image frames and fade in only after download/decode. */
+body.cham-site :is(.cham-shop-card__visual,.cham-coir-card__image,.cham-vietnam-photo,.cham5-category__image,.cham5-product__image,.cham-product-card__image,.cham-product-page__image-stage){background-color:#eee6da}
+body.cham-site .cham-photo-wait{opacity:0!important}
+body.cham-site .cham-photo-ready{animation:cham-photo-in .26s ease-out both}
+@keyframes cham-photo-in{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){body.cham-site .cham-photo-wait{opacity:1!important}body.cham-site .cham-photo-ready{animation:none!important}}

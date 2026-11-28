@@ -1,0 +1,29 @@
+const {chromium}=require('F:/Oxyz Edu/node_modules/playwright');
+const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'..');
+const css=['cham-refinement.css','cham-demo.css','cham-minimal.css','cham-polish.css','cham-v3.css','cham-v4.css','cham-design-system.css','cham-ai-chat.css','cham-photo-load.css'];
+const scripts=['cham-photo-load.js','cham-ai-rules.js','cham-ai-chat.js'];
+const html='<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'+css.map(f=>'<link rel="stylesheet" href="/assets/'+f+'">').join('')+scripts.map(f=>'<script defer src="/assets/'+f+'"></script>').join('')+'</head><body class="cham-site" style="margin:0"><div id="header-group">header</div><main id="MainContent" style="min-height:1800px"><div class="cham-vietnam-photo" style="width:160px"><img src="/slow.svg" width="160" height="120" alt="test"></div></main><footer>footer</footer>'+fs.readFileSync(path.join(root,'snippets/cham-ai-chat.liquid'),'utf8')+'</body></html>';
+const server=http.createServer((req,res)=>{if(req.url==='/'){res.setHeader('Content-Type','text/html; charset=utf-8');res.end(html);return;}if(req.url==='/slow.svg'){res.setHeader('Content-Type','image/svg+xml');setTimeout(()=>res.end('<svg xmlns="http://www.w3.org/2000/svg" width="160" height="120"><rect width="160" height="120" fill="#986"/></svg>'),1400);return;}const f=path.join(root,req.url);if(!fs.existsSync(f)){res.writeHead(404);res.end();return;}res.setHeader('Content-Type',f.endsWith('.css')?'text/css':'application/javascript');res.end(fs.readFileSync(f));});
+(async()=>{await new Promise(r=>server.listen(0,'127.0.0.1',r));const browser=await chromium.launch({executablePath:'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',headless:true,args:['--no-sandbox']});try{
+for(const [width,height] of [[320,568],[390,844],[430,932],[844,390],[1440,900]]){
+ const context=await browser.newContext({viewport:{width,height},hasTouch:width<1000,isMobile:width<1000,deviceScaleFactor:1});
+ const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('http://127.0.0.1:'+server.address().port,{waitUntil:'domcontentloaded'});
+ const launch=page.locator('.cham-ai-launch');await launch.click();
+ const isMobile=width<=700||(height<=500&&width<1000);
+ if(isMobile){assert.equal(await page.locator('#ChamAIInput').evaluate(e=>e===document.activeElement),false);assert.equal(await page.locator('#MainContent').evaluate(e=>e.inert),true);}
+ await page.locator('#ChamAIInput').fill('CHAM la gi?');await page.locator('.cham-ai-form button').click();await page.locator('.cham-ai-message').nth(2).waitFor();
+ if(isMobile){
+  await page.locator('#ChamAIInput').focus();
+  // Simulate keyboard shrink and iOS visual viewport offset without requiring a hardware keyboard.
+  await page.evaluate(()=>{const v=window.visualViewport;Object.defineProperty(v,'height',{configurable:true,get:()=>Math.min(330,window.innerHeight-30)});Object.defineProperty(v,'offsetTop',{configurable:true,get:()=>24});v.dispatchEvent(new Event('resize'));});
+  await page.waitForTimeout(100);
+  const m=await page.evaluate(()=>{const v=visualViewport;const b=document.querySelector('.cham-ai-form button').getBoundingClientRect();const t=document.querySelector('#ChamAIInput').getBoundingClientRect();const log=document.querySelector('.cham-ai-log').getBoundingClientRect();return {top:v.offsetTop,bottom:v.offsetTop+v.height,send:b.bottom,input:t.bottom,log:log.height};});
+  assert(m.send<=m.bottom+1&&m.input<=m.bottom+1&&m.log>0,JSON.stringify(m));
+  await page.locator('[data-chat-close]').click();assert.equal(await page.locator('#MainContent').evaluate(e=>e.inert),false);assert.equal(await page.evaluate(()=>document.body.classList.contains('cham-chat-lock')),false);
+ }else await page.locator('[data-chat-close]').click();
+ await page.locator('.cham-photo-ready').waitFor({state:'attached',timeout:6000});
+ assert.equal(await page.locator('.cham-vietnam-photo img').evaluate(e=>e.complete&&e.naturalWidth>0&&!e.classList.contains('cham-photo-wait')),true);
+ assert.deepEqual(errors,[]);console.log('PASS',width,height,isMobile?'keyboard simulation':'desktop','photo decode');await context.close();
+}
+}finally{await browser.close();server.close();}})().catch(e=>{console.error(e);process.exitCode=1});

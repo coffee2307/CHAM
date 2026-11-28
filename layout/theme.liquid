@@ -61,6 +61,8 @@
     {% if request.design_mode %}{%- render 'theme-editor' -%}{% endif %}
     {{ content_for_header }}
       {{ 'cham-ai-chat.css' | asset_url | stylesheet_tag }}
+    {{ 'cham-photo-load.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'cham-photo-load.js' | asset_url }}" defer></script>
     <script src="{{ 'cham-ai-rules.js' | asset_url }}" defer></script>
     <script src="{{ 'cham-ai-chat.js' | asset_url }}" defer></script>
   </head>

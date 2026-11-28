@@ -25,25 +25,7 @@ const headerHeight=()=>Math.round(Math.max(48,Math.min(150,header?.getBoundingCl
 const measure=()=>document.documentElement.style.setProperty('--cham5-header',headerHeight()+'px');
 measure();
 /* Progressive, nonblocking image reveal: only start decoding when near the viewport. */
-function revealImages(){
- const images=$$('.cham6-hero__print img,.cham6-watch__image img,.cham5-process__photo img,.cham5-bridge__images img,.cham5-category__image img,.cham5-product__image img');
- const visible=img=>{
-   if(img.dataset.cham6Seen)return;
-   img.dataset.cham6Seen='1';
-   const done=()=>img.classList.add('cham6-loaded');
-   if(img.complete&&img.naturalWidth>0){done();return;}
-   if(typeof img.decode==='function')img.decode().then(done).catch(done);
-   else{img.addEventListener('load',done,{once:true});img.addEventListener('error',done,{once:true});}
- };
- root.classList.add('cham6-images-enabled');
- images.forEach(img=>img.classList.add('cham6-photo-pending'));
- if(!('IntersectionObserver'in window)){images.forEach(visible);return;}
- const io=new IntersectionObserver(entries=>{
-   entries.forEach(entry=>{if(entry.isIntersecting){visible(entry.target);io.unobserve(entry.target);}});
- },{rootMargin:'320px 0px'});
- images.forEach(img=>{if(img.complete&&img.naturalWidth>0)visible(img);else io.observe(img);});
-}
-revealImages();
+/* Photo loading is handled by cham-photo-load.js for every page. */
 /* Native video: lazy start, pause offscreen, no per-frame JS. */
 const filmMobile=window.matchMedia('(max-width: 767px)');
 $$('[data-cham-workshop-video]',root).forEach(workshop=>{

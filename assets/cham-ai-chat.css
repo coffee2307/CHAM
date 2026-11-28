@@ -24,3 +24,24 @@ body.cp-viewport-lock .cham-ai{display:none!important}
 .cham-ai-note{font-size:10px;line-height:1.4;padding:0 13px 9px;color:#7a6c5f;margin:0}
 .cham-ai button:focus-visible,.cham-ai textarea:focus-visible{outline:2px solid #966a4a;outline-offset:2px}
 @media(max-width:700px){body.cham-site .cham-ai{right:14px;bottom:max(78px,calc(env(safe-area-inset-bottom) + 70px))}.cham-ai-launch{width:52px;height:52px}.cham-ai-window{bottom:61px;height:min(480px,calc(100dvh - 160px));width:min(360px,calc(100vw - 28px))}.cham-ai-form textarea{font-size:16px}}
+
+/* Keyboard-aware mobile chat. The visual viewport, not 100vh, owns the panel. */
+html.cham-chat-lock,body.cham-chat-lock{overflow:hidden!important;overscroll-behavior:none!important}
+body.cham-site .cham-ai.cham-ai-mobile-open{position:fixed!important;inset:auto!important;top:var(--cham-chat-top,0px)!important;left:var(--cham-chat-left,0px)!important;width:var(--cham-chat-width,100vw)!important;height:var(--cham-chat-height,100dvh)!important;z-index:10050;overflow:hidden;background:#faf7f1}
+body.cham-site .cham-ai-mobile-open .cham-ai-launch{display:none!important}
+body.cham-site .cham-ai-mobile-open .cham-ai-window{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none;max-height:none;border:0;border-radius:0;box-shadow:none;box-sizing:border-box}
+.cham-ai-mobile-open .cham-ai-window header{flex:0 0 auto;padding:max(10px,env(safe-area-inset-top)) 16px 10px}
+.cham-ai-mobile-open .cham-ai-window header button{display:grid;place-items:center;width:44px;height:44px;flex:none;font-size:27px}
+.cham-ai-mobile-open .cham-ai-log{padding:16px;min-height:0;overflow:auto;-webkit-overflow-scrolling:touch}
+.cham-ai-mobile-open .cham-ai-message{font-size:15px;line-height:1.55;flex-shrink:0}
+.cham-ai-mobile-open .cham-ai-tools{flex:0 0 auto;padding:6px 12px;gap:8px}
+.cham-ai-mobile-open .cham-ai-tools button{min-height:36px;font-size:12px}
+.cham-ai-mobile-open .cham-ai-form{flex:0 0 auto;padding:8px 12px;gap:8px;background:#faf7f1}
+.cham-ai-mobile-open .cham-ai-form textarea{font-size:16px!important;min-height:48px;max-height:80px;box-sizing:border-box;line-height:1.4}
+.cham-ai-mobile-open .cham-ai-form button{width:48px;height:48px;flex:none}
+.cham-ai-mobile-open .cham-ai-note{flex:0 0 auto;padding:0 12px max(8px,env(safe-area-inset-bottom));font-size:10px}
+.cham-ai-mobile-open.cham-ai-keyboard .cham-ai-tools,.cham-ai-mobile-open.cham-ai-keyboard .cham-ai-note{display:none}
+.cham-ai-mobile-open.cham-ai-keyboard .cham-ai-form{padding-bottom:8px}
+.cham-ai-mobile-open.cham-ai-keyboard .cham-ai-window header{padding-top:4px;padding-bottom:4px}
+.cham-ai-mobile-open.cham-ai-keyboard .cham-ai-log{padding:10px 12px}
+@media(prefers-reduced-motion:reduce){.cham-ai-window{scroll-behavior:auto}}
