@@ -47,7 +47,7 @@
  const money=v=>new Intl.NumberFormat('vi-VN',{style:'currency',currency:'VND',maximumFractionDigits:0}).format(Number(v)||0);
  const end=()=>{if(log.scrollHeight-log.scrollTop-log.clientHeight<180)log.scrollTop=log.scrollHeight;};
  const add=(text,kind='')=>{const n=make('div','cham-ai-message '+kind,kind==='user'?text:rules?.voice(text)??text);log.append(n);log.scrollTop=log.scrollHeight;if(text&&kind!=='user'&&kind!=='chammy-thinking')markReply(n.textContent);return n;};
- const productPath=/(?:https:\/\/(?:www\.)?chamstore\.site\/|https:\/\/5yvv8u-44\.myshopify\.com\/|(?<![\w/])\/)(products\/[a-z0-9-]{1,120})(?:\/)?(?:\?[^\s<>()\]]*)?/gi;
+ const productPath=/(?:https:\/\/(?:www\.)?chamstore\.site\/|https:\/\/5yvv8u-44\.myshopify\.com\/|(?<![\w/])\/)(products\/[\p{L}\p{M}\p{N}%-]{1,720})(?:\/)?(?:\?[^\s<>()\]]*)?/giu;
  const format=(node,text,titles=[])=>{
   node.replaceChildren();
   const names=[...new Set(titles.filter(x=>typeof x==='string'&&x.trim()).map(x=>x.trim()))].sort((a,b)=>b.length-a.length);
@@ -65,9 +65,9 @@
  };
  const imageURL=raw=>{try{const u=new URL(raw,location.origin);return u.protocol==='https:'&&(u.hostname==='cdn.shopify.com'||u.hostname.endsWith('.myshopify.com')||u.hostname===location.hostname)?u.href:'';}catch{return '';}};
  const cardCache=new Map();
- const safeProductPath=value=>{try{const u=new URL(String(value),location.origin);if(![location.hostname,'chamstore.site','www.chamstore.site','5yvv8u-44.myshopify.com'].includes(u.hostname))return '';const match=u.pathname.match(/^\/(products\/[a-z0-9-]{1,120})\/?$/i);return match?match[1].toLowerCase():'';}catch{return '';}};
+ const safeProductPath=value=>{try{const u=new URL(String(value),location.origin);if(![location.hostname,'chamstore.site','www.chamstore.site','5yvv8u-44.myshopify.com'].includes(u.hostname))return '';const match=u.pathname.match(/^\/products\/([^/]+)\/?$/i);if(!match)return '';const handle=decodeURIComponent(match[1]);return /^[\p{L}\p{M}\p{N}-]{1,120}$/u.test(handle)?'products/'+encodeURIComponent(handle):'';}catch{return '';}};
  async function productCard(path,meta){
-  if(!/^products\/[a-z0-9-]{1,120}$/.test(path))return null;
+  if(!path||safeProductPath(path)!==path)return null;
   let p=cardCache.get(path),source='live';
   if(!p){
    try{const r=await fetch('/'+path+'.js',{credentials:'same-origin',signal:AbortSignal.timeout(5000)});if(!r.ok)throw Error('product');const j=await r.json();if(!j.title||!Number.isFinite(j.price))throw Error('product data');p={title:j.title,price:j.price/100,image:j.featured_image||j.images?.[0],available:j.available};cardCache.set(path,p);}catch{
@@ -88,7 +88,7 @@
   const unique=[...new Set([...paths,...matches,...metaMap.keys()].map(safeProductPath).filter(Boolean))].slice(0,14);
   const n=add('');const body=make('div','chammy-reply');n.append(body);
   // Compact reply text after stripping product URLs, including standalone URL lines.
-  const cleaned=raw.replace(/\[([^\]\n]+)\]\((?:https:\/\/(?:www\.)?chamstore\.site\/|\/)(products\/[a-z0-9-]+)(?:\?[^\s)]*)?\)/gi,'$1').replace(/(?:tại đường dẫn này|tại đây|đường dẫn)\s*:\s*(?=https:\/\/chamstore\.site\/products\/)/gi,'').replace(productPath,'').replace(/\r\n?/g,'\n').split('\n').map(line=>line.trim()).filter(line=>line&&!/^[.,:;–—-]+$/.test(line)).join('\n').trim();
+  const cleaned=raw.replace(/\[([^\]\n]+)\]\((?:https:\/\/(?:www\.)?chamstore\.site\/|\/)(products\/[\p{L}\p{M}\p{N}%-]+)(?:\?[^\s)]*)?\)/giu,'$1').replace(/(?:tại đường dẫn này|tại đây|đường dẫn)\s*:\s*(?=https:\/\/chamstore\.site\/products\/)/gi,'').replace(productPath,'').replace(/\r\n?/g,'\n').split('\n').map(line=>line.trim()).filter(line=>line&&!/^[.,:;–—-]+$/.test(line)).join('\n').trim();
   const plain=cleaned.replace(/\*\*([^*\n]+)\*\*/g,'$1').replace(/\*([^*\n]+)\*/g,'$1');
   if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&desiredOpen&&plain.length){
    body.setAttribute('aria-hidden','true');const chars=Array.from(plain);const duration=Math.min(1800,Math.max(220,chars.length*8));const start=performance.now();
@@ -149,7 +149,7 @@
 
  share.setAttribute('aria-pressed','false');share.onclick=()=>{shareOrders=!shareOrders;share.setAttribute('aria-pressed',String(shareOrders));share.textContent=shareOrders?'Đang xem đơn demo':'Xem đơn demo';if(shareOrders)orderReply('');};
  root.querySelector('[data-chat-reset]').onclick=()=>{if(busy)return;history=[];shareOrders=false;share.setAttribute('aria-pressed','false');share.textContent='Xem đơn demo';log.replaceChildren();add(greeting);};
- form.onsubmit=async e=>{e.preventDefault();const message=input.value.trim();if(!message||busy)return;busy=true;send.disabled=true;input.value='';add(message,'user');const route=rules?.classify(message,history.filter(x=>x.role==='user'));if(route?.answer){await reply(route.answer,[],[],route.kind==='faq'?message:'',false);if(route.kind==='faq'){history.push({role:'user',content:message},{role:'assistant',content:route.answer});history=history.slice(-6);}busy=false;send.disabled=false;return;}if(route?.kind==='order'){orderReply(message);busy=false;send.disabled=false;return;}if(!aiConfigured){await reply(rules?.fallback(message,history.filter(x=>x.role==='user'))||'AI chưa kết nối. Vui lòng xem danh mục CHẠM.',[],[],message,false);busy=false;send.disabled=false;return;}const pending=thinking();let timer,controller=new AbortController();
+ form.onsubmit=async e=>{e.preventDefault();const message=input.value.trim();if(!message||busy)return;busy=true;send.disabled=true;input.value='';add(message,'user');const route=rules?.classify(message,history.filter(x=>x.role==='user'));if(route?.answer){await reply(route.answer,route.products||[],route.productCards||[],route.kind==='faq'&&!route.collection?message:'',false);if(route.kind==='faq'){history.push({role:'user',content:message},{role:'assistant',content:route.answer});history=history.slice(-6);}busy=false;send.disabled=false;return;}if(route?.kind==='order'){orderReply(message);busy=false;send.disabled=false;return;}if(!aiConfigured){await reply(rules?.fallback(message,history.filter(x=>x.role==='user'))||'AI chưa kết nối. Vui lòng xem danh mục CHẠM.',[],[],message,false);busy=false;send.disabled=false;return;}const pending=thinking();let timer,controller=new AbortController();
  try{timer=setTimeout(()=>controller.abort(),30000);
  const res=await fetch(endpoint+'/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message,history:history.slice(-6),demoOrders:[]}),signal:controller.signal});const data=await res.json();pending.remove();if(!res.ok||!data.answer)throw Error(data.error||'AI chưa trả lời.');
  await reply(data.answer,Array.isArray(data.products)?data.products:[],data.productCards,message,!!data.ai);if(data.ai||data.source==='faq'){history.push({role:'user',content:message},{role:'assistant',content:data.answer});history=history.slice(-6);}
