@@ -240,10 +240,14 @@ def build(item):
     canvas.convert('RGB').save(out,'WEBP',quality=84,method=6)
     print(out.name,out.stat().st_size,flush=True)
     return out
-with ThreadPoolExecutor(max_workers=4) as pool: files=list(pool.map(build,items))
-sheet=Image.new('RGB',(1000,5*300),'#fff');d=ImageDraw.Draw(sheet)
-for i,p in enumerate(files):
-    im=Image.open(p).resize((490,278),Image.Resampling.LANCZOS);x=(i%2)*500+5;y=(i//2)*300+5
-    sheet.paste(im,(x,y));d.text((x,y+280),p.stem,fill='#171717')
-sheet.save(ROOT/'.qa'/'cham-festival-contact.jpg',quality=85)
-print('DONE',len(files),sum(p.stat().st_size for p in files))
+if __name__ == '__main__':
+    import subprocess, sys
+    with ThreadPoolExecutor(max_workers=4) as pool: files=list(pool.map(build,[x for x in items if x['key'] not in ('school','summer')]))
+    subprocess.run([sys.executable,str(ROOT/'scripts/repair-cham-banner-masks.py')],check=True)
+    files=[ROOT/'assets'/('cham-festival-'+x['key']+'.webp') for x in items]
+    sheet=Image.new('RGB',(1000,5*300),'#fff');d=ImageDraw.Draw(sheet)
+    for i,p in enumerate(files):
+        im=Image.open(p).resize((490,278),Image.Resampling.LANCZOS);x=(i%2)*500+5;y=(i//2)*300+5
+        sheet.paste(im,(x,y));d.text((x,y+280),p.stem,fill='#171717')
+    sheet.save(ROOT/'.qa'/'cham-festival-contact.jpg',quality=85)
+    print('DONE',len(files),sum(p.stat().st_size for p in files))

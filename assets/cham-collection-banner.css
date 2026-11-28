@@ -95,3 +95,11 @@
 @keyframes chamBannerReveal{from{opacity:.8;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:767px){.cham-banner__dot{min-width:20px;width:20px}.cham-banner__dot[aria-current="true"]::before{width:15px}.cham-banner--compact .cham-banner__slide[data-tone="diy"] .cham-banner__copy h2{font-size:clamp(20px,5.4vw,28px)}}
 @media(prefers-reduced-motion:reduce){.cham-banner__progress{display:none}[data-banner-ready="true"] [data-banner-slide]:not([aria-hidden]) .cham-banner__copy>*{animation:none!important}}
+
+/* Keep the entire reviewed school and summer artwork visible at every ratio. */
+.cham-banner__slide[data-tone="school"] .cham-banner__image{background:linear-gradient(90deg,#1549ac,#3987e7)}
+.cham-banner__slide[data-tone="summer"] .cham-banner__image{background:linear-gradient(90deg,#007a82,#25c2b6)}
+.cham-banner__slide[data-tone="school"] .cham-banner__image img,
+.cham-banner__slide[data-tone="summer"] .cham-banner__image img{object-fit:contain;object-position:center}
+.cham-banner__slide[data-tone="school"] .cham-banner__image::after,
+.cham-banner__slide[data-tone="summer"] .cham-banner__image::after{display:none}
