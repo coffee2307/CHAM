@@ -13,14 +13,32 @@
  }
  function markGreeting(value){greetingUnread=value;try{sessionStorage.setItem('chammy.greeting-unread.v3',value?'1':'0');}catch{}updateUnread();}
  const welcome=root.querySelector('[data-chammy-welcome]'),preview=welcome?.querySelector('[data-chammy-preview]');
- let showTimer=0,hideTimer=0;
- function hidePreview(){clearTimeout(hideTimer);if(welcome)welcome.hidden=true;}
+ let showTimer=0,hideTimer=0,previewMotion=null;
+ const previewRest={opacity:1,transform:'translate3d(0,0,0) scale(1)'};
+ const previewTucked={opacity:0,transform:'translate3d(0,8px,0) scale(.975)'};
+ function animatePreview(open){
+  if(!welcome)return;
+  const wasHidden=welcome.hidden;
+  if(!open&&wasHidden)return;
+  const style=wasHidden?null:getComputedStyle(welcome);
+  const from=style?{opacity:style.opacity,transform:style.transform}:previewTucked;
+  previewMotion?.cancel();previewMotion=null;
+  if(open)welcome.hidden=false;
+  welcome.inert=!open;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches||typeof welcome.animate!=='function'){
+   welcome.hidden=!open;return;
+  }
+  const motion=welcome.animate([from,open?previewRest:previewTucked],{duration:open?260:165,easing:'cubic-bezier(.16,1,.3,1)',fill:'both'});
+  previewMotion=motion;
+  motion.finished.then(()=>{if(previewMotion!==motion)return;welcome.hidden=!open;previewMotion=null;motion.cancel();},()=>{});
+ }
+ function hidePreview(){clearTimeout(hideTimer);animatePreview(false);}
  function showPreview(text){
   if(!welcome||!preview||desiredOpen)return;
   const plain=String(text||'').replace(/https?:\/\/[^\s<>()\]]+/gi,'').replace(/[*_`#]/g,'').replace(/\s+/g,' ').trim()||'Chammy vừa gửi bạn một tin nhắn';
   const chars=Array.from(plain);
   preview.textContent=chars.length>160?chars.slice(0,157).join('').trimEnd()+'…':plain;
-  clearTimeout(hideTimer);welcome.hidden=false;
+  clearTimeout(hideTimer);animatePreview(true);
   hideTimer=setTimeout(hidePreview,10000);
  }
  function markReply(text){if(!desiredOpen){unread++;updateUnread();showPreview(text);if(unreadBadge&&!matchMedia('(prefers-reduced-motion: reduce)').matches)unreadBadge.animate?.([{transform:'scale(.75)'},{transform:'scale(1.13)'},{transform:'scale(1)'}],{duration:240,easing:'ease-out'});}}
