@@ -8,7 +8,6 @@
     <span class="cham-shop-page__total" data-cham-live-count aria-live="polite">{{ collection.products_count }} sản phẩm</span>
   </div>
   {% if collection.handle == 'all' %}
-    {% render 'cham-coir-feature' %}{% render 'cham-vietnam-culture' %}
     <details class="cham-curated-disclosure" open><summary>Bộ sưu tập và dịch vụ</summary>{% render 'cham-curated-catalog' %}{% render 'cham-gift-bundles' %}</details>
   {% else %}<div class="cham-collection-description">{{ collection.description }}</div><a class="cham-collection-back" href="{{ routes.all_products_collection_url }}">Tất cả bộ sưu tập và sản phẩm</a>{% endif %}
   <span class="cham-shop-page__filter-label">Theo chất liệu</span><nav class="cham-shop-page__tabs" aria-label="Danh mục sản phẩm">
