@@ -1,15 +1,10 @@
 <section class="cham-shop-page cham-shell" data-cham-shop>
-  <div class="cham-shop-page__heading">
-    <div>
-      <p class="cham-shop-page__eyebrow">CHẠM</p>
-      <h1>{% if collection.handle == 'all' %}Tất cả sản phẩm{% else %}{{ collection.title }}{% endif %}</h1>
-      <p>Khám phá những vật dụng thủ công dành cho không gian sống và mỗi ngày.</p>
-    </div>
-    <span class="cham-shop-page__total" data-cham-live-count aria-live="polite">{{ collection.products_count }} sản phẩm</span>
-  </div>
-  {% if collection.handle == 'all' %}
-    <details class="cham-curated-disclosure" open><summary>Bộ sưu tập và dịch vụ</summary>{% render 'cham-curated-catalog' %}{% render 'cham-gift-bundles' %}</details>
-  {% else %}<div class="cham-collection-description">{{ collection.description }}</div><a class="cham-collection-back" href="{{ routes.all_products_collection_url }}">Tất cả bộ sưu tập và sản phẩm</a>{% endif %}
+  {% unless collection.handle == 'all' %}
+    <div class="cham-shop-page__heading"><h1>{{ collection.title }}</h1></div>
+  {% else %}
+    <h1 class="visually-hidden">Tất cả sản phẩm</h1>
+  {% endunless %}
+  <span class="visually-hidden" data-cham-live-count aria-live="polite">{{ collection.products_count }} sản phẩm</span>
   <span class="cham-shop-page__filter-label">Theo danh mục</span><nav class="cham-shop-page__tabs" aria-label="Danh mục sản phẩm">
     <a href="{{ routes.all_products_collection_url }}" {% if collection.handle == 'all' %}aria-current="page"{% endif %}>Tất cả</a>
     {% assign material_handles = 'xo-dua,gom,tre-may,luc-binh-co,go-soi-tu-nhien,học-sinh-sinh-vien,dồ-dung-một-lần' | split: ',' %}
