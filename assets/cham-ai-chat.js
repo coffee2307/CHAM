@@ -2,9 +2,48 @@
  const endpoint=root.dataset.endpoint||'';const aiConfigured=endpoint.startsWith('https://')&&!endpoint.includes('__CHAM');
  const launch=root.querySelector('.cham-ai-launch'),panel=root.querySelector('.cham-ai-window'),log=root.querySelector('.cham-ai-log'),form=root.querySelector('form'),input=form.querySelector('textarea'),send=form.querySelector('button'),share=root.querySelector('[data-chat-orders]');
  const rules=window.CHAMAI_RULES;const status=root.querySelector('.cham-ai-window header small');if(!aiConfigured&&status)status.textContent='Hỗ trợ cơ bản · AI chưa kết nối';const note=root.querySelector('.cham-ai-note');if(!aiConfigured&&note)note.textContent='Chế độ FAQ và tra cứu demo. AI tạo sinh chưa được kích hoạt. Không nhập dữ liệu nhạy cảm.';const greeting=log.firstElementChild.textContent;let history=[],busy=false,shareOrders=false;
- const add=(text,kind='')=>{const node=document.createElement('div');node.className='cham-ai-message '+kind;
- for(const part of String(text).split(/(https:\/\/chamstore\.site\/[A-Za-z0-9%_\-\/]+)/g)){if(part.startsWith('https://chamstore.site/')){const a=document.createElement('a');a.href=part;a.textContent=part;node.append(a);}else node.append(document.createTextNode(part));}
- log.append(node);log.scrollTop=log.scrollHeight;return node;};
+ const make=(tag,cls,text)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=String(text);return el;};
+ const money=v=>new Intl.NumberFormat('vi-VN',{style:'currency',currency:'VND',maximumFractionDigits:0}).format(Number(v)||0);
+ const end=()=>{if(log.scrollHeight-log.scrollTop-log.clientHeight<180)log.scrollTop=log.scrollHeight;};
+ const add=(text,kind='')=>{const n=make('div','cham-ai-message '+kind,text);log.append(n);log.scrollTop=log.scrollHeight;return n;};
+ const productPath=/https:\/\/chamstore\.site\/(products\/[a-z0-9-]{1,120})/gi;
+ const format=(node,text)=>{
+  node.replaceChildren();const parts=String(text).split(/(\*\*[^*\n]+\*\*|\*[^*\n]+\*|https:\/\/chamstore\.site\/[A-Za-z0-9%_\-/]+)/g);
+  for(const part of parts){if(/^https:\/\/chamstore\.site\//.test(part)){const a=make('a','chammy-link',part.includes('/products/')?'Xem sản phẩm':part.includes('/collections/')?'Xem bộ sưu tập':part.includes('cham-play')?'Mở CHẠM Play':'Xem tại CHẠM');a.href=part;node.append(a);}else if(part.startsWith('**')&&part.endsWith('**'))node.append(make('strong','',part.slice(2,-2)));else if(part.startsWith('*')&&part.endsWith('*'))node.append(make('em','',part.slice(1,-1)));else node.append(document.createTextNode(part));}
+ };
+ const imageURL=raw=>{try{const u=new URL(raw,location.origin);return u.protocol==='https:'&&(u.hostname==='cdn.shopify.com'||u.hostname.endsWith('.myshopify.com')||u.hostname===location.hostname)?u.href:'';}catch{return '';}};
+ const cardCache=new Map();
+ async function productCard(path){
+  if(!/^products\/[a-z0-9-]{1,120}$/.test(path))return null;
+  try{let p=cardCache.get(path);if(!p){const r=await fetch('/'+path+'.js',{credentials:'same-origin',signal:AbortSignal.timeout(5000)});if(!r.ok)return null;p=await r.json();if(!p.title||!Number.isFinite(p.price))return null;cardCache.set(path,p);}
+   const card=make('a','chammy-product');card.href='/'+path;
+   const pic=imageURL(p.featured_image||p.images?.[0]);if(pic){const im=make('img');im.src=pic;im.alt='';im.width=88;im.height=88;im.loading='lazy';card.append(im);}
+   const body=make('span','chammy-product-copy');body.append(make('strong','',p.title),make('span','chammy-price',money(p.price/100)),make('small','',p.available?'Có thể thêm vào giỏ demo':'Hiện không khả dụng'),make('span','chammy-product-action','Xem chi tiết'));card.append(body);return card;
+  }catch{return null;}
+ }
+ async function reply(text,paths=[]){
+  const raw=String(text);const matches=[...raw.matchAll(productPath)].map(x=>x[1]);const unique=[...new Set([...paths,...matches])].filter(x=>/^products\/[a-z0-9-]{1,120}$/.test(x)).slice(0,3);
+  const n=add('');const body=make('div','chammy-reply');n.append(body);
+  const plain=raw.replace(productPath,'').replace(/\*\*([^*\n]+)\*\*/g,'$1').replace(/\*([^*\n]+)\*/g,'$1').replace(/(?:tại đường dẫn này|tại đây|đường dẫn)\s*:\s*\.?/gi,'').trim();
+  const cleaned=raw.replace(/(?:tại đường dẫn này|tại đây|đường dẫn)\s*:\s*(?=https:\/\/chamstore\.site\/products\/)/gi,'').replace(productPath,'').replace(/\n\s*\.\s*\n/g,'\n').trim();
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&desiredOpen&&plain.length){
+   body.setAttribute('aria-hidden','true');const chars=Array.from(plain);const duration=Math.min(1800,Math.max(220,chars.length*8));const start=performance.now();
+   await new Promise(resolve=>{const tick=now=>{const count=Math.min(chars.length,Math.ceil((now-start)/duration*chars.length));body.textContent=chars.slice(0,count).join('');end();if(count<chars.length&&desiredOpen&&!document.hidden)requestAnimationFrame(tick);else resolve();};requestAnimationFrame(tick);});body.removeAttribute('aria-hidden');
+  }
+  format(body,cleaned||'Chammy gửi bạn sản phẩm phù hợp:');
+  if(unique.length){const cards=await Promise.all(unique.map(productCard));for(let i=0;i<cards.length;i++){if(cards[i])n.append(cards[i]);else{const a=make('a','chammy-link','Xem chi tiết sản phẩm');a.href='/'+unique[i];n.append(a);}}}end();return n;
+ }
+ const thinking=()=>{const n=add('','chammy-thinking');n.setAttribute('role','status');n.setAttribute('aria-label','Chammy đang suy nghĩ');n.append(make('span','chammy-thinking-text','Chammy đang suy nghĩ'),make('span','chammy-dots',''));n.lastChild.append(make('i'),make('i'),make('i'));return n;};
+ function orderReply(message){
+  if(!shareOrders){add('Bạn chọn Xem đơn demo để Chammy đọc các đơn đã lưu trên trình duyệt này nhé.');return;}
+  const orders=(window.CHAMDemo?.getState()?.orders||[]).slice(0,5);const id=message.match(/CHAM-DEMO-[A-Za-z0-9-]+/i)?.[0];const found=id?orders.filter(o=>String(o.id).toLowerCase()===id.toLowerCase()):orders;
+  if(!found.length){add('Chammy không tìm thấy đơn demo này trên trình duyệt của bạn.');return;}
+  const n=add('Đây là thông tin đơn hàng demo của bạn. Đơn chưa được thanh toán hoặc giao hàng thật.');
+  for(const o of found){const c=make('div','chammy-order');c.append(make('strong','',o.id),make('small','chammy-order-state','Đã tiếp nhận mô phỏng'));
+   for(const i of (o.items||[]).slice(0,10)){const row=make('div','chammy-order-item');row.append(make('span','',String(i.title||'Sản phẩm')+' × '+(Number(i.quantity)||1)),make('span','',money(i.linePrice)));c.append(row);}
+   c.append(make('strong','chammy-price','Tổng: '+money(o.total)));n.append(c);}
+  end();
+ }
  const mobile=matchMedia('(max-width: 700px), (max-height: 500px) and (pointer: coarse)');
  const viewport=window.visualViewport;let frame=0,locked=false,savedY=0,background=[];
  const scrollBottom=()=>{log.scrollTop=log.scrollHeight;};
@@ -16,7 +55,7 @@
   const h=viewport?.height||window.innerHeight,w=viewport?.width||window.innerWidth,top=viewport?.offsetTop||0,left=viewport?.offsetLeft||0;
   const nearEnd=log.scrollHeight-log.scrollTop-log.clientHeight<80||document.activeElement===input;
   root.style.setProperty('--cham-chat-top',top+'px');root.style.setProperty('--cham-chat-left',left+'px');root.style.setProperty('--cham-chat-width',w+'px');root.style.setProperty('--cham-chat-height',h+'px');
-  root.classList.toggle('cham-ai-keyboard',h<window.innerHeight-100||h<450);panel.setAttribute('aria-modal','true');
+  root.classList.toggle('cham-ai-keyboard',h<window.innerHeight-100||(document.activeElement===input&&h<300));panel.setAttribute('aria-modal','true');
   if(nearEnd)scrollBottom();
  };
  const schedule=()=>{if(!frame)frame=requestAnimationFrame(sync);};
@@ -43,21 +82,13 @@
  launch.onclick=()=>toggle(!desiredOpen);close.onclick=()=>toggle(false);
  root.addEventListener('keydown',e=>{if(e.key==='Escape'&&desiredOpen){e.preventDefault();toggle(false);}else if(e.key==='Tab'&&desiredOpen&&mobile.matches){const targets=[...panel.querySelectorAll('button:not(:disabled),textarea,a[href]')].filter(x=>x.getClientRects().length);if(!targets.length)return;const first=targets[0],last=targets[targets.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
 
- share.setAttribute('aria-pressed','false');share.onclick=()=>{shareOrders=!shareOrders;share.setAttribute('aria-pressed',String(shareOrders));share.textContent=shareOrders?'Đã chọn chia sẻ đơn demo':'Chia sẻ đơn demo';};
- root.querySelector('[data-chat-reset]').onclick=()=>{if(busy)return;history=[];shareOrders=false;share.setAttribute('aria-pressed','false');share.textContent='Chia sẻ đơn demo';log.replaceChildren();add(greeting);};
- form.onsubmit=async e=>{e.preventDefault();const message=input.value.trim();if(!message||busy)return;busy=true;send.disabled=true;input.value='';add(message,'user');const route=rules?.classify(message,history.filter(x=>x.role==='user'));if(route?.answer){add(route.answer);if(route.kind==='faq'){history.push({role:'user',content:message},{role:'assistant',content:route.answer});history=history.slice(-6);}busy=false;send.disabled=false;return;}if(!aiConfigured){
-   if(route?.kind==='order'){
-    const orders=shareOrders?(window.CHAMDemo?.getState()?.orders||[]).slice(0,5):[];
-    const id=message.match(/CHAM-DEMO-[A-Za-z0-9-]+/i)?.[0];
-    const found=id?orders.filter(o=>String(o.id).toLowerCase()===id.toLowerCase()):orders;
-    add(!shareOrders?'Hãy chọn Chia sẻ đơn demo để xem dữ liệu đơn trên trình duyệt này.':found.length?'Đơn mô phỏng (không giao hàng thật):\n'+found.map(o=>String(o.id)+' — '+new Intl.NumberFormat('vi-VN').format(Number(o.total)||0)+'đ — Đã tiếp nhận mô phỏng').join('\n'):'Không tìm thấy đơn demo đã chia sẻ.');
-   }else add(rules?.fallback(message,history.filter(x=>x.role==='user'))||'AI chưa kết nối. Vui lòng xem danh mục CHẠM.');
-   busy=false;send.disabled=false;return;
- }const pending=add('Đang trả lời…');let timer,controller=new AbortController();
- try{const orders=shareOrders?(window.CHAMDemo?.getState()?.orders||[]).slice(0,5).map(o=>({id:o.id,total:o.total,createdAt:o.createdAt})):[];timer=setTimeout(()=>controller.abort(),18000);
- const res=await fetch(endpoint+'/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message,history:history.slice(-6),demoOrders:orders}),signal:controller.signal});const data=await res.json();pending.remove();if(!res.ok||!data.answer)throw Error(data.error||'AI chưa trả lời.');
- add(data.answer);if(data.ai||data.source==='faq'){history.push({role:'user',content:message},{role:'assistant',content:data.answer});history=history.slice(-6);}
- }catch(err){pending.remove();add(rules?.fallback(message,history.filter(x=>x.role==='user'))||'AI hiện không khả dụng. Vui lòng thử lại.','error');}finally{clearTimeout(timer);busy=false;send.disabled=false;}
+ share.setAttribute('aria-pressed','false');share.onclick=()=>{shareOrders=!shareOrders;share.setAttribute('aria-pressed',String(shareOrders));share.textContent=shareOrders?'Đang xem đơn demo':'Xem đơn demo';if(shareOrders)orderReply('');};
+ root.querySelector('[data-chat-reset]').onclick=()=>{if(busy)return;history=[];shareOrders=false;share.setAttribute('aria-pressed','false');share.textContent='Xem đơn demo';log.replaceChildren();add(greeting);};
+ form.onsubmit=async e=>{e.preventDefault();const message=input.value.trim();if(!message||busy)return;busy=true;send.disabled=true;input.value='';add(message,'user');const route=rules?.classify(message,history.filter(x=>x.role==='user'));if(route?.answer){await reply(route.answer);if(route.kind==='faq'){history.push({role:'user',content:message},{role:'assistant',content:route.answer});history=history.slice(-6);}busy=false;send.disabled=false;return;}if(route?.kind==='order'){orderReply(message);busy=false;send.disabled=false;return;}if(!aiConfigured){await reply(rules?.fallback(message,history.filter(x=>x.role==='user'))||'AI chưa kết nối. Vui lòng xem danh mục CHẠM.');busy=false;send.disabled=false;return;}const pending=thinking();let timer,controller=new AbortController();
+ try{timer=setTimeout(()=>controller.abort(),30000);
+ const res=await fetch(endpoint+'/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message,history:history.slice(-6),demoOrders:[]}),signal:controller.signal});const data=await res.json();pending.remove();if(!res.ok||!data.answer)throw Error(data.error||'AI chưa trả lời.');
+ await reply(data.answer,Array.isArray(data.products)?data.products:[]);if(data.ai||data.source==='faq'){history.push({role:'user',content:message},{role:'assistant',content:data.answer});history=history.slice(-6);}
+ }catch(err){pending.remove();await reply(rules?.fallback(message,history.filter(x=>x.role==='user'))||'AI hiện không khả dụng. Vui lòng thử lại.');}finally{clearTimeout(timer);busy=false;send.disabled=false;}
  };
  root.hidden=false; // Once deployed, FAQ remains usable even during an AI outage.
 })();
