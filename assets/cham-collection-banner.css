@@ -79,3 +79,19 @@
 .cham-banner__copy{background:radial-gradient(circle at 6% 145%,transparent 0 41%,#ffffff15 41.2% 41.5%,transparent 41.7% 45%,#ffffff10 45.2% 45.5%,transparent 45.7%)}
 .cham-banner--compact .cham-banner__copy h2{font-size:clamp(26px,3.05vw,45px)}
 @media(max-width:767px){.cham-banner--compact .cham-banner__copy h2{font-size:clamp(20px,5.6vw,28px)}}
+
+/* Campaign finish: preserve the ten festival concepts and add the DIY workshop. */
+.cham-banner__slide[data-tone="diy"]{--tone:#512a91;--accent:#ffd86a;--accent-ink:#432367}
+.cham-banner__viewport{box-shadow:0 5px 20px #33251413}
+.cham-banner__occasion{font-variant-numeric:tabular-nums}
+.cham-banner__cta{box-shadow:0 3px 0 #00000017;transition:background .2s,color .2s,transform .2s,box-shadow .2s}
+.cham-banner__link:hover .cham-banner__cta{box-shadow:0 5px 14px #00000023}
+.cham-banner__progress{position:absolute;z-index:2;inset:auto 0 0;height:3px;overflow:hidden;background:#ffffff20;pointer-events:none}
+.cham-banner__progress span{display:block;width:100%;height:100%;background:#ffffffce;transform:scaleX(0);transform-origin:left center}
+.cham-banner__dot::before{height:6px;width:6px;transition:width .3s,background .3s}
+.cham-banner__dot[aria-current="true"]::before{width:20px;background:#513a2b}
+[data-banner-ready="true"] [data-banner-slide]:not([aria-hidden]) .cham-banner__copy>h2,
+[data-banner-ready="true"] [data-banner-slide]:not([aria-hidden]) .cham-banner__copy>.cham-banner__occasion{animation:chamBannerReveal .52s cubic-bezier(.22,.75,.2,1) both}
+@keyframes chamBannerReveal{from{opacity:.8;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:767px){.cham-banner__dot{min-width:20px;width:20px}.cham-banner__dot[aria-current="true"]::before{width:15px}.cham-banner--compact .cham-banner__slide[data-tone="diy"] .cham-banner__copy h2{font-size:clamp(20px,5.4vw,28px)}}
+@media(prefers-reduced-motion:reduce){.cham-banner__progress{display:none}[data-banner-ready="true"] [data-banner-slide]:not([aria-hidden]) .cham-banner__copy>*{animation:none!important}}

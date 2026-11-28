@@ -8,7 +8,7 @@
   {% if collection.handle == 'all' %}{% render 'cham-collection-banner', variant: 'compact' %}{% endif %}
   <span class="cham-shop-page__filter-label">Theo danh mục</span><nav class="cham-shop-page__tabs" aria-label="Danh mục sản phẩm">
     <a href="{{ routes.all_products_collection_url }}" {% if collection.handle == 'all' %}aria-current="page"{% endif %}>Tất cả</a>
-    {% assign material_handles = 'xo-dua,gom,tre-may,luc-binh-co,go-soi-tu-nhien,học-sinh-sinh-vien,dồ-dung-một-lần' | split: ',' %}
+    {% assign material_handles = 'xo-dua,gom,tre-may,luc-binh-co,go-soi-tu-nhien,học-sinh-sinh-vien,dồ-dung-một-lần,tự-lam-dồ-thủ-cong' | split: ',' %}
     {% for handle in material_handles %}{% assign group = collections[handle] %}{% if group != blank %}
       <a href="{{ group.url }}" {% if group.handle == collection.handle %}aria-current="page"{% endif %}>{{ group.title }}</a>
     {% endif %}{% endfor %}

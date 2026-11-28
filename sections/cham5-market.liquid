@@ -11,7 +11,7 @@
       <a href="{{ routes.all_products_collection_url }}" class="cham5-textlink">Tất cả sản phẩm</a>
     </div>
     <div class="cham5-categories__grid">
-      {% assign material_handles = 'xo-dua,gom,tre-may,luc-binh-co,go-soi-tu-nhien' | split: ',' %}
+      {% assign material_handles = 'xo-dua,gom,tre-may,luc-binh-co,go-soi-tu-nhien,tự-lam-dồ-thủ-cong' | split: ',' %}
       {% for handle in material_handles %}
         {% assign group = collections[handle] %}{% if group != blank %}
           {%- liquid

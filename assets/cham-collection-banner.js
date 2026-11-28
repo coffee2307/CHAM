@@ -14,6 +14,8 @@
     const n = slides.length, loop = n > 1;
     let index = 0, timer = null, hovered = false, focused = false, wrapTimer = null;
     let userPaused = reduced.matches, inView = false, pointer = null, suppressClickUntil = 0;
+    const progress = root.querySelector('[data-banner-progress]');
+    let progressAnimation = null;
     const interval = Math.max(3500, Number(root.dataset.interval) || 5000);
     function clone(slide) {
       const c = slide.cloneNode(true);
@@ -70,7 +72,10 @@
     track.addEventListener('transitionend', e => { if (e.target === track && e.propertyName === 'transform') finishWrap(); });
     function schedule() {
       clearTimeout(timer);
+      progressAnimation?.cancel();
+      progressAnimation = null;
       if (!loop || userPaused || hovered || focused || !inView || document.hidden) return;
+      if (progress?.animate && !reduced.matches) progressAnimation = progress.animate([{transform:'scaleX(0)'},{transform:'scaleX(1)'}],{duration:interval,easing:'linear',fill:'forwards'});
       timer = setTimeout(() => { show(index + 1); schedule(); }, interval);
     }
     function updatePause() {

@@ -1,11 +1,11 @@
 {%- liquid
-  assign banner_handles = 'giang-sinh-an-lanh,tết-sum-vầy,qua-tặng-8-thang-3,qua-tặng-20-thang-10,tri-an-thầy-co,trung-thu-doan-vien,valentine-yeu-thương,học-sinh-sinh-vien,mua-he-xanh,mua-tốt-nghiệp' | split: ','
-  assign banner_keys = 'christmas,tet,women-march,women-october,teachers,midautumn,valentine,school,summer,graduation' | split: ','
-  assign banner_dates = '25.12|Tết|08.03|20.10|20.11|Trung thu|14.02|Tựu trường|Mùa hè|Tốt nghiệp' | split: '|'
-  assign banner_titles = 'Giáng sinh an lành|Tết về nhà|Dành tặng nàng|Thương gửi người phụ nữ Việt|Gửi lời tri ân|Trăng rằm đoàn viên|Thương từ điều nhỏ|Sẵn sàng đến lớp|Mang hè đi khắp nơi|Mở trang mới' | split: '|'
-  assign banner_descriptions = 'Quà trao tay, ấm áp mùa lễ hội|Quà sum vầy, đón năm mới|Một món quà, một lời yêu thương|Gửi yêu thương bằng món quà nhỏ|Những món quà ý nghĩa dành tặng thầy cô|Gom niềm vui về bên gia đình|Gửi một món quà thay lời muốn nói|Balo, sổ tay và đồ dùng học tập|Túi đan, mũ và quạt cho ngày nắng|Quà kỷ niệm cho hành trình phía trước' | split: '|'
+  assign banner_handles = 'giang-sinh-an-lanh,tự-lam-dồ-thủ-cong,tết-sum-vầy,qua-tặng-8-thang-3,qua-tặng-20-thang-10,tri-an-thầy-co,trung-thu-doan-vien,valentine-yeu-thương,học-sinh-sinh-vien,mua-he-xanh,mua-tốt-nghiệp' | split: ','
+  assign banner_keys = 'christmas,diy,tet,women-march,women-october,teachers,midautumn,valentine,school,summer,graduation' | split: ','
+  assign banner_dates = '25.12|Tự tay sáng tạo|Tết|08.03|20.10|20.11|Trung thu|14.02|Tựu trường|Mùa hè|Tốt nghiệp' | split: '|'
+  assign banner_titles = 'Giáng sinh an lành|Một góc xưởng tại nhà|Tết về nhà|Dành tặng nàng|Thương gửi người phụ nữ Việt|Gửi lời tri ân|Trăng rằm đoàn viên|Thương từ điều nhỏ|Sẵn sàng đến lớp|Mang hè đi khắp nơi|Mở trang mới' | split: '|'
+  assign banner_descriptions = 'Quà trao tay, ấm áp mùa lễ hội|10 bộ kit thủ công, từ 49.000đ|Quà sum vầy, đón năm mới|Một món quà, một lời yêu thương|Gửi yêu thương bằng món quà nhỏ|Những món quà ý nghĩa dành tặng thầy cô|Gom niềm vui về bên gia đình|Gửi một món quà thay lời muốn nói|Balo, sổ tay và đồ dùng học tập|Túi đan, mũ và quạt cho ngày nắng|Quà kỷ niệm cho hành trình phía trước' | split: '|'
 -%}
-<div class="cham-banner cham-banner--festival cham-banner--{{ variant | default: 'compact' }}" data-cham-banner data-interval="{% if variant == 'home' %}6500{% else %}5000{% endif %}" role="region" aria-roledescription="băng chuyền" aria-label="Bộ sưu tập theo mùa">
+<div class="cham-banner cham-banner--festival cham-banner--{{ variant | default: 'compact' }}" data-cham-banner data-interval="{% if variant == 'home' %}6500{% else %}5000{% endif %}" role="region" aria-roledescription="băng chuyền" aria-label="Bộ sưu tập và chiến dịch nổi bật">
   <div class="cham-banner__viewport" data-banner-viewport>
     <div class="cham-banner__track" data-banner-track>
       {% for handle in banner_handles %}
@@ -30,6 +30,7 @@
         {% endif %}
       {% endfor %}
     </div>
+    <div class="cham-banner__progress" aria-hidden="true"><span data-banner-progress></span></div>
   </div>
   <div class="cham-banner__controls" data-banner-controls hidden>
     <button class="cham-banner__arrow" type="button" data-banner-prev aria-label="Bộ sưu tập trước"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m15 6-6 6 6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
