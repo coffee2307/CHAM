@@ -1,0 +1,4 @@
+# CHẠM AI
+Real model inference via Cloudflare Workers AI; never expose a provider key in the theme. Public catalog is read from Shopify with snapshot fallback. No real order access; browser demo orders shared only if the visitor opts in. Daily 100-call cap and 5 requests/minute per IP. Free allowance subject to Cloudflare plan and model pricing. Do not upgrade billing without owner approval.
+Setup on the authorized Windows PC: cd F:\\CHAM; npx wrangler login; npx wrangler whoami; then powershell -ExecutionPolicy Bypass -File chatbot/deploy.ps1. First confirm that Workers AI is available on the account. The script deploys backend and tests real inference before enabling widget in the live theme. No credentials committed.
+Real order support requires a Shopify app with signed app proxy/customer authentication, order ownership verification and least-privilege read access. Never pass all orders or admin tokens into the model.

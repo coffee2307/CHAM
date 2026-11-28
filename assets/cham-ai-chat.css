@@ -1,0 +1,26 @@
+body.cham-site .cham-ai[hidden],body.cham-site .cham-ai [hidden]{display:none!important}
+body.cham-site .cham-ai{position:fixed;right:max(20px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));z-index:9500;font-family:inherit;color:#322b23}
+body.cp-viewport-lock .cham-ai{display:none!important}
+.cham-ai button{font:inherit;cursor:pointer}
+.cham-ai-launch{display:grid;place-items:center;width:58px;height:58px;border:0;border-radius:50%;color:#fff;background:#66503b;box-shadow:0 5px 20px #35291e26;margin-left:auto}
+.cham-ai-launch svg{width:29px;height:29px}
+.cham-ai-window{position:absolute;right:0;bottom:70px;width:min(380px,calc(100vw - 24px));height:min(520px,calc(100dvh - 120px));background:#faf7f1;border:1px solid #d9cdbd;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 14px 55px #34291f24}
+.cham-ai-window header{display:flex;align-items:center;justify-content:space-between;padding:15px 17px;border-bottom:1px solid #e3d9cb;background:#eee5d8}
+.cham-ai-window header strong,.cham-ai-window header small{display:block}
+.cham-ai-window header strong{font-size:16px}.cham-ai-window header small{font-size:11px;color:#746355;margin-top:3px}
+.cham-ai-window header button{font-size:25px;line-height:1;width:36px;height:36px;border:0;background:none;color:#57483a}
+.cham-ai-log{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;display:flex;flex-direction:column;gap:12px;padding:16px;scrollbar-width:thin}
+.cham-ai-message{font-size:13px;line-height:1.6;background:#eee6da;padding:10px 12px;border-radius:12px 12px 12px 3px;align-self:flex-start;max-width:90%;white-space:pre-wrap;overflow-wrap:anywhere}
+.cham-ai-message.user{align-self:flex-end;background:#66503b;color:#fff;border-radius:12px 12px 3px 12px}
+.cham-ai-message.error{background:#f3dfd7;color:#783f30}
+.cham-ai-message a{color:inherit;text-decoration:underline}
+.cham-ai-tools{display:flex;flex-wrap:wrap;gap:6px;padding:0 12px 7px}
+.cham-ai-tools button{font-size:11px;color:#66503b;background:none;border:1px solid #d9cdbd;border-radius:20px;padding:6px 9px}
+.cham-ai-tools button[aria-pressed=true]{background:#66503b;color:white}
+.cham-ai-form{display:flex;gap:8px;padding:9px 12px;border-top:1px solid #e3d9cb;align-items:center}
+.cham-ai-form textarea{flex:1;width:0;resize:none;padding:9px;border:1px solid #d9cdbd;border-radius:8px;min-height:42px;max-height:80px;font:inherit;font-size:14px;background:#fffdf9}
+.cham-ai-form button{display:grid;place-items:center;width:42px;height:42px;background:#66503b;color:white;border:0;border-radius:9px}
+.cham-ai-form button svg{width:21px;height:21px}.cham-ai-form button:disabled{opacity:.5}
+.cham-ai-note{font-size:10px;line-height:1.4;padding:0 13px 9px;color:#7a6c5f;margin:0}
+.cham-ai button:focus-visible,.cham-ai textarea:focus-visible{outline:2px solid #966a4a;outline-offset:2px}
+@media(max-width:700px){body.cham-site .cham-ai{right:14px;bottom:max(78px,calc(env(safe-area-inset-bottom) + 70px))}.cham-ai-launch{width:52px;height:52px}.cham-ai-window{bottom:61px;height:min(480px,calc(100dvh - 160px));width:min(360px,calc(100vw - 28px))}.cham-ai-form textarea{font-size:16px}}

@@ -1,0 +1,29 @@
+{
+  "name": "cham-support-ai",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-11-28",
+  "ai": {
+    "binding": "AI"
+  },
+  "vars": {
+    "ALLOWED_ORIGINS": "https://chamstore.site,https://www.chamstore.site,https://5yvv8u-44.myshopify.com",
+    "MODEL": "@cf/meta/llama-3.1-8b-instruct",
+    "DAILY_LIMIT": "100"
+  },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "BUDGET",
+        "class_name": "Budget"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": [
+        "Budget"
+      ]
+    }
+  ]
+}

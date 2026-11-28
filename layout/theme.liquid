@@ -60,6 +60,8 @@
     <script src="{{ 'cham-shop.js' | asset_url }}" defer></script>
     {% if request.design_mode %}{%- render 'theme-editor' -%}{% endif %}
     {{ content_for_header }}
+      {{ 'cham-ai-chat.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'cham-ai-chat.js' | asset_url }}" defer></script>
   </head>
   <body class="cham-site page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}{% if template.suffix == 'cham-play' %} cham-play-mode{% endif %}{% if template.name == 'index' %} cham5-home{% endif %}">
     {% render 'skip-to-content-link', href: '#MainContent', text: 'Bỏ qua đến nội dung chính', literal: true %}
@@ -71,5 +73,6 @@
       {{ content_for_layout }}
     </main>
     <footer>{% sections 'footer-group' %}</footer>
+      {% render 'cham-ai-chat' %}
   </body>
 </html>
