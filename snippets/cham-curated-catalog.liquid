@@ -1,0 +1,20 @@
+<section class="cham-curated-catalog" aria-label="Bộ sưu tập và dịch vụ">
+  <div class="cham-curated-head"><div><p class="cham-curated-kicker">Mua sắm theo nhu cầu</p><h2>Chọn món đồ, chọn dịp tặng.</h2><p>Từ vật dụng nhỏ hằng ngày đến quà tặng cá nhân và những câu chuyện nghề Việt.</p></div></div>
+  <div class="cham-curated-tiers">
+    {% assign tiers = 'dưới-50-000d,qua-tặng-dưới-100-000d,qua-tặng-ca-nhan-hoa' | split: ',' %}
+    {% for handle in tiers %}{% assign group = collections[handle] %}{% if group != blank %}<a href="{{ group.url }}"><strong>{{ group.title }}</strong><span>{{ group.products_count }} lựa chọn</span></a>{% endif %}{% endfor %}
+    <a href="{{ routes.all_products_collection_url }}?cham_price=100000-199999"><strong>100.000–199.999đ</strong><span>Gia dụng và quà tặng</span></a>
+    <a href="{{ routes.all_products_collection_url }}?cham_price=200000-999999999"><strong>Từ 200.000đ</strong><span>Nội thất và bộ đồ lớn</span></a>
+  </div>
+  <h3 class="cham-curated-label">Theo mùa và dịp lễ</h3>
+  <div class="cham-curated-grid">
+  {% assign seasonal = 'tết-sum-vầy,trung-thu-doan-vien,mua-he-xanh,tri-an-thầy-co,qua-tặng-cuối-nam' | split: ',' %}
+  {% for handle in seasonal %}{% assign group = collections[handle] %}{% if group != blank %}<a href="{{ group.url }}" class="cham-curated-card">{% assign photo = group.image | default: group.products.first.featured_image %}{% if photo %}{{ photo | image_url: width: 520 | image_tag: loading: 'lazy', widths: '260,390,520', sizes: '(max-width: 700px) 46vw, 20vw', alt: group.title }}{% endif %}<strong>{{ group.title }}</strong><span>{{ group.products_count }} sản phẩm</span></a>{% endif %}{% endfor %}
+  </div>
+  <h3 class="cham-curated-label">Bản sắc nghề thủ công</h3>
+  <div class="cham-curated-grid cham-curated-grid--craft">
+  {% assign crafts = 'xo-dua,nghề-gốm,nghề-dan-lat,nghề-chế-tac-gỗ' | split: ',' %}
+  {% for handle in crafts %}{% assign group = collections[handle] %}{% if group != blank %}<a href="{{ group.url }}" class="cham-curated-card">{% assign photo = group.image | default: group.products.first.featured_image %}{% if photo %}{{ photo | image_url: width: 520 | image_tag: loading: 'lazy', widths: '260,390,520', sizes: '(max-width: 700px) 46vw, 25vw', alt: group.title }}{% endif %}<strong>{% if handle == 'xo-dua' %}Nghề chế tác xơ dừa{% else %}{{ group.title }}{% endif %}</strong><span>{{ group.products_count }} sản phẩm</span></a>{% endif %}{% endfor %}
+  </div>
+  <div class="cham-service-band"><div><h3>Món quà mang dấu ấn riêng.</h3><p>Chọn khắc tên trên mẫu gỗ, tre phù hợp; đề xuất chữ trang trí trên gốm; thêm thiệp và ghi chú gói quà. Tất cả là trải nghiệm mô phỏng, cần xác nhận kỹ thuật trước khi sản xuất.</p></div><a href="{{ collections['qua-tặng-ca-nhan-hoa'].url }}">Chọn món quà cá nhân hóa</a></div>
+</section>

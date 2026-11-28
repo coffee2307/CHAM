@@ -44,6 +44,22 @@
               {% endfor %}
             </select>
           {% endif %}
+          <div class="cham-personalize" data-cham-personalize>
+            <h3>Dịch vụ theo yêu cầu</h3>
+            {% assign engraved = 'thot-go,khay-go,muong-go,luoc-go,hop-go-tron,muong-tre,khay-tre-dan,ly-gom-thu-cong,tach-dia-gom' | split: ',' %}
+            {% if engraved contains product.handle %}
+              <label class="cham-service-check"><input type="checkbox" data-cham-personal-toggle> {% if product.type == 'Gốm' %}Trang trí chữ theo yêu cầu{% else %}Khắc tên theo yêu cầu{% endif %} <small>Demo</small></label>
+              <fieldset data-cham-personal-fields disabled hidden>
+                <label for="ChamPersonalText">Nội dung (tối đa 25 ký tự)</label><input id="ChamPersonalText" name="properties[Nội dung cá nhân hóa]" maxlength="25" required placeholder="Ví dụ: An Nhiên" data-cham-personal-text>
+                <label for="ChamPersonalStyle">Kiểu chữ</label><select id="ChamPersonalStyle" name="properties[Kiểu chữ]" data-cham-personal-style><option value="Thanh lịch">Thanh lịch</option><option value="Viết tay">Viết tay</option><option value="In hoa">In hoa</option></select>
+                <div class="cham-personal-preview" data-cham-personal-preview data-style="Thanh lịch" aria-live="polite">An Nhiên</div>
+                <p class="cham-curated-note">Xem trước kiểu chữ minh họa, không phải bản khắc thực tế. Phí và vị trí khắc cần xác nhận.</p>
+              </fieldset>
+            {% endif %}
+            <label class="cham-service-check"><input type="checkbox" data-cham-gift-toggle> Gói quà và thiệp <small>Demo</small></label>
+            <fieldset data-cham-gift-fields disabled hidden><input type="hidden" name="properties[Gói quà]" value="Yêu cầu gói quà"><label for="ChamGiftOccasion">Dịp tặng</label><select id="ChamGiftOccasion" name="properties[Dịp tặng]"><option>Tặng thường ngày</option><option>Tết</option><option>Trung thu</option><option>20/11</option><option>Sinh nhật</option><option>Giáng sinh</option><option>Khác</option></select><label for="ChamGiftNote">Lời nhắn trên thiệp (không bắt buộc)</label><textarea id="ChamGiftNote" name="properties[Lời nhắn]" maxlength="120" rows="2" placeholder="Gửi lời chúc của bạn"></textarea></fieldset>
+            <p class="cham-curated-note">Thông tin yêu cầu được lưu cùng sản phẩm trong giỏ hàng. Không thu phụ phí hoặc nhận đơn thật trong bản trình diễn.</p>
+          </div>
           <label for="ChamQuantity">Số lượng</label>
           <div class="cham-product-page__purchase">
             <div class="cham-product-page__quantity">

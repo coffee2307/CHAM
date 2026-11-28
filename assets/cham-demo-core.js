@@ -115,7 +115,7 @@
     if(discountId&&!voucher) return {ok:false,error:'Voucher không còn hợp lệ'};
     const safeItems=items.map(item=>({
       id:String(item.id),variantId:String(item.variant_id||item.id),title:String(item.product_title||item.title),
-      quantity:Math.max(1,Number(item.quantity)||1),linePrice:Number(item.final_line_price ?? item.line_price)||0,image:item.featured_image?.url||item.image||''
+      properties:Object.fromEntries(Object.entries(item.properties||{}).filter(([k,v])=>!k.startsWith('_')&&typeof v==='string').map(([k,v])=>[k.slice(0,80),v.slice(0,120)])),quantity:Math.max(1,Number(item.quantity)||1),linePrice:Number(item.final_line_price ?? item.line_price)||0,image:item.featured_image?.url||item.image||''
     }));
     const orderId=uid('CHAM-DEMO');
     const order={id:orderId,createdAt:new Date().toISOString(),items:safeItems,

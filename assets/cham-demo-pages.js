@@ -120,7 +120,7 @@ async function checkoutPage(){
   <div class="cd-payment"><strong>Thanh toán khi nhận hàng · MÔ PHỎNG</strong><p>Không xử lý giao dịch thật.</p></div>
   <button class="cd-btn cd-btn--wide" type="submit">Xác nhận đơn hàng DEMO</button><p role="alert" class="cd-error" hidden></p></form>
   <aside class="cd-panel cd-summary"><h2>Thông tin đơn</h2>
-  ${cart.items.map(i=>`<div class="cd-summary-line"><span>${esc(i.product_title)} × ${i.quantity}</span><strong>${cartPrice(i.final_line_price)}</strong></div>`).join('')}
+  ${cart.items.map(i=>`<div class="cd-summary-line"><span>${esc(i.product_title)} × ${i.quantity}${Object.entries(i.properties||{}).filter(([k,v])=>!k.startsWith('_')&&v).map(([k,v])=>'<small class="cham-order-property">'+esc(k)+': '+esc(v)+'</small>').join('')}</span><strong>${cartPrice(i.final_line_price)}</strong></div>`).join('')}
   <div class="cd-summary-line"><span>Tạm tính</span><strong>${money(subtotal)}</strong></div>
   <div class="cd-summary-line"><span>Voucher</span><strong data-discount>0đ</strong></div>
   <div class="cd-summary-line cd-summary-total"><strong>Tổng thanh toán DEMO</strong><strong data-total>${money(subtotal)}</strong></div>

@@ -3,14 +3,16 @@
   assign card_limit = section.settings.products_limit | default: 6
 -%}
 <div class="cham5 cham5-market">
+  <div class="cham-home-curated">{% render 'cham-curated-catalog' %}{% render 'cham-gift-bundles' %}</div>
   <section class="cham5-categories" id="cham5-categories" aria-labelledby="cham5-categories-title">
     <div class="cham5-market__heading">
       <div><p class="cham5-eyebrow">Khám phá cửa hàng CHẠM</p><h2 id="cham5-categories-title">Khám phá danh mục.</h2></div>
       <a href="{{ routes.all_products_collection_url }}" class="cham5-textlink">Tất cả sản phẩm</a>
     </div>
     <div class="cham5-categories__grid">
-      {% for group in collections %}
-        {% unless group.handle == 'frontpage' or group.handle == 'all' %}
+      {% assign material_handles = 'xo-dua,gom,tre-may,luc-binh-co,go-soi-tu-nhien' | split: ',' %}
+      {% for handle in material_handles %}
+        {% assign group = collections[handle] %}{% if group != blank %}
           {%- liquid
             assign cover_handle = blank
             case group.handle
@@ -36,7 +38,7 @@
             </div>
             <div class="cham5-category__caption"><h3>{{ group.title }}</h3><small>{{ group.products_count }} sản phẩm</small></div>
           </a>
-        {% endunless %}
+        {% endif %}
       {% endfor %}
     </div>
   </section>
@@ -47,7 +49,7 @@
       <a href="{{ routes.all_products_collection_url }}" class="cham5-textlink">Khám phá thêm</a>
     </div>
     <div class="cham5-products__grid">
-      {% assign featured_handles = 'am-tra-gom-tao-hinh,gio-may,bat-go,tui-luc-binh,bong-meo,binh-rot-gom,khay-tre-dan,ly-gom-men-xanh,chieu-coi,tui-soi-day,tham-chui-chan,lo-gom-trang-tri' | split: ',' %}
+      {% assign featured_handles = 'de-lot-ly-tron,mieng-cha-got-chan,bong-meo,xuong-cho,tham-chui-chan,ly-gom-men-xanh,gio-may,bat-go,tui-luc-binh,khay-tre-dan,chieu-coi,tui-soi-day' | split: ',' %}
       {% for handle in featured_handles limit: card_limit %}
         {% assign product = all_products[handle] %}
         <article class="cham5-product">

@@ -209,3 +209,63 @@
 @media(max-width:767px){.cham-site .cham-shop-page__select{min-width:0}.cham-site .cham-shop-page__toolbar{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.cham-site .cham-shop-page__search{grid-column:1/-1}.cham-filter-menu{font-size:12px}.cham-filter-menu summary{padding:10px;gap:5px}.cham-filter-menu__list{width:100%;min-width:0}.cham-site .cham-shop-page__use-items button,.cham-site .cham-shop-page__tabs a{font-size:12px;padding:8px 11px;min-height:36px}}
 
 .cham-site .cham-shop-page__load-state{font-size:13px;color:#75695c;text-align:center;padding:12px}.cham-site .cham-shop-page__pagination[hidden],.cham-site .cham-shop-page__load-state[hidden]{display:none!important}.cham-site .cham-shop-grid--collection .cham-shop-card{content-visibility:auto;contain-intrinsic-size:auto 350px}
+
+/* CHAM commerce: accessible entry prices, collections and services */
+body.cham-site .cham-home-curated{max-width:1440px;margin:0 auto;padding:clamp(24px,5vw,68px) clamp(18px,5vw,65px)}
+body.cham-site :is(.cham-coir-feature,.cham-curated-catalog,.cham-gift-bundles){margin:0 0 clamp(28px,5vw,62px);color:#29241f}
+body.cham-site .cham-coir-feature{background:#eee4d6;border:1px solid #dcd0be;border-radius:14px;padding:clamp(16px,3vw,34px)}
+body.cham-site .cham-curated-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:22px}
+body.cham-site .cham-curated-kicker{font-size:12px;color:#8a5139;font-weight:650;margin:0 0 7px}
+body.cham-site .cham-curated-head h2{font-size:clamp(26px,4vw,48px);line-height:1.14;letter-spacing:-.045em;margin:0 0 9px}
+body.cham-site .cham-curated-head p:not(.cham-curated-kicker){font-size:14px;line-height:1.6;color:#6e6154;max-width:620px;margin:0}
+body.cham-site :is(.cham-curated-head>a,.cham-service-band>a,.cham-collection-back){display:inline-block;flex-shrink:0;padding:9px 0;border-bottom:1px solid #8b6b53;color:#4e392c;text-decoration:none;font-size:13px;font-weight:650}
+body.cham-site .cham-coir-grid,body.cham-site .cham-curated-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(10px,1.5vw,20px)}
+body.cham-site .cham-curated-grid--craft{grid-template-columns:repeat(4,minmax(0,1fr))}
+body.cham-site :is(.cham-coir-card,.cham-curated-card){min-width:0;display:flex;flex-direction:column;color:#2d261e;text-decoration:none}
+body.cham-site :is(.cham-coir-card,.cham-curated-card)>img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain;background:#f8f4ed;border-radius:7px;padding:6px;mix-blend-mode:normal}
+body.cham-site .cham-coir-card h3{font-size:clamp(12px,1.25vw,15px);line-height:1.45;margin:10px 0 5px}
+body.cham-site .cham-coir-card strong{font-size:14px;color:#8b4931;margin-top:auto}
+body.cham-site .cham-curated-card strong{font-size:15px;margin:10px 0 4px}
+body.cham-site .cham-curated-card span{font-size:12px;color:#776b60}
+body.cham-site :is(.cham-coir-card,.cham-curated-card):hover strong{color:#9a593c}
+body.cham-site .cham-curated-note{font-size:11px;line-height:1.65;color:#756758;margin:12px 0 0}
+body.cham-site .cham-curated-tiers{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin:0 0 28px}
+body.cham-site .cham-curated-tiers>a{min-width:0;display:flex;flex-direction:column;gap:5px;padding:14px;border:1px solid #dcd0bf;border-radius:8px;background:#f9f5ee;color:#49372a;text-decoration:none}
+body.cham-site .cham-curated-tiers>a:hover{background:#e9ddcd}
+body.cham-site .cham-curated-tiers strong{font-size:13px;line-height:1.4}
+body.cham-site .cham-curated-tiers span{font-size:11px;color:#756657}
+body.cham-site .cham-curated-label{font-size:clamp(20px,2.2vw,27px);letter-spacing:-.025em;margin:26px 0 13px}
+body.cham-site .cham-service-band{display:flex;justify-content:space-between;align-items:center;gap:18px;margin:25px 0 0;padding:22px;background:#ede2d4;border-radius:9px}
+body.cham-site .cham-service-band h3{font-size:22px;margin:0 0 6px}
+body.cham-site .cham-service-band p{font-size:13px;line-height:1.6;margin:0;max-width:690px}
+body.cham-site .cham-bundle-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+body.cham-site .cham-bundle-card{border:1px solid #e1d7c9;background:#faf7f1;border-radius:10px;padding:14px;min-width:0}
+body.cham-site .cham-bundle-card form{display:flex;flex-direction:column;height:100%}
+body.cham-site .cham-bundle-card__images{display:flex;gap:6px;align-items:stretch;min-width:0}
+body.cham-site .cham-bundle-card__images img{width:0;flex:1 1 0;min-width:0;aspect-ratio:1;height:auto;object-fit:contain;background:#eee8dd;border-radius:5px}
+body.cham-site .cham-bundle-card h3{font-size:16px;line-height:1.3;margin:12px 0 5px}
+body.cham-site .cham-bundle-card__names{font-size:12px;line-height:1.6;color:#736557;margin:0 0 12px}
+body.cham-site .cham-bundle-card__bottom{display:flex;align-items:center;justify-content:space-between;gap:7px;margin-top:auto}
+body.cham-site .cham-bundle-card__bottom strong{font-size:15px;color:#8b4931}
+body.cham-site .cham-bundle-card__bottom button{font:inherit;font-size:12px;font-weight:600;background:#3d332a;color:#fff;border:0;border-radius:6px;min-height:40px;padding:8px 12px;cursor:pointer}
+body.cham-site .cham-bundle-card__bottom button:disabled{opacity:.55;cursor:default}
+body.cham-site .cham-curated-disclosure{border-bottom:1px solid #d9cebd;margin-bottom:24px}
+body.cham-site .cham-curated-disclosure>summary{font-weight:650;cursor:pointer;padding:15px 0;margin-bottom:16px;font-size:17px}
+body.cham-site .cham-collection-description{font-size:14px;line-height:1.6;color:#6e6154}
+body.cham-site .cham-collection-back{margin:6px 0 24px}
+body.cham-site .cham-personalize{border:1px solid #ded2c1;border-radius:9px;padding:15px;margin:12px 0 16px;background:#faf7f1}
+body.cham-site .cham-personalize h3{font-size:16px;margin:0 0 10px}
+body.cham-site .cham-personalize .cham-service-check{display:flex;gap:8px;align-items:center;font-size:13px;min-height:38px;margin:0}
+body.cham-site .cham-service-check input{appearance:auto!important;width:18px;height:18px;min-width:18px;accent-color:#80543a;margin:0}
+body.cham-site .cham-service-check small{margin-left:auto;color:#77695c;font-weight:400}
+body.cham-site .cham-personalize fieldset{border:0;padding:10px 0 14px;min-width:0;margin:0}
+body.cham-site .cham-personalize fieldset[hidden]{display:none!important}
+body.cham-site .cham-personalize fieldset :is(input:not([type=hidden]),select,textarea){display:block;width:100%;min-height:42px;margin:5px 0 10px;padding:9px;border:1px solid #d6c8b5;border-radius:6px;background:#fffdf8;font:inherit;font-size:13px}
+body.cham-site .cham-personal-preview{display:grid;place-items:center;min-height:76px;padding:12px;background:#e6d1b2;border-radius:7px;color:#765031;font:24px Georgia,serif;overflow-wrap:anywhere;text-align:center}
+body.cham-site .cham-personal-preview[data-style="Viết tay"]{font-style:italic}
+body.cham-site .cham-personal-preview[data-style="In hoa"]{font-family:inherit;text-transform:uppercase;font-weight:650;letter-spacing:.06em}
+body.cham-site .cham-order-property{display:block;font-size:11px;line-height:1.45;color:#786a5d;overflow-wrap:anywhere}
+@media(max-width:900px){body.cham-site .cham-curated-tiers{grid-template-columns:repeat(3,minmax(0,1fr))}body.cham-site .cham-bundle-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){body.cham-site .cham-home-curated{padding:25px 16px}body.cham-site .cham-curated-head{align-items:flex-start;flex-direction:column;gap:7px;margin-bottom:15px}body.cham-site .cham-coir-grid,body.cham-site .cham-curated-grid,body.cham-site .cham-curated-tiers{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}body.cham-site .cham-service-band{align-items:flex-start;flex-direction:column;padding:15px}body.cham-site .cham-bundle-grid{grid-template-columns:1fr}body.cham-site .cham-coir-card h3{font-size:12px}}
+
+body.cham-site .cham-home-coir{max-width:1440px;margin:0 auto;padding:clamp(24px,4vw,56px) clamp(18px,5vw,65px)}body.cham-site .cham-home-coir .cham-coir-feature{margin:0}

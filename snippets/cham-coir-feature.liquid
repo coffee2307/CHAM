@@ -1,0 +1,11 @@
+<section class="cham-coir-feature" aria-labelledby="cham-coir-title">
+  <div class="cham-curated-head"><div><p class="cham-curated-kicker">Dòng sản phẩm chủ lực</p><h2 id="cham-coir-title">Xơ dừa trong đời sống.</h2><p>Tận dụng phần xơ từ quả dừa để tạo nên những vật dụng gần gũi: chăm sóc cá nhân, nhà cửa và thú cưng.</p></div><a href="{{ collections['xo-dua'].url }}">Khám phá xơ dừa</a></div>
+  <div class="cham-coir-grid">
+  {% assign coir_order = 'de-lot-ly-tron,mieng-cha-got-chan,bong-meo,xuong-cho,tham-chui-chan' | split: ',' %}
+  {% for key in coir_order %}
+    {% assign coir = collections['xo-dua'].products | where: 'handle', key | first %}
+    {% if coir %}<a class="cham-coir-card" href="{{ coir.url }}">{% if coir.featured_image %}{{ coir.featured_image | image_url: width: 500 | image_tag: loading: 'lazy', widths: '240,360,500', sizes: '(max-width: 700px) 46vw, 20vw', alt: coir.title }}{% endif %}<h3>{{ coir.title }}</h3><strong>{{ coir.price | money }}</strong></a>{% endif %}
+  {% endfor %}
+  </div>
+  <p class="cham-curated-note">Ảnh mẫu xơ dừa từ đối tác Coconut Art Bowl (trừ đế lót ly: ảnh tham khảo). Giá và thông tin phục vụ trình diễn.</p>
+</section>

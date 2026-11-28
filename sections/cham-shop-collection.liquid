@@ -7,13 +7,16 @@
     </div>
     <span class="cham-shop-page__total" data-cham-live-count aria-live="polite">{{ collection.products_count }} sản phẩm</span>
   </div>
+  {% if collection.handle == 'all' %}
+    {% render 'cham-coir-feature' %}
+    <details class="cham-curated-disclosure" open><summary>Bộ sưu tập và dịch vụ</summary>{% render 'cham-curated-catalog' %}{% render 'cham-gift-bundles' %}</details>
+  {% else %}<div class="cham-collection-description">{{ collection.description }}</div><a class="cham-collection-back" href="{{ routes.all_products_collection_url }}">Tất cả bộ sưu tập và sản phẩm</a>{% endif %}
   <span class="cham-shop-page__filter-label">Theo chất liệu</span><nav class="cham-shop-page__tabs" aria-label="Danh mục sản phẩm">
     <a href="{{ routes.all_products_collection_url }}" {% if collection.handle == 'all' %}aria-current="page"{% endif %}>Tất cả</a>
-    {% for group in collections %}
-      {% unless group.handle == 'frontpage' or group.handle == 'all' %}
-        <a href="{{ group.url }}" {% if group.handle == collection.handle %}aria-current="page"{% endif %}>{{ group.title }}</a>
-      {% endunless %}
-    {% endfor %}
+    {% assign material_handles = 'xo-dua,gom,tre-may,luc-binh-co,go-soi-tu-nhien' | split: ',' %}
+    {% for handle in material_handles %}{% assign group = collections[handle] %}{% if group != blank %}
+      <a href="{{ group.url }}" {% if group.handle == collection.handle %}aria-current="page"{% endif %}>{{ group.title }}</a>
+    {% endif %}{% endfor %}
   </nav>
   <div class="cham-shop-page__uses" aria-label="Lọc theo công dụng"><span class="cham-shop-page__filter-label">Theo công dụng</span><div class="cham-shop-page__use-items"><button type="button" data-cham-use="all" aria-pressed="true">Tất cả</button><button type="button" data-cham-use="tableware" aria-pressed="false">Bàn ăn</button><button type="button" data-cham-use="tea" aria-pressed="false">Trà và đồ uống</button><button type="button" data-cham-use="kitchen" aria-pressed="false">Nhà bếp</button><button type="button" data-cham-use="decor" aria-pressed="false">Trang trí và nội thất</button><button type="button" data-cham-use="storage" aria-pressed="false">Lưu trữ</button><button type="button" data-cham-use="fashion" aria-pressed="false">Túi và phụ kiện</button><button type="button" data-cham-use="care" aria-pressed="false">Chăm sóc cá nhân</button><button type="button" data-cham-use="pets" aria-pressed="false">Thú cưng</button></div></div>
   <div class="cham-shop-page__toolbar">
@@ -24,7 +27,7 @@
     </label>
     <label class="cham-shop-page__select"><span class="visually-hidden">Khoảng giá</span>
       <select data-cham-filter-price aria-label="Lọc theo giá">
-        <option value="all">Mọi mức giá</option><option value="0-99999">Dưới 100.000đ</option><option value="100000-199999">100.000–199.999đ</option><option value="200000-299999">200.000–299.999đ</option><option value="300000-499999">300.000–499.999đ</option><option value="500000-999999999">Từ 500.000đ</option>
+        <option value="all">Mọi mức giá</option><option value="0-49999">Dưới 50.000đ</option><option value="50000-99999">50.000–99.999đ</option><option value="100000-199999">100.000–199.999đ</option><option value="200000-299999">200.000–299.999đ</option><option value="300000-499999">300.000–499.999đ</option><option value="500000-999999999">Từ 500.000đ</option><option value="200000-999999999">Từ 200.000đ</option>
       </select>
     </label>
     <label class="cham-shop-page__select"><span class="visually-hidden">Sắp xếp</span>

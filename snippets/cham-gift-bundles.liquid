@@ -1,0 +1,17 @@
+<section class="cham-gift-bundles" id="cham-gift-bundles" aria-labelledby="cham-bundle-title">
+  <div class="cham-curated-head"><div><p class="cham-curated-kicker">Bộ quà gợi ý</p><h2 id="cham-bundle-title">Kết hợp thành một bộ.</h2><p>Thêm các món trong một bộ vào giỏ cùng lúc, giá được tính theo từng sản phẩm. Không áp dụng chiết khấu giả.</p></div></div>
+  <div class="cham-bundle-grid">
+  {% assign bundle_defs = 'Bộ xơ dừa hằng ngày|xo-dua|de-lot-ly-tron,mieng-cha-got-chan,tham-chui-chan;Bộ chăm sóc thú cưng|xo-dua|bong-meo,xuong-cho;Bộ trà ngày Tết|tết-sum-vầy|am-tra-gom-den,tach-dia-gom,khay-tre-dan;Bộ quà Trung thu|trung-thu-doan-vien|hop-luc-binh,khay-tre-dan,de-lot-ly-tron;Bộ tri ân thầy cô|tri-an-thầy-co|ly-gom-thu-cong,tui-day-mini,de-lot-ly-tron;Bộ quà mùa hè|mua-he-xanh|tui-luc-binh,mu-co-dan,quat-tay-tre' | split: ';' %}
+  {% for def in bundle_defs %}
+    {% assign parts = def | split: '|' %}{% assign keys = parts[2] | split: ',' %}{% assign source = collections[parts[1]] %}
+    {% assign total = 0 %}{% assign valid = 0 %}{% assign available = true %}
+    <article class="cham-bundle-card"><form data-cham-bundle data-bundle-title="{{ parts[0] | escape }}">
+      <div class="cham-bundle-card__images">
+      {% for key in keys %}{% assign item = source.products | where: 'handle', key | first %}{% if item != blank %}{% assign variant = item.selected_or_first_available_variant %}{% if variant.available %}{% assign valid = valid | plus: 1 %}{% else %}{% assign available = false %}{% endif %}{% assign total = total | plus: variant.price %}{% if item.featured_image %}{{ item.featured_image | image_url: width: 340 | image_tag: loading: 'lazy', alt: item.title }}{% endif %}<input type="hidden" data-bundle-variant value="{{ variant.id }}">{% endif %}{% endfor %}
+      </div><h3>{{ parts[0] }}</h3>
+      <p class="cham-bundle-card__names">{% for key in keys %}{% assign item = source.products | where: 'handle', key | first %}{% if item != blank %}{{ item.title }}{% unless forloop.last %} · {% endunless %}{% endif %}{% endfor %}</p>
+      <div class="cham-bundle-card__bottom"><strong>{{ total | money }}</strong><button type="submit" {% unless available and valid == keys.size %}disabled{% endunless %}>Thêm cả bộ</button></div>
+    </form></article>
+  {% endfor %}
+  </div>
+</section>

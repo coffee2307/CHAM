@@ -26,6 +26,28 @@
     });
     document.dispatchEvent(new CustomEvent('cham:cart-updated',{detail:cart}));
   }
+  // Optional service fields remain disabled unless selected, so they do not enter unrelated carts.
+  const personal=$('[data-cham-personalize]');
+  if(personal){
+    for(const [toggle,fields] of [['personal','personal'],['gift','gift']]){
+      const cb=$('[data-cham-'+toggle+'-toggle]',personal),fs=$('[data-cham-'+fields+'-fields]',personal);
+      if(cb&&fs){const sync=()=>{fs.hidden=!cb.checked;fs.disabled=!cb.checked;};cb.addEventListener('change',sync);sync();}
+    }
+    const preview=$('[data-cham-personal-preview]',personal),input=$('[data-cham-personal-text]',personal),style=$('[data-cham-personal-style]',personal);
+    const draw=()=>{if(preview){preview.textContent=input?.value.trim()||'An Nhiên';preview.dataset.style=style?.value||'Thanh lịch';}};
+    input?.addEventListener('input',draw);style?.addEventListener('change',draw);draw();
+  }
+  root.addEventListener('submit',async event=>{
+    const form=event.target.closest('form[data-cham-bundle]');if(!form)return;
+    event.preventDefault();const btn=$('button[type=submit]',form);if(!btn||btn.disabled)return;
+    const ids=$$('[data-bundle-variant]',form).map(x=>Number(x.value));if(!ids.length||ids.some(x=>!Number.isSafeInteger(x)||x<=0))return;
+    const label=btn.textContent;btn.disabled=true;btn.textContent='Đang thêm…';
+    try{
+      const response=await fetch('/cart/add.js',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({items:ids.map(id=>({id,quantity:1,properties:{'Bộ quà':form.dataset.bundleTitle}}))})});
+      const result=await response.json().catch(()=>({}));if(!response.ok)throw Error(result.description||result.message||'Không thể thêm cả bộ');
+      await syncCart();toast('Đã thêm cả bộ vào giỏ');btn.textContent='Đã thêm';setTimeout(()=>{btn.disabled=false;btn.textContent=label;},1000);
+    }catch(e){toast(e.message,true);btn.disabled=false;btn.textContent=label;}
+  });
   root.addEventListener('submit',event=>{
     if(!event.target.matches('form[data-cham-contact-demo]'))return;
     event.preventDefault();
@@ -170,7 +192,9 @@
     });
     shop.addEventListener('input',e=>{if(e.target.matches('[data-cham-filter-search]'))updateFilters(shop);});
     shop.addEventListener('change',e=>{if(e.target.matches('[data-cham-filter-price],[data-cham-filter-sort]'))updateFilters(shop);});
-    updateFilters(shop);
+    const preset=new URLSearchParams(location.search).get('cham_price');
+    const priceSelect=$('[data-cham-filter-price]',shop);if(preset&&priceSelect&&[...priceSelect.options].some(o=>o.value===preset)){priceSelect.value=preset;priceSelect.dispatchEvent(new Event('change',{bubbles:true}));}
+    else updateFilters(shop);
   }
   const animated=$$('[data-cham-scroll] .cham-section-head, [data-cham-scroll] .cham-home-club__copy, [data-cham-scroll] .cham-home-about__inner, [data-cham-scroll] .cham-craft-categories__head, [data-cham-scroll] .cham-craft-tile, [data-cham-scroll] .cham-catalog__heading, [data-cham-scroll] .cham-catalog__body, [data-cham-scroll] .cham-about-v3__intro, [data-cham-scroll] .cham-about-v3__statement-grid, [data-cham-scroll] .cham-about-v3__editorial-copy');
   const prefersReduced=window.matchMedia('(prefers-reduced-motion: reduce)');
