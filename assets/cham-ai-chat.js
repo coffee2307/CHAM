@@ -5,7 +5,7 @@
  const make=(tag,cls,text)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=String(text);return el;};
  const money=v=>new Intl.NumberFormat('vi-VN',{style:'currency',currency:'VND',maximumFractionDigits:0}).format(Number(v)||0);
  const end=()=>{if(log.scrollHeight-log.scrollTop-log.clientHeight<180)log.scrollTop=log.scrollHeight;};
- const add=(text,kind='')=>{const n=make('div','cham-ai-message '+kind,text);log.append(n);log.scrollTop=log.scrollHeight;return n;};
+ const add=(text,kind='')=>{const n=make('div','cham-ai-message '+kind,kind==='user'?text:rules?.voice(text)??text);log.append(n);log.scrollTop=log.scrollHeight;return n;};
  const productPath=/https:\/\/chamstore\.site\/(products\/[a-z0-9-]{1,120})/gi;
  const format=(node,text)=>{
   node.replaceChildren();const parts=String(text).split(/(\*\*[^*\n]+\*\*|\*[^*\n]+\*|https:\/\/chamstore\.site\/[A-Za-z0-9%_\-/]+)/g);
@@ -22,7 +22,7 @@
   }catch{return null;}
  }
  async function reply(text,paths=[]){
-  const raw=String(text);const matches=[...raw.matchAll(productPath)].map(x=>x[1]);const unique=[...new Set([...paths,...matches])].filter(x=>/^products\/[a-z0-9-]{1,120}$/.test(x)).slice(0,3);
+  const raw=rules?.voice(text)??String(text);const matches=[...raw.matchAll(productPath)].map(x=>x[1]);const unique=[...new Set([...paths,...matches])].filter(x=>/^products\/[a-z0-9-]{1,120}$/.test(x)).slice(0,3);
   const n=add('');const body=make('div','chammy-reply');n.append(body);
   const plain=raw.replace(productPath,'').replace(/\*\*([^*\n]+)\*\*/g,'$1').replace(/\*([^*\n]+)\*/g,'$1').replace(/(?:tại đường dẫn này|tại đây|đường dẫn)\s*:\s*\.?/gi,'').trim();
   const cleaned=raw.replace(/(?:tại đường dẫn này|tại đây|đường dẫn)\s*:\s*(?=https:\/\/chamstore\.site\/products\/)/gi,'').replace(productPath,'').replace(/\n\s*\.\s*\n/g,'\n').trim();
@@ -33,12 +33,12 @@
   format(body,cleaned||'Chammy gửi bạn sản phẩm phù hợp:');
   if(unique.length){const cards=await Promise.all(unique.map(productCard));for(let i=0;i<cards.length;i++){if(cards[i])n.append(cards[i]);else{const a=make('a','chammy-link','Xem chi tiết sản phẩm');a.href='/'+unique[i];n.append(a);}}}end();return n;
  }
- const thinking=()=>{const n=add('','chammy-thinking');n.setAttribute('role','status');n.setAttribute('aria-label','Chammy đang suy nghĩ');n.append(make('span','chammy-thinking-text','Chammy đang suy nghĩ'),make('span','chammy-dots',''));n.lastChild.append(make('i'),make('i'),make('i'));return n;};
+ const thinking=()=>{const n=add('','chammy-thinking');n.setAttribute('role','status');n.setAttribute('aria-label','Chammy đang tìm câu trả lời nè');n.append(make('span','chammy-thinking-text','Chammy đang tìm câu trả lời nè'),make('span','chammy-dots',''));n.lastChild.append(make('i'),make('i'),make('i'));return n;};
  function orderReply(message){
-  if(!shareOrders){add('Bạn chọn Xem đơn demo để Chammy đọc các đơn đã lưu trên trình duyệt này nhé.');return;}
+  if(!shareOrders){add('Dạ, bạn chọn Xem đơn demo để Chammy xem các đơn đã lưu trên trình duyệt này nha.');return;}
   const orders=(window.CHAMDemo?.getState()?.orders||[]).slice(0,5);const id=message.match(/CHAM-DEMO-[A-Za-z0-9-]+/i)?.[0];const found=id?orders.filter(o=>String(o.id).toLowerCase()===id.toLowerCase()):orders;
-  if(!found.length){add('Chammy không tìm thấy đơn demo này trên trình duyệt của bạn.');return;}
-  const n=add('Đây là thông tin đơn hàng demo của bạn. Đơn chưa được thanh toán hoặc giao hàng thật.');
+  if(!found.length){add('Dạ, Chammy chưa tìm thấy đơn demo này ạ. Bạn kiểm tra lại mã đơn nha.');return;}
+  const n=add('Dạ, Chammy tìm được thông tin đơn demo của bạn rồi nè! Đơn này chưa được thanh toán hoặc giao hàng thật nha.');
   for(const o of found){const c=make('div','chammy-order');c.append(make('strong','',o.id),make('small','chammy-order-state','Đã tiếp nhận mô phỏng'));
    for(const i of (o.items||[]).slice(0,10)){const row=make('div','chammy-order-item');row.append(make('span','',String(i.title||'Sản phẩm')+' × '+(Number(i.quantity)||1)),make('span','',money(i.linePrice)));c.append(row);}
    c.append(make('strong','chammy-price','Tổng: '+money(o.total)));n.append(c);}
@@ -90,5 +90,19 @@
  await reply(data.answer,Array.isArray(data.products)?data.products:[]);if(data.ai||data.source==='faq'){history.push({role:'user',content:message},{role:'assistant',content:data.answer});history=history.slice(-6);}
  }catch(err){pending.remove();await reply(rules?.fallback(message,history.filter(x=>x.role==='user'))||'AI hiện không khả dụng. Vui lòng thử lại.');}finally{clearTimeout(timer);busy=false;send.disabled=false;}
  };
- root.hidden=false; // Once deployed, FAQ remains usable even during an AI outage.
+ root.hidden=false;
+ const welcome=root.querySelector('[data-chammy-welcome]');
+ if(welcome){
+  let seen=false;try{seen=sessionStorage.getItem('chammy.welcome.v1')==='1';}catch{}
+  let showTimer=0,hideTimer=0;
+  const remember=()=>{try{sessionStorage.setItem('chammy.welcome.v1','1');}catch{}};
+  const dismiss=()=>{clearTimeout(showTimer);clearTimeout(hideTimer);welcome.hidden=true;remember();};
+  welcome.querySelector('[data-chammy-dismiss]').addEventListener('click',dismiss);
+  welcome.querySelector('[data-chammy-start]').addEventListener('click',()=>{dismiss();toggle(true);});
+  launch.addEventListener('click',dismiss);
+  if(!seen&&!document.body.classList.contains('cham-play-mode')&&!location.pathname.includes('checkout'))showTimer=setTimeout(()=>{
+   if(desiredOpen||document.hidden||document.documentElement.classList.contains('cp-viewport-lock'))return;
+   welcome.hidden=false;remember();hideTimer=setTimeout(()=>{welcome.hidden=true;},14000);
+  },1300);
+ }
 })();
