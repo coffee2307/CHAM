@@ -33,12 +33,12 @@
   format(body,cleaned||'Chammy gửi bạn sản phẩm phù hợp:');
   if(unique.length){const cards=await Promise.all(unique.map(productCard));for(let i=0;i<cards.length;i++){if(cards[i])n.append(cards[i]);else{const a=make('a','chammy-link','Xem chi tiết sản phẩm');a.href='/'+unique[i];n.append(a);}}}end();return n;
  }
- const thinking=()=>{const n=add('','chammy-thinking');n.setAttribute('role','status');n.setAttribute('aria-label','Chammy đang tìm câu trả lời nè');n.append(make('span','chammy-thinking-text','Chammy đang tìm câu trả lời nè'),make('span','chammy-dots',''));n.lastChild.append(make('i'),make('i'),make('i'));return n;};
+ const thinking=()=>{const n=add('','chammy-thinking');n.setAttribute('role','status');n.setAttribute('aria-label','Chammy đang xem thông tin');n.append(make('span','chammy-thinking-text','Chammy đang xem thông tin'),make('span','chammy-dots',''));n.lastChild.append(make('i'),make('i'),make('i'));return n;};
  function orderReply(message){
   if(!shareOrders){add('Dạ, bạn chọn Xem đơn demo để Chammy xem các đơn đã lưu trên trình duyệt này nha.');return;}
   const orders=(window.CHAMDemo?.getState()?.orders||[]).slice(0,5);const id=message.match(/CHAM-DEMO-[A-Za-z0-9-]+/i)?.[0];const found=id?orders.filter(o=>String(o.id).toLowerCase()===id.toLowerCase()):orders;
   if(!found.length){add('Dạ, Chammy chưa tìm thấy đơn demo này ạ. Bạn kiểm tra lại mã đơn nha.');return;}
-  const n=add('Dạ, Chammy tìm được thông tin đơn demo của bạn rồi nè! Đơn này chưa được thanh toán hoặc giao hàng thật nha.');
+  const n=add('Chammy tìm thấy đơn demo của bạn rồi nè. Đơn này chưa được thanh toán hay giao hàng thật nha.');
   for(const o of found){const c=make('div','chammy-order');c.append(make('strong','',o.id),make('small','chammy-order-state','Đã tiếp nhận mô phỏng'));
    for(const i of (o.items||[]).slice(0,10)){const row=make('div','chammy-order-item');row.append(make('span','',String(i.title||'Sản phẩm')+' × '+(Number(i.quantity)||1)),make('span','',money(i.linePrice)));c.append(row);}
    c.append(make('strong','chammy-price','Tổng: '+money(o.total)));n.append(c);}

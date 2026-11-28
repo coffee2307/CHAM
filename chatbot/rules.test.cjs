@@ -11,3 +11,8 @@ test('fake product link',()=>assert.equal(R.validAnswer('https://chamstore.site/
 test('known product link',()=>assert.equal(R.validAnswer('https://chamstore.site/products/abc',[{url:'https://chamstore.site/products/abc'}]),true));
 test('fallback not invented',()=>assert.equal(R.fallback('Tìm quà tặng'),R.unavailable));
 test('fallback FAQ',()=>assert.equal(R.fallback('CHẠM là gì?'),R.classify('CHẠM là gì?').answer));
+
+test('Chammy natural voice preserves URL and limits punctuation',()=>{
+ const result=R.voice('Tôi tìm được rồi!!! Bạn muốn xem không?? Cần thêm gì? https://chamstore.site/products/mieng-cha-got-chan');
+ assert.equal(result,'Chammy tìm được rồi. Bạn muốn xem không? Cần thêm gì. https://chamstore.site/products/mieng-cha-got-chan');
+});

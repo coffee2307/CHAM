@@ -1,12 +1,12 @@
 <div class="cham-ai" data-cham-ai hidden data-endpoint="https://cham-support-ai.coffee2307-pham.workers.dev">
  <button type="button" class="cham-ai-launch" aria-label="Mở Chammy" aria-expanded="false" aria-controls="ChamAIWindow"><img src="{{ 'chammy.svg' | asset_url }}" width="96" height="96" alt="" class="chammy-mascot"></button>
  <div class="chammy-welcome" data-chammy-welcome hidden>
-  <button type="button" class="chammy-welcome-text" data-chammy-start><strong>Chammy xin chào!</strong><span>Bạn cần Chammy giúp gì ạ?</span></button>
+  <button type="button" class="chammy-welcome-text" data-chammy-start><strong>Chammy xin chào</strong><span>Bạn cần Chammy giúp gì ạ?</span></button>
   <button type="button" class="chammy-welcome-close" data-chammy-dismiss aria-label="Đóng lời chào">×</button>
  </div>
  <section class="cham-ai-window" id="ChamAIWindow" role="dialog" aria-label="Chammy, trợ lý CHẠM" hidden>
  <header><div class="chammy-brand"><span class="chammy-avatar"><img src="{{ 'chammy.svg' | asset_url }}" width="96" height="96" alt=""></span><div><strong>Chammy</strong><small>Trợ lý mua sắm CHẠM</small></div></div><button type="button" data-chat-close aria-label="Đóng chatbot">×</button></header>
- <div class="cham-ai-log" role="log" aria-live="polite"><div class="cham-ai-message">Dạ, Chammy xin chào bạn! Bạn cần Chammy giúp gì ạ? Chọn quà, tìm sản phẩm hay xem đơn demo đều được nha.</div></div>
+ <div class="cham-ai-log" role="log" aria-live="polite"><div class="cham-ai-message">Chào bạn, Chammy đây. Bạn cần Chammy giúp gì ạ?</div></div>
  <div class="cham-ai-tools"><button type="button" data-chat-orders>Xem đơn demo</button><button type="button" data-chat-reset>Cuộc trò chuyện mới</button></div>
  <form class="cham-ai-form"><label class="visually-hidden" for="ChamAIInput">Tin nhắn</label><textarea id="ChamAIInput" rows="1" maxlength="1000" placeholder="Nhắn với Chammy…" required></textarea><button type="submit" aria-label="Gửi tin nhắn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m4 4 16 8-16 8 3-8-3-8Zm3 8h13"/></svg></button></form>
  <p class="cham-ai-note">Tin nhắn được xử lý bằng AI trên Cloudflare. Không nhập dữ liệu nhạy cảm. AI có thể nhầm lẫn.</p>
