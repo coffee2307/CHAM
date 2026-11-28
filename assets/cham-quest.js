@@ -83,7 +83,7 @@
       kind='hub';stopUI();
       const categories=['Tất cả','Trí nhớ','Kiến thức','Ghép nối','Giải đố','Thời gian'];
       const cards=games.filter(g=>filter==='Tất cả'||g.type===filter).map(g=>
-        '<article class="cp-card"><button type="button" class="cp-card__open" data-cp-game="'+g.id+'" aria-label="Chơi '+esc(g.name)+'">'+
+        '<article class="cp-card cp-card--'+g.id+'"><button type="button" class="cp-card__open" data-cp-game="'+g.id+'" aria-label="Chơi '+esc(g.name)+'">'+
           '<span class="cp-card__media cp-card__media--'+g.art+'">'+avatar(g.art)+'<span class="cp-card__level">'+difficulty[g.id]+'</span>'+(completed.has(g.id)?'<span class="cp-card__done">'+icon('check')+' Đã chơi</span>':'')+'</span>'+
           '<span class="cp-card__content"><span class="cp-card__category">'+esc(g.type)+' · '+esc(g.time)+'</span>'+
           '<strong>'+esc(g.name)+'</strong><span class="cp-card__description">'+esc(g.description)+'</span>'+
@@ -91,19 +91,19 @@
         '</button></article>').join('');
       const tabs=categories.map(c=>'<button type="button" class="cp-filter'+(filter===c?' is-active':'')+'" data-cp-filter="'+c+'" aria-pressed="'+(filter===c)+'">'+c+'</button>').join('');
       root.innerHTML='<div class="cp-app cp-hub">'+
-        '<section class="cp-hero"><div class="cp-hero__copy"><p class="cp-eyebrow">CHẠM Play</p><h1>Khám phá trò chơi</h1>'+
-        '<p>Bảy trải nghiệm, nhiều cách tìm hiểu sản phẩm thủ công.</p>'+
-        '<div class="cp-hero__links"><a href="/pages/cham-club?tab=rewards" class="cp-quiet-link">Xem điểm và phần thưởng</a></div></div>'+
+        '<section class="cp-hero"><div class="cp-hero__copy"><p class="cp-eyebrow">CHẠM PLAY</p><h1>Vào game thôi!</h1>'+
+        '<p>7 mini game, thử tài khéo léo và khám phá thế giới thủ công.</p>'+
+        '<div class="cp-hero__links"><a href="#cp-games" class="cp-play-start">Chọn trò chơi</a><a href="/pages/cham-club?tab=rewards" class="cp-quiet-link">Ví điểm</a></div></div>'+
         '<div class="cp-hero__photo cp4-hero-gallery" aria-label="Tuyển tập trò chơi CHẠM Play">'+
          '<span class="cp4-hero-gallery__back">'+avatar('quiz')+'</span>'+
          '<span class="cp4-hero-gallery__main">'+avatar('memory',true)+'</span>'+
          '<span class="cp4-hero-gallery__front">'+avatar('pack')+'</span>'+
          '</div></section>'+
         '<section class="cp-summary" aria-label="Tổng quan điểm thưởng"><div><span>'+icon('coin')+' Điểm của bạn</span><strong data-cp-wallet>'+core.points()+'</strong></div>'+
-        '<div><span>Trò đã hoàn thành trong phiên</span><strong>'+completed.size+' / 5</strong></div>'+
-        '<div><span>Thưởng trò chơi hôm nay</span><strong>'+(claimed()?'Đã nhận':'Chưa nhận')+'</strong></div>'+
+        '<div><span>Trò đã khám phá</span><strong>'+completed.size+' / 5</strong></div>'+
+        '<div><span>Thưởng hôm nay</span><strong>'+(claimed()?'Đã nhận':'Chưa nhận')+'</strong></div>'+
         '<p>Chỉ là điểm và voucher mô phỏng lưu trên trình duyệt. Hoàn thành trò chơi đủ điều kiện để nhận tối đa 20 điểm demo mỗi ngày.</p></section>'+
-        '<section id="cp-games" class="cp-games"><div class="cp-section-head"><h2>Chọn trò chơi</h2><p>Chọn một cách khám phá phù hợp. Không cần cài đặt.</p></div>'+
+        '<section id="cp-games" class="cp-games"><div class="cp-section-head"><h2>Chọn trò chơi</h2><p>Chọn game yêu thích và bắt đầu chơi.</p></div>'+
         '<div class="cp-filter-row" role="group" aria-label="Lọc trò chơi">'+tabs+'</div>'+
         '<div class="cp-grid">'+cards+'</div></section>'+
         '<section class="cp-foot"><div><h2>Hiểu món đồ trước khi lựa chọn.</h2><p>Tìm hiểu câu chuyện chất liệu và cách thực hiện trên CHẠM.</p></div>'+
@@ -165,7 +165,7 @@
           progress(s.found.size,s.target)+
           '<p class="cp-help cp-combo">Liên tiếp '+s.combo+' cặp · Kỷ lục '+s.bestCombo+' · Sai '+s.errors+'</p><div class="cp-memory-grid cp-memory-grid--'+s.target+'">'+s.deck.map((card,i)=>{
             const shown=s.open.includes(i)||s.found.has(card.id);
-            return '<button class="cp-memory-cell'+(shown?' is-revealed':'')+(s.found.has(card.id)?' is-matched':'')+'" data-cp-memory="'+i+'" type="button" '+(s.found.has(card.id)?'disabled':'')+' aria-label="Thẻ '+(i+1)+(shown?': '+esc(card.label):': đang úp')+'"><span>'+ (shown?'<span class="cp4-memory-face-title">'+esc(card.label)+'</span>':'<span class="cp4-memory-face-back"><b>CHẠM</b><small>CHẠM</small></span>')+'</span></button>';
+            return '<button class="cp-memory-cell'+(shown?' is-revealed':'')+(s.found.has(card.id)?' is-matched':'')+'" data-cp-memory="'+i+'" type="button" '+(s.found.has(card.id)?'disabled':'')+' aria-label="Thẻ '+(i+1)+(shown?': '+esc(card.label):': đang úp')+'"><span>'+ (shown?'<span class="cp4-memory-face-title">'+esc(card.label)+'</span>':'<span class="cp4-memory-face-back"><b>CHẠM</b><small>PLAY</small></span>')+'</span></button>';
           }).join('')+'</div><p class="cp-help" role="status">Lật từng cặp thẻ. Hoàn thành khi tìm đủ '+s.target+' cặp.</p></div>';
       }
       if(kind==='quiz'||kind==='speed'){

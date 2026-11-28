@@ -666,3 +666,256 @@ body.cham-site.cham-play-mode .cp-session .cp-memory-cell:hover:not(:disabled){b
  body.cham-site.cham-play-mode .cp-session .cp-memory-grid--6{grid-template-columns:repeat(6,minmax(0,var(--card-width)))!important;--card-width:clamp(44px,15dvh,84px)}
  body.cham-site.cham-play-mode .cp-session .cp4-memory-face-back b{font-size:clamp(11px,3.3dvh,17px)!important}
 }
+
+/* CHẠM Play 4.0 — arcade visual system, isolated from commerce pages.
+   Original illustrated covers, playful color, tactile controls, unchanged game logic. */
+body.cham-site.cham-play-mode{background:#f3f1ff!important}
+body.cham-site.cham-play-mode .cp-app{
+ --cp-paper:#f3f1ff;--cp-panel:#fff;--cp-ink:#272344;--cp-muted:#625e7d;
+ --cp-line:#ded8f3;--cp-brown:#6041c8;--cp-dark:#272344;
+ --cp3-paper:#f3f1ff;--cp3-line:#ded8f3;--cp4-paper:#f3f1ff;
+ --cp4-ink:#272344;--cp4-line:#ded8f3;--cp4-shade:0 8px 24px #47358e12;
+ color:#272344;background:#f3f1ff;
+}
+body.cham-site.cham-play-mode .cp-hub{padding-top:1px}
+body.cham-site.cham-play-mode .cp-hero{
+ position:relative;border:0;border-radius:28px;min-height:0;
+ padding:clamp(26px,4vw,55px);gap:clamp(20px,3vw,40px);
+ background:radial-gradient(circle at 86% 20%,#7774f6 0,transparent 45%),linear-gradient(120deg,#29256a,#493dc2 70%,#5a4ad8);
+ box-shadow:0 7px 0 #29256a,0 17px 35px #33266b26;color:#fff;
+}
+body.cham-site.cham-play-mode .cp-hero:before{
+ content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+ background-image:radial-gradient(circle,#fff3 1.3px,transparent 1.3px);background-size:22px 22px;
+ mask-image:linear-gradient(115deg,transparent 25%,#000 100%);
+}
+body.cham-site.cham-play-mode .cp-hero .cp-eyebrow{
+ display:inline-flex;background:#ffe482;color:#34265b;border-radius:999px;
+ padding:8px 13px;font-size:12px;letter-spacing:.075em;font-weight:850;
+}
+body.cham-site.cham-play-mode .cp-hero h1{
+ font-weight:900;color:#fff;line-height:1.04;letter-spacing:-.058em;
+ font-size:clamp(43px,5.25vw,80px);text-shadow:0 4px #241e6e;
+ margin:16px 0;max-width:540px;
+}
+body.cham-site.cham-play-mode .cp-hero__copy>p:not(.cp-eyebrow){color:#f2edff;font-weight:500;line-height:1.65}
+body.cham-site.cham-play-mode .cp-hero__links{gap:14px;align-items:center;margin-top:22px}
+body.cham-site.cham-play-mode .cp-hero__links .cp-play-start{
+ display:inline-flex;justify-content:center;align-items:center;min-height:48px;
+ background:#ffe482;color:#32234f!important;font-size:14px;font-weight:850;
+ padding:12px 22px;border-radius:13px;border:0;text-decoration:none;
+ box-shadow:0 5px 0 #d9a940;transition:transform .2s,box-shadow .2s,background .2s;
+}
+body.cham-site.cham-play-mode .cp-hero__links .cp-play-start:hover{transform:translateY(-3px);box-shadow:0 8px 0 #d9a940;background:#fff0a4}
+body.cham-site.cham-play-mode .cp-hero__links .cp-play-start:active{transform:translateY(3px);box-shadow:0 2px 0 #d9a940}
+body.cham-site.cham-play-mode .cp-hero__links .cp-quiet-link{color:#fff!important;border-bottom:2px solid #c4b9ff}
+body.cham-site.cham-play-mode .cp-hero__photo.cp4-hero-gallery{height:clamp(210px,25vw,330px)}
+body.cham-site.cham-play-mode .cp4-hero-gallery>span{
+ border:4px solid #fff8eb;border-radius:18px;box-shadow:0 8px 0 #29256a,0 19px 30px #1e195e66;
+}
+body.cham-site.cham-play-mode .cp4-hero-gallery__back{top:2%;right:1%;width:55%;height:63%;transform:rotate(10deg)}
+body.cham-site.cham-play-mode .cp4-hero-gallery__main{top:13%;left:1%;width:66%;height:79%;transform:rotate(-8deg)}
+body.cham-site.cham-play-mode .cp4-hero-gallery__front{right:0;bottom:0;width:47%;height:54%;transform:rotate(7deg)}
+body.cham-site.cham-play-mode .cp-summary{
+ background:#fff;border:1px solid #e0daf4;border-radius:20px;
+ box-shadow:0 5px 0 #e0daf4;margin-top:25px;margin-bottom:clamp(30px,4vw,52px);
+}
+body.cham-site.cham-play-mode .cp-summary>div strong{color:#4934a8;font-weight:850}
+body.cham-site.cham-play-mode .cp-summary>div span{color:#625e7d;font-weight:650}
+body.cham-site.cham-play-mode .cp-summary>div:first-child strong{color:#965b05}
+body.cham-site.cham-play-mode .cp-summary>div:first-child .cp-icon{filter:sepia(1) saturate(4)}
+body.cham-site.cham-play-mode .cp-summary>p{color:#625e7d;font-size:11px;border-left-color:#e2dcf2}
+body.cham-site.cham-play-mode .cp-games{scroll-margin-top:90px}
+body.cham-site.cham-play-mode .cp-section-head h2{color:#292344;font-weight:850;font-size:clamp(29px,3.5vw,48px);letter-spacing:-.05em}
+body.cham-site.cham-play-mode .cp-section-head>p{color:#625e7d}
+body.cham-site.cham-play-mode .cp-filter-row{gap:9px}
+body.cham-site.cham-play-mode .cp-filter{
+ min-height:40px;border:1px solid #d9d1f6;border-radius:13px;
+ background:#fff;color:#574c80;font-weight:750;box-shadow:0 3px 0 #ddd6f5;
+}
+body.cham-site.cham-play-mode .cp-filter.is-active{background:#6041c8;border-color:#6041c8;color:#fff;box-shadow:0 3px 0 #402a96}
+body.cham-site.cham-play-mode .cp-filter:hover:not(.is-active){background:#ece6ff}
+body.cham-site.cham-play-mode .cp-card{--game:#6c45ca;--game-deep:#4a2d9d;--game-light:#f2eaff}
+body.cham-site.cham-play-mode .cp-card--quiz{--game:#197dcc;--game-deep:#135ba1;--game-light:#e5f5ff}
+body.cham-site.cham-play-mode .cp-card--match{--game:#0b8a78;--game-deep:#086557;--game-light:#e5fbf3}
+body.cham-site.cham-play-mode .cp-card--word{--game:#b85c0e;--game-deep:#874109;--game-light:#fff0d9}
+body.cham-site.cham-play-mode .cp-card--speed{--game:#c13755;--game-deep:#8f2441;--game-light:#ffedf1}
+body.cham-site.cham-play-mode .cp3-card--pack{--game:#3458bb;--game-deep:#283f91;--game-light:#e9edff}
+body.cham-site.cham-play-mode .cp3-card--wheel{--game:#962d9c;--game-deep:#742078;--game-light:#fce9fb}
+body.cham-site.cham-play-mode .cp-card{
+ border:2px solid color-mix(in srgb,var(--game) 34%,white);
+ border-radius:21px;background:#fff;box-shadow:0 5px 0 color-mix(in srgb,var(--game) 32%,white);
+ transition:transform .24s cubic-bezier(.18,.9,.3,1.25),box-shadow .25s,border-color .25s;
+}
+body.cham-site.cham-play-mode .cp-card__media{background:var(--game)!important;aspect-ratio:16/10}
+body.cham-site.cham-play-mode .cp-card:first-child .cp-card__media{aspect-ratio:16/9}
+body.cham-site.cham-play-mode .cp-card__media>img{filter:none;object-fit:cover!important}
+body.cham-site.cham-play-mode .cp-card__content{background:linear-gradient(180deg,var(--game-light),#fff 78%);padding:clamp(14px,1.5vw,22px)}
+body.cham-site.cham-play-mode .cp-card__category{display:inline-flex;align-self:flex-start;background:#fff;color:var(--game-deep);padding:5px 9px;border-radius:9px;font-size:11px;font-weight:750;line-height:1.4}
+body.cham-site.cham-play-mode .cp-card__content>strong{font-weight:850;color:#292344;letter-spacing:-.04em}
+body.cham-site.cham-play-mode .cp-card__description{color:#625e7d;margin:7px 0 15px}
+body.cham-site.cham-play-mode .cp-card__bottom{border-top-color:var(--game-light);color:#625e7d}
+body.cham-site.cham-play-mode .cp-card__action,
+body.cham-site.cham-play-mode .cp-card:first-child .cp-card__action{
+ background:var(--game);color:#fff!important;border-radius:11px;
+ box-shadow:0 3px 0 var(--game-deep);min-height:38px;font-weight:850;
+ text-align:center;transition:background .2s,transform .2s,box-shadow .2s;
+}
+body.cham-site.cham-play-mode .cp-card__done{background:#c9f7d8;border-color:#73bd91;color:#235b3c;border-radius:999px;font-weight:750}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ body.cham-site.cham-play-mode .cp-card:hover,
+ body.cham-site.cham-play-mode .cp-card:focus-within{
+  transform:translateY(-6px) rotate(-.35deg);border-color:var(--game);box-shadow:0 10px 0 color-mix(in srgb,var(--game) 25%,white),0 15px 25px #40316b16
+ }
+ body.cham-site.cham-play-mode .cp-card:hover .cp-card__action{background:var(--game-deep)}
+ body.cham-site.cham-play-mode .cp-card:hover .cp-card__media>img{filter:none;transform:scale(1.045)}
+}
+body.cham-site.cham-play-mode .cp-card__open:active .cp-card__action{transform:translateY(2px);box-shadow:0 1px 0 var(--game-deep)}
+/* Quests and progress resemble achievement cards, rather than office statistics. */
+body.cham-site.cham-play-mode .cp3-dashboard{background:#fff;border:2px solid #ded8f3;border-radius:24px;box-shadow:0 6px 0 #ded8f3}
+body.cham-site.cham-play-mode .cp3-dashboard__top{background:linear-gradient(112deg,#e8deff,#dcecff)}
+body.cham-site.cham-play-mode .cp3-player h2{color:#4934a8;font-weight:850}
+body.cham-site.cham-play-mode .cp3-player>p:not(.cp-eyebrow),body.cham-site.cham-play-mode .cp3-daily span{color:#625e7d}
+body.cham-site.cham-play-mode .cp3-daily{border-color:#c5bce8}
+body.cham-site.cham-play-mode .cp3-daily strong{color:#4934a8;font-weight:850}
+body.cham-site.cham-play-mode .cp3-meter{background:#ded7f4;height:10px}
+body.cham-site.cham-play-mode .cp3-meter i{background:linear-gradient(90deg,#6848d0,#9276ee)}
+body.cham-site.cham-play-mode .cp3-mission{background:#f3efff;border-color:#e0d7f8;border-radius:15px}
+body.cham-site.cham-play-mode .cp3-mission__mark{background:#e1d7ff;border-radius:10px}
+body.cham-site.cham-play-mode .cp3-mission.is-done{background:#e1faed;border-color:#b5e9ce}
+body.cham-site.cham-play-mode .cp3-mission.is-done .cp3-mission__mark{background:#b5e9ce}
+body.cham-site.cham-play-mode .cp3-milestones{background:#fff;border-color:#e0d7f8}
+body.cham-site.cham-play-mode .cp3-badge{background:#f2effa;border-color:#e0d7f8;border-radius:15px}
+body.cham-site.cham-play-mode .cp3-badge>span{background:#ded5f2}
+body.cham-site.cham-play-mode .cp3-badge.is-earned{background:#fff3ce;border-color:#efce6a}
+body.cham-site.cham-play-mode .cp3-badge.is-earned>span{background:#ffdb68}
+body.cham-site.cham-play-mode .cp3-badge.is-locked{opacity:1;filter:saturate(.4)}
+body.cham-site.cham-play-mode .cp-foot{border-color:#ded8f3}
+/* Distinct game boards and tactile state changes. No change to scoring or timers. */
+body.cham-site.cham-play-mode .cp-session{--play-color:#6041c8;--play-deep:#432c96;--play-pale:#ede5ff; background:#f2eeff!important}
+body.cham-site.cham-play-mode .cp-session[data-cp-game-id="quiz"]{--play-color:#197dcc;--play-deep:#135ba1;--play-pale:#e3f5ff;background:#eaf7ff!important}
+body.cham-site.cham-play-mode .cp-session[data-cp-game-id="match"]{--play-color:#0b8a78;--play-deep:#086557;--play-pale:#dcf8ee;background:#e9fbf3!important}
+body.cham-site.cham-play-mode .cp-session[data-cp-game-id="word"]{--play-color:#b85c0e;--play-deep:#874109;--play-pale:#fff0d9;background:#fff7e5!important}
+body.cham-site.cham-play-mode .cp-session[data-cp-game-id="speed"]{--play-color:#c13755;--play-deep:#8f2441;--play-pale:#ffe8ee;background:#fff0f3!important}
+body.cham-site.cham-play-mode .cp-session[data-cp-game-id="pack"]{--play-color:#3458bb;--play-deep:#283f91;--play-pale:#e9edff;background:#eef1ff!important}
+body.cham-site.cham-play-mode .cp-session[data-cp-game-id="wheel"]{--play-color:#962d9c;--play-deep:#742078;--play-pale:#fce9fb;background:#fceefb!important}
+body.cham-site.cham-play-mode .cp-session .cp-session-header{border-bottom-color:color-mix(in srgb,var(--play-color) 25%,white)}
+body.cham-site.cham-play-mode .cp-session-copy>span{color:var(--play-deep);font-weight:800}
+body.cham-site.cham-play-mode .cp-session-copy h1{color:#292344;font-weight:850}
+body.cham-site.cham-play-mode .cp-session .cp-back{background:#fff;border:1px solid color-mix(in srgb,var(--play-color) 30%,white);border-radius:10px;color:var(--play-deep)!important;padding:8px 12px;box-shadow:0 3px 0 color-mix(in srgb,var(--play-color) 25%,white)}
+body.cham-site.cham-play-mode .cp-session-wallet strong{color:var(--play-deep);font-weight:850}
+body.cham-site.cham-play-mode .cp-session .cp3-hud{background:#fff;border-color:#ded8f3;border-radius:12px}
+body.cham-site.cham-play-mode .cp-session .cp-board{
+ border:2px solid color-mix(in srgb,var(--play-color) 32%,white);background:#fff;
+ border-radius:20px;box-shadow:0 5px 0 color-mix(in srgb,var(--play-color) 25%,white);
+}
+body.cham-site.cham-play-mode .cp-session .cp-progress{background:var(--play-pale);border-radius:999px}
+body.cham-site.cham-play-mode .cp-session .cp-progress>div{background:var(--play-color);border-radius:999px}
+body.cham-site.cham-play-mode .cp-session .cp4-game-banner,body.cham-site.cham-play-mode .cp-session .cp4-session-illustration{background:var(--play-pale);border-color:color-mix(in srgb,var(--play-color) 35%,white);border-radius:15px}
+body.cham-site.cham-play-mode .cp-session .cp-memory-cell{
+ background:repeating-linear-gradient(135deg,#ffffff15 0 2px,transparent 2px 14px),linear-gradient(145deg,#8866ed,#5d3cbd);
+ border:2px solid #4c2d9f;box-shadow:0 4px 0 #42298d;color:#fff;
+}
+body.cham-site.cham-play-mode .cp-session .cp4-memory-face-back{color:#fff0ae}
+body.cham-site.cham-play-mode .cp-session .cp4-memory-face-back small{color:#fff;letter-spacing:.14em}
+body.cham-site.cham-play-mode .cp-session .cp-memory-cell.is-revealed{background:#fff3cd;border-color:#dca645;color:#563b76;box-shadow:0 4px 0 #dca645}
+body.cham-site.cham-play-mode .cp-session .cp-memory-cell.is-matched{background:#d0f8de;border-color:#59b883;color:#235d3d;box-shadow:0 4px 0 #59b883}
+body.cham-site.cham-play-mode .cp-session .cp-memory-cell:hover:not(:disabled){box-shadow:0 4px 0 #42298d;filter:brightness(1.08)}
+body.cham-site.cham-play-mode .cp-session :is(.cp-option,.cp-match-option,.cp3-package){
+ border:1.5px solid color-mix(in srgb,var(--play-color) 38%,white);background:var(--play-pale);color:#292344;border-radius:12px;box-shadow:0 3px 0 color-mix(in srgb,var(--play-color) 27%,white);font-weight:650
+}
+body.cham-site.cham-play-mode .cp-session :is(.cp-option,.cp-match-option,.cp3-package):hover:not(:disabled){background:color-mix(in srgb,var(--play-color) 17%,white);border-color:var(--play-color)}
+body.cham-site.cham-play-mode .cp-session :is(.cp-option,.cp-match-option,.cp3-package).is-correct,
+body.cham-site.cham-play-mode .cp-session .cp-match-option.is-matched{background:#d2f9df;border-color:#59b883;color:#245b3c;box-shadow:0 3px 0 #9bdbb4}
+body.cham-site.cham-play-mode .cp-session .cp-option.is-wrong{background:#ffe0e8;border-color:#e16b88;color:#8b2948;box-shadow:0 3px 0 #edafbd}
+body.cham-site.cham-play-mode .cp-session :is(.cp-match-option,.cp3-package).is-selected{outline:2px solid var(--play-color);outline-offset:1px}
+body.cham-site.cham-play-mode .cp-session .cp-word-grid{background:#ffdea0;border:1px solid #e6b15f;box-shadow:0 4px 0 #e6b15f}
+body.cham-site.cham-play-mode .cp-session .cp-word-cell{background:#fff7e3;color:#784314;border:1px solid #e4b66d;box-shadow:0 2px 0 #e4b66d;border-radius:7px}
+body.cham-site.cham-play-mode .cp-session .cp-word-cell.is-selected{background:#ffce5c;border-color:#b85c0e}
+body.cham-site.cham-play-mode .cp-session .cp-word-cell.is-found{background:#d2f9df;border-color:#59b883;color:#245b3c}
+body.cham-site.cham-play-mode .cp-session :is(.cp-primary,.cp-secondary){border-radius:12px;font-weight:800}
+body.cham-site.cham-play-mode .cp-session .cp-primary{background:var(--play-color);border-color:var(--play-color);box-shadow:0 4px 0 var(--play-deep)}
+body.cham-site.cham-play-mode .cp-session .cp-secondary{background:#fff;border-color:var(--play-color);color:var(--play-deep)!important}
+body.cham-site.cham-play-mode .cp-session .cp-result{background:#fff;border:2px solid #ded8f3;box-shadow:0 6px 0 #ded8f3;border-radius:24px}
+body.cham-site.cham-play-mode .cp-result__symbol{background:#ffe482;border-color:#fff;box-shadow:0 5px 0 #ddb252}
+body.cham-site.cham-play-mode .cp3-stars span.is-full{color:#e6a217;text-shadow:0 2px #bf7911}
+body.cham-site.cham-play-mode .cp3-dialog{background:#fff;border:3px solid #ded5ff;border-radius:25px;box-shadow:0 8px 0 #4c329e,0 20px 60px #17124550}
+body.cham-site.cham-play-mode .cp3-dialog__art{background:#eee7ff}
+body.cham-site.cham-play-mode .cp3-dialog__text h2{color:#292344;font-weight:850}
+body.cham-site.cham-play-mode .cp3-dialog__text>.cp-primary{background:#6041c8;border-color:#6041c8;box-shadow:0 5px 0 #432c96;border-radius:13px}
+body.cham-site.cham-play-mode .cp3-dialog__close{border-color:#d5cafb;color:#4934a8;background:#fff}
+body.cham-site.cham-play-mode .cp3-mode label span{background:#f2eeff;border-color:#ded5ff;color:#4c329e}
+body.cham-site.cham-play-mode .cp3-mode input:checked+span{background:#dcd0ff;border-color:#6041c8;box-shadow:inset 0 0 0 1px #6041c8}
+@media(max-width:767px){
+ body.cham-site.cham-play-mode .cp-hub{padding-inline:12px}
+ body.cham-site.cham-play-mode .cp-hero{border-radius:21px;padding:23px 20px 13px;gap:7px}
+ body.cham-site.cham-play-mode .cp-hero h1{font-size:clamp(36px,10vw,52px);margin:12px 0}
+ body.cham-site.cham-play-mode .cp-hero__photo.cp4-hero-gallery{height:clamp(175px,50vw,235px);margin-top:10px}
+ body.cham-site.cham-play-mode .cp4-hero-gallery>span{border-width:3px;border-radius:13px}
+ body.cham-site.cham-play-mode .cp-hero__links{margin-top:15px}
+ body.cham-site.cham-play-mode .cp-summary{margin-top:20px;border-radius:15px}
+ body.cham-site.cham-play-mode .cp-summary>div strong{font-size:clamp(15px,5vw,23px)}
+ body.cham-site.cham-play-mode .cp-summary>div span{font-size:10px}
+ body.cham-site.cham-play-mode .cp-grid{gap:15px 10px!important}
+ body.cham-site.cham-play-mode .cp-card{border-radius:16px}
+ body.cham-site.cham-play-mode .cp-card__content{padding:10px}
+ body.cham-site.cham-play-mode .cp-card:first-child .cp-card__media{aspect-ratio:16/9}
+ body.cham-site.cham-play-mode .cp-card__category{font-size:9px;padding:4px 6px}
+ body.cham-site.cham-play-mode .cp-card__description{display:none}
+ body.cham-site.cham-play-mode .cp-card:first-child .cp-card__description{display:block}
+ body.cham-site.cham-play-mode .cp-card__bottom{padding-top:9px;gap:6px}
+ body.cham-site.cham-play-mode .cp-card__bottom>span:first-child{font-size:10px}
+ body.cham-site.cham-play-mode .cp-card__action{min-height:40px}
+ body.cham-site.cham-play-mode .cp-session .cp-back{padding:5px 7px}
+ body.cham-site.cham-play-mode .cp-session .cp-board{border-radius:14px}
+}
+@media(prefers-reduced-motion:no-preference){
+ body.cham-site.cham-play-mode .cp-hero__copy{animation:cpArcadeEnter .55s cubic-bezier(.2,.75,.2,1) both}
+ body.cham-site.cham-play-mode .cp-hero__photo{animation:cpArcadeEnter .65s .1s cubic-bezier(.2,.75,.2,1) both}
+ @keyframes cpArcadeEnter{from{opacity:0;translate:0 12px}to{opacity:1;translate:0 0}}
+ body.cham-site.cham-play-mode .cp3-stars span.is-full{animation:cpArcadeStar .4s cubic-bezier(.15,.9,.3,1.4) both}
+ body.cham-site.cham-play-mode .cp3-stars span:nth-child(2){animation-delay:90ms}
+ body.cham-site.cham-play-mode .cp3-stars span:nth-child(3){animation-delay:180ms}
+ @keyframes cpArcadeStar{from{scale:.55;opacity:.4}to{scale:1;opacity:1}}
+}
+@media(prefers-reduced-motion:reduce){
+ body.cham-site.cham-play-mode .cp-app *,body.cham-site.cham-play-mode .cp3-dialog *{animation:none!important;transition:none!important}
+}
+
+/* Keep the featured game prominent without stretching the adjacent cards. */
+@media(min-width:768px){
+ body.cham-site.cham-play-mode .cp-grid{grid-auto-rows:auto}
+ body.cham-site.cham-play-mode .cp-card:first-child .cp-card__open{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:stretch}
+ body.cham-site.cham-play-mode .cp-card:first-child .cp-card__media{height:100%!important;aspect-ratio:auto;min-height:235px!important}
+ body.cham-site.cham-play-mode .cp-card:first-child .cp-card__media>img{position:absolute;inset:0;object-fit:contain!important}
+ body.cham-site.cham-play-mode .cp-card:first-child .cp-card__content{justify-content:center;min-width:0}
+ body.cham-site.cham-play-mode .cp-card:first-child .cp-card__bottom{margin-top:12px}
+ body.cham-site.cham-play-mode .cp-card:first-child .cp-card__content>strong{font-size:clamp(19px,2.1vw,30px)}
+}
+body.cham-site.cham-play-mode .cp-session .cp-option>span{display:inline-grid;place-items:center;flex:none;border-radius:8px;background:var(--play-color);color:white;border:0;font-weight:850;min-width:29px;min-height:29px}
+body.cham-site.cham-play-mode .cp-session .cp-option.is-correct>span{background:#25724a}
+body.cham-site.cham-play-mode .cp-session .cp-option.is-wrong>span{background:#b63c60}
+body.cham-site.cham-play-mode .cp-session .cp-clock{background:#ffe0e8;color:#a22247;border-radius:999px;padding:5px 9px;font-weight:850}
+body.cham-site.cham-play-mode .cp-session .cp-timebar{background:#ffe0e8}
+body.cham-site.cham-play-mode .cp-session .cp-timebar>span{background:#ed5574}
+body.cham-site.cham-play-mode .cp-session .cp3-wheel-disc{background:conic-gradient(#ffe272 0 60deg,#f7b4cd 60deg 120deg,#87e6c8 120deg 180deg,#b2a2ff 180deg 240deg,#ffb476 240deg 300deg,#cce6ff 300deg);border-color:#884091}
+body.cham-site.cham-play-mode .cp-session .cp3-wheel-disc>span{color:#302344;font-weight:800}
+body.cham-site.cham-play-mode .cp-session .cp3-parcel{background:#fff2cf;border-radius:16px;border-color:#e8c77c}
+body.cham-site.cham-play-mode .cp-session .cp-feedback{background:#f4f2ff;border-color:#ddd6f6;border-radius:13px}
+body.cham-site.cham-play-mode .cp-app :is(button,a):focus-visible{outline-color:#5036b2!important}
+body.cham-site.cham-play-mode .cp-hero :is(button,a):focus-visible{outline-color:#ffe482!important}
+
+/* Override legacy fixed-session paper background with the individual game palette. */
+body.cham-site.cham-play-mode .cp-app.cp-session{
+ background:radial-gradient(circle at 90% 10%,#fff9,transparent 38%),var(--play-pale)!important;
+}
+body.cham-site.cham-play-mode .cp-session .cp-aside,
+body.cham-site.cham-play-mode .cp-session .cp3-side{
+ background:#fff;border-color:color-mix(in srgb,var(--play-color) 23%,white);border-radius:15px
+}
+@media(max-width:767px){
+ body.cham-site.cham-play-mode .cp-summary{grid-template-columns:repeat(3,minmax(0,1fr));gap:0 6px;padding:0 10px}
+ body.cham-site.cham-play-mode .cp-summary>div{padding:12px 0 8px;min-width:0}
+ body.cham-site.cham-play-mode .cp-summary>div strong{font-size:clamp(13px,4.1vw,20px);overflow-wrap:normal}
+ body.cham-site.cham-play-mode .cp-summary>p{grid-column:1/-1;border-left:0;border-top:1px solid #e2dcf2;padding:8px 0 10px;margin:0;font-size:10px;line-height:1.5}
+}

@@ -66,7 +66,7 @@ function mount(root,core){
     '<span class="cp-card__media">'+img(id)+'<span class="cp-card__level">'+(gift?'Mỗi ngày':'Mới')+'</span></span>'+
     '<span class="cp-card__content"><span class="cp-card__category">'+escape(g.tag)+' · '+escape(g.time)+'</span>'+
     '<strong>'+escape(names[id])+'</strong><span class="cp-card__description">'+escape(g.description)+'</span>'+
-    '<span class="cp-card__bottom"><span>'+(gift?'Huy hiệu demo':'4 lượt lựa chọn')+'</span><span class="cp-card__action">Khám phá</span></span></span>'+
+    '<span class="cp-card__bottom"><span>'+(gift?'Huy hiệu demo':'4 lượt lựa chọn')+'</span><span class="cp-card__action">'+(gift?'Xem quà':'Chơi ngay')+'</span></span></span>'+
     '</button></article>';
  }
  function lobby(){
@@ -78,12 +78,12 @@ function mount(root,core){
    dashboard.className='cp3-dashboard';dashboard.setAttribute('aria-label','Tiến trình CHẠM Play');
    dashboard.innerHTML=
     '<div class="cp3-dashboard__top"><div class="cp3-player">'+
-      '<p class="cp-eyebrow">Hồ sơ khám phá · Chỉ lưu trên thiết bị</p>'+
+      '<p class="cp-eyebrow">Cấp độ của bạn</p>'+
       '<h2>'+escape(s.level.name)+'</h2><p>'+s.xp+' XP · '+s.stars+' sao · '+s.streak+' ngày khám phá liên tiếp</p>'+
       '<div class="cp3-meter" aria-label="Tiến trình cấp độ"><i style="width:'+(s.level.progress*100).toFixed(2)+'%"></i></div>'+
       '</div><div class="cp3-daily"><p class="cp-eyebrow">Nhiệm vụ hôm nay</p>'+
       '<strong>'+s.missions.filter(q=>q.done).length+' / '+s.missions.length+'</strong>'+
-      '<span>Hoàn thành để mở quà sưu tầm demo</span></div></div>'+
+      '<span>Hoàn thành nhiệm vụ để mở huy hiệu demo</span></div></div>'+
     '<div class="cp3-missions">'+missionHTML()+'</div>'+
     '<div class="cp3-milestones"><h3>Huy hiệu của bạn</h3><div class="cp3-badge-grid">'+badgesHTML(meta.badges)+'</div></div>';
    summary.insertAdjacentElement('afterend',dashboard);
@@ -104,7 +104,7 @@ function mount(root,core){
   const count=hub.querySelector('.cp-summary>div:nth-child(2) strong');
   if(count)count.textContent=s.completed.length+' / 7';
   const header=hub.querySelector('.cp-section-head h2');
-  if(header)header.textContent='Bảy trải nghiệm dành cho bạn';
+  if(header)header.textContent='Chọn game yêu thích';
  }
  function removePanel(){
   panel?.remove();panel=null;

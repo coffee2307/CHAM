@@ -108,7 +108,7 @@ const waitReady=async page=>page.locator('.cp-card').first().waitFor({timeout:15
     await page.locator('[data-cp-game="'+game+'"]').click();
     await page.locator('[data-v3-begin="'+game+'"]').click();
     const banner=page.locator('.cp4-game-banner img');
-    await banner.waitFor();
+    await banner.waitFor({state:'attached'});
     assert.ok((await banner.getAttribute('src')).endsWith('.webp'),'in-game artwork must use WebP '+game);
     const board=page.locator('.cp-board');await board.waitFor();
     const m=await board.evaluate(el=>({right:el.getBoundingClientRect().right,overflow:document.documentElement.scrollWidth-innerWidth,board:el.scrollWidth-el.clientWidth}));
