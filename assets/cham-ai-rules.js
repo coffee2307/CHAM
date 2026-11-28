@@ -10,7 +10,7 @@
  const domain=/\b(?:cham|chamstore|san pham|cua hang|mua|dat hang|don hang|don demo|gio hang|thanh toan|giao hang|van chuyen|doi tra|hoan tien|lien he|bao hanh|gia|ngan sach|ton kho|qua tang|goi qua|thiep|khac ten|ca nhan hoa|bo suu tap|xo dua|non la|hoa sen|trong dong|ao dai|gom|tre may|luc binh|co bang|coi|go|tham|de lot ly|cha got chan|bong meo|do choi|thu cung|lang nghe|cham play|diem|voucher|tro choi|tet|trung thu|tri an)\b/;
  const follow=/^(?:con (?:cai|mau|loai|mon|bo) (?:nay|kia|do)|bao nhieu(?: tien)?|gia bao nhieu|co mau khac khong|co khac ten khong|co re hon khong|cai nao|loai nao|mau nao|cho toi xem|noi ro hon|them vai mau|duoc khong|tai sao)[?!. ]*$/;
  const faqs=[
-  [/^(?:xin chao|chao|hello|hi|hey|chao ban)[!?. ]*$/,'Chào bạn, Chammy đây. Bạn cần Chammy giúp gì ạ?'],
+  [/^(?:xin chao|chao|hello|hi|hey|chao ban)[!?. ]*$/,'Bạn cứ xem đồ thoải mái nha. Cần gì thì nhắn Chammy nè.'],
   [/^(?:cam on|cam on ban|thank you|thanks)[!?. ]*$/,'Dạ, Chammy cảm ơn bạn đã ghé CHẠM nha! Tôi luôn sẵn sàng hỗ trợ các câu hỏi về cửa hàng.'],
   [/^(?:(?:cham|cham store) la gi|gioi thieu (?:ve )?cham|cham ban gi|cham co gi)[?!. ]*$/,'CHẠM là dự án trình diễn về sản phẩm thủ công từ tài nguyên bản địa Việt Nam. Xơ dừa là dòng sản phẩm đầu tiên, bên cạnh gốm, tre mây, lục bình, cỏ và gỗ. Xem '+site+'/collections/all'],
   [/^(?:(?:cham )?co ban that khong|(?:cham )?co giao hang (?:that )?khong|(?:cham )?co thanh toan that khong|(?:cham )?co nhan don that khong|(?:cham )?co ship khong|(?:cham )?co cod khong)[?!. ]*$/,'CHẠM hiện là website trình diễn. Đơn hàng, thanh toán, vận chuyển và điểm thưởng chỉ là mô phỏng; không thu tiền hoặc giao hàng thật.'],
@@ -24,14 +24,11 @@
   [/^(?:cach doi tra|chinh sach doi tra|bao hanh nhu the nao|chinh sach giao hang|phi van chuyen bao nhieu)[?!. ]*$/,'CHẠM hiện chưa có giao dịch thật nên chưa thể xác nhận phí vận chuyển, đổi trả hoặc bảo hành thương mại. Bạn có thể liên hệ '+site+'/pages/contact để tìm hiểu thêm.']
  ];
  function voice(answer){
-  let questions=0;
   return String(answer??'').split(/(https?:\/\/[^\s<>()\]]+)/gi).map(part=>{
    if(/^https?:\/\//i.test(part))return part;
    return part
     .replace(/(?<![\p{L}\p{M}])(?:chúng tôi|tôi|tớ|mình)(?![\p{L}\p{M}])/giu,'Chammy')
-    .replace(/!+(?=\s|$)/g,'.')
-    .replace(/\?{2,}/g,'?')
-    .replace(/\?(?=\s|$)/g,()=>++questions===1?'?':'.')
+    .replace(/[!?]+/g,'.')
     .replace(/(?:\.{2,})(?=\s|$)/g,'.')
     .replace(/([.!?])\s+([.!?])/g,'$1')
     .replace(/[ \t]+([.,?!])/g,'$1');

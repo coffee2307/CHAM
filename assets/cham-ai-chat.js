@@ -3,15 +3,15 @@
  const launch=root.querySelector('.cham-ai-launch'),panel=root.querySelector('.cham-ai-window'),log=root.querySelector('.cham-ai-log'),form=root.querySelector('form'),input=form.querySelector('textarea'),send=form.querySelector('button'),share=root.querySelector('[data-chat-orders]');
  const rules=window.CHAMAI_RULES;const status=root.querySelector('.cham-ai-window header small');if(!aiConfigured&&status)status.textContent='Hỗ trợ cơ bản · AI chưa kết nối';const note=root.querySelector('.cham-ai-note');if(!aiConfigured&&note)note.textContent='Chế độ FAQ và tra cứu demo. AI tạo sinh chưa được kích hoạt. Không nhập dữ liệu nhạy cảm.';const greeting=log.firstElementChild.textContent;let history=[],busy=false,shareOrders=false;
  const unreadBadge=launch.querySelector('[data-chammy-unread]');
- let unread=0,greetingUnread=false;
- try{greetingUnread=sessionStorage.getItem('chammy.greeting-unread.v1')==='1';}catch{}
+ let unread=0,greetingUnread=true;
+ try{greetingUnread=sessionStorage.getItem('chammy.greeting-unread.v2')!=='0';}catch{}
  function updateUnread(){
   const count=unread+(greetingUnread?1:0);
   if(unreadBadge){unreadBadge.hidden=count===0;unreadBadge.textContent=count>99?'99+':String(count);}
   launch.setAttribute('aria-label',count?'Mở Chammy, '+count+' tin nhắn chưa đọc':'Mở Chammy');
   launch.classList.toggle('chammy-has-unread',count>0);
  }
- function markGreeting(value){greetingUnread=value;try{sessionStorage.setItem('chammy.greeting-unread.v1',value?'1':'0');}catch{}updateUnread();}
+ function markGreeting(value){greetingUnread=value;try{sessionStorage.setItem('chammy.greeting-unread.v2',value?'1':'0');}catch{}updateUnread();}
  function markReply(){if(!desiredOpen){unread++;updateUnread();if(unreadBadge&&!matchMedia('(prefers-reduced-motion: reduce)').matches)unreadBadge.animate?.([{transform:'scale(.75)'},{transform:'scale(1.13)'},{transform:'scale(1)'}],{duration:240,easing:'ease-out'});}}
  function readAll(){unread=0;markGreeting(false);}
  const make=(tag,cls,text)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=String(text);return el;};
@@ -105,16 +105,16 @@
  root.hidden=false;updateUnread();
  const welcome=root.querySelector('[data-chammy-welcome]');
  if(welcome){
-  let seen=false;try{seen=sessionStorage.getItem('chammy.welcome.v1')==='1';}catch{}
+  let seen=false;try{seen=sessionStorage.getItem('chammy.welcome.v2')==='1';}catch{}
   let showTimer=0,hideTimer=0;
-  const remember=()=>{try{sessionStorage.setItem('chammy.welcome.v1','1');}catch{}};
+  const remember=()=>{try{sessionStorage.setItem('chammy.welcome.v2','1');}catch{}};
   const dismiss=()=>{clearTimeout(showTimer);clearTimeout(hideTimer);welcome.hidden=true;remember();};
   welcome.querySelector('[data-chammy-dismiss]').addEventListener('click',dismiss);
   welcome.querySelector('[data-chammy-start]').addEventListener('click',()=>{dismiss();toggle(true);});
   launch.addEventListener('click',dismiss);
   if(!seen&&!document.body.classList.contains('cham-play-mode')&&!location.pathname.includes('checkout'))showTimer=setTimeout(()=>{
    if(desiredOpen||document.hidden||document.documentElement.classList.contains('cp-viewport-lock'))return;
-   welcome.hidden=false;markGreeting(true);remember();hideTimer=setTimeout(()=>{welcome.hidden=true;},14000);
+   welcome.hidden=false;remember();hideTimer=setTimeout(()=>{welcome.hidden=true;},14000);
   },1300);
  }
 })();

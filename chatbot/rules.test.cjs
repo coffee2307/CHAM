@@ -14,5 +14,5 @@ test('fallback FAQ',()=>assert.equal(R.fallback('CHẠM là gì?'),R.classify('C
 
 test('Chammy natural voice preserves URL and limits punctuation',()=>{
  const result=R.voice('Tôi tìm được rồi!!! Bạn muốn xem không?? Cần thêm gì? https://chamstore.site/products/mieng-cha-got-chan');
- assert.equal(result,'Chammy tìm được rồi. Bạn muốn xem không? Cần thêm gì. https://chamstore.site/products/mieng-cha-got-chan');
+ assert.equal(result,'Chammy tìm được rồi. Bạn muốn xem không. Cần thêm gì. https://chamstore.site/products/mieng-cha-got-chan');
 });
