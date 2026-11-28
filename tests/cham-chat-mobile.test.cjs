@@ -9,7 +9,8 @@ const server=http.createServer((req,res)=>{if(req.url==='/'){res.setHeader('Cont
 for(const [width,height] of [[320,568],[390,844],[430,932],[844,390],[1440,900]]){
  const context=await browser.newContext({viewport:{width,height},hasTouch:width<1000,isMobile:width<1000,deviceScaleFactor:1});
  const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('http://127.0.0.1:'+server.address().port,{waitUntil:'domcontentloaded'});
- const launch=page.locator('.cham-ai-launch');await launch.click();
+ const launch=page.locator('.cham-ai-launch');await launch.click();await page.waitForTimeout(300);
+ assert.equal(await page.locator('.cham-ai-window').evaluate(e=>e.getAnimations().length),0);
  const isMobile=width<=700||(height<=500&&width<1000);
  if(isMobile){assert.equal(await page.locator('#ChamAIInput').evaluate(e=>e===document.activeElement),false);assert.equal(await page.locator('#MainContent').evaluate(e=>e.inert),true);}
  await page.locator('#ChamAIInput').fill('CHAM la gi?');await page.locator('.cham-ai-form button').click();await page.locator('.cham-ai-message').nth(2).waitFor();
@@ -20,8 +21,8 @@ for(const [width,height] of [[320,568],[390,844],[430,932],[844,390],[1440,900]]
   await page.waitForTimeout(100);
   const m=await page.evaluate(()=>{const v=visualViewport;const b=document.querySelector('.cham-ai-form button').getBoundingClientRect();const t=document.querySelector('#ChamAIInput').getBoundingClientRect();const log=document.querySelector('.cham-ai-log').getBoundingClientRect();return {top:v.offsetTop,bottom:v.offsetTop+v.height,send:b.bottom,input:t.bottom,log:log.height};});
   assert(m.send<=m.bottom+1&&m.input<=m.bottom+1&&m.log>0,JSON.stringify(m));
-  await page.locator('[data-chat-close]').click();assert.equal(await page.locator('#MainContent').evaluate(e=>e.inert),false);assert.equal(await page.evaluate(()=>document.body.classList.contains('cham-chat-lock')),false);
- }else await page.locator('[data-chat-close]').click();
+  await page.locator('[data-chat-close]').click();await page.locator('.cham-ai-window').waitFor({state:'hidden'});assert.equal(await page.locator('#MainContent').evaluate(e=>e.inert),false);assert.equal(await page.evaluate(()=>document.body.classList.contains('cham-chat-lock')),false);
+ }else {await page.locator('[data-chat-close]').click();await page.locator('.cham-ai-window').waitFor({state:'hidden'});}
  await page.locator('.cham-photo-ready').waitFor({state:'attached',timeout:6000});
  assert.equal(await page.locator('.cham-vietnam-photo img').evaluate(e=>e.complete&&e.naturalWidth>0&&!e.classList.contains('cham-photo-wait')),true);
  assert.deepEqual(errors,[]);console.log('PASS',width,height,isMobile?'keyboard simulation':'desktop','photo decode');await context.close();

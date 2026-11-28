@@ -45,3 +45,10 @@ body.cham-site .cham-ai-mobile-open .cham-ai-window{position:absolute!important;
 .cham-ai-mobile-open.cham-ai-keyboard .cham-ai-window header{padding-top:4px;padding-bottom:4px}
 .cham-ai-mobile-open.cham-ai-keyboard .cham-ai-log{padding:10px 12px}
 @media(prefers-reduced-motion:reduce){.cham-ai-window{scroll-behavior:auto}}
+
+/* Modal animation is compositor-only and does not animate keyboard geometry. */
+body.cham-site .cham-ai.cham-ai-mobile-open{background:transparent}
+body.cham-site .cham-ai-window{transform-origin:bottom right;transition:none!important}
+body.cham-site .cham-ai-mobile-open .cham-ai-window{transform-origin:center bottom}
+body.cham-site .cham-ai-window[aria-modal=true]{overscroll-behavior:contain}
+html.cham-chat-lock{scroll-behavior:auto!important}

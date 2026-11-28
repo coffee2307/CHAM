@@ -81,7 +81,7 @@ const setupScroll=()=>{
  process.classList.add('is-enhanced');
  let mobileCleanup=null;
  const context=gsap.context(()=>{
-  if(hero){
+  if(hero&&window.matchMedia('(min-width: 768px) and (pointer: fine)').matches){
     gsap.to($('.cham6-hero__title',hero),{y:-66,scale:.96,ease:'none',scrollTrigger:{trigger:hero,start:'top top',end:'bottom top',scrub:.75}});
     $$('.cham6-hero__print',hero).forEach((el,i)=>{
       gsap.to(el,{y:(i%2===0?-37:24),ease:'none',scrollTrigger:{trigger:hero,start:'top top',end:'bottom top',scrub:.9}});
@@ -103,17 +103,18 @@ const setupScroll=()=>{
     tl.fromTo(watchOverlay,{opacity:0},{opacity:1,ease:'none',duration:.24},.70);
   }
   if(distance()>0){
+    let lastNumber=0,lastBar='';
     const onUpdate=self=>{
-      if(progress)progress.style.transform='scaleX('+Math.max(.005,self.progress).toFixed(4)+')';
+      const bar=Math.max(.005,self.progress).toFixed(4);
+      if(progress&&bar!==lastBar){progress.style.transform='scaleX('+bar+')';lastBar=bar;}
       const number=Math.max(1,Math.min(steps.length,Math.floor(self.progress*(steps.length-1)+.48)+1));
-      if(counter)counter.textContent=String(number);
-      steps.forEach((panel,index)=>panel.classList.toggle('cham8-scene--active',index===number-1));
+      if(number!==lastNumber){lastNumber=number;if(counter)counter.textContent=String(number);steps.forEach((panel,index)=>panel.classList.toggle('cham8-scene--active',index===number-1));}
     };
     // Entire viewport range: the browser owns the vertical scroll and sticky
     // placement. No ScrollTrigger.pin, refresh-induced height writes or scrub
     // easing at the exact boundary between vertical and horizontal movement.
     process.classList.add('is-native-sticky');
-    let width=window.innerWidth, height=window.innerHeight, span=0, tick=0, disposed=false;
+    let width=window.innerWidth, height=window.innerHeight, span=0, tick=0, disposed=false,lastX=NaN;
     const measureNative=()=>{
       span=Math.max(0,track.scrollWidth-viewport.clientWidth);
       const fixedHeight=Math.ceil(pin.offsetHeight+span);
@@ -122,9 +123,10 @@ const setupScroll=()=>{
     };
     const renderNative=()=>{
       tick=0;
-      if(disposed)return;
+      if(disposed||document.hidden||document.documentElement.classList.contains('cham-chat-lock'))return;
       const distanceTraveled=Math.max(0,Math.min(span,-process.getBoundingClientRect().top));
       const p=span?distanceTraveled/span:0;
+      if(Math.abs(distanceTraveled-lastX)<.1)return;lastX=distanceTraveled;
       track.style.transform='translate3d('+(-distanceTraveled).toFixed(2)+'px,0,0)';
       onUpdate({progress:p});
       // Reuse this exact frame for reversible photo reveals; no second scroll handler.
@@ -133,6 +135,7 @@ const setupScroll=()=>{
     const queueNative=()=>{if(!tick&&!disposed)tick=requestAnimationFrame(renderNative);};
     const onViewportResize=()=>{
       // Ignore mobile URL-bar height changes; a desktop window resize is real.
+      if(document.documentElement.classList.contains('cham-chat-lock'))return;
       const nextWidth=window.innerWidth,nextHeight=window.innerHeight;
       if(Math.abs(nextWidth-width)>=3 || (nextWidth>=768&&Math.abs(nextHeight-height)>=3)){
         width=nextWidth;height=nextHeight;
@@ -163,7 +166,7 @@ const setupScroll=()=>{
 };
 mm.add('(max-width:767px) and (prefers-reduced-motion:no-preference)',setupScroll);
 mm.add('(min-width:768px) and (prefers-reduced-motion:no-preference)',setupScroll);
-const refresh=()=>{if(window.innerWidth<768)return;cancelAnimationFrame(refreshRAF);refreshRAF=requestAnimationFrame(()=>{measure();ScrollTrigger.refresh();});};
+const refresh=()=>{if(window.innerWidth<768||document.documentElement.classList.contains('cham-chat-lock'))return;cancelAnimationFrame(refreshRAF);refreshRAF=requestAnimationFrame(()=>{measure();ScrollTrigger.refresh();});};
 window.addEventListener('load',refresh,{once:true});
 document.fonts?.ready.then(refresh).catch(()=>{});
 if(window.innerWidth>=768&&header&&'ResizeObserver'in window)new ResizeObserver(refresh).observe(header);
@@ -178,7 +181,7 @@ if(!window.gsap||!window.ScrollTrigger)return;
 const gsap=window.gsap,ScrollTrigger=window.ScrollTrigger;
 gsap.registerPlugin(ScrollTrigger);
 const mm=gsap.matchMedia();
-mm.add('(prefers-reduced-motion: no-preference)',()=>{
+mm.add('(min-width: 768px) and (pointer: fine) and (prefers-reduced-motion: no-preference)',()=>{
  const ctx=gsap.context(()=>{
   const scroll=(trigger,start='top 84%',end='top 40%')=>({
     trigger,start,end,scrub:.85,invalidateOnRefresh:true
@@ -239,31 +242,7 @@ mm.add('(prefers-reduced-motion: no-preference)',()=>{
      });
    }
   }
-  // Let product photography reveal the catalog; do not animate interactive
-  // cards while users are actively trying to select a product.
-  for(const [containerSelector,itemSelector,start,end,shift] of [
-   ['.cham5-categories__grid','.cham5-category','top 91%','top 43%',38],
-   ['.cham5-products__grid','.cham5-product','top 92%','top 39%',34],
-   ['.cham5-further','.cham5-further a','top 86%','top 32%',17]
-  ]){
-   const container=document.querySelector(containerSelector);
-   if(!container)continue;
-   const items=[...container.querySelectorAll(itemSelector)];
-   if(!items.length)continue;
-   gsap.fromTo(items,{y:shift,opacity:.80},{
-     y:0,opacity:1,stagger:.13,ease:'none',immediateRender:false,
-     scrollTrigger:scroll(container,start,end)
-   });
-   // A shallow photo mask follows the same chapter progress. Interactive cards
-   // remain in place; only the images are uncovered as the layout enters view.
-   if(itemSelector!=='.cham5-further a'){
-     const photoFrames=items.map(x=>x.querySelector('.cham5-category__image,.cham5-product__image')).filter(Boolean);
-     gsap.fromTo(photoFrames,{clipPath:'inset(0% 0% 13% 0%)'},{
-       clipPath:'inset(0% 0% 0% 0%)',ease:'none',stagger:.13,
-       immediateRender:false,scrollTrigger:scroll(container,start,end)
-     });
-   }
-  }
+  // Catalog cards stay stationary. Their photos use the shared decode fade, not a second scroll mask.
   // Closing exhibition panel gradually darkens as the visitor reaches it.
   const ending=document.querySelector('.cham5-end');
   if(ending){

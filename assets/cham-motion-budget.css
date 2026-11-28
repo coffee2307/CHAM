@@ -1,0 +1,14 @@
+
+/* Keep small interactive transitions; avoid expensive filters on touch and competing scroll effects. */
+@media (hover:none),(pointer:coarse){
+ body.cham-site :is(.cham-mobile-bottom,.cham-header,.cham-button--soft,.cham-hero__featured-label){backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+ body.cham-site .cham-mobile-bottom{background:#fffdf8}
+ body.cham-site :is(.cham5-category,.cham5-product,.cham-category-photo-card,.cham-shop-card){transform:none!important}
+ body.cham-site .cham8-scene [data-cham8-reveal]{clip-path:none!important;will-change:auto!important}
+ body.cham-site .cham8-scene [data-cham8-reveal] img{transform:none!important;will-change:auto!important}
+ body.cham-site :is(.cham6-hero__title,.cham6-hero__print,.cham5-bridge__small){will-change:auto!important}
+}
+@media(prefers-reduced-motion:reduce){
+ body.cham-site :is(.cham-ai-window,.cham-ai-launch,.cham-mobile-nav__panel,.cham-photo-ready){animation:none!important;transition:none!important}
+ html{scroll-behavior:auto!important}
+}

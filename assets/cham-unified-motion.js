@@ -5,6 +5,8 @@
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   if(reduced.matches)return;
   const isHome=document.body.classList.contains('cham5-home');
+  // Home has its own scroll clock. Touch layouts avoid per-frame reveal writes.
+  if(isHome||matchMedia('(pointer: coarse)').matches)return;
   const isPlay=document.body.classList.contains('cham-play-mode');
   const selector=isPlay?
     '.cp-hub .cp-hero__copy,.cp-hub .cp-section-head,.cp-hub .cp-foot':
@@ -37,7 +39,7 @@
   const clamp=n=>Math.max(0,Math.min(1,n));
   function update(){
     pending=false;
-    if(!active)return;
+    if(!active||document.hidden||document.documentElement.classList.contains('cham-chat-lock'))return;
     const h=window.innerHeight||800;
     for(const el of elements){
       if(!el.isConnected)continue;

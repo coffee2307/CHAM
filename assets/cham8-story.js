@@ -18,7 +18,7 @@
       delay:Math.max(0,Math.min(.4,Number.parseFloat(figure.getAttribute('data-cham8-delay')||'0')||0))
     }))
   );
-  const enabled=()=>!reduced.matches;
+  const enabled=()=>!reduced.matches&&!mobile.matches;
   let lastProgress=0;
   function mask(direction,p,small){
     const t=ease(p);
@@ -40,7 +40,7 @@
   }
   function draw(progress){
     lastProgress=clamp(progress);
-    if(!enabled()){reset();return;}
+    if(!enabled()){if(root.classList.contains('cham13-reversible'))reset();return;}
     root.classList.add('cham13-reversible');
     const position=lastProgress*(stages.length-1);
     const small=mobile.matches;
@@ -80,7 +80,7 @@
     const hero=document.querySelector('.cham9-hero');
     if(hero){
       const mq=window.gsap.matchMedia();
-      mq.add('(prefers-reduced-motion: no-preference)',()=>{
+      mq.add('(min-width: 768px) and (pointer: fine) and (prefers-reduced-motion: no-preference)',()=>{
         const ctx=window.gsap.context(()=>{
           const arts=[...hero.querySelectorAll('.cham9-hero__art')];
           arts.forEach((art,i)=>window.gsap.fromTo(art,{y:0},{
