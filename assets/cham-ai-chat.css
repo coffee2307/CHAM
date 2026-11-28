@@ -121,3 +121,10 @@ body.cham-site .chammy-welcome-text span[data-chammy-preview]{display:-webkit-bo
 /* Compact conversational rhythm; product cards keep their own spacing. */
 body.cham-site .cham-ai-message{line-height:1.45}
 body.cham-site .chammy-reply{white-space:pre-line;line-height:1.45;min-height:0}
+
+/* The desktop launcher and panel occupy the same anchored corner. Keep the
+   launcher footprint until closing ends so the panel never jumps mid-animation. */
+body.cham-site .cham-ai.chammy-panel-open .cham-ai-launch{visibility:hidden;pointer-events:none}
+body.cham-site .cham-ai.chammy-panel-open:not(.cham-ai-mobile-open) .cham-ai-window{bottom:0}
+body.cham-site .chammy-product-copy strong,body.cham-site .chammy-reply strong,body.cham-site .chammy-product-name{font-weight:700}
+body.cham-site .chammy-product .chammy-price,body.cham-site .chammy-inline-price{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}

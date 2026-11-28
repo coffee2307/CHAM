@@ -30,9 +30,20 @@
  const end=()=>{if(log.scrollHeight-log.scrollTop-log.clientHeight<180)log.scrollTop=log.scrollHeight;};
  const add=(text,kind='')=>{const n=make('div','cham-ai-message '+kind,kind==='user'?text:rules?.voice(text)??text);log.append(n);log.scrollTop=log.scrollHeight;if(text&&kind!=='user'&&kind!=='chammy-thinking')markReply(n.textContent);return n;};
  const productPath=/(?:https:\/\/(?:www\.)?chamstore\.site\/|https:\/\/5yvv8u-44\.myshopify\.com\/|(?<![\w/])\/)(products\/[a-z0-9-]{1,120})(?:\/)?(?:\?[^\s<>()\]]*)?/gi;
- const format=(node,text)=>{
-  node.replaceChildren();const parts=String(text).split(/(\*\*[^*\n]+\*\*|\*[^*\n]+\*|https:\/\/chamstore\.site\/[A-Za-z0-9%_\-/]+)/g);
-  for(const part of parts){if(/^https:\/\/chamstore\.site\//.test(part)){const a=make('a','chammy-link',part.includes('/products/')?'Xem sản phẩm':part.includes('/collections/')?'Xem bộ sưu tập':part.includes('cham-play')?'Mở CHẠM Play':'Xem tại CHẠM');a.href=part;node.append(a);}else if(part.startsWith('**')&&part.endsWith('**'))node.append(make('strong','',part.slice(2,-2)));else if(part.startsWith('*')&&part.endsWith('*'))node.append(make('em','',part.slice(1,-1)));else node.append(document.createTextNode(part));}
+ const format=(node,text,titles=[])=>{
+  node.replaceChildren();
+  const names=[...new Set(titles.filter(x=>typeof x==='string'&&x.trim()).map(x=>x.trim()))].sort((a,b)=>b.length-a.length);
+  const escapeRegex=x=>x.replace(/[.*+?^$(){}|[\]\\]/g,'\\$&');
+  const namePattern=names.length?names.map(escapeRegex).join('|'):'(?!)';
+  const pricePattern=/(?:\d{1,3}(?:[.,\s]\d{3})+|\d+(?:[.,]\d+)?)[ \u00a0]*(?:nghìn(?:\s*đồng)?|ngàn(?:\s*đồng)?|triệu(?:\s*đồng)?|VNĐ|VND|đồng|₫|đ|k)(?![\p{L}\p{N}])/u.source;
+  const matcher=new RegExp('('+namePattern+'|'+pricePattern+')','giu'),price=new RegExp('^'+pricePattern+'$','iu');
+  const appendRich=(parent,value)=>{
+   let cursor=0;matcher.lastIndex=0;
+   for(const m of value.matchAll(matcher)){parent.append(document.createTextNode(value.slice(cursor,m.index)));const isPrice=price.test(m[0]);parent.append(make(isPrice?'u':'strong',isPrice?'chammy-inline-price':'chammy-product-name',m[0]));cursor=m.index+m[0].length;}
+   parent.append(document.createTextNode(value.slice(cursor)));
+  };
+  const parts=String(text).split(/(\*\*[^*\n]+\*\*|\*[^*\n]+\*|https:\/\/chamstore\.site\/[A-Za-z0-9%_\-/]+)/g);
+  for(const part of parts){if(/^https:\/\/chamstore\.site\//.test(part)){const a=make('a','chammy-link',part.includes('/products/')?'Xem sản phẩm':part.includes('/collections/')?'Xem bộ sưu tập':part.includes('cham-play')?'Mở CHẠM Play':'Xem tại CHẠM');a.href=part;node.append(a);}else if(part.startsWith('**')&&part.endsWith('**')){const strong=make('strong');appendRich(strong,part.slice(2,-2));node.append(strong);}else if(part.startsWith('*')&&part.endsWith('*')){const em=make('em');appendRich(em,part.slice(1,-1));node.append(em);}else appendRich(node,part);}
  };
  const imageURL=raw=>{try{const u=new URL(raw,location.origin);return u.protocol==='https:'&&(u.hostname==='cdn.shopify.com'||u.hostname.endsWith('.myshopify.com')||u.hostname===location.hostname)?u.href:'';}catch{return '';}};
  const cardCache=new Map();
@@ -63,8 +74,8 @@
    body.setAttribute('aria-hidden','true');const chars=Array.from(plain);const duration=Math.min(1800,Math.max(220,chars.length*8));const start=performance.now();
    await new Promise(resolve=>{const tick=now=>{const count=Math.min(chars.length,Math.ceil((now-start)/duration*chars.length));body.textContent=chars.slice(0,count).join('');end();if(count<chars.length&&desiredOpen&&!document.hidden)requestAnimationFrame(tick);else resolve();};requestAnimationFrame(tick);});body.removeAttribute('aria-hidden');
   }
-  format(body,cleaned||'Chammy gửi bạn sản phẩm phù hợp:');markReply(body.textContent);
-  if(unique.length){const cards=await Promise.all(unique.map(path=>productCard(path,metaMap.get(path))));for(let i=0;i<cards.length;i++){if(cards[i])n.append(cards[i]);}}end();return n;
+  const replyText=cleaned||'Chammy gửi bạn sản phẩm phù hợp:';const titles=[...metaMap.values()].map(p=>p.title);format(body,replyText,titles);markReply(body.textContent);
+  if(unique.length){const cards=await Promise.all(unique.map(path=>productCard(path,metaMap.get(path))));for(let i=0;i<cards.length;i++){if(cards[i]){n.append(cards[i]);const title=cards[i].querySelector('.chammy-product-copy strong')?.textContent;if(title&&title!=='Sản phẩm CHẠM')titles.push(title);}}format(body,replyText,titles);}end();return n;
  }
  const thinking=()=>{const n=add('','chammy-thinking');n.setAttribute('role','status');n.setAttribute('aria-label','Chammy đang xem thông tin');n.append(make('span','chammy-thinking-text','Chammy đang xem thông tin'),make('span','chammy-dots',''));n.lastChild.append(make('i'),make('i'),make('i'));return n;};
  function orderReply(message){
@@ -104,9 +115,9 @@
   const from=previous?{opacity:previous.opacity,transform:previous.transform}:null;
   transition?.cancel();transition=null;
   launch.setAttribute('aria-expanded',String(open));
-  if(open){readAll();panel.hidden=false;panel.inert=false;sync();panel.setAttribute('aria-modal',String(mobile.matches));scrollBottom();}
+  if(open){root.classList.add('chammy-panel-open');readAll();panel.hidden=false;panel.inert=false;sync();panel.setAttribute('aria-modal',String(mobile.matches));scrollBottom();}
   else{if(document.activeElement===input)input.blur();panel.inert=true;}
-  const finish=()=>{if(epoch!==version)return;transition=null;if(!open){panel.hidden=true;panel.inert=false;panel.removeAttribute('aria-modal');sync();launch.focus({preventScroll:true});}else if(!panel.contains(document.activeElement)){(mobile.matches?close:input).focus({preventScroll:true});}};
+  const finish=()=>{if(epoch!==version)return;transition=null;if(!open){panel.hidden=true;root.classList.remove('chammy-panel-open');panel.inert=false;panel.removeAttribute('aria-modal');sync();launch.focus({preventScroll:true});}else if(!panel.contains(document.activeElement)){(mobile.matches?close:input).focus({preventScroll:true});}};
   if(reducedMotion.matches||typeof panel.animate!=='function'){finish();return;}
   const resting={opacity:1,transform:'translate3d(0,0,0)'};
   const tucked={opacity:0,transform:mobile.matches?'translate3d(0,18px,0)':'translate3d(0,9px,0) scale(.985)'};
