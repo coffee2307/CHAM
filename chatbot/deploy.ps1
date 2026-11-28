@@ -11,7 +11,7 @@ if (!$url) {throw 'No verified worker endpoint returned'}
 $health=Invoke-RestMethod -Uri "$url/health"
 if (!$health.ok) {throw 'Worker binding unavailable'}
 $result=Invoke-RestMethod -Uri "$url/chat" -Method Post -Headers @{Origin='https://chamstore.site'} -ContentType 'application/json' -Body '{"message":"CHAM co ban de lot ly xo dua khong? Gia bao nhieu?","history":[]}'
-if (!$result.answer) {throw 'Real AI smoke test failed'}
+if (!$result.answer -or !$result.ai) {throw 'Real AI smoke test failed'}
 Write-Host "AI response: $($result.answer)"
 $p=Join-Path (Get-Location) 'snippets/cham-ai-chat.liquid'
 $s=[IO.File]::ReadAllText($p)
@@ -22,5 +22,5 @@ git commit -m 'Enable verified CHAM AI worker endpoint'
 if ($LASTEXITCODE -ne 0) {throw 'Git commit failed'}
 git push origin main
 if ($LASTEXITCODE -ne 0) {throw 'Git push failed'}
-shopify theme push --path F:\CHAM --store 5yvv8u-44.myshopify.com --theme 191052087538 --allow-live --only layout/theme.liquid --only snippets/cham-ai-chat.liquid --only assets/cham-ai-chat.css --only assets/cham-ai-chat.js --nodelete --json
+shopify theme push --path F:\CHAM --store 5yvv8u-44.myshopify.com --theme 191052087538 --allow-live --only layout/theme.liquid --only snippets/cham-ai-chat.liquid --only assets/cham-ai-chat.css --only assets/cham-ai-chat.js --only assets/cham-ai-rules.js --nodelete --json
 if ($LASTEXITCODE -ne 0) {throw 'Shopify theme push failed'}
