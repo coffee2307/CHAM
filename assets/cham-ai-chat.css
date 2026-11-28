@@ -112,3 +112,8 @@ body.cham-site .cham-ai-launch .chammy-unread[hidden]{display:none!important}
 @media(hover:none),(pointer:coarse){body.cham-site .cham-ai-launch:hover{transform:none}}
 @media(max-width:700px){body.cham-site .cham-ai-launch{width:66px;height:66px}.cham-ai-launch .chammy-mascot,body.cham-site .cham-ai-launch .chammy-mascot{width:55px;height:55px}body.cham-site .cham-ai-launch .chammy-unread{top:-4px;right:-4px}}
 @media(prefers-reduced-motion:reduce){body.cham-site .cham-ai-launch{transition:none!important;transform:none!important}}
+
+/* Messenger-style latest-message preview, without covering the chat itself. */
+body.cham-site .chammy-welcome[hidden]{display:none!important}
+body.cham-site .cham-ai-mobile-open .chammy-welcome{visibility:hidden;pointer-events:none}
+body.cham-site .chammy-welcome-text span[data-chammy-preview]{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;text-overflow:ellipsis;overflow-wrap:anywhere;line-height:1.45;max-height:4.35em}
