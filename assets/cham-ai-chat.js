@@ -47,8 +47,9 @@
  async function reply(text,paths=[]){
   const raw=rules?.voice(text)??String(text);const matches=[...raw.matchAll(productPath)].map(x=>x[1]);const unique=[...new Set([...paths,...matches])].filter(x=>/^products\/[a-z0-9-]{1,120}$/.test(x)).slice(0,3);
   const n=add('');const body=make('div','chammy-reply');n.append(body);
-  const plain=raw.replace(productPath,'').replace(/\*\*([^*\n]+)\*\*/g,'$1').replace(/\*([^*\n]+)\*/g,'$1').replace(/(?:tại đường dẫn này|tại đây|đường dẫn)\s*:\s*\.?/gi,'').trim();
-  const cleaned=raw.replace(/(?:tại đường dẫn này|tại đây|đường dẫn)\s*:\s*(?=https:\/\/chamstore\.site\/products\/)/gi,'').replace(productPath,'').replace(/\n\s*\.\s*\n/g,'\n').trim();
+  // Compact reply text after stripping product URLs, including standalone URL lines.
+  const cleaned=raw.replace(/(?:tại đường dẫn này|tại đây|đường dẫn)\s*:\s*(?=https:\/\/chamstore\.site\/products\/)/gi,'').replace(productPath,'').replace(/\r\n?/g,'\n').split('\n').map(line=>line.trim()).filter(line=>line&&!/^[.,:;–—-]+$/.test(line)).join('\n').trim();
+  const plain=cleaned.replace(/\*\*([^*\n]+)\*\*/g,'$1').replace(/\*([^*\n]+)\*/g,'$1');
   if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&desiredOpen&&plain.length){
    body.setAttribute('aria-hidden','true');const chars=Array.from(plain);const duration=Math.min(1800,Math.max(220,chars.length*8));const start=performance.now();
    await new Promise(resolve=>{const tick=now=>{const count=Math.min(chars.length,Math.ceil((now-start)/duration*chars.length));body.textContent=chars.slice(0,count).join('');end();if(count<chars.length&&desiredOpen&&!document.hidden)requestAnimationFrame(tick);else resolve();};requestAnimationFrame(tick);});body.removeAttribute('aria-hidden');

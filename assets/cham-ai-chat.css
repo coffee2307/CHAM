@@ -117,3 +117,7 @@ body.cham-site .cham-ai-launch .chammy-unread[hidden]{display:none!important}
 body.cham-site .chammy-welcome[hidden]{display:none!important}
 body.cham-site .cham-ai-mobile-open .chammy-welcome{visibility:hidden;pointer-events:none}
 body.cham-site .chammy-welcome-text span[data-chammy-preview]{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;text-overflow:ellipsis;overflow-wrap:anywhere;line-height:1.45;max-height:4.35em}
+
+/* Compact conversational rhythm; product cards keep their own spacing. */
+body.cham-site .cham-ai-message{line-height:1.45}
+body.cham-site .chammy-reply{white-space:pre-line;line-height:1.45;min-height:0}
